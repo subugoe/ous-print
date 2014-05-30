@@ -56,13 +56,15 @@ class XSLTIncludeClasspathURIResolver implements URIResolver {
     }
     
     /**
-     * Using this contructor, just look into the class path 
+     * Using this contructor, just look into the class path of the caller
      * to get resources in Jar files and on class path
+     * @param Class of the caller, to get the right class loader
      * @author cmahnke
      * @see http://www.publicstaticfinal.de/2011/01/26/fop-embedding-fonts-from-classpath/
      */
-    XSLTIncludeClasspathURIResolver() {
-        this.clazz = this.class
+    XSLTIncludeClasspathURIResolver(Class<?> clazz) {
+        this.clazz = clazz
+        log.trace('Created empty XSLTIncludeClasspathURIResolver for ' + clazz.getName())
     }
     
     /**
@@ -89,7 +91,7 @@ class XSLTIncludeClasspathURIResolver implements URIResolver {
                     return new StreamSource(new FileInputStream(new File(resolved)))
                 }
             } else {
-                log.warn('No context tylesheet set!')
+                log.warn('No context stylesheet set (Not found on class path ' + System.getProperty('java.class.path') + ')!')
             }
             log.warn('Couldn\'t resolve URI')
         } else {

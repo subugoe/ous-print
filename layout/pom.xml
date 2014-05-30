@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Generated from archetype; please customize.
+--><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>ous-print</artifactId>
+        <groupId>de.unigoettingen.sub</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <groupId>de.unigoettingen.sub</groupId>
+    <artifactId>layout</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <dependencies>
+        <dependency>
+            <groupId>de.unigoettingen.sub</groupId>
+            <artifactId>util</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tika</groupId>
+            <artifactId>tika-core</artifactId>
+            <version>1.5</version>
+        </dependency>
+                <!-- FOP 1.1 has a bug in the dependency declerations, see
+             http://apache-fop.1065347.n5.nabble.com/Maven-dependencies-for-fop-1-1-td37437.html
+        -->
+        <dependency>
+            <groupId>org.apache.xmlgraphics</groupId>
+            <artifactId>fop</artifactId>
+            <version>1.1</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.avalon.framework</groupId>
+                    <artifactId>avalon-framework-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.avalon.framework</groupId>
+                    <artifactId>avalon-framework-impl</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- Needed for FOP -->
+        <dependency>
+            <groupId>avalon-framework</groupId>
+            <artifactId>avalon-framework-api</artifactId>
+            <version>4.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>avalon-framework</groupId>
+            <artifactId>avalon-framework-impl</artifactId>
+            <version>4.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.barcode4j</groupId>
+            <artifactId>barcode4j-fop-ext-complete</artifactId>
+            <version>2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>layout-test</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <classifier>resources</classifier>
+            <type>zip</type>
+            <!-- Make sure this isn't included on any classpath-->
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+    <build>
+        <testResources>
+            <testResource>
+                <directory>${project.build.directory}/generated-test-resources</directory>
+            </testResource>
+            <testResource>
+                <directory>./src/test/resources</directory>
+            </testResource>
+        </testResources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>unpack-shared-resources</id>
+                        <goals>
+                            <goal>unpack-dependencies</goal>
+                        </goals>
+                        <phase>generate-test-resources</phase>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/generated-test-resources</outputDirectory>
+                            <includeGroupIds>${project.groupId}</includeGroupIds>
+                            <includeArtifacIds>layout-test</includeArtifacIds>
+                            <excludeTransitive>true</excludeTransitive>
+                            <!--use as much as needed to be specific...also scope,type,classifier etc-->
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.7</version>
+                <executions>
+                    <execution>
+                        <phase>process-resources</phase>
+                        <configuration>
+                            <target>
+                                <!--
+                                See http://ftp.gnu.org/gnu/freefont/ if the mirror is down
+                                -->
+                                <property name="download.url" value="http://mirror.checkdomain.de/gnu/freefont/freefont-ttf-20120503.zip"/>
+                                <property name="font.location" value="./src/main/resources/fonts/"/>
+                                <get src="${download.url}" dest="${font.location}" usetimestamp="true" />
+                                
+                                <unzip dest="${font.location}">
+                                    <fileset dir="${font.location}">
+                                        <include name="**/*.zip"/>
+                                    </fileset>
+                                    <patternset>
+                                        <include name="**/*.*"/>
+                                    </patternset>
+                                    <mapper type="flatten"/>
+                                </unzip>
+                               
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

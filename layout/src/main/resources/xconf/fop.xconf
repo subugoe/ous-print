@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fop version="1.0">
+
+    <!-- Strict user configuration -->
+    <strict-configuration>true</strict-configuration>
+
+    <!-- Strict FO validation -->
+    <strict-validation>true</strict-validation>
+    <renderers>
+        <renderer mime="application/pdf">
+            <fonts>
+                <font embed-url="./fonts/FreeSans.ttf">
+                    <font-triplet name="FreeSans" style="normal" weight="normal" />
+                </font>
+                <font embed-url="./fonts/FreeSansBold.ttf">
+                    <font-triplet name="FreeSans" style="normal" weight="bold" />
+                </font>
+                <font embed-url="./fonts/FreeSansOblique.ttf">
+                    <font-triplet name="FreeSans" style="italic" weight="normal" />
+                </font>
+                <font embed-url="./fonts/FreeSansBoldOblique.ttf">
+                    <font-triplet name="FreeSans" style="italic" weight="bold" />
+                </font>
+            </fonts>
+        </renderer>
+        <renderer mime="application/postscript">
+            <fonts>
+                <font embed-url="./fonts/FreeSans.ttf">
+                    <font-triplet name="FreeSans" style="normal" weight="normal" />
+                </font>
+                <font embed-url="./fonts/FreeSansBold.ttf">
+                    <font-triplet name="FreeSans" style="normal" weight="bold" />
+                </font>
+                <font embed-url="./fonts/FreeSansOblique.ttf">
+                    <font-triplet name="FreeSans" style="italic" weight="normal" />
+                </font>
+                <font embed-url="./fonts/FreeSansBoldOblique.ttf">
+                    <font-triplet name="FreeSans" style="italic" weight="bold" />
+                </font>
+            </fonts>
+        </renderer>
+    </renderers>
+    <fonts>
+        <substitutions>
+            <substitution>
+                <from font-family="Arial" font-weight="700..900"/>
+                <to font-family="FreeSans"/>
+            </substitution>
+            <substitution>
+                <from font-family="LiberationSans" font-weight="700..900"/>
+                <to font-family="FreeSans"/>
+            </substitution>
+        </substitutions>
+    </fonts>
+</fop>

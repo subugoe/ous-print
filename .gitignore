@@ -1,0 +1,17 @@
+/layout-cli/target/
+/layout-test/target/
+/layout-component/target/
+/layout/target/
+/layout/src/main/resources/fonts/FreeSansOblique.ttf
+/layout/src/main/resources/fonts/FreeMonoBold.ttf
+/layout/src/main/resources/fonts/FreeSans.ttf
+/layout/src/main/resources/fonts/FreeSerifBoldItalic.ttf
+/layout/src/main/resources/fonts/FreeSerif.ttf
+/layout/src/main/resources/fonts/FreeMono.ttf
+/layout/src/main/resources/fonts/freefont-ttf-20120503.zip
+/layout/src/main/resources/fonts/FreeSerifBold.ttf
+/layout/src/main/resources/fonts/FreeMonoBoldOblique.ttf
+/layout/src/main/resources/fonts/FreeMonoOblique.ttf
+/layout/src/main/resources/fonts/FreeSerifItalic.ttf
+/layout/src/main/resources/fonts/FreeSansBold.ttf
+/layout/src/main/resources/fonts/FreeSansBoldOblique.ttf

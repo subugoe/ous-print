@@ -1,8 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-    Generated from archetype; please customize.
---><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-
+/*
+ * This file is part of the OUS print system, Copyright 2014 SUB Göttingen
+ *
+ * This program is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Affero General Public License version 3 as published by
+ * the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program; if not, see http://www.gnu.org/licenses or write to
+ * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301 USA.
+ */
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -13,13 +29,13 @@
 
     <groupId>de.unigoettingen.sub</groupId>
     <artifactId>layout</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <name>Layout Engine</name>
 
     <dependencies>
         <dependency>
             <groupId>de.unigoettingen.sub</groupId>
             <artifactId>util</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${parent.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.tika</groupId>
@@ -63,7 +79,7 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>layout-test</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${parent.version}</version>
             <classifier>resources</classifier>
             <type>zip</type>
             <!-- Make sure this isn't included on any classpath-->
@@ -94,12 +110,17 @@
                             <outputDirectory>${project.build.directory}/generated-test-resources</outputDirectory>
                             <includeGroupIds>${project.groupId}</includeGroupIds>
                             <includeArtifacIds>layout-test</includeArtifacIds>
+                            <excludeArtifactIds>util</excludeArtifactIds>
                             <excludeTransitive>true</excludeTransitive>
                             <!--use as much as needed to be specific...also scope,type,classifier etc-->
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
+            <!--
+            Downloads opensorce replacement fonts for Arial / Helvetica ant Times / Times New Roman
+            TODO: Make this work in offline mode 
+            -->
             <plugin>
                 <artifactId>maven-antrun-plugin</artifactId>
                 <version>1.7</version>
@@ -113,6 +134,8 @@
                                 -->
                                 <property name="download.url" value="http://mirror.checkdomain.de/gnu/freefont/freefont-ttf-20120503.zip"/>
                                 <property name="font.location" value="./src/main/resources/fonts/"/>
+                                <!-- Create the directory, it won't be there from a fresh git clone -->
+                                <mkdir dir="${font.location}"/>
                                 <get src="${download.url}" dest="${font.location}" usetimestamp="true" />
                                 
                                 <unzip dest="${font.location}">

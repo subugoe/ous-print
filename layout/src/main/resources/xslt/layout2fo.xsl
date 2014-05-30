@@ -196,7 +196,7 @@
                                 <fo:block padding-top="2.5pt" font-family="FreeSans" font-size="32pt" font-weight="bold">
                                     <xsl:value-of select="$user-firstname"/>
                                 </fo:block>
-                                <fo:block font="FreeSans" font-size="12pt" text-align-last="justify">
+                                <fo:block font-family="FreeSans" font-size="12pt" text-align-last="justify">
                                     <fo:leader leader-pattern="space"/>
                                     <!-- Output of user ID if not anonymized -->
                                     <fo:inline>
@@ -226,7 +226,7 @@
                             <xsl:value-of select="$target"/>
                         </fo:block>
                         <!-- See http://stackoverflow.com/a/590335 -->
-                        <fo:block margin-top="0.5mm" font="FreeSans" font-size="12pt">
+                        <fo:block margin-top="0.5mm" font-family="FreeSans" font-size="12pt">
                             <!-- Adress extra -->
                             <xsl:comment>Adress extra</xsl:comment>
                             <xsl:value-of select="$adress-extra"/>
@@ -235,7 +235,7 @@
                         </fo:block>
                         <!-- Notabene -->
                         <xsl:comment>Notabene</xsl:comment>
-                        <fo:block font="FreeSans" font-size="12pt" text-align-last="justify">
+                        <fo:block font-family="FreeSans" font-size="12pt" text-align-last="justify">
                             <xsl:value-of select="$notabene"/>
                             <fo:leader leader-pattern="space"/>
                             <!-- Date -->
@@ -247,11 +247,12 @@
                     </fo:block-container>
                     <!-- Prints a text accross the output PDF -->
                     <xsl:if test="$debug">
-                        <fo:block-container position="absolute" top="0mm" left="0mm" z-index="+1">
+                        <fo:block-container position="absolute" top="0mm" left="0mm" z-index="10">
                             <fo:block padding="5mm">
                                 <fo:instream-foreign-object scaling="uniform" width="154mm">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="210mm" height="148mm">
-                                        <text x="0" y="300" transform="rotate(-30)" style="font-size: 120pt; fill: grey; font-weight: bold; font-style: Optima;">
+                                        <!-- Font was 'Optima' -->
+                                        <text x="0" y="300" transform="rotate(-30)" style="font-size: 120pt; fill: grey; font-weight: bold; font-style: Arial;">
                                             <xsl:value-of select="$debug-text"/>
                                         </text>
                                     </svg>

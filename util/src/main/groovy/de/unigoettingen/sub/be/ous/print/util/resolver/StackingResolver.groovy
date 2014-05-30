@@ -55,7 +55,7 @@ class StackingResolver implements URIResolver {
         this.resolvers.addAll(resolvers)
     }
 
-        /**
+    /**
      * @see URIResolver#resolve(String, String)
      */
     @Override

@@ -9,6 +9,7 @@
     <renderers>
         <renderer mime="application/pdf">
             <fonts>
+                <!-- Arial -->
                 <font embed-url="./fonts/FreeSans.ttf">
                     <font-triplet name="FreeSans" style="normal" weight="normal" />
                 </font>
@@ -20,6 +21,19 @@
                 </font>
                 <font embed-url="./fonts/FreeSansBoldOblique.ttf">
                     <font-triplet name="FreeSans" style="italic" weight="bold" />
+                </font>
+                <!-- Times -->
+                <font embed-url="./fonts/FreeSerif.ttf">
+                    <font-triplet name="FreeSerif" style="normal" weight="normal" />
+                </font>
+                <font embed-url="./fonts/FreeSerifBold.ttf">
+                    <font-triplet name="FreeSerif" style="normal" weight="bold" />
+                </font>
+                <font embed-url="./fonts/FreeSerifOblique.ttf">
+                    <font-triplet name="FreeSerif" style="italic" weight="normal" />
+                </font>
+                <font embed-url="./fonts/FreeSerifBoldOblique.ttf">
+                    <font-triplet name="FreeSerif" style="italic" weight="bold" />
                 </font>
             </fonts>
         </renderer>
@@ -49,6 +63,18 @@
             <substitution>
                 <from font-family="LiberationSans" font-weight="700..900"/>
                 <to font-family="FreeSans"/>
+            </substitution>
+            <substitution>
+                <from font-family="Times" font-weight="700..900"/>
+                <to font-family="FreeSerif"/>
+            </substitution>
+             <substitution>
+                <from font-family="Times New Roman" font-weight="700..900"/>
+                <to font-family="FreeSerif"/>
+            </substitution>
+            <substitution>
+                <from font-family="LiberationSerif" font-weight="700..900"/>
+                <to font-family="FreeSerif"/>
             </substitution>
         </substitutions>
     </fonts>

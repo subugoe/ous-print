@@ -22,7 +22,7 @@ import de.unigoettingen.sub.be.ous.print.util.resolver.XSLTIncludeClasspathURIRe
 import groovy.util.logging.Log4j
 
 /**
- *
+ * Converts ASC ASCII files to XML representation
  * @author cmahnke
  */
 

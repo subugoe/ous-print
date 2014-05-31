@@ -27,7 +27,7 @@
     </parent>
     <artifactId>layout-cli</artifactId>
     <packaging>jar</packaging>
-    <name>Layout commandline interface</name>
+    <name>Layout command line interface</name>
     <properties>
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
@@ -130,6 +130,7 @@
                             <outputDirectory>${project.build.directory}/generated-test-resources</outputDirectory>
                             <includeGroupIds>${project.groupId}</includeGroupIds>
                             <includeArtifacIds>layout-test</includeArtifacIds>
+                            <excludeArtifactIds>util</excludeArtifactIds>
                             <excludeTransitive>true</excludeTransitive>
                             <!--use as much as needed to be specific...also scope,type,classifier etc-->
                         </configuration>

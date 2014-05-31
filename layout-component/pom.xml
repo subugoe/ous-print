@@ -106,6 +106,7 @@
                             <outputDirectory>${project.build.directory}/generated-test-resources</outputDirectory>
                             <includeGroupIds>${project.groupId}</includeGroupIds>
                             <includeArtifacIds>layout-test</includeArtifacIds>
+                            <excludeArtifactIds>util</excludeArtifactIds>
                             <excludeTransitive>true</excludeTransitive>
                             <!--use as much as needed to be specific...also scope,type,classifier etc-->
                         </configuration>

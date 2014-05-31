@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<camelContext xmlns="http://activemq.apache.org/camel/schema/spring">
+    <jmxAgent id="agent" createConnector="true" connectorPort="1099" mbeanObjectDomainName="de.unigoettingen.sub.be.ous.print.server"/>
+   
+</camelContext>

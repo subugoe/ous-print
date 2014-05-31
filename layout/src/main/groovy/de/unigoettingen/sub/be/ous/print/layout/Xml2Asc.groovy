@@ -22,7 +22,7 @@ import de.unigoettingen.sub.be.ous.print.util.resolver.XSLTIncludeClasspathURIRe
 import groovy.util.logging.Log4j
 
 /**
- *
+ * Converts a XML representation of a layout into text format
  * @author cmahnke
  */
 @Log4j

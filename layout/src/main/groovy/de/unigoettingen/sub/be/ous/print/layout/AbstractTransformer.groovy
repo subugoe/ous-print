@@ -84,7 +84,7 @@ abstract class AbstractTransformer {
     /**
      * Transforms the given document using the given stylesheet with parameters.
      * @param doc the {@link org.w3c.dom.Document Document} of the input document
-     * @param xslt the {@link avax.xml.transform.Source Source} of the stylesheet
+     * @param xslt the {@link javax.xml.transform.Source Source} of the stylesheet
      * @param params parameters of the stylesheet
      * @return the result {@link org.w3c.dom.Document Document}
      * @see #transform(javax.xml.transform.Source,javax.xml.transform.Source,java.util.Map)

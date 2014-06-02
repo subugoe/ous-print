@@ -32,7 +32,7 @@
                 <font embed-url="./fonts/FreeSerifItalic.ttf">
                     <font-triplet name="FreeSerif" style="italic" weight="normal" />
                 </font>
-                <font embed-url="./fonts/FreeSerifItalicOblique.ttf">
+                <font embed-url="./fonts/FreeSerifBoldItalic.ttf">
                     <font-triplet name="FreeSerif" style="italic" weight="bold" />
                 </font>
             </fonts>
@@ -62,7 +62,7 @@
                 <font embed-url="./fonts/FreeSerifItalic.ttf">
                     <font-triplet name="FreeSerif" style="italic" weight="normal" />
                 </font>
-                <font embed-url="./fonts/FreeSerifItalicOblique.ttf">
+                <font embed-url="./fonts/FreeSerifBoldItalic.ttf">
                     <font-triplet name="FreeSerif" style="italic" weight="bold" />
                 </font>
             </fonts>

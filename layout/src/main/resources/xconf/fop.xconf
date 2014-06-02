@@ -29,16 +29,17 @@
                 <font embed-url="./fonts/FreeSerifBold.ttf">
                     <font-triplet name="FreeSerif" style="normal" weight="bold" />
                 </font>
-                <font embed-url="./fonts/FreeSerifOblique.ttf">
+                <font embed-url="./fonts/FreeSerifItalic.ttf">
                     <font-triplet name="FreeSerif" style="italic" weight="normal" />
                 </font>
-                <font embed-url="./fonts/FreeSerifBoldOblique.ttf">
+                <font embed-url="./fonts/FreeSerifItalicOblique.ttf">
                     <font-triplet name="FreeSerif" style="italic" weight="bold" />
                 </font>
             </fonts>
         </renderer>
         <renderer mime="application/postscript">
             <fonts>
+                <!-- Arial -->
                 <font embed-url="./fonts/FreeSans.ttf">
                     <font-triplet name="FreeSans" style="normal" weight="normal" />
                 </font>
@@ -50,6 +51,19 @@
                 </font>
                 <font embed-url="./fonts/FreeSansBoldOblique.ttf">
                     <font-triplet name="FreeSans" style="italic" weight="bold" />
+                </font>
+                <!-- Times -->
+                <font embed-url="./fonts/FreeSerif.ttf">
+                    <font-triplet name="FreeSerif" style="normal" weight="normal" />
+                </font>
+                <font embed-url="./fonts/FreeSerifBold.ttf">
+                    <font-triplet name="FreeSerif" style="normal" weight="bold" />
+                </font>
+                <font embed-url="./fonts/FreeSerifItalic.ttf">
+                    <font-triplet name="FreeSerif" style="italic" weight="normal" />
+                </font>
+                <font embed-url="./fonts/FreeSerifItalicOblique.ttf">
+                    <font-triplet name="FreeSerif" style="italic" weight="bold" />
                 </font>
             </fonts>
         </renderer>

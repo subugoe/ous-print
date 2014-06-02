@@ -252,7 +252,7 @@
                                 <fo:instream-foreign-object scaling="uniform" width="154mm">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="210mm" height="148mm">
                                         <!-- Font was 'Optima' -->
-                                        <text x="0" y="300" transform="rotate(-30)" style="font-size: 120pt; fill: grey; font-weight: bold; font-style: Arial;">
+                                        <text x="0" y="300" transform="rotate(-30)" style="font-size: 120pt; fill: grey; font-weight: bold; font-family: Arial;">
                                             <xsl:value-of select="$debug-text"/>
                                         </text>
                                     </svg>

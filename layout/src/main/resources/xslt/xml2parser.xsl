@@ -54,6 +54,22 @@
                     <xsl:apply-templates/>
                 </layout>
             </gxsl:template>
+            <!-- Our own replacer, returns an empty string if no match found -->
+            <xsl:comment>This is our own replacer wich returns an empty string if no match found</xsl:comment>
+            <gxsl:function name="print:replace" as="xs:string">
+                <gxsl:param name="input"/>
+                <gxsl:param name="pattern"/>
+                <gxsl:param name="replacement"/>
+                <gxsl:variable name="replaced" select="replace($input, $pattern, $replacement)" as="xs:string"/>
+                <gxsl:choose>
+                    <gxsl:when test="$input = $replaced">
+                        <gxsl:value-of select="''"/>
+                    </gxsl:when>
+                    <gxsl:otherwise>
+                        <gxsl:value-of select="$replaced"/>
+                    </gxsl:otherwise>
+                </gxsl:choose>
+            </gxsl:function>
         </gxsl:stylesheet>
     </xsl:template>
     <xsl:function name="print:generate-positions" as="xs:integer*">
@@ -67,7 +83,7 @@
 
     <xsl:template match="line[not(@comment)]">
         <!-- TODO: Add support for type I, M and R - aligned right -->
-        
+
         <!-- Filter empty lines -->
         <xsl:if test="@entity != '000' or @attribute != '000' or @sequence != '000'">
             <!-- ident, lenght of preceding text, plus 1 for the following space, if there is text -->
@@ -118,7 +134,8 @@
                     <xsl:if test="not(empty(distinct-values($positions[. = $other-positions])))">
                         <xsl:message>Warning: area over written by other definitions! Line <xsl:value-of select="$line"/>, column: <xsl:value-of select="$column"/>
                         </xsl:message>
-                        <xsl:message>Offending entry: entity '<xsl:value-of select="@entity"/>', attribute '<xsl:value-of select="@attribute"/>', sequence: '<xsl:value-of select="@sequence"/>'
+                        <xsl:message>Offending entry: entity '<xsl:value-of select="@entity"/>', attribute '<xsl:value-of select="@attribute"/>', sequence: '<xsl:value-of select="@sequence"
+                            />'
                         </xsl:message>
                     </xsl:if>
                 </xsl:if>
@@ -147,7 +164,7 @@
                         <xsl:comment>This contains the raw string, including possible leading whitespace</xsl:comment>
                         <gxsl:variable name="raw-value" as="xs:string">
                             <xsl:attribute name="select">
-                                <xsl:value-of select="concat('replace($lines[', $line ,'] , ', string-join($regex, ''))"/>
+                                <xsl:value-of select="concat('print:replace($lines[', $line ,'] , ', string-join($regex, ''))"/>
                                 <xsl:text>, '$1')</xsl:text>
                             </xsl:attribute>
                         </gxsl:variable>
@@ -166,7 +183,7 @@
                     <xsl:otherwise>
                         <gxsl:attribute name="value">
                             <xsl:attribute name="select">
-                                <xsl:value-of select="concat('replace($lines[', $line ,'] , ', string-join($regex, ''))"/>
+                                <xsl:value-of select="concat('print:replace($lines[', $line ,'] , ', string-join($regex, ''))"/>
                                 <xsl:text>, '$1')</xsl:text>
                             </xsl:attribute>
                         </gxsl:attribute>

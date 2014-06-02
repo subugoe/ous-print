@@ -92,8 +92,8 @@
         <!-- Other fields -->
         <xsl:variable name="relocation" select="//entry[@entity = '004' and @attribute = '003']/@value" as="xs:string"/>
         <xsl:variable name="volume-free-text" select="//entry[@entity = '004' and @attribute = '011']/@value" as="xs:string"/>
-        <xsl:variable name="loan-free-text" select="//entry[@entity = '003' and @attribute = '017']/@value" as="xs:string"/>
-        <xsl:variable name="co" select="//entry[@entity = '012' and @attribute = '014']/@value" as="xs:string"/>
+        <xsl:variable name="loan-free-text" select="//entry[@entity = '003' and @attribute = '017']/@value"/>
+        <xsl:variable name="co" select="//entry[@entity = '012' and @attribute = '014']/@value"/>
 
         <!-- Document root -->
         <fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:fox="http://xmlgraphics.apache.org/fop/extensions">
@@ -268,7 +268,7 @@
                                 <fo:instream-foreign-object scaling="uniform" width="154mm">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="210mm" height="148mm">
                                         <!-- Font was 'Optima' -->
-                                        <text x="0" y="300" transform="rotate(-30)" style="font-size: 120pt; fill: grey; font-weight: bold; font-family: Arial;">
+                                        <text x="0" y="300" transform="rotate(-30)" style="font-size: 120pt; fill: grey; font-weight: bold; font-family: FreeSans;">
                                             <xsl:value-of select="$debug-text"/>
                                         </text>
                                     </svg>
@@ -339,7 +339,7 @@
     </xsl:function>
     <xsl:function name="print:set-font-size" as="attribute(font-size)">
         <xsl:param name="size" as="xs:integer"/>
-        <xsl:attribute name="font-size" select="$size"/>
+        <xsl:attribute name="font-size" select="concat($size, 'pt')"/>
     </xsl:function>
     <xsl:function name="print:barcode" as="element(fo:instream-foreign-object)" xmlns:fo="http://www.w3.org/1999/XSL/Format">
         <xsl:param name="message"/>

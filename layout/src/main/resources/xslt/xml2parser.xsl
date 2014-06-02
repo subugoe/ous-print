@@ -132,10 +132,10 @@
                 <xsl:if test="@entity != '000' or @attribute != '000' or @sequence != '000'">
                     <xsl:variable name="other-positions" select="print:generate-positions(number(@column), string-length(@text) + 1, number(@length))" as="xs:integer*"/>
                     <xsl:if test="not(empty(distinct-values($positions[. = $other-positions])))">
-                        <xsl:message>Warning: area over written by other definitions! Line <xsl:value-of select="$line"/>, column: <xsl:value-of select="$column"/>
-                        </xsl:message>
-                        <xsl:message>Offending entry: entity '<xsl:value-of select="@entity"/>', attribute '<xsl:value-of select="@attribute"/>', sequence: '<xsl:value-of select="@sequence"
-                            />'
+                        <xsl:message>E<xsl:value-of select="@entity"/>A<xsl:value-of select="@attribute"/>: Warning: area over written by other definitions! Line <xsl:value-of select="$line"
+                                />, column: <xsl:value-of select="$column"/>
+                        Offending entry: entity '<xsl:value-of select="@entity"/>', attribute '<xsl:value-of
+                                select="@attribute"/>', sequence: '<xsl:value-of select="@sequence"/>'
                         </xsl:message>
                     </xsl:if>
                 </xsl:if>

@@ -18,8 +18,12 @@
 
 package de.unigoettingen.sub.be.ous.print.layout
 
+import de.unigoettingen.sub.be.ous.print.util.resolver.XSLTIncludeClasspathURIResolver
+import de.unigoettingen.sub.be.ous.print.util.resolver.BasePathResolver
+
 import groovy.transform.TypeChecked
 import groovy.util.logging.Log4j
+
 import javax.xml.transform.Result
 import javax.xml.transform.Source
 import javax.xml.transform.Transformer
@@ -29,17 +33,16 @@ import javax.xml.transform.URIResolver
 import javax.xml.transform.dom.DOMSource
 import javax.xml.transform.sax.SAXResult
 import javax.xml.transform.stream.StreamSource
+
 import org.apache.avalon.framework.configuration.Configuration
 import org.apache.avalon.framework.configuration.DefaultConfigurationBuilder
-import org.apache.fop.apps.FOURIResolver
-import org.w3c.dom.Document
 
 import org.apache.fop.apps.FopFactory
 import org.apache.fop.apps.Fop
 import org.apache.fop.apps.MimeConstants
 
-import de.unigoettingen.sub.be.ous.print.util.resolver.XSLTIncludeClasspathURIResolver
-import de.unigoettingen.sub.be.ous.print.util.resolver.BasePathResolver
+import org.w3c.dom.Document
+
 /**
  * Transforms a xml representation into XSL-FO file and offers a possibility to render the FO object.
  * 
@@ -72,7 +75,7 @@ class Layout2Fo extends AbstractTransformer {
     /** The {@link org.apache.fop.apps.FopFactory FopFactory} to be used */
     protected FopFactory fopFactory = null
     
-    /** Sets if an external FOP coniguration should be used */
+    /** Sets if an external FOP configuration should be used (use this also if you want to embed fonts in the result) */
     protected Boolean useConfig = true
     
     /*

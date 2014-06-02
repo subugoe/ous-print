@@ -19,6 +19,7 @@
 package de.unigoettingen.sub.be.ous.print.layout
 
 import de.unigoettingen.sub.be.ous.print.util.resolver.XSLTIncludeClasspathURIResolver
+
 import groovy.util.logging.Log4j
 
 /**

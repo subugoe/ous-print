@@ -18,9 +18,13 @@
 
 package de.unigoettingen.sub.be.ous.print.layout
 
+import de.unigoettingen.sub.be.ous.print.util.LogErrorListener
+import de.unigoettingen.sub.be.ous.print.util.Util
+
 import groovy.util.logging.Log4j
 import groovy.transform.TypeChecked
 import groovy.xml.XmlUtil
+import groovy.xml.DOMBuilder
 
 import javax.xml.transform.TransformerFactory
 import javax.xml.transform.URIResolver
@@ -34,11 +38,8 @@ import javax.xml.transform.TransformerException
 import javax.xml.transform.ErrorListener
 import javax.xml.validation.Schema
 import javax.xml.validation.SchemaFactory
-import org.w3c.dom.Document
-import groovy.xml.DOMBuilder
 
-import de.unigoettingen.sub.be.ous.print.util.LogErrorListener
-import de.unigoettingen.sub.be.ous.print.util.Util
+import org.w3c.dom.Document
 
 /**
  * This abstract class is used as base for all classes that wrap XSLT stylesheets.

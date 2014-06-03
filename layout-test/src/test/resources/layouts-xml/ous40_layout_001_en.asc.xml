@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout xmlns:print="http://www.sub.uni-goettingen.de/BE/OUS/print"
+        iln="040"
+        layout-file="001"
+        language="ENG"><!--Generated from /Users/cmahnke/NetBeansProjects/ous-print/layout-test/src/test/resources/layouts/ous40_layout_001_en.asc-->
+   <line comment="true" text=";LAYOUT_001  Begleitzettel"/>
+   <line comment="true" text=";"/>
+   <line comment="true" text=";"/>
+   <line comment="true" text=";"/>
+   <line comment="true" text=";"/>
+   <line comment="true" text=";lin kol ent att seq t len text"/>
+   <line line="003"
+         column="005"
+         entity="000"
+         attribute="000"
+         sequence="000"
+         type="A"
+         length="045"
+         text=" BEGLEITZETTEL"/>
+   <line line="003"
+         column="050"
+         entity="098"
+         attribute="001"
+         sequence="000"
+         type="D"
+         length="010"
+         text=""/>
+   <line comment="true" text="; Signatur:"/>
+   <line comment="true" text="; 004 002 000 000 000 A 002  G"/>
+   <line line="005"
+         column="005"
+         entity="050"
+         attribute="013"
+         sequence="000"
+         type="A"
+         length="070"
+         text=""/>
+   <line comment="true" text="; 005 076 000 000 000 A 002  H"/>
+   <line comment="true" text="; Verlegung:"/>
+   <line line="006"
+         column="005"
+         entity="004"
+         attribute="003"
+         sequence="000"
+         type="A"
+         length="020"
+         text=""/>
+   <line comment="true" text="; Bandinfo:"/>
+   <line line="007"
+         column="005"
+         entity="004"
+         attribute="010"
+         sequence="000"
+         type="A"
+         length="045"
+         text=""/>
+   <line comment="true" text="; Bestandsinfo:"/>
+   <line line="007"
+         column="022"
+         entity="050"
+         attribute="015"
+         sequence="000"
+         type="A"
+         length="020"
+         text=""/>
+   <line comment="true" text=";"/>
+   <line comment="true" text="; 007 050 000 000 000 A 002  G"/>
+   <line comment="true" text="; Extra Adresse"/>
+   <line line="007"
+         column="054"
+         entity="012"
+         attribute="020"
+         sequence="000"
+         type="A"
+         length="025"
+         text=""/>
+   <line comment="true" text=";Notabene"/>
+   <line line="008"
+         column="054"
+         entity="001"
+         attribute="016"
+         sequence="000"
+         type="A"
+         length="025"
+         text=""/>
+   <line comment="true" text="; 007 078 000 000 000 A 002  H"/>
+   <line comment="true" text="; Verfasser:"/>
+   <line line="008"
+         column="005"
+         entity="050"
+         attribute="003"
+         sequence="000"
+         type="A"
+         length="045"
+         text=""/>
+   <line comment="true" text="; Titel:"/>
+   <line line="009"
+         column="005"
+         entity="050"
+         attribute="002"
+         sequence="000"
+         type="A"
+         length="045"
+         text=" "/>
+   <line comment="true" text="; Bandbarcode:"/>
+   <line line="010"
+         column="005"
+         entity="004"
+         attribute="004"
+         sequence="000"
+         type="A"
+         length="015"
+         text=" "/>
+   <line comment="true" text="; Entleiher:"/>
+   <line line="010"
+         column="049"
+         entity="001"
+         attribute="004"
+         sequence="000"
+         type="A"
+         length="013"
+         text=" Nutzertyp:"/>
+   <line line="010"
+         column="064"
+         entity="001"
+         attribute="002"
+         sequence="000"
+         type="A"
+         length="013"
+         text=" "/>
+   <line comment="true" text="; Fax-Nr., fuer Behindertenkennzeichnung"/>
+   <line line="011"
+         column="060"
+         entity="012"
+         attribute="019"
+         sequence="000"
+         type="A"
+         length="015"
+         text=""/>
+   <line comment="true" text="; 011 059 000 000 000 A 002  G"/>
+   <line line="012"
+         column="049"
+         entity="001"
+         attribute="008"
+         sequence="000"
+         type="A"
+         length="030"
+         text=""/>
+   <line comment="true" text="; 012 078 000 000 000 A 002  H"/>
+   <line line="013"
+         column="005"
+         entity="004"
+         attribute="011"
+         sequence="000"
+         type="A"
+         length="040"
+         text=""/>
+   <line line="013"
+         column="049"
+         entity="001"
+         attribute="006"
+         sequence="000"
+         type="A"
+         length="020"
+         text=""/>
+   <line line="013"
+         column="064"
+         entity="001"
+         attribute="010"
+         sequence="000"
+         type="A"
+         length="012"
+         text=""/>
+   <line line="014"
+         column="049"
+         entity="012"
+         attribute="014"
+         sequence="000"
+         type="A"
+         length="030"
+         text=""/>
+   <line line="015"
+         column="005"
+         entity="005"
+         attribute="017"
+         sequence="000"
+         type="A"
+         length="030"
+         text=" Best.-Nr.  :"/>
+   <line comment="true" text="; 015 049 012 004 000 A 030"/>
+   <line comment="true" text="; 016 049 012 015 000 A 030 Zi-Nr: "/>
+   <line comment="true" text="; 017 049 012 005 000 A 006"/>
+   <line comment="true" text="; 017 049 012 006 000 A 024"/>
+   <line line="018"
+         column="005"
+         entity="000"
+         attribute="000"
+         sequence="000"
+         type="A"
+         length="010"
+         text=" Ausl.typ:"/>
+   <line line="018"
+         column="015"
+         entity="005"
+         attribute="006"
+         sequence="000"
+         type="I"
+         length="001"
+         text=""/>
+   <line line="018"
+         column="018"
+         entity="005"
+         attribute="106"
+         sequence="000"
+         type="A"
+         length="030"
+         text=""/>
+   <line line="019"
+         column="005"
+         entity="052"
+         attribute="005"
+         sequence="000"
+         type="A"
+         length="080"
+         text=" Standort:"/>
+   <line line="020"
+         column="005"
+         entity="098"
+         attribute="002"
+         sequence="000"
+         type="A"
+         length="005"
+         text=""/>
+   <line line="020"
+         column="038"
+         entity="000"
+         attribute="000"
+         sequence="000"
+         type="A"
+         length="005"
+         text=" Ziel:"/>
+   <line comment="true" text="; 020 048 000 000 000 A 002  G"/>
+   <line line="020"
+         column="045"
+         entity="011"
+         attribute="004"
+         sequence="000"
+         type="A"
+         length="050"
+         text=""/>
+   <line comment="true" text="; 020 077 000 000 000 A 002  H"/>
+   <line line="024"
+         column="005"
+         entity="001"
+         attribute="002"
+         sequence="000"
+         type="A"
+         length="013"
+         text=" "/>
+   <line line="024"
+         column="005"
+         entity="000"
+         attribute="000"
+         sequence="000"
+         type="A"
+         length="005"
+         text=" XXXXX"/>
+   <line line="024"
+         column="018"
+         entity="001"
+         attribute="008"
+         sequence="000"
+         type="A"
+         length="001"
+         text=""/>
+   <line comment="true" text=";"/>
+</layout>

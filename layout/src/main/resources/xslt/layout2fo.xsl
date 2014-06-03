@@ -60,7 +60,8 @@
     </xsl:variable>
     <xsl:template match="/">
         <xsl:variable name="user-type" select="replace(//entry[@entity = '001' and @attribute = '004']/@value, '^(\d+)\s* .*$', '$1')"/>
-        <xsl:variable name="loan-type" select="replace(//entry[@entity = '005' and @attribute = '106']/@value, '^.*?typ: (\d+)$', '$1')"/>
+        <xsl:variable name="loan-type" select="//entry[@entity = '005' and @attribute = '006']/@value"/>
+        <xsl:variable name="loan-type-decription" select="//entry[@entity = '005' and @attribute = '106']/@value"/>
         <!-- Full user ID -->
         <xsl:variable name="user-id-full" select="(//entry[@entity = '001' and @attribute = '002']/@value)[1]"/>
         <!-- Truncated user ID -->
@@ -92,17 +93,23 @@
         <!-- Other fields -->
         <xsl:variable name="relocation" select="//entry[@entity = '004' and @attribute = '003']/@value" as="xs:string"/>
         <xsl:variable name="volume-free-text" select="//entry[@entity = '004' and @attribute = '011']/@value" as="xs:string"/>
-        <xsl:variable name="loan-free-text" select="//entry[@entity = '003' and @attribute = '017']/@value"/>
+        <xsl:variable name="loan-free-text" select="//entry[@entity = '005' and @attribute = '017']/@value"/>
         <xsl:variable name="co" select="//entry[@entity = '012' and @attribute = '014']/@value"/>
+
+        <xsl:comment>
+            <xsl:text>Some of the used variables:</xsl:text><xsl:text>&#xA;</xsl:text>
+            <xsl:text>First name of the user: </xsl:text><xsl:value-of select="$user-firstname"/><xsl:text>&#xA;</xsl:text>
+            <xsl:text>Last name of the user: </xsl:text><xsl:value-of select="$user-lastname"/><xsl:text>&#xA;</xsl:text>
+            <xsl:text>Title of the user: </xsl:text><xsl:value-of select="$user-title"/><xsl:text>&#xA;</xsl:text>
+            <xsl:text>Number of the user: </xsl:text><xsl:value-of select="$user-id-full"/><xsl:text>&#xA;</xsl:text>
+            
+            <xsl:text>Date: </xsl:text><xsl:value-of select="$date"/><xsl:text>&#xA;</xsl:text>
+            <xsl:text>Time: </xsl:text><xsl:value-of select="$time"/><xsl:text>&#xA;</xsl:text>
+        </xsl:comment>
+
 
         <!-- Document root -->
         <fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:fox="http://xmlgraphics.apache.org/fop/extensions">
-            <xsl:comment>
-                Generated on <xsl:value-of select="//entry[@entity = '098' and @attribute = '002']/@value"/> 
-                Borrower <xsl:value-of select="//entry[@entity = '001' and @attribute = '006']/@value"/>
-                <xsl:text> </xsl:text>
-                <xsl:value-of select="//entry[@entity = '001' and @attribute = '008']/@value"/> (<xsl:value-of select="//entry[@entity = '001' and @attribute = '002']/@value"/>)
-            </xsl:comment>
             <fo:layout-master-set>
                 <fo:simple-page-master master-name="{$master-name}" page-width="{$width}" page-height="{$height}" margin="{$margin}">
                     <fo:region-body/>
@@ -114,7 +121,7 @@
                     <xsl:comment>Shelfmark</xsl:comment>
                     <xsl:variable name="shelfmark" select="//entry[@entity = '050' and @attribute = '013']/@value" as="xs:string"/>
 
-                    <fo:block-container position="absolute" top="0mm" left="0mm">
+                    <fo:block-container position="absolute" top="0mm" left="0mm" width="125mm">
                         <fo:block font-family="FreeSans" font-size="30pt">
                             <!-- We use XPath based logic here to be able to inject it from elsewere, like a better layouting system  -->
                             <xsl:copy-of
@@ -125,16 +132,18 @@
                             <xsl:value-of select="$shelfmark"/>
                         </fo:block>
                         <!-- Volume -->
-                        <fo:block font-family="FreeSans" font-size="14pt">
+                        <xsl:comment>Volume information and relocation</xsl:comment>
+                        <fo:block font-family="FreeSans" font-size="14pt" text-align-last="justify">
                             <xsl:value-of select="$volume"/>
-                            <fo:leader/>
-                            <xsl:value-of select="$volume-free-text"/>
-                            <fo:leader/>
+                            <fo:leader leader-pattern="space"/>
                             <xsl:value-of select="$relocation"/>
+                        </fo:block>
+                        <fo:block font-family="FreeSans" font-size="14pt">
+                            <xsl:value-of select="$volume-free-text"/>
                         </fo:block>
                     </fo:block-container>
 
-                    <fo:block-container position="absolute" left="95mm" top="20mm" width="30mm">
+                    <fo:block-container position="absolute" left="95mm" top="23mm" width="30mm">
                         <xsl:comment>Date</xsl:comment>
                         <fo:block text-align="right" font-family="FreeSans" font-size="12pt">
                             <xsl:value-of select="$date"/>
@@ -145,7 +154,7 @@
                         </fo:block>
                     </fo:block-container>
                     <xsl:comment>Heading</xsl:comment>
-                    <fo:block-container position="absolute" top="20mm" left="0mm">
+                    <fo:block-container position="absolute" top="23mm" left="0mm">
                         <fo:block font-family="FreeSans" font-size="20pt" font-weight="bold">Begleitzettel</fo:block>
                     </fo:block-container>
 
@@ -157,8 +166,15 @@
                         <fo:block font-family="FreeSans" font-size="12pt" font-weight="bold">
                             <xsl:value-of select="//entry[@entity = '050' and @attribute = '002']/@value"/>
                         </fo:block>
+                        <xsl:if test="$loan-free-text != ''">
+                            <xsl:comment>Additional info</xsl:comment>
+                            <fo:block font-style="italic" font-family="FreeSans" font-size="12pt">
+                                <xsl:value-of select="concat('Ausleihinfo: ', $loan-free-text)"/>
+                            </fo:block>
+                        </xsl:if>
                     </fo:block-container>
-                    <fo:block-container position="absolute" top="65mm" left="0mm" width="120mm">
+                    <xsl:comment>Barcode section</xsl:comment>
+                    <fo:block-container position="absolute" top="68mm" left="0mm" width="120mm">
                         <fo:block padding="1mm">
                             <xsl:variable name="book-number" select="translate(//entry[@entity = '004' and @attribute = '004']/@value, ' ', '')"/>
                             <xsl:choose>
@@ -176,6 +192,17 @@
                         <fo:block font-family="FreeSans" font-size="12pt">
                             <xsl:value-of select="$location"/>
                         </fo:block>
+                        <!--
+                        <xsl:if
+                            test="($user-type = '40' or $user-type = '15') or ($target != 'Zentralbib./Selbstabholbereich' and $target != 'Zentralbibliothek/Selbstabholbereich' and $target != 'Abholregal BB Kulturwiss.')">
+                            <xsl:if test="$co != ''">
+                                <xsl:comment>Add adress for intitute delivery service</xsl:comment>
+                                <fo:block font-family="FreeSans" font-size="12pt">
+                             <xsl:value-of select="concat('&#x2192;', $co)"/>
+                                </fo:block>
+                            </xsl:if>
+                        </xsl:if>
+                        -->
                     </fo:block-container>
                     <!-- This needs to be changed in A4 mode -->
                     <xsl:comment>Logo</xsl:comment>
@@ -196,12 +223,11 @@
                     <!-- Check user Type and target 
                          If user type is 15 or delivery target is not "Zentralbibliothek/Selbstabholbereich" or "Abholregal BB Kulturwiss.", print the user name and id, otherwise anonymize
                     -->
-                    <xsl:comment>Number of the user <xsl:value-of select="$user-id-full"/></xsl:comment>
-                    <xsl:comment>User Name <xsl:value-of select="$user-name"/></xsl:comment>
                     <fo:block-container reference-orientation="90" position="absolute" top="0mm" left="130mm" bottom="{print:scaleA5toA4('15mm')}" border-start-style="solid" border-color="grey"
                         border-start-width="2pt">
                         <xsl:choose>
-                            <xsl:when test="($user-type = '40' or $user-type = '15') or ($target != 'Zentralbibliothek/Selbstabholbereich' and $target != 'Abholregal BB Kulturwiss.')">
+                            <xsl:when
+                                test="($user-type = '40' or $user-type = '15') or ($target != 'Zentralbib./Selbstabholbereich' and $target != 'Zentralbibliothek/Selbstabholbereich' and $target != 'Abholregal BB Kulturwiss.')">
                                 <fo:block padding-top="2.5pt" font-family="FreeSans" font-size="32pt" font-weight="bold">
                                     <xsl:value-of select="concat($user-title, ' ', $user-lastname)"/>
                                 </fo:block>
@@ -209,9 +235,12 @@
                                     <xsl:value-of select="$user-firstname"/>
                                 </fo:block>
                                 <fo:block font-family="FreeSans" font-size="12pt" text-align-last="justify">
+                                    <xsl:comment/>
+                                    <xsl:value-of select="$co"/>
                                     <fo:leader leader-pattern="space"/>
                                     <!-- Output of user ID if not anonymized -->
                                     <fo:inline>
+                                        <xsl:comment>User ID</xsl:comment>
                                         <xsl:value-of select="$user-id-full"/>
                                     </fo:inline>
                                 </fo:block>
@@ -227,14 +256,15 @@
                         </xsl:choose>
                     </fo:block-container>
 
+                    <!-- the is still some space for another block
+                    <fo:block-container reference-orientation="90" position="absolute" top="0mm" left="159mm" bottom="{print:scaleA5toA4('15mm')}">
+                    -->
+
                     <!-- This needs to be changed in A4 mode -->
                     <!-- Old values: right="24pt"  height="30pt" -->
                     <fo:block-container reference-orientation="90" position="absolute" top="0mm" right="8.5mm" height="11.5mm" bottom="{print:scaleA5toA4('15mm')}">
-                        <fo:block font-family="FreeSans" font-size="12pt">Ausleihtyp: <xsl:value-of select="$loan-type"/> / Nutzertyp: <xsl:value-of select="$user-type"/>
-                            <xsl:if test="$loan-free-text != ''">
-                                <xsl:text> / Ausleihinfo: </xsl:text>
-                                <xsl:value-of select="$loan-free-text"/>
-                            </xsl:if>
+                        <fo:block font-family="FreeSans" font-size="12pt">
+                            <xsl:value-of select="concat('Ausleihtyp: ', $loan-type-decription, ' (', $loan-type, ') / Nutzertyp: ', $user-type)"/>
                         </fo:block>
                         <fo:block font-family="FreeSans" font-size="12pt" font-weight="bold">Ziel: 
                             <!-- Target -->
@@ -340,6 +370,9 @@
     <xsl:function name="print:set-font-size" as="attribute(font-size)">
         <xsl:param name="size" as="xs:integer"/>
         <xsl:attribute name="font-size" select="concat($size, 'pt')"/>
+    </xsl:function>
+    <xsl:function name="print:leader" as="element(fo:leader)" xmlns:fo="http://www.w3.org/1999/XSL/Format">
+        <fo:leader leader-pattern="space"/>
     </xsl:function>
     <xsl:function name="print:barcode" as="element(fo:instream-foreign-object)" xmlns:fo="http://www.w3.org/1999/XSL/Format">
         <xsl:param name="message"/>

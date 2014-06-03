@@ -55,14 +55,7 @@
          length="045"
          text=""/>
    <line comment="true" text="; Bestandsinfo:"/>
-   <line line="007"
-         column="022"
-         entity="050"
-         attribute="015"
-         sequence="000"
-         type="A"
-         length="020"
-         text=""/>
+   <line comment="true" text="; 007 022 050 015 000 A 020"/>
    <line comment="true" text=";"/>
    <line comment="true" text="; 007 050 000 000 000 A 002  G"/>
    <line comment="true" text="; Extra Adresse"/>

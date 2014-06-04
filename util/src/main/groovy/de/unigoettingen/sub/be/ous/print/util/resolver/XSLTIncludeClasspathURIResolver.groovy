@@ -82,6 +82,16 @@ class XSLTIncludeClasspathURIResolver implements URIResolver {
                 log.trace("Found ${href} directly on class path")
                 return new StreamSource(source)
             }
+            
+            //Try to work arount an issue with sources in Jar files
+            if (href.startsWith('./')) {
+                String absolutePath = href.substring(1)
+                source = clazz.getClassLoader().getResourceAsStream(absolutePath)
+                if (source != null) {
+                    log.trace("Found ${href} as ${absolutePath} directly on class path")
+                    return new StreamSource(source)
+                }
+            }
 
             //Next try to construct the URI from the given stylesheet path
             if (stylesheet != null) {

@@ -166,12 +166,6 @@
                         <fo:block font-family="FreeSans" font-size="12pt" font-weight="bold">
                             <xsl:value-of select="//entry[@entity = '050' and @attribute = '002']/@value"/>
                         </fo:block>
-                        <xsl:if test="$loan-free-text != ''">
-                            <xsl:comment>Additional info</xsl:comment>
-                            <fo:block font-style="italic" font-family="FreeSans" font-size="12pt">
-                                <xsl:value-of select="concat('Ausleihinfo: ', $loan-free-text)"/>
-                            </fo:block>
-                        </xsl:if>
                     </fo:block-container>
                     <xsl:comment>Barcode section</xsl:comment>
                     <fo:block-container position="absolute" top="68mm" left="0mm" width="120mm">
@@ -187,8 +181,16 @@
                             </xsl:choose>
                         </fo:block>
                     </fo:block-container>
-                    <xsl:comment>Location</xsl:comment>
+                    
                     <fo:block-container position="absolute" top="100mm" left="0mm">
+                        <xsl:comment>Additional loan information</xsl:comment>
+                        <xsl:if test="$loan-free-text != ''">
+                            <xsl:comment>Additional info</xsl:comment>
+                            <fo:block font-style="italic" font-family="FreeSans" font-size="12pt">
+                                <xsl:value-of select="concat('Ausleihinfo: ', $loan-free-text)"/>
+                            </fo:block>
+                        </xsl:if>
+                        <xsl:comment>Location</xsl:comment>
                         <fo:block font-family="FreeSans" font-size="12pt">
                             <xsl:value-of select="$location"/>
                         </fo:block>

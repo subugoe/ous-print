@@ -31,4 +31,9 @@
     <artifactId>util</artifactId>
     <packaging>jar</packaging>
     <name>OUS Print Utilities</name>
+    <description>
+        This module contains some classes used in other modules. Like resolvers
+        and printing utilities.
+    </description>
+    
 </project>

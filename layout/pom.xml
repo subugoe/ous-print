@@ -30,6 +30,13 @@
     <groupId>de.unigoettingen.sub</groupId>
     <artifactId>layout</artifactId>
     <name>Layout Engine</name>
+    
+    <description>
+        This modules contains the Groovy classes and XSL Stylesheets to read ASC files,
+        converting them into XML, create XSLT based parsers from them and a XSL-FO template
+        to create PDF or Postscript files. This can be used with te command line interface
+        or the Apache Camel component.
+    </description>
 
     <dependencies>
         <dependency>

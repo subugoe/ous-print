@@ -27,6 +27,12 @@
     </parent>
     <artifactId>layout-component</artifactId>
     <name>Layout Camel Component</name>
+    <description>
+        This odule contains a Apache Camel component for the layout engine. This
+        allows to parse a slip using a given layout as part of a camle route. The
+        results can be send to a printer or via mail using the appropriate Camel
+        components.
+    </description>
     <packaging>jar</packaging>
     
     <dependencies>

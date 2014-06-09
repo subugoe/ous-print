@@ -28,7 +28,7 @@
     <artifactId>layout-test</artifactId>
     <packaging>pom</packaging>
     <name>Layout Test Resources Bundle</name>
-    <description>This resorce bundle cotains all resources needed for the unit tests.</description>
+    <description>This resorce bundle contains all resources needed for the unit tests.</description>
     
     <build>
         <plugins>

@@ -23,6 +23,8 @@
     <groupId>de.unigoettingen.sub</groupId>
     <artifactId>ous-print</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <name>OUS Layout and Print Server</name>
+    <description>Parent module for OUS layout and printing engine</description>
     <packaging>pom</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding> 
@@ -33,6 +35,7 @@
         <maven.compiler.target>1.6</maven.compiler.target>
         <apache.camel.version>2.13.0</apache.camel.version>
         <saxon.version>9.5.1-5</saxon.version>
+        <powermock.version>1.5.4</powermock.version>
     </properties>
 
     <organization>
@@ -73,10 +76,17 @@
             <artifactId>log4j</artifactId>
             <version>1.2.14</version>
         </dependency>
+        <!-- Test dependencies -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.10</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.stefanbirkner</groupId>
+            <artifactId>system-rules</artifactId>
+            <version>1.5.0</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -182,6 +192,37 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.2</version>
+                <configuration>
+                    <reportPlugins>
+                        <plugin>
+                            <groupId>org.codehaus.mojo</groupId>
+                            <artifactId>taglist-maven-plugin</artifactId>
+                            <version>2.4</version>
+                            <configuration>
+                                <tagListOptions>
+                                    <tagClasses>
+                                        <tagClass>
+                                            <displayName>Todo Work</displayName>
+                                            <tags>
+                                                <tag>
+                                                    <matchString>todo</matchString>
+                                                    <matchType>ignoreCase</matchType>
+                                                </tag>
+                                            </tags>
+                                        </tagClass>
+                                    </tagClasses>
+                                </tagListOptions>
+                                <aggregate>true</aggregate>
+                            </configuration>
+                        </plugin>
+                    </reportPlugins>
+                    <locales>en</locales>
+                </configuration>
             </plugin>
         </plugins>
     </build>

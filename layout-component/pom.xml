@@ -42,7 +42,7 @@
             <version>${apache.camel.version}</version>
         </dependency>
         <dependency>
-            <groupId>de.unigoettingen.sub</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>layout</artifactId>
             <version>${parent.version}</version>
         </dependency>
@@ -51,6 +51,7 @@
             <artifactId>slf4j-log4j12</artifactId>
             <version>1.6.6</version>
         </dependency>
+        <!-- Test dependencies -->
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-printer</artifactId>
@@ -72,7 +73,7 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>layout-test</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${parent.version}</version>
             <classifier>resources</classifier>
             <type>zip</type>
             <!-- Make sure this isn't included on any classpath-->

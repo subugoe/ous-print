@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="OUS Print Utils">
+    <body>
+        <menu name="OUS Print Utils">
+            <item name="GroovyDoc" href="./groovydoc/index.html"/>
+        </menu>
+        <menu ref="reports"/>
+    </body>
+</project>

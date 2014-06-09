@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="OUS Layout and Print Server">
+    <body>
+        <menu name="OUS Layout and Print Server">
+            <!--
+            <item name="GroovyDoc" href="./groovydoc/index.html"/>
+            -->
+        </menu>
+        <menu ref="reports"/>
+    </body>
+</project>

@@ -27,7 +27,7 @@
     </parent>
     <artifactId>layout-cli</artifactId>
     <packaging>jar</packaging>
-    <name>Layout command line interface</name>
+    <name>Layout Command Line Interface</name>
     <properties>
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>

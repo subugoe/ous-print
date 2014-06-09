@@ -27,7 +27,7 @@
     </parent>
     <artifactId>print-server</artifactId>
     <packaging>jar</packaging>
-    <name>Print server</name>
+    <name>Print Server</name>
    
     <dependencies>
         <dependency>

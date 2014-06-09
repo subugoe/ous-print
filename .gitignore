@@ -19,3 +19,4 @@
 /layout/src/main/resources/fonts/FreeSansBoldOblique.ttf
 /target/
 **/*.iml
+*.iml

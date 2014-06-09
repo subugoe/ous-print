@@ -2,6 +2,8 @@
 /layout-test/target/
 /layout-component/target/
 /layout/target/
+/util/target/
+/print-server/target/
 /layout/src/main/resources/fonts/FreeSansOblique.ttf
 /layout/src/main/resources/fonts/FreeMonoBold.ttf
 /layout/src/main/resources/fonts/FreeSans.ttf

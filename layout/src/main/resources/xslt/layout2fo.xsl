@@ -143,7 +143,7 @@
                         </fo:block>
                     </fo:block-container>
 
-                    <fo:block-container position="absolute" left="95mm" top="23mm" width="30mm">
+                    <fo:block-container position="absolute" left="95mm" top="25mm" width="30mm">
                         <xsl:comment>Date</xsl:comment>
                         <fo:block text-align="right" font-family="FreeSans" font-size="12pt">
                             <xsl:value-of select="$date"/>
@@ -154,8 +154,10 @@
                         </fo:block>
                     </fo:block-container>
                     <xsl:comment>Heading</xsl:comment>
-                    <fo:block-container position="absolute" top="23mm" left="0mm">
+                    <fo:block-container position="absolute" top="25mm" left="0mm">
+                        <!--
                         <fo:block font-family="FreeSans" font-size="20pt" font-weight="bold">Begleitzettel</fo:block>
+                        -->
                     </fo:block-container>
 
                     <xsl:comment>Autor and title</xsl:comment>
@@ -229,7 +231,7 @@
                         border-start-width="2pt">
                         <xsl:choose>
                             <xsl:when
-                                test="($user-type = '40' or $user-type = '15') or ($target != 'Zentralbib./Selbstabholbereich' and $target != 'Zentralbibliothek/Selbstabholbereich' and $target != 'Abholregal BB Kulturwiss.')">
+                                test="($user-type = '40' or $user-type = '15') or ($target != 'Zentralbib./Selbstabholbereich' and $target != 'Zentralbibliothek/Selbstabholbereich' and $target != 'Abholregal BB Kulturwiss.' and $target != 'Zentralbibliothek / Selbstabholberei')">
                                 <fo:block padding-top="2.5pt" font-family="FreeSans" font-size="32pt" font-weight="bold">
                                     <xsl:value-of select="concat($user-title, ' ', $user-lastname)"/>
                                 </fo:block>

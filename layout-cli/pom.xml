@@ -70,11 +70,6 @@
     </dependencies>
 
     <build>
-        <resources>
-            <resource>
-                <directory>../layout/src/main/resources</directory>
-            </resource>
-        </resources>
         <testResources>
             <testResource>
                 <directory>${project.build.directory}/generated-test-resources</directory>
@@ -108,7 +103,14 @@
                                     <excludes>
                                         <exclude>META-INF/*.SF</exclude>
                                         <exclude>META-INF/*.DSA</exclude>
-                                        <exclude>META-INF/*.RSA</exclude>                                       
+                                        <exclude>META-INF/*.RSA</exclude>
+                                        <exclude>log4j.properties</exclude>                                 
+                                    </excludes>
+                                </filter>
+                                <filter>
+                                    <artifact>de.unigoettingen.sub:layout</artifact>
+                                    <excludes>
+                                        <exclude>log4j.properties</exclude>  
                                     </excludes>
                                 </filter>
                             </filters>
@@ -116,6 +118,7 @@
                     </execution>
                 </executions>
             </plugin>
+          
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>

@@ -28,7 +28,7 @@
     <artifactId>layout-component</artifactId>
     <name>Layout Camel Component</name>
     <description>
-        This odule contains a Apache Camel component for the layout engine. This
+        This module contains a Apache Camel component for the layout engine. This
         allows to parse a slip using a given layout as part of a camle route. The
         results can be send to a printer or via mail using the appropriate Camel
         components.
@@ -40,12 +40,6 @@
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-core</artifactId>
             <version>${apache.camel.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-test-spring</artifactId>
-            <version>${apache.camel.version}</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>de.unigoettingen.sub</groupId>
@@ -60,6 +54,12 @@
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-printer</artifactId>
+            <version>${apache.camel.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-test-spring</artifactId>
             <version>${apache.camel.version}</version>
             <scope>test</scope>
         </dependency>

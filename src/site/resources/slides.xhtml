@@ -63,7 +63,7 @@
                 <p>Der Dienst sollte alles können was der Vorgänger kann</p>
                 <ul>
                     <li>Automatisch startender Dienst, der das Eingangsverzeichnis laufend überwacht <span class="done">✔</span></li>
-                    <li>Druck (ohne Änderungen an Cups) und Mail Funktion <span class="done">✔</span></li>
+                    <li>Druck (ohne Änderungen an <abbr title="Common Unix Print System">CUPS</abbr>) und Mail Funktion <span class="done">✔</span></li>
                     <li>Erkennung des Druckernamens auf Basis des Dateinamens <span class="done">✔</span></li>
                     <li>Einfach erweiterbar <span class="done">✔</span></li>
                     <li>Betrieb unter Solaris 10 <span class="done">✔</span></li>
@@ -248,7 +248,7 @@
                 <ul>
                     <li>Derzeit ist im XSL-FO Stylesheet Logik hinterlegt diese muss in das ODF Template überführt werden können (<span class="done">✔</span>=möglich, ✖ = nicht möglich)<ul>
                             <li>Schriftgröße anpassen bei langen Signaturen <span class="done">✔</span></li>
-                            <li>Anzeige des Nutzernamens basierend auf Abholbereich und Nutzertyp <span class="done">✔</span> (fast  <span class="todo"
+                            <li>Anzeige des Nutzernamens basierend auf Abholbereich und Nutzertyp <span class="done">✔</span> (fast <span class="todo"
                                 >✖</span>, erfordert überlappende Definitionen mit Bedingungen)</li>
                             <li>Seitenverhältnisse je nach Ausgabeformat <span class="todo">✖</span></li>
                             <li>String Bearbeitung für die Anonymisierung <span class="done">✔</span></li>
@@ -256,6 +256,15 @@
                     <li>Lösung: Überführung in XPath Ausdrücke die zur Laufzeit des generierten XSL-FO Templates evaluiert werden</li>
                     <li>Mapping der Designvorgaben von Open / Libre Office auf XSL-FO Ausdrücke</li>
                     <li>Einträge können öfter in einem Layout benutzt werden, nur das erste Vorkommen kann weiter verarbeitet werden.</li>
+                </ul>
+            </div>
+            <div id="slide27" class="step" data-x="9000" data-y="11000">
+                <h2>Status</h2>
+                <ul>
+                    <li>In der Zentaralbibliothek der SUB Göttingen im Produktionseinsatz</li>
+                    <li>Betriebsfragen (Monitoring, SMF-Integration noch offen)</li>
+                    <li>ODF Template noch in der Entwicklung - bisher Proof of Concept</li>
+                    <li>Dokumentation wird noch erstellt, Quellcode noch nicht veröffendlicht (Lokales Git Repository)</li>
                 </ul>
             </div>
         </div>

@@ -1,0 +1,104 @@
+@import url(http://weloveiconfonts.com/api/?family=fontawesome);
+/* fontawesome */
+[class *= "fontawesome-"]:before{
+    font-family:'FontAwesome', sans-serif;
+}
+body{
+    font-family:Arial, Helvetica;
+    height:100%;
+    margin:0;
+    padding:0;
+    border:0;
+}
+#impress h1{
+    font-size:56pt;
+    font-weight:bold;
+    color:rgb(0, 56, 103);
+}
+#impress h2{
+    font-size:36pt;
+    font-weight:bold;
+    color:rgb(0, 56, 103);
+}
+#impress h3{
+    font-size:22pt;
+}
+#impress p{
+    font-size:22pt;
+}
+#impress .step{
+    width:900px;
+    height:600px;
+    position:relative;
+    margin:0 auto;
+}
+#impress .submaster{
+    background-image:url('./img/logo-bottom.png');
+    background-position:left bottom;
+}
+#impress ul li{
+    font-size:22pt
+}
+#impress li li{
+    font-size:18pt
+}
+#impress li li li{
+    font-size:15pt
+}
+#impress img{
+    width:700px;
+}
+#impress .system-text{
+    font-family:Courier
+}
+footer{
+    background-color:rgb(0, 56, 103);
+    /* Taken fom powepoint file 19.05/1.41 about 13tel, or 7 % */
+    height:70px;
+    width:100%;
+    background-image:url('./img/logo-bottom.png');
+    background-repeat:no-repeat;
+    background-position:left bottom;
+    position:absolute;
+    left:0;
+    bottom:0;
+    padding:4px;
+    padding-top:0px
+}
+footer p{
+    text-align:center;
+    color:white;
+    font-size:8pt;
+}
+header{
+    height:40px;
+    width:100%;
+    position:absolute;
+    left:0;
+    top:0;
+    background-image:url('./img/logo-top.png');
+    background-repeat:no-repeat;
+    background-position:left top;
+    margin:17px;
+}
+.done{
+    color:green;
+}
+.todo{
+    color:red;
+}
+.icon-center{
+    height:100%;
+    font-size:250pt;
+    text-align:center;
+    vertical-align:middle;
+}
+.step:not(.active){
+    opacity:0.3;
+}
+.step.hide:not(.active){
+    opacity:0;
+}
+#impress .white {
+    background-color: white;
+}

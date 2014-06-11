@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <title>Bestellzetteldruck 2.0</title>
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic" rel="stylesheet" />
+        <link rel="stylesheet" type="text/css" href="./style.css" />
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+        <link rel="stylesheet" href="http://yandex.st/highlightjs/8.0/styles/default.min.css" />
+        <script src="http://yandex.st/highlightjs/8.0/highlight.min.js"></script>
+    </head>
+    <body>
+        <script>hljs.initHighlightingOnLoad();</script>
+        <header class="header"></header>
+        <div id="impress">
+            <div id="start" class="step">
+                <h1>Bestellzettel 2.0</h1>
+                <h3>Der neue Workflow für den Bestellzetteldruck an der SUB Göttingen</h3>
+            </div>
+            <div id="slide1" class="step" data-x="1500" data-y="0">
+                <h2>Ausgangslage (Zettel)</h2>
+                <img src="img/old.png" title="Der alte Bestellzettel"/>
+            </div>
+            <div id="slide2" class="step white" data-x="3000" data-y="0">
+                <h2>Ausgangslage (Layout) - Ausschnitt</h2>
+                <img src="img/asc.png" title="Ausschnitt einer ASC Datei (Layout definition)"/>
+            </div>
+            <div id="slide3" class="step" data-x="4500" data-y="0">
+                <h2>Ausgangslage (Infrastruktur)</h2>
+                <ul>
+                    <li>OUS produziert Textdateien auf Basis eines Layouts</li>
+                    <li>Ergebnis sind ASCII Dateien</li>
+                    <li>Eigenartiger Zeichensatz (Codepage 858)</li>
+                    <li>Erzeugte Text Dateien werden auf Basis des Dateinamens vom <span class="system-text">ous_print_server</span> an die Drucker (CUPS) geschickt bzw. per Mail verschickt</li>
+                    <li>Hotfolder Mechanismus</li>
+                </ul>
+            </div>
+            <div id="slide4" class="step" data-x="6000" data-y="0">
+                <h2>Neue Anforderungen</h2>
+                <ul>
+                    <li>Primär<ul>
+                            <li>Nutzernummer kürzen <span class="done">✔</span><ul>
+                                    <li>Notwendig für die Anonymisierung im Selbstabholbereich</li>
+                                </ul></li>
+                            <li>Je nach Nutzertyp und Ziel soll der Zettel nicht anonymisiert werden <span class="done">✔</span></li>
+                            <li>Gut leserliches Layout (große Schrift) für Mitarbeiter bei der Arbeit und Nutzer am Selbstabholbereich <span class="done">✔</span></li>
+                            <li>Nutzer Initial anzeigen <span class="done">✔</span></li>
+                            <li>Keine Verzögerung durch die Erstellung <span class="done">✔</span></li>
+                        </ul>
+                    </li>
+                    <li>Sekundär<ul>
+                            <li>Logo einbinden und Leserichtung entsprechend der Blickrichtung <span class="done">✔</span></li>
+                            <li>Vereinfachung bei der Erstellung und Anpassung von Layouts <span class="todo">✖</span></li>
+                            <li>XSLT-FO Kenntnisse nun notwendig – siehe Ausblick</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div id="slide5" class="step" data-x="7500" data-y="0">
+                <h2>Bestehende Anforderungen</h2>
+                <p>Der Dienst sollte alles können was der Vorgänger kann</p>
+                <ul>
+                    <li>Automatisch startender Dienst, der das Eingangsverzeichnis laufend überwacht <span class="done">✔</span></li>
+                    <li>Druck (ohne Änderungen an Cups) und Mail Funktion <span class="done">✔</span></li>
+                    <li>Erkennung des Druckernamens auf Basis des Dateinamens <span class="done">✔</span></li>
+                    <li>Einfach erweiterbar <span class="done">✔</span></li>
+                    <li>Betrieb unter Solaris 10 <span class="done">✔</span></li>
+                    <li>Verschiedene Ausgabepapierformate (A4 / A5) <span class="done">✔</span></li>
+                    <li>Bearbeitete Dateien sichern <span class="done">✔</span></li>
+                </ul>
+            </div>
+            <div id="slide6" class="step" data-x="9000" data-y="0">
+                <h2>Grundannahmen</h2>
+                <ul>
+                    <li>Ein Layout gibt an, was wo auf den Zettel gedruckt werden soll</li>
+                    <li>Daher: Welcher Teil eines generierten Zettels welche Bedeutung hat, kann man auf Basis des Layouts die Datei interpretiert werden</li>
+                    <li>Wenn man die Layout Datei in XML verwandelt, kann man sie mit XSLT und XSL-FO weiter verarbeiten (XML Publishing Workflow)</li>
+                    <li>Also: Man kann aus der Layout Datei einen Parser zum einlesen der Zettel generieren.</li>
+                    <li>Für die Verarbeitung kommt XSLT zum Einsatz, für die die Verbindung der Stylesheet und das Handling der Parameter Groovy</li>
+                    <li>Das Ergebnis sollte PDF oder Postscript sein um unabhängig vom Drucker zu sein</li>
+                </ul>
+            </div>
+            <div id="slide7" class="step" data-x="9000" data-z="-2000" data-rotate-x="90">
+                <h2>Übersicht über den Ablauf</h2>
+                <img src="img/flow.svg" />
+            </div>
+            <!-- Start ty fly into -->
+            <script type="text/javascript">
+                <!-- Taken from https://gist.github.com/lavallee/2340157 -->
+                 $(document).ready(function() {
+                    $(document).on('impress:stepenter', function(e) {
+                        var currentSlide = $(e.target).attr('id');
+ 
+                        if (currentSlide === 'slide7') {
+                            $(".header").hide();
+                            $(".footer").hide();
+                        }
+                    });
+                 });
+            </script>
+            <div id="slide8" class="step" data-x="7000" data-y="5000" data-z="-2500" data-rotate-x="90">
+                <h2>Layout Datei einlesen – XML Repräsentation</h2>
+                <img src="img/ascxml.png" />
+            </div>
+            <div id="slide9" class="step" data-x="8500" data-y="5000" data-z="-2500" data-rotate-x="90">
+                <h2>Generierter Parser (Ausschnitt)</h2>
+                <img src="img/xml2parser.png" />
+            </div>
+            <div id="slide10" class="step" data-x="10000" data-y="5000" data-z="-2500" data-rotate-x="90">
+                <h2>Geparster Zettel in XML (Ausschnitt)</h2>
+                <img src="img/parsedasc.png" />
+            </div>
+            <div id="slide11" class="step" data-x="8500" data-y="5000" data-z="-1200" data-rotate-x="90">
+                <h2>Generiertes XSL FO (Ausschnitt)</h2>
+                <img src="img/xslfo.png" />
+            </div>
+            <div id="slide12" class="step" data-x="7000" data-y="5000" data-z="-1200" data-rotate-x="90">
+                <h2>Ergebnis</h2>
+                <img src="img/new.png" />
+            </div>
+            <div id="slide13" class="step" data-x="13500" data-y="0">
+                <h2>Nutzung auf der Kommandozeile</h2>
+                <img src="img/cli.png" />
+            </div>
+            <div id="slide14" class="step" data-x="13500" data-y="1000">
+                <h2>Möglichkeiten des Kommandozeilenprogramms</h2>
+                <ul>
+                    <li>Slips konvertieren / einlesen</li>
+                    <li>Drucker anzeigen</li>
+                    <li>Drucken</li>
+                    <li>Konvertierung in PDF, Postscript, XSL-FO<ul>
+                        <li>XSL-FO als Ausgabe kann zur weiteren Verarbeitung (XSLT, XPath) in Camel genutzt werden</li></ul></li>
+                    <li>Erzeugung von XSLT basierten Parsern aus Layouts</li>
+                </ul>
+            </div>
+            
+            
+            <div id="slide15" class="step" data-x="9000" data-y="1500">
+                <div class="fontawesome-print icon-center"></div>
+            </div>
+            
+            <div id="slide16" class="step" data-x="9000" data-y="3200" data-scale="6">
+                <h2>PrintServer</h2>
+                <ul>
+                    <li>Regelbasiertes Routing, Änderungen am <span class="system-text">ous_print_server</span> entfallen</li>
+                    <li>Eigene Apache Camel Komponente um das Parsen des Layouts in einer Camel Route zu erledigen</li>
+                    <li>Camel File überwacht Verzeichnisse</li>
+                    <li>Dateinamen können als regulärer Ausdruck anagegeben werden</li>
+                    <li>Camel Print druckt erzeugte Dateien</li>
+                    <li>Alle lokalen CUPS Drucker können verwendet werden</li>
+                    <li>Camel Mail kann Ergebnisse verschicken</li>
+                </ul>
+            </div>
+            <div id="slide17" class="step" data-x="9000" data-y="8000">
+                <h2>Apache Camel - Ein Routing Framework</h2>
+                <ul>
+                    <li>Routen haben Start- und Endpunkte, sowie Zwischenschritte</li>
+                    <li>Definiert in Java, Scala, Groovy oder XML</li>
+                    <li>Vordefinierte Start- und Endpunkte sind Dateien (auch Remote, z.B. FTP), Nachrichtensysteme („Message Queues“), Webservices, Datenbanken, Mail und viele mehr</li>
+                    <li>Punkte bzw. Schritte werden als URIs angegeben</li>
+                    <li>Eigene Funktionalitäten können als Komponente hinzugefügt werden</li>
+                </ul>
+            </div>
+            <div id="slide18" class="step" data-x="11500" data-y="7000" data-rotate="90" data-scale="3">
+                <h2>Beispiel für eine Route:</h2>
+                <pre><code>
+                    &lt;route>
+                        &lt;from uri="">&lt;/from>
+                        &lt;to uri="">&lt;/to> 
+                    &lt;/route>
+                </code></pre>
+                <h2>Volständiges Beispiel:</h2>
+                <pre><code>
+                &lt;route>
+                    &lt;from uri="file:/pica/prod/prt/selbstabholbereich?include=sub4235_\d{16}_slip001.print&amp;?move=../sich-selbstabhol"/>
+                    &lt;to uri="layout:.?xslfo=./xslfo/layout2fo.xsl&amp;template=./ous40_layout_001_du.asc&amp;outputFormat=PS"/> 
+                    &lt;to uri="lpr://localhost/bbk-test"/>
+                &lt;/route>
+                </code></pre>
+                <div><svg xmlns="http://www.w3.org/2000/svg" height="100%" width="100%">
+                    <path id="svg_2" d="m176.12,177.11501l24.16679,0l0,0l36.24948,0l84.58372,0l0,43.84293l0,0l0,18.79074l0,12.52698l-84.58372,0l-60.18175,36.83934l23.93227,-36.83934l-24.16679,0l0,-12.52698l0,-18.79074l0,0l0,-43.84293z" stroke-width="1.5" stroke="#000" fill="#6D97AB"/>
+                </svg>
+                </div>
+            </div>
+            <div id="slide19" class="step" data-x="9000" data-y="9500">
+                <h2>Erste Erfahrungen</h2>
+                <ul>
+                    <li>Postscript statt PDF sorgt für bessere Ergebnisse mit unterschiedlichen Druckern und Papierformaten</li>
+                    <li>Höheren Speicherbedarf als mit dem herkömmlichen Print Server</li>
+                    <li>Keine Geschwindigkeitseinbußen – die Prozesskette benötigt ca. 0,5 Sekunden – das Verzeichnis wird einfach doppelt so häufig abgefragt</li>
+                    <li>Titeldaten werden normalisiert ausgegeben</li>
+                    <li>Interpretation des Layouts hat eigenartige Semantiken, wenn die Feldlänge zu kurz ist</li>
+                    <li>Mehrseitige Ausgabelayouts und Mail Versand  noch nicht getestet</li>
+                    <li>Umlaute werden von den Schriften auf dem System nicht unterstützt, Schriften müssen eingebettet werden</li>
+                </ul>
+            </div>
+            <div id="slide20" class="step" data-x="8000" data-y="9500" data-rotate="90">
+                <div class="fontawesome-envelope icon-center"></div>
+            </div>
+            <div id="slide21" class="step" data-x="9000" data-y="11000" data-rotate="">
+                <h2>Ausblick</h2>
+                <ul>
+                    <li>Integration ins bestehende System<ul>
+                        <li><span class="system-text">ous_print_server</span> kann das Kommandozeilenwerkzeug einbinden</li>
+                            <li>PrintServer kann ous_print_server ersetzen<ul>
+                                    <li>Bon Drucke mit Logo denkbar</li>
+                                </ul></li>
+                            <li>Start via Solaris <abbr title="Service Management Facility">SMF</abbr></li>
+                        </ul></li>
+                    <li>Barcodes können schon jetzt generiert werden – Anwendungsfall fehlt noch</li>
+                    <li>Tests mit anderen Zeichensätzen (ggf. entsprechende Titelsätze vorhanden?)</li>
+                    <li>Grafische Erstellung der Vorlagen – kein XSL-FO mehr notwendig</li>
+                    <li>Veröffentlichung des Source Codes bei GitHub <span class="fontawesome-github"></span></li>
+                    <li>Camel bietet <abbr title="Java Management Extensions">JMX</abbr> Monitoring, dies kann z.B. mit dem Nagios der VZG zusammenarbeiten</li>
+                    <li>Überwachung der Konfiguration auf Änderungen</li>
+                    <li>Handling von Mahnungsmails</li>
+                    <li>Bibliotheksmarketing auf der Rückseite?</li>
+                </ul>
+            </div>
+            <div id="slide22" class="step" data-x="9000" data-y="10500">
+                <div class="fontawesome-envelope icon-center"></div>
+            </div>
+            <div id="slide23" class="step" data-x="9000" data-y="10500">
+                <h2>Mögliche Verbesserungen (nicht geplant</h2>
+                <ul>
+                    <li>Parser könnten auch in Java generiert werden, bzw. müssten nicht jedes mal neu generiert werden – Performance Optimierung</li>
+                    <li>Oder Parsen und Layouten in einem Stylesheet</li>
+                    <li>Datenbankabfrage zeitgesteuert (z.b. für Benachrichtigungen)</li>
+                </ul>
+            </div>
+
+            <div id="slide24" class="step" data-x="9000" data-y="9000">
+                <h2>Layouts grafisch gestalten</h2>
+                <ul>
+                    <li>Perspektivisch könnten Layouts auch grafisch gestaltet werdeny</li>
+                    <li>Vorlagen können in Open / Libre Office erstellt werden und dann mit XSLT in XSL-FO verwandelt werden</li>
+                    <li>Open / Libre Office bietet die Möglichkeit grafische Elemente zu annotieren</li>
+                    <li>In diesen Annotationen können die Namen der gewünschten Felder, Funktionsaufrufe und einfache Kontrollstrukturen (if, then, else) hinterlegt werden</li>
+                </ul>
+            </div>
+            <div id="slide25" class="step" data-x="9000" data-y="10500">
+                <div class="fontawesome-edit icon-center"></div>
+            </div>
+            <div id="slide26" class="step" data-x="9000" data-y="11000">
+                <h2>Technische Anforderungen</h2>
+                <ul>
+                    <li>Derzeit ist im XSL-FO Stylesheet Logik hinterlegt diese muss in das ODF Template überführt werden können (<span class="done">✔</span>=möglich, ✖ = nicht möglich)<ul>
+                            <li>Schriftgröße anpassen bei langen Signaturen <span class="done">✔</span></li>
+                            <li>Anzeige des Nutzernamens basierend auf Abholbereich und Nutzertyp <span class="done">✔</span> (fast  <span class="todo"
+                                >✖</span>, erfordert überlappende Definitionen mit Bedingungen)</li>
+                            <li>Seitenverhältnisse je nach Ausgabeformat <span class="todo">✖</span></li>
+                            <li>String Bearbeitung für die Anonymisierung <span class="done">✔</span></li>
+                        </ul></li>
+                    <li>Lösung: Überführung in XPath Ausdrücke die zur Laufzeit des generierten XSL-FO Templates evaluiert werden</li>
+                    <li>Mapping der Designvorgaben von Open / Libre Office auf XSL-FO Ausdrücke</li>
+                    <li>Einträge können öfter in einem Layout benutzt werden, nur das erste Vorkommen kann weiter verarbeitet werden.</li>
+                </ul>
+            </div>
+        </div>
+        <footer class="footer">
+            <!--
+            <img src="img/logo-bottom.png" />
+            -->
+            <p>
+            Der neue Workflow für den Bestellzetteldruck an der SUB Göttingen
+            </p>
+            <p>Christian Mahnke</p>
+        </footer>
+        <script type="text/javascript" src="https://raw.githubusercontent.com/bartaz/impress.js/master/js/impress.js"></script>
+        <script type="text/javascript">impress().init();</script>
+    </body>
+</html>

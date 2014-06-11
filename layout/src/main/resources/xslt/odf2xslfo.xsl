@@ -194,10 +194,10 @@
                 <xsl:apply-templates select="@*"/>
             </xsl:variable>
             <xsl:choose>
-                <xsl:when test="$attributes/@reference-orientation">
+                <xsl:when test="$attributes[name(.) = 'reference-orientation']">
                     <xsl:copy-of select="$attributes except @top"/>
                     <!-- Rewrite top attribute top = top - width -->
-                    <xsl:attribute name="top" select="print:calculate($attributes/@top, $attributes/@width, '-')"></xsl:attribute>
+                    <xsl:attribute name="top" select="print:calculate($attributes[name(.) = 'top'], '-', $attributes[name(.) = 'width'])"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:copy-of select="$attributes"/>
@@ -268,7 +268,7 @@
                 <xsl:variable name="image" select="document(@xlink:href, /)" as="document-node()"/>
                 <gxsl:comment>A SVG image (<xsl:value-of select="@xlink:href"/>)</gxsl:comment>
                 <fo:block>
-                    <xsl:apply-templates select="@*" mode="fo"/>
+                    <xsl:apply-templates select="@*"/>
                     <fo:instream-foreign-object>
                         <xsl:copy-of select="$image/*"/>
                     </fo:instream-foreign-object>
@@ -293,7 +293,7 @@
     <!-- Text in XSL-FO mode -->
     <xsl:template match="text:p">
         <fo:block>
-            <xsl:apply-templates select="@*" mode="fo"/>
+            <xsl:apply-templates select="@*"/>
             <!-- text:p's in frames with description -->
             <xsl:choose>
                 <xsl:when test="parent::draw:text-box/following-sibling::svgoo:desc">
@@ -345,7 +345,7 @@
 
     <xsl:template match="text:span" mode="#default">
         <fo:inline>
-            <xsl:apply-templates select="@*" mode="fo"/>
+            <xsl:apply-templates select="@*"/>
             <xsl:apply-templates/>
         </fo:inline>
     </xsl:template>
@@ -375,7 +375,7 @@
     </xsl:template>
 
     <xsl:template match="draw:text-box">
-        <xsl:apply-templates select="@*" mode="fo"/>
+        <xsl:apply-templates select="@*"/>
         <xsl:apply-templates/>
     </xsl:template>
 
@@ -388,15 +388,15 @@
         <xsl:attribute name="{local-name(.)}" select="."/>
     </xsl:template>
 
-    <xsl:template match="@svgoo:y" mode="fo">
+    <xsl:template match="@svgoo:y">
         <xsl:attribute name="top" select="."/>
     </xsl:template>
-    <xsl:template match="@svgoo:x" mode="fo">
+    <xsl:template match="@svgoo:x">
         <xsl:attribute name="left" select="."/>
     </xsl:template>
 
     <!-- Margins -->
-    <xsl:template match="@fooo:margin-left|@fooo:margin-right|@fooo:margin-top|@fooo:margin-bottom" mode="#all">
+    <xsl:template match="@fooo:margin-left|@fooo:margin-right|@fooo:margin-top|@fooo:margin-bottom">
         <xsl:attribute name="{local-name(.)}" select="."/>
     </xsl:template>
     <!-- Other FO attributes -->
@@ -426,7 +426,7 @@
         <xsl:apply-templates select="$styles[@style:name = $style-name]/@*" mode="#current"/>
     </xsl:template>
 
-    <xsl:template match="@style:family">
+    <xsl:template match="@style:family" mode="#all">
         <xsl:apply-templates select="../style:text-properties/@*|../style:graphic-properties/@*|../style:paragraph-properties/@*" mode="#current"/>
     </xsl:template>
 
@@ -467,7 +467,7 @@
         <xsl:attribute name="{local-name(.)}" select="print:rewrite-transform(.)"/>
     </xsl:template>
     <!-- SVG Attributes to ignore in XSL-FO mode -->
-    <xsl:template match="@draw:stroke|@svgoo:stroke-color|@draw:fill|@draw:fill-color" mode="#all"/>
+    <xsl:template match="@draw:stroke|@svgoo:stroke-color|@draw:fill|@draw:fill-color"/>
     <!-- SVG Text -->
     <xsl:template match="text()" mode="svg">
         <xsl:value-of select="."/>
@@ -476,8 +476,12 @@
     <xsl:template match="@style:wrap|@style:number-wrapped-paragraphs|@style:wrap-contour|@draw:wrap-influence-on-position|@style:text-autospace|@fooo:text-align|@fooo:min-height|@style:font-name"
         mode="svg"/>
 
+    <!-- Unmactched atibutes in svg mode -->
+    <xsl:template match="@*" mode="svg">
+        <xsl:message>Unmached attribute: <xsl:value-of select="name(.)"/>, value: <xsl:value-of select="data(.)"/></xsl:message>
+    </xsl:template>
     <!-- All other attributes -->
-    <xsl:template match="@*" mode="#all">
+    <xsl:template match="@*" mode="#default">
         <xsl:message terminate="yes">Unmached attribute: <xsl:value-of select="name(.)"/>, value: <xsl:value-of select="data(.)"/></xsl:message>
     </xsl:template>
 
@@ -617,7 +621,7 @@
         <xsl:variable name="pi" select="3.1415926535897932384626433832795028841971693993751" as="xs:double"/>
         <xsl:value-of select="$rad*(180 div $pi)"/>
     </xsl:function>
-    
+
     <!-- Calculates some measurements -->
     <xsl:function name="print:calculate" as="xs:string">
         <xsl:param name="arg1" as="xs:string"/>

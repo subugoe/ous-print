@@ -21,12 +21,14 @@ package de.unigoettingen.sub.be.ous.print.layout
 import groovy.util.logging.Log4j
 
 /**
- *
+ * This class extends Layout2Fo since it's XSL-FO capabilities can be sued for 
+ * ODF templates as well. Use ths class if you want to work with ODF templates directly.
+ * This code is experimental, there is no support.
  * @author cmahnke
  */
 
 @Log4j
-class Odf2Fo  extends AbstractTransformer {
+class Odf2Fo extends Layout2Fo {
     /** The location of the stylesheet */
     def static String xslt = "/xslt/odf2xslfo.xsl"
     

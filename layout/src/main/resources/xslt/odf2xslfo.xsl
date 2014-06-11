@@ -69,20 +69,32 @@
 
             <gxsl:template match="/">
                 <xsl:comment>Internal variables</xsl:comment>
-                <xsl:for-each select="//svgoo:desc[matches(., $reference-pattern)]/text()">
-                    <xsl:comment>Results of parsing <xsl:value-of select="."/></xsl:comment>
-                    <xsl:analyze-string select="." regex="{$reference-pattern}">
-                        <xsl:matching-substring>
-                            <gxsl:variable>
-                                <xsl:attribute name="name" select="print:get-variable-name(.)"/>
-                                <xsl:attribute name="select" select="print:get-variable-path(.)"/>
-                                <xsl:attribute name="as" select="'xs:string'"/>
-                            </gxsl:variable>
-                            <!--
-                        <gxsl:comment>Variable definition for expression <xsl:value-of select="."/> Value: <gxsl:value-of select="{concat('$', print:get-variable-name(.))}"></gxsl:value-of></gxsl:comment>
-                        -->
-                        </xsl:matching-substring>
-                    </xsl:analyze-string>
+                <!-- Collect internal variables -->
+                <xsl:variable name="variables" as="node()*">
+                    <xsl:for-each select="//svgoo:desc[matches(., $reference-pattern)]/text()">
+                        <xsl:comment>Results of parsing <xsl:value-of select="."/></xsl:comment>
+                        <xsl:analyze-string select="." regex="{$reference-pattern}">
+                            <xsl:matching-substring>
+                                <gxsl:variable>
+                                    <xsl:attribute name="name" select="print:get-variable-name(.)"/>
+                                    <xsl:attribute name="select" select="print:get-variable-path(.)"/>
+                                    <xsl:attribute name="as" select="'xs:string'"/>
+                                </gxsl:variable>
+                                <!--
+                                <gxsl:comment>Variable definition for expression <xsl:value-of select="."/> Value: <gxsl:value-of select="{concat('$', print:get-variable-name(.))}"></gxsl:value-of></gxsl:comment>
+                                -->
+                            </xsl:matching-substring>
+                        </xsl:analyze-string>
+                    </xsl:for-each>
+                </xsl:variable>
+                <!-- Select distinct variables to get rid of duplicates -->
+                <!-- TODO, copy the comments as well | $variables/comment() -->
+                <xsl:for-each select="distinct-values($variables/@select)">
+                    <xsl:variable name="select" select="." as="xs:string"/>
+                    <xsl:if test="$variables[@select = $select]/preceding-sibling::comment()">
+                        <xsl:copy-of select="$variables[@select = $select]/preceding-sibling::comment()"/>
+                    </xsl:if>
+                    <xsl:copy-of select="$variables[@select = $select][1]"/>
                 </xsl:for-each>
                 <fo:root xmlns:fox="http://xmlgraphics.apache.org/fop/extensions">
                     <gxsl:comment>Contents go in here</gxsl:comment>
@@ -569,14 +581,22 @@
     </xsl:function>
 
     <!-- Utility functions -->
+    <!-- Transforms a @draw:transform attribute into @fo:reference-orientation -->
+    <xsl:function name="print:reference-orientation" as="attribute(fo:reference-orientation)">
+        <xsl:param name="str" as="xs:string"/>
+        <xsl:variable name="rad" select="number(replace($str, '^.*rotate\s+\(([\d\.]+?)\).*$', '$1'))"/>
+        <xsl:attribute name="fo:reference-orientation" select="print:rad-to-degree($rad)"/>
+    </xsl:function>
+
     <!-- Takes a string and escapes charackters that should me matched literaly -->
     <xsl:function name="print:escape-regex" as="xs:string">
         <xsl:param name="str" as="xs:string"/>
         <xsl:value-of select="replace($str, '\.|\*|\?|\+|\^\|\$|\{|\}|\[|\]|\(|\)|\-|\\', '\\$1')"/>
     </xsl:function>
+    <!-- Rewrite Transfor attribute from rad (Libre / Open Office) to degree (SVG) -->
     <xsl:function name="print:rewrite-transform">
         <!-- See http://mail-archives.apache.org/mod_mbox/incubator-ooo-dev/201208.mbox/%3C50269758.3090901@t-online.de%3E -->
-        <xsl:param name="str"></xsl:param>
+        <xsl:param name="str"/>
         <xsl:analyze-string select="$str" regex="rotate\s+([\d\.]+?)">
             <xsl:matching-substring>
                 <xsl:value-of select="concat('rotate (', print:rad-to-degree(number(replace(., 'rotate\s+\(([\d\.]+?)\)', '$1'))), ')')"/>
@@ -586,7 +606,8 @@
             </xsl:non-matching-substring>
         </xsl:analyze-string>
     </xsl:function>
-    
+
+    <!-- Converts radians to degrees -->
     <xsl:function name="print:rad-to-degree">
         <!-- See http://en.wikipedia.org/wiki/Radian#Conversions 
              And http://www.exslt.org/math/functions/constant/math.constant.template.xsl.html

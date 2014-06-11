@@ -190,7 +190,19 @@
 
     <xsl:template match="draw:frame">
         <fo:block-container position="absolute">
-            <xsl:apply-templates select="@*"/>
+            <xsl:variable name="attributes" as="attribute()*">
+                <xsl:apply-templates select="@*"/>
+            </xsl:variable>
+            <xsl:choose>
+                <xsl:when test="$attributes/@reference-orientation">
+                    <xsl:copy-of select="$attributes except @top"/>
+                    <!-- Rewrite top attribute top = top - width -->
+                    <xsl:attribute name="top" select="print:calculate($attributes/@top, $attributes/@width, '-')"></xsl:attribute>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:copy-of select="$attributes"/>
+                </xsl:otherwise>
+            </xsl:choose>
             <xsl:apply-templates/>
         </fo:block-container>
     </xsl:template>
@@ -420,12 +432,10 @@
 
     <!-- Attributes to ignore -->
     <xsl:template
-        match="@draw:name|@text:anchor-type|@style:name|@style:class|@style:page-layout-name|@office:version|@officeooo:*|@style:contextual-spacing|@text:number-lines|@text:line-number|@style:vertical-rel|@xlink:*|@draw:textarea-horizontal-align|@draw:textarea-vertical-align|@style:protect"
-        />
+        match="@draw:name|@text:anchor-type|@style:name|@style:class|@style:page-layout-name|@office:version|@officeooo:*|@style:contextual-spacing|@text:number-lines|@text:line-number|@style:vertical-rel|@xlink:*|@draw:textarea-horizontal-align|@draw:textarea-vertical-align|@style:protect"/>
     <!-- Asian attributes to ignore -->
     <xsl:template
-        match="@style:font-name-asian|@style:font-weight-asian|@style:font-size-asian|@style:font-style-asian|@style:font-pitch-asian|@style:font-family-asian|@style:font-family-generic-asian"
-        />
+        match="@style:font-name-asian|@style:font-weight-asian|@style:font-size-asian|@style:font-style-asian|@style:font-pitch-asian|@style:font-family-asian|@style:font-family-generic-asian"/>
     <!-- Complex settings to ignore -->
     <xsl:template match="@style:font-name-complex|@style:font-size-complex|@style:font-weight-complex|@style:font-style-complex|@style:font-family-generic-complex"/>
     <!-- Font settings to ignore -->
@@ -441,8 +451,7 @@
     </xsl:template>
     <!-- Attributes that might can be mapped to SVG -->
     <xsl:template
-        match="@draw:luminance|@draw:contrast|@draw:red|@draw:green|@draw:blue|@draw:gamma|@draw:color-inversion|@draw:image-opacity|@draw:color-mode|@style:run-through|@style:flow-with-text"
-        >
+        match="@draw:luminance|@draw:contrast|@draw:red|@draw:green|@draw:blue|@draw:gamma|@draw:color-inversion|@draw:image-opacity|@draw:color-mode|@style:run-through|@style:flow-with-text">
         <xsl:message>Unmached attribute ignored: <xsl:value-of select="name(.)"/>, value: <xsl:value-of select="data(.)"/></xsl:message>
     </xsl:template>
     <!-- Stuff to map to SVG -->
@@ -469,6 +478,7 @@
 
     <!-- All other attributes -->
     <xsl:template match="@*" mode="#all">
+        <xsl:message terminate="yes">Unmached attribute: <xsl:value-of select="name(.)"/>, value: <xsl:value-of select="data(.)"/></xsl:message>
     </xsl:template>
 
     <!-- Other Stuff -->
@@ -575,8 +585,8 @@
         <xsl:variable name="left" select="replace($str, '.*translate\s*?\((.[^ ]*)\s*(.[^ ]*)\)', '$1')" as="xs:string"/>
         <xsl:variable name="top" select="replace($str, '.*translate\s*?\((.[^ ]*)\s*(.[^ ]*)\)', '$2')" as="xs:string"/>
         <xsl:attribute name="reference-orientation" select="round(print:rad-to-degree($rad))"/>
-        <xsl:attribute name="top" select="$top"/>
         <xsl:attribute name="left" select="$left"/>
+        <xsl:attribute name="top" select="$top"/>
     </xsl:function>
 
     <!-- Takes a string and escapes charackters that should me matched literaly -->
@@ -606,6 +616,40 @@
         <xsl:param name="rad" as="xs:double"/>
         <xsl:variable name="pi" select="3.1415926535897932384626433832795028841971693993751" as="xs:double"/>
         <xsl:value-of select="$rad*(180 div $pi)"/>
+    </xsl:function>
+    
+    <!-- Calculates some measurements -->
+    <xsl:function name="print:calculate" as="xs:string">
+        <xsl:param name="arg1" as="xs:string"/>
+        <xsl:param name="operation" as="xs:string"/>
+        <xsl:param name="arg2" as="xs:string"/>
+        <xsl:variable name="unit" select="replace($arg1, '[\d\.]*?([^\d\.]+)', '$1')" as="xs:string"/>
+        <!-- Use this if you  want to check if units match -->
+        <xsl:if test="not(contains($arg2, $unit))">
+            <xsl:message terminate="yes">Units dosn't match!</xsl:message>
+        </xsl:if>
+        <xsl:variable name="int1" select="number(replace($arg1, '([\d\.]+)[^\d]*', '$1'))" as="xs:double"/>
+        <xsl:variable name="int2" select="number(replace($arg2, '([\d\.]+)[^\d]*', '$1'))" as="xs:double"/>
+        <xsl:variable name="result" as="xs:double">
+            <xsl:choose>
+                <xsl:when test="$operation = '+'">
+                    <xsl:value-of select="$int1 + $int2"/>
+                </xsl:when>
+                <xsl:when test="$operation = '-'">
+                    <xsl:value-of select="$int1 - $int2"/>
+                </xsl:when>
+                <xsl:when test="$operation = '*'">
+                    <xsl:value-of select="$int1 * $int2"/>
+                </xsl:when>
+                <xsl:when test="$operation = '/' or $operation = 'div'">
+                    <xsl:value-of select="$int1 div $int2"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:message terminate="yes">Unsupported operation!</xsl:message>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:value-of select="concat(string($result), $unit)"/>
     </xsl:function>
 
 </xsl:stylesheet>

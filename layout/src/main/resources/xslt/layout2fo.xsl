@@ -33,12 +33,13 @@
     <xsl:param name="debugParam" select="'false'" as="xs:string"/>
     <xsl:param name="barcodeParam" select="'false'" as="xs:string"/>
     <xsl:param name="format" select="'A5'" as="xs:string"/>
+    <xsl:param name="version" select="1.0"/>
 
     <!-- This is needed for Type casting -->
     <xsl:variable name="debug" select="if ($debugParam castable as xs:boolean) then xs:boolean($debugParam) else false()" as="xs:boolean"/>
     <xsl:variable name="barcode" select="if ($barcodeParam castable as xs:boolean) then xs:boolean($barcodeParam) else true()" as="xs:boolean"/>
     <xsl:variable name="template-info">
-        <xsl:text>V1 Layout: 001</xsl:text>
+        <xsl:text>V</xsl:text><xsl:value-of select="$version"/><xsl:text> Layout: 001</xsl:text>
     </xsl:variable>
     <!--
     Definition of possible paper formats

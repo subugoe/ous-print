@@ -168,6 +168,7 @@
                 </gxsl:processing-instruction>
             </gxsl:template>
             <xsl:comment>Functions</xsl:comment>
+            <xsl:comment>Sets the font size for a given String</xsl:comment>
             <gxsl:function name="print:set-font-size" as="element(fo:inline)" xmlns:fo="http://www.w3.org/1999/XSL/Format">
                 <gxsl:param name="size" as="xs:integer"/>
                 <gxsl:param name="text" as="xs:string"/>
@@ -176,6 +177,15 @@
                     <gxsl:copy-of select="$text"/>
                 </fo:inline>
             </gxsl:function>
+            <gxsl:function name="print:show-if" as="element(fo:inline)" xmlns:fo="http://www.w3.org/1999/XSL/Format">
+                <gxsl:param name="str" as="xs:string"></gxsl:param>
+                <gxsl:param name="condition" as="xs:boolean"></gxsl:param>
+                <fo:inline>
+                    <gxsl:attribute name="visibility" select="if ($condition) then 'visible' else 'hidden'"/>
+                    <gxsl:copy-of select="$str"/>
+                </fo:inline>
+            </gxsl:function>
+            <xsl:comment>returns a XSL-FO leader tag, use this for empty lines</xsl:comment>
             <gxsl:function name="print:leader" as="element(fo:leader)" xmlns:fo="http://www.w3.org/1999/XSL/Format">
                 <fo:leader leader-pattern="space"/>
             </gxsl:function>
@@ -384,7 +394,7 @@
          There is one mode for XSL-FO results and one for SVG (not fully implemented yet)
     -->
     <!-- First Attributes in XSL-FO -->
-    <xsl:template match="@svgoo:width|@svgoo:height|@draw:z-index" mode="#all">
+    <xsl:template match="@svgoo:width|@svgoo:height|@draw:z-index">
         <xsl:attribute name="{local-name(.)}" select="."/>
     </xsl:template>
 

@@ -198,7 +198,7 @@
     <!-- One frame can contain multiple image representations, choose the SVG one and ignore others, otherwise apply image element -->
     <xsl:template match="draw:frame[child::draw:image]">
         <fo:block-container position="absolute">
-            <xsl:apply-templates select="@*" mode="fo"/>
+            <xsl:apply-templates select="@*"/>
             <xsl:choose>
                 <xsl:when test="./child::draw:image[ends-with(@xlink:href, '.svg')]">
                     <!-- TODO: create a function for this -->
@@ -262,6 +262,7 @@
                     </fo:instream-foreign-object>
                 </fo:block>
             </xsl:when>
+            <!-- TODO: Check if we can load the image as unparsed text, encode it to Base64 and add it inline by guessing the mime type -->
             <!--
             <xsl:when test="ends-with(@xlink:href, '.png')">   
                 <xsl:variable name="image" select="unparsed-text(@xlink:href)"/>
@@ -269,7 +270,6 @@
             </xsl:when>
             -->
             <xsl:otherwise>
-                <!-- TODO: Check if we can load the image as unparsed text, encode it to Base64 and add it inline by guessing the mime type -->
                 <xsl:variable name="message">
                     Image Type of <xsl:value-of select="@xlink:href"/> not supported!
                 </xsl:variable>
@@ -279,7 +279,7 @@
         </xsl:choose>
     </xsl:template>
     <!-- Text in XSL-FO mode -->
-    <xsl:template match="text:p" mode="fo #default">
+    <xsl:template match="text:p">
         <fo:block>
             <xsl:apply-templates select="@*" mode="fo"/>
             <!-- text:p's in frames with description -->
@@ -290,7 +290,7 @@
                 </xsl:when>
                 <!-- text:p's without descriptions -->
                 <xsl:otherwise>
-                    <xsl:apply-templates select="@*" mode="fo"/>
+                    <xsl:apply-templates select="@*"/>
                     <xsl:apply-templates/>
                 </xsl:otherwise>
             </xsl:choose>
@@ -384,23 +384,23 @@
     </xsl:template>
 
     <!-- Margins -->
-    <xsl:template match="@fooo:margin-left|@fooo:margin-right|@fooo:margin-top|@fooo:margin-bottom" mode="fo">
+    <xsl:template match="@fooo:margin-left|@fooo:margin-right|@fooo:margin-top|@fooo:margin-bottom" mode="#all">
         <xsl:attribute name="{local-name(.)}" select="."/>
     </xsl:template>
     <!-- Other FO attributes -->
     <xsl:template match="@fooo:text-align|@fooo:border|@fooo:padding|@fooo:clip|@fooo:min-height|@fooo:color|@fooo:background-color|@fooo:font-size|@fooo:font-weight|@fooo:font-style|@fooo:text-align"
-        mode="fo">
+        mode="#all">
         <xsl:attribute name="{local-name(.)}" select="."/>
     </xsl:template>
 
-    <xsl:template match="@style:font-name" mode="fo">
+    <xsl:template match="@style:font-name">
         <xsl:variable name="font-name" select="."/>
         <xsl:attribute name="font-family" select="//style:font-face[@style:name = $font-name]/@svgoo:font-family"/>
     </xsl:template>
-    <xsl:template match="@style:vertical-pos" mode="fo">
+    <xsl:template match="@style:vertical-pos">
         <xsl:attribute name="vertical-align" select="."/>
     </xsl:template>
-    <xsl:template match="@draw:transform" mode="fo">
+    <xsl:template match="@draw:transform">
         <!--
         <xsl:copy-of select="print:reference-orientation(.)"/>
         -->
@@ -408,41 +408,41 @@
     </xsl:template>
 
     <!-- Wrapped styles, these contains additional styles -->
-    <xsl:template match="@draw:style-name|@draw:text-style-name|@text:style-name|@style:parent-style-name|@style:list-style-name" mode="#all">
+    <xsl:template match="@draw:style-name|@draw:text-style-name|@text:style-name|@style:parent-style-name|@style:list-style-name">
         <xsl:variable name="style-name" select="data(.)"/>
         <xsl:message>Resolving style <xsl:value-of select="$style-name"/></xsl:message>
         <xsl:apply-templates select="$styles[@style:name = $style-name]/@*" mode="#current"/>
     </xsl:template>
 
-    <xsl:template match="@style:family" mode="#all">
+    <xsl:template match="@style:family">
         <xsl:apply-templates select="../style:text-properties/@*|../style:graphic-properties/@*|../style:paragraph-properties/@*" mode="#current"/>
     </xsl:template>
 
     <!-- Attributes to ignore -->
     <xsl:template
         match="@draw:name|@text:anchor-type|@style:name|@style:class|@style:page-layout-name|@office:version|@officeooo:*|@style:contextual-spacing|@text:number-lines|@text:line-number|@style:vertical-rel|@xlink:*|@draw:textarea-horizontal-align|@draw:textarea-vertical-align|@style:protect"
-        mode="#all"/>
+        />
     <!-- Asian attributes to ignore -->
     <xsl:template
         match="@style:font-name-asian|@style:font-weight-asian|@style:font-size-asian|@style:font-style-asian|@style:font-pitch-asian|@style:font-family-asian|@style:font-family-generic-asian"
-        mode="#all"/>
+        />
     <!-- Complex settings to ignore -->
-    <xsl:template match="@style:font-name-complex|@style:font-size-complex|@style:font-weight-complex|@style:font-style-complex|@style:font-family-generic-complex" mode="#all"/>
+    <xsl:template match="@style:font-name-complex|@style:font-size-complex|@style:font-weight-complex|@style:font-style-complex|@style:font-family-generic-complex"/>
     <!-- Font settings to ignore -->
-    <xsl:template match="@fo:font-family|@style:font-family-generic" mode="#all"/>
+    <xsl:template match="@fo:font-family|@style:font-family-generic"/>
 
     <!-- Wrap options, currently ignored -->
-    <xsl:template match="@style:wrap|@style:number-wrapped-paragraphs|@style:wrap-contour|@draw:wrap-influence-on-position|@style:text-autospace" mode="fo">
+    <xsl:template match="@style:wrap|@style:number-wrapped-paragraphs|@style:wrap-contour|@draw:wrap-influence-on-position|@style:text-autospace">
         <xsl:message>Unmached attribute ignored: <xsl:value-of select="name(.)"/>, value: <xsl:value-of select="data(.)"/></xsl:message>
     </xsl:template>
     <!-- Other atriutes that may be mapped in the future -->
-    <xsl:template match="@style:horizontal-pos|@style:horizontal-rel|@style:mirror" mode="fo svg">
+    <xsl:template match="@style:horizontal-pos|@style:horizontal-rel|@style:mirror">
         <xsl:message>Unmached attribute ignored: <xsl:value-of select="name(.)"/>, value: <xsl:value-of select="data(.)"/></xsl:message>
     </xsl:template>
     <!-- Attributes that might can be mapped to SVG -->
     <xsl:template
         match="@draw:luminance|@draw:contrast|@draw:red|@draw:green|@draw:blue|@draw:gamma|@draw:color-inversion|@draw:image-opacity|@draw:color-mode|@style:run-through|@style:flow-with-text"
-        mode="#all">
+        >
         <xsl:message>Unmached attribute ignored: <xsl:value-of select="name(.)"/>, value: <xsl:value-of select="data(.)"/></xsl:message>
     </xsl:template>
     <!-- Stuff to map to SVG -->
@@ -458,7 +458,7 @@
         <xsl:attribute name="{local-name(.)}" select="print:rewrite-transform(.)"/>
     </xsl:template>
     <!-- SVG Attributes to ignore in XSL-FO mode -->
-    <xsl:template match="@draw:stroke|@svgoo:stroke-color|@draw:fill|@draw:fill-color" mode="fo"/>
+    <xsl:template match="@draw:stroke|@svgoo:stroke-color|@draw:fill|@draw:fill-color" mode="#all"/>
     <!-- SVG Text -->
     <xsl:template match="text()" mode="svg">
         <xsl:value-of select="."/>
@@ -469,7 +469,6 @@
 
     <!-- All other attributes -->
     <xsl:template match="@*" mode="#all">
-        <xsl:message terminate="yes">Unmached attribute: <xsl:value-of select="name(.)"/>, value: <xsl:value-of select="data(.)"/></xsl:message>
     </xsl:template>
 
     <!-- Other Stuff -->
@@ -568,12 +567,6 @@
     </xsl:function>
 
     <!-- Utility functions -->
-    <!-- Transforms a @draw:transform attribute into @fo:reference-orientation -->
-    <xsl:function name="print:reference-orientation" as="attribute(reference-orientation)">
-        <xsl:param name="str" as="xs:string"/>
-        <xsl:variable name="rad" select="number(replace($str, '^.*rotate\s+\(([\d\.]+?)\).*$', '$1'))" as="xs:double"/>
-        <xsl:attribute name="reference-orientation" select="round(print:rad-to-degree($rad))"/>
-    </xsl:function>
 
     <!-- Interprets the @draw:transform attribute and generates XSL-FO attributes -->
     <xsl:function name="print:transform" as="attribute()*">
@@ -581,12 +574,9 @@
         <xsl:variable name="rad" select="number(replace($str, '^.*rotate\s+\(([\d\.]+?)\).*$', '$1'))" as="xs:double"/>
         <xsl:variable name="left" select="replace($str, '.*translate\s*?\((.[^ ]*)\s*(.[^ ]*)\)', '$1')" as="xs:string"/>
         <xsl:variable name="top" select="replace($str, '.*translate\s*?\((.[^ ]*)\s*(.[^ ]*)\)', '$2')" as="xs:string"/>
-        <xsl:variable name="attributes" as="attribute()*">
-            <xsl:attribute name="reference-orientation" select="round(print:rad-to-degree($rad))"/>
-            <xsl:attribute name="top" select="$top"/>
-            <xsl:attribute name="left" select="$left"/>
-        </xsl:variable>
-        <xsl:copy-of select="$attributes"/>
+        <xsl:attribute name="reference-orientation" select="round(print:rad-to-degree($rad))"/>
+        <xsl:attribute name="top" select="$top"/>
+        <xsl:attribute name="left" select="$left"/>
     </xsl:function>
 
     <!-- Takes a string and escapes charackters that should me matched literaly -->

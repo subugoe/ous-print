@@ -190,9 +190,10 @@
 
     <xsl:template match="draw:frame">
         <fo:block-container position="absolute">
-            <xsl:apply-templates select="@* except @draw:transform" mode="fo"/>
+            <xsl:apply-templates select="@*" mode="fo"/>
             <xsl:choose>
                 <!-- Frames with transform attribute should be mapped to SVG, since SVG supports @transform nativly -->
+                <!--
                 <xsl:when test="@draw:transform">
                     <fo:block>
                         <fo:instream-foreign-object scaling="uniform">
@@ -203,6 +204,8 @@
                         </fo:instream-foreign-object>
                     </fo:block>
                 </xsl:when>
+                -->
+                <xsl:when test="false()"></xsl:when>
                 <!-- Frame without transform attribute -->
                 <xsl:otherwise>
                     <xsl:apply-templates mode="fo"/>
@@ -417,7 +420,7 @@
         <xsl:attribute name="vertical-align" select="."/>
     </xsl:template>
     <xsl:template match="@draw:transform" mode="fo">
-        <xsl:message terminate="yes">@transform attributes are only supported for SVG elements, not XSL-FO</xsl:message>
+        <xsl:copy-of select="print:reference-orientation(.)"></xsl:copy-of>
     </xsl:template>
 
     <!-- Wrapped styles, these contains additional styles -->
@@ -582,10 +585,10 @@
 
     <!-- Utility functions -->
     <!-- Transforms a @draw:transform attribute into @fo:reference-orientation -->
-    <xsl:function name="print:reference-orientation" as="attribute(fo:reference-orientation)">
+    <xsl:function name="print:reference-orientation" as="attribute(reference-orientation)">
         <xsl:param name="str" as="xs:string"/>
         <xsl:variable name="rad" select="number(replace($str, '^.*rotate\s+\(([\d\.]+?)\).*$', '$1'))"/>
-        <xsl:attribute name="fo:reference-orientation" select="print:rad-to-degree($rad)"/>
+        <xsl:attribute name="reference-orientation" select="round(print:rad-to-degree($rad))"/>
     </xsl:function>
 
     <!-- Takes a string and escapes charackters that should me matched literaly -->

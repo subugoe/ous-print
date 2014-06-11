@@ -190,27 +190,8 @@
 
     <xsl:template match="draw:frame">
         <fo:block-container position="absolute">
-            <xsl:apply-templates select="@*" mode="fo"/>
-            <xsl:choose>
-                <!-- Frames with transform attribute should be mapped to SVG, since SVG supports @transform nativly -->
-                <!--
-                <xsl:when test="@draw:transform">
-                    <fo:block>
-                        <fo:instream-foreign-object scaling="uniform">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
-                                <xsl:apply-templates select="@svgoo:width|@svgoo:height" mode="svg"/>
-                                <xsl:apply-templates mode="svg"/>
-                            </svg>
-                        </fo:instream-foreign-object>
-                    </fo:block>
-                </xsl:when>
-                -->
-                <xsl:when test="false()"></xsl:when>
-                <!-- Frame without transform attribute -->
-                <xsl:otherwise>
-                    <xsl:apply-templates mode="fo"/>
-                </xsl:otherwise>
-            </xsl:choose>
+            <xsl:apply-templates select="@*"/>
+            <xsl:apply-templates/>
         </fo:block-container>
     </xsl:template>
 
@@ -420,7 +401,10 @@
         <xsl:attribute name="vertical-align" select="."/>
     </xsl:template>
     <xsl:template match="@draw:transform" mode="fo">
-        <xsl:copy-of select="print:reference-orientation(.)"></xsl:copy-of>
+        <!--
+        <xsl:copy-of select="print:reference-orientation(.)"/>
+        -->
+        <xsl:copy-of select="print:transform(.)"/>
     </xsl:template>
 
     <!-- Wrapped styles, these contains additional styles -->
@@ -587,8 +571,22 @@
     <!-- Transforms a @draw:transform attribute into @fo:reference-orientation -->
     <xsl:function name="print:reference-orientation" as="attribute(reference-orientation)">
         <xsl:param name="str" as="xs:string"/>
-        <xsl:variable name="rad" select="number(replace($str, '^.*rotate\s+\(([\d\.]+?)\).*$', '$1'))"/>
+        <xsl:variable name="rad" select="number(replace($str, '^.*rotate\s+\(([\d\.]+?)\).*$', '$1'))" as="xs:double"/>
         <xsl:attribute name="reference-orientation" select="round(print:rad-to-degree($rad))"/>
+    </xsl:function>
+
+    <!-- Interprets the @draw:transform attribute and generates XSL-FO attributes -->
+    <xsl:function name="print:transform" as="attribute()*">
+        <xsl:param name="str" as="xs:string"/>
+        <xsl:variable name="rad" select="number(replace($str, '^.*rotate\s+\(([\d\.]+?)\).*$', '$1'))" as="xs:double"/>
+        <xsl:variable name="left" select="replace($str, '.*translate\s*?\((.[^ ]*)\s*(.[^ ]*)\)', '$1')" as="xs:string"/>
+        <xsl:variable name="top" select="replace($str, '.*translate\s*?\((.[^ ]*)\s*(.[^ ]*)\)', '$2')" as="xs:string"/>
+        <xsl:variable name="attributes" as="attribute()*">
+            <xsl:attribute name="reference-orientation" select="round(print:rad-to-degree($rad))"/>
+            <xsl:attribute name="top" select="$top"/>
+            <xsl:attribute name="left" select="$left"/>
+        </xsl:variable>
+        <xsl:copy-of select="$attributes"/>
     </xsl:function>
 
     <!-- Takes a string and escapes charackters that should me matched literaly -->

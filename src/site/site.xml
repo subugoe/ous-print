@@ -2,6 +2,7 @@
 <project name="OUS Layout and Print Server">
     <body>
         <menu name="OUS Layout and Print Server">
+            <item name="Overview" href="./overview.html"/>
             <item name="Slides (German)" href="./slides.xhtml"/>
             <item name="Installation and Usage" href="./installation.html"/>
         </menu>

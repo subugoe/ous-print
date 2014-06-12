@@ -36,6 +36,7 @@
         <apache.camel.version>2.13.0</apache.camel.version>
         <saxon.version>9.5.1-5</saxon.version>
         <powermock.version>1.5.4</powermock.version>
+        <github.global.server>github</github.global.server>
     </properties>
 
     <organization>
@@ -197,11 +198,11 @@
                                           href="http://groovy.codehaus.org/api/" />
                                     <link packages="org.codehaus.gmaven."
                                           href="http://evgeny-goldin.org/javadoc/gmaven" />
-                                    <!--TODO
                                     <link packages="org.apache.camel."
-                                          href="" />
+                                          href="http://camel.apache.org/maven/current/camel-core/apidocs" />
                                     <link packages="org.apache.commons.vfs2."
-                                          href="" />
+                                          href="http://commons.apache.org/proper/commons-vfs/apidocs" />
+                                    <!--TODO
                                     <link packages="org.apache.fop."
                                           href="" />
                                     -->
@@ -215,6 +216,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
                 <version>3.2</version>
+                <!-- TODO: this doesn't work with Maven 3, see http://maven.apache.org/plugins/maven-site-plugin/maven-3.html#New_Configuration_Maven_3_only_no_reports_configuration_inheritance
                 <configuration>
                     <reportPlugins>
                         <plugin>
@@ -241,6 +243,7 @@
                     </reportPlugins>
                     <locales>en</locales>
                 </configuration>
+                -->
                 <dependencies>
                     <dependency>
                         <groupId>org.apache.maven.doxia</groupId>
@@ -266,14 +269,17 @@
                 <version>0.8</version>
                 <configuration>
                     <message>Creating site for ${project.version}</message>
+                    <merge>true</merge>
+                    <!--
                     <dryRun>true</dryRun>
+                    -->
                 </configuration>
                 <executions>
                     <execution>
                         <goals>
                             <goal>site</goal>
                         </goals>
-                        <phase>site</phase>
+                        <phase>site-deploy</phase>
                     </execution>
                 </executions>
             </plugin>

@@ -2,10 +2,15 @@
 <project name="OUS Layout and Print Server">
     <body>
         <menu name="OUS Layout and Print Server">
-            <!--
-            <item name="GroovyDoc" href="./groovydoc/index.html"/>
-            -->
+            
+            <item name="Slides (German)" href="./slides.xhtml"/>
+
         </menu>
         <menu ref="reports"/>
     </body>
+    <skin>
+        <groupId>lt.velykis.maven.skins</groupId>
+        <artifactId>reflow-maven-skin</artifactId>
+        <version>1.1.0</version>
+    </skin>
 </project>

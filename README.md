@@ -61,10 +61,11 @@ The following Maven Modules make up this framework:
 * **layout-cli** - One of the main artifacts, a command line interface to work with the stylesheets, can convert and print
 * **layout-component** - A Apache Camel component for the layout core, this way Camel can use the layout engine.
 * **print-server** - A command line wrapper for Apache Camel, an act as a daemon to watch for and print slips
+* **layout-test** - Contains test files for unit tests
 
 
 ## XSL-FO Files
 The result of the layout process is determinate by XSL-FO files. Either use your own, change the provided one, or generate one using a ODF template. A description how to use ODF to create a XSL-FO file can be found in the Maven site.
 
 ## Contributing
-Contributions are welcome, but since this code is in a working state no support can be provided. 
+Contributions are welcome, but since this code is in a working state, no support can be provided. 

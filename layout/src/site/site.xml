@@ -4,6 +4,9 @@
         <menu name="Layout Engine">
             <item name="GroovyDoc" href="./groovydoc/index.html"/>
         </menu>
+        <menu name="Slides (German)">
+            <item name="Slides" href="./slides.html"/>
+        </menu>
         <menu ref="reports"/>
     </body>
 </project>

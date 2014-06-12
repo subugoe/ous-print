@@ -21,11 +21,11 @@
             </div>
             <div id="slide1" class="step" data-x="1500" data-y="0">
                 <h2>Ausgangslage (Zettel)</h2>
-                <img src="img/old.png" title="Der alte Bestellzettel"/>
+                <img src="img/old.png" title="Der alte Bestellzettel" />
             </div>
             <div id="slide2" class="step white" data-x="3000" data-y="0">
                 <h2>Ausgangslage (Layout) - Ausschnitt</h2>
-                <img src="img/asc.png" title="Ausschnitt einer ASC Datei (Layout definition)"/>
+                <img src="img/asc.png" title="Ausschnitt einer ASC Datei (Layout definition)" />
             </div>
             <div id="slide3" class="step" data-x="4500" data-y="0">
                 <h2>Ausgangslage (Infrastruktur)</h2>
@@ -88,7 +88,8 @@
             </div>
             <!-- Start ty fly into -->
             <script type="text/javascript">
-                <!-- Taken from https://gist.github.com/lavallee/2340157 -->
+                <!--
+                    Taken from https://gist.github.com/lavallee/2340157-->
                  $(document).ready(function() {
                     $(document).on('impress:stepenter', function(e) {
                         var currentSlide = $(e.target).attr('id');
@@ -131,17 +132,15 @@
                     <li>Drucker anzeigen</li>
                     <li>Drucken</li>
                     <li>Konvertierung in PDF, Postscript, XSL-FO<ul>
-                        <li>XSL-FO als Ausgabe kann zur weiteren Verarbeitung (XSLT, XPath) in Camel genutzt werden</li></ul></li>
+                            <li>XSL-FO als Ausgabe kann zur weiteren Verarbeitung (XSLT, XPath) in Camel genutzt werden</li>
+                        </ul></li>
                     <li>Erzeugung von XSLT basierten Parsern aus Layouts</li>
                 </ul>
             </div>
-            
-            
-            <div id="slide15" class="step" data-x="9000" data-y="1500">
+            <div id="slide15" class="step" data-x="13500" data-y="1900">
                 <div class="fontawesome-print icon-center"></div>
             </div>
-            
-            <div id="slide16" class="step" data-x="9000" data-y="3200" data-scale="6">
+            <div id="slide16" class="step" data-x="13500" data-y="3600" data-scale="6">
                 <h2>PrintServer</h2>
                 <ul>
                     <li>Regelbasiertes Routing, Änderungen am <span class="system-text">ous_print_server</span> entfallen</li>
@@ -163,7 +162,7 @@
                     <li>Eigene Funktionalitäten können als Komponente hinzugefügt werden</li>
                 </ul>
             </div>
-            <div id="slide18" class="step" data-x="11500" data-y="7000" data-rotate="90" data-scale="3">
+            <div id="slide18" class="step" data-x="11500" data-y="7400" data-rotate="90" data-scale="2">
                 <h2>Beispiel für eine Route:</h2>
                 <pre><code>
                     &lt;route>
@@ -180,8 +179,10 @@
                 &lt;/route>
                 </code></pre>
                 <div><svg xmlns="http://www.w3.org/2000/svg" height="100%" width="100%">
-                    <path id="svg_2" d="m176.12,177.11501l24.16679,0l0,0l36.24948,0l84.58372,0l0,43.84293l0,0l0,18.79074l0,12.52698l-84.58372,0l-60.18175,36.83934l23.93227,-36.83934l-24.16679,0l0,-12.52698l0,-18.79074l0,0l0,-43.84293z" stroke-width="1.5" stroke="#000" fill="#6D97AB"/>
-                </svg>
+                        <path id="svg_2"
+                            d="m176.12,177.11501l24.16679,0l0,0l36.24948,0l84.58372,0l0,43.84293l0,0l0,18.79074l0,12.52698l-84.58372,0l-60.18175,36.83934l23.93227,-36.83934l-24.16679,0l0,-12.52698l0,-18.79074l0,0l0,-43.84293z"
+                            stroke-width="1.5" stroke="#000" fill="#6D97AB"></path>
+                    </svg>
                 </div>
             </div>
             <div id="slide19" class="step" data-x="9000" data-y="9500">
@@ -199,30 +200,36 @@
             <div id="slide20" class="step" data-x="8000" data-y="9500" data-rotate="90">
                 <div class="fontawesome-envelope icon-center"></div>
             </div>
-            <div id="slide21" class="step" data-x="9000" data-y="11000" data-rotate="">
+            <div id="slide21" class="step" data-x="7900" data-y="10200" data-z="750" data-rotate="90">
+            <h2>Status</h2>
+                <ul>
+                    <li>In der Zentaralbibliothek der SUB Göttingen im Produktionseinsatz</li>
+                    <li>Betriebsfragen (Monitoring, SMF-Integration noch offen)</li>
+                    <li>Barcodes können schon jetzt generiert werden – Anwendungsfall fehlt noch</li>
+                    <li>Experimentelle Erstellung von XSL-FO aus ODF (bisher Proof of Concept, kein manuelles XSL-FO mehr notwendig)</li>
+                    <li>Dokumentation wird noch erweitert</li>
+                    <li>Source Codes bei GitHub <span class="fontawesome-github"></span><br/>
+                        <a title="Git" href="https://github.com/subugoe/ous-print" style="font-weight:bold; text-align: center;">https://github.com/subugoe/ous-print</a>
+                    </li>
+                </ul>
+            </div>
+            <div id="slide22" class="step" data-x="8000" data-y="14000" data-z="-300" data-rotate="-90">
                 <h2>Ausblick</h2>
                 <ul>
                     <li>Integration ins bestehende System<ul>
-                        <li><span class="system-text">ous_print_server</span> kann das Kommandozeilenwerkzeug einbinden</li>
+                            <li><span class="system-text">ous_print_server</span> kann das Kommandozeilenwerkzeug einbinden</li>
                             <li>PrintServer kann ous_print_server ersetzen<ul>
                                     <li>Bon Drucke mit Logo denkbar</li>
                                 </ul></li>
                             <li>Start via Solaris <abbr title="Service Management Facility">SMF</abbr></li>
                         </ul></li>
-                    <li>Barcodes können schon jetzt generiert werden – Anwendungsfall fehlt noch</li>
                     <li>Tests mit anderen Zeichensätzen (ggf. entsprechende Titelsätze vorhanden?)</li>
-                    <li>Grafische Erstellung der Vorlagen – kein XSL-FO mehr notwendig</li>
-                    <li>Veröffentlichung des Source Codes bei GitHub <span class="fontawesome-github"></span></li>
                     <li>Camel bietet <abbr title="Java Management Extensions">JMX</abbr> Monitoring, dies kann z.B. mit dem Nagios der VZG zusammenarbeiten</li>
                     <li>Überwachung der Konfiguration auf Änderungen</li>
                     <li>Handling von Mahnungsmails</li>
-                    <li>Bibliotheksmarketing auf der Rückseite?</li>
                 </ul>
             </div>
-            <div id="slide22" class="step" data-x="9000" data-y="10500">
-                <div class="fontawesome-envelope icon-center"></div>
-            </div>
-            <div id="slide23" class="step" data-x="9000" data-y="10500">
+            <div id="slide23" class="step" data-x="8000" data-y="12500" data-z="-300" data-rotate="-90">
                 <h2>Mögliche Verbesserungen (nicht geplant</h2>
                 <ul>
                     <li>Parser könnten auch in Java generiert werden, bzw. müssten nicht jedes mal neu generiert werden – Performance Optimierung</li>
@@ -230,8 +237,7 @@
                     <li>Datenbankabfrage zeitgesteuert (z.b. für Benachrichtigungen)</li>
                 </ul>
             </div>
-
-            <div id="slide24" class="step" data-x="9000" data-y="9000">
+            <div id="slide24" class="step" data-x="9000" data-y="13000">
                 <h2>Layouts grafisch gestalten</h2>
                 <ul>
                     <li>Perspektivisch könnten Layouts auch grafisch gestaltet werdeny</li>
@@ -240,13 +246,14 @@
                     <li>In diesen Annotationen können die Namen der gewünschten Felder, Funktionsaufrufe und einfache Kontrollstrukturen (if, then, else) hinterlegt werden</li>
                 </ul>
             </div>
-            <div id="slide25" class="step" data-x="9000" data-y="10500">
+            <div id="slide25" class="step" data-x="10000" data-y="13000" data-rotate="-90">
                 <div class="fontawesome-edit icon-center"></div>
             </div>
-            <div id="slide26" class="step" data-x="9000" data-y="11000">
-                <h2>Technische Anforderungen</h2>
+            <div id="slide26" class="step" data-x="10600" data-y="14250" data-scale="3" data-rotate="-90">
+                <h2 style="margin-bottom:30px">Technische Anforderungen</h2>
+                <div class="explanation">(<span class="done">✔</span> = möglich, <span class="todo">✖</span> = nicht möglich)</div>
                 <ul>
-                    <li>Derzeit ist im XSL-FO Stylesheet Logik hinterlegt diese muss in das ODF Template überführt werden können (<span class="done">✔</span>=möglich, ✖ = nicht möglich)<ul>
+                    <li>Derzeit ist im XSL-FO Stylesheet Logik hinterlegt diese muss in das ODF Template überführt werden können.<ul>
                             <li>Schriftgröße anpassen bei langen Signaturen <span class="done">✔</span></li>
                             <li>Anzeige des Nutzernamens basierend auf Abholbereich und Nutzertyp <span class="done">✔</span> (fast <span class="todo"
                                 >✖</span>, erfordert überlappende Definitionen mit Bedingungen)</li>
@@ -257,16 +264,19 @@
                     <li>Mapping der Designvorgaben von Open / Libre Office auf XSL-FO Ausdrücke</li>
                     <li>Einträge können öfter in einem Layout benutzt werden, nur das erste Vorkommen kann weiter verarbeitet werden.</li>
                 </ul>
+                <span class="fontawesome-edit" style="opacity:50%; position: relarive; "></span>
             </div>
-            <div id="slide27" class="step" data-x="9000" data-y="11000">
-                <h2>Status</h2>
-                <ul>
-                    <li>In der Zentaralbibliothek der SUB Göttingen im Produktionseinsatz</li>
-                    <li>Betriebsfragen (Monitoring, SMF-Integration noch offen)</li>
-                    <li>ODF Template noch in der Entwicklung - bisher Proof of Concept</li>
-                    <li>Dokumentation wird noch erstellt, Quellcode noch nicht veröffendlicht (lokales Git Repository)</li>
-                    <li>Nicht alle Unit Tests werden bestanden</li>
-                </ul>
+            <div id="slide28" class="step" data-x="10000" data-y="17000">
+                <h2  style="margin-bottom:20px">Libre Office – Textboxen annotieren</h2>
+                <img src="img/libreoffice.png" title="Libre Office main window" style="width: 400px; height: auto; position:relative; top:5px; left:10px; z-index:1"/>
+                <img src="img/svgdesc.png" title="Editing the description of an object" style="width: 400px; height: auto;position:relative; top:-200px; left:-50px; z-index:1"/>
+                <img src="img/odf-xml.png" title="XML representation of ODF" style="width: 750px; height: auto;position:relative; top:-100px; left:10px; z-index:1"/>
+            </div>
+            <div id="slide29" class="step" data-x="10000" data-y="18000" data-scale="2" data-rotate="-180">
+                <div style="text-align:center;">
+                    <span class="fontawesome-github" style="font-size:250pt"></span>
+                    <a title="Git" href="https://github.com/subugoe/ous-print" style="font-weight:bold; font-size:56pt;">https://github.com/subugoe/ous-print</a>
+                </div>
             </div>
         </div>
         <footer class="footer">

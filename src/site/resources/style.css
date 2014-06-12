@@ -88,10 +88,8 @@ header{
     color:red;
 }
 .icon-center{
-    height:100%;
     font-size:250pt;
     text-align:center;
-    vertical-align:middle;
 }
 .step:not(.active){
     opacity:0.3;
@@ -102,6 +100,14 @@ header{
 #impress .white {
     background-color: white;
 }
+#impress .explanation {
+    font-size:18pt;
+    text-align:right;
+    width: 100%;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
 /* Stolen from http://www.sub.uni-goettingen.de/style/main.css */
 a {
   color: #1a3771;

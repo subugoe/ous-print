@@ -175,11 +175,6 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.apache.camel</groupId>
-                <artifactId>camel-maven-plugin</artifactId>
-                <version>${apache.camel.version}</version>
-            </plugin>
         </plugins>
     </build>
 </project>

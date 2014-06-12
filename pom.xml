@@ -272,9 +272,6 @@
                     <force>true</force>
                     <!-- Over write all contents -->
                     <!--
-                    <merge>true</merge>
-                    -->
-                    <!--
                     <dryRun>true</dryRun>
                     -->
                 </configuration>

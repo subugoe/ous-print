@@ -178,11 +178,11 @@
                 </fo:inline>
             </gxsl:function>
             <gxsl:function name="print:show-if" as="element(fo:inline)" xmlns:fo="http://www.w3.org/1999/XSL/Format">
-                <gxsl:param name="str" as="xs:string"></gxsl:param>
+                <gxsl:param name="obj" as="node()*"></gxsl:param>
                 <gxsl:param name="condition" as="xs:boolean"></gxsl:param>
                 <fo:inline>
                     <gxsl:attribute name="visibility" select="if ($condition) then 'visible' else 'hidden'"/>
-                    <gxsl:copy-of select="$str"/>
+                    <gxsl:copy-of select="$obj"/>
                 </fo:inline>
             </gxsl:function>
             <xsl:comment>returns a XSL-FO leader tag, use this for empty lines</xsl:comment>

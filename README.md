@@ -63,7 +63,7 @@ The following Maven Modules make up this framework:
 * **layout** - The core of this framework, contains the XSLT stylesheets and Groovy wrappers
 * **layout-cli** - One of the main artifacts, a command line interface to work with the stylesheets, can convert and print
 * **layout-component** - A Apache Camel component for the layout core, this way Camel can use the layout engine.
-* **print-server** - A command line wrapper for Apache Camel, an act as a daemon to watch for and print slips
+* **print-server** - A command line wrapper for Apache Camel, can act as a daemon to watch for and print slips
 * **layout-test** - Contains test files for unit tests
 
 

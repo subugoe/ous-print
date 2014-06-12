@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="799px" height="446px" version="1.1">
+    <defs/>
+    <g transform="translate(0.5,0.5)">
+        <path d="M 149 24 L 149 162 L 2 162 L 2 2 L 128 2 Z" fill="#ffffff" stroke="#000000" stroke-width="2" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 128 2 C 130 7 127 12 121 16 L 151 26 Z" fill="#ffffff" stroke="#000000" stroke-width="2" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 162 67 L 246 67 L 246 47 L 301 82 L 246 117 L 246 97 L 162 97 Z" fill="#ffffff" stroke="#000000" stroke-width="2" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 469 24 L 469 162 L 322 162 L 322 2 L 448 2 Z" fill="#ffffff" stroke="#000000" stroke-width="2" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 448 2 C 450 7 447 12 441 16 L 471 26 Z" fill="#ffffff" stroke="#000000" stroke-width="2" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 794 305 L 794 443 L 647 443 L 647 283 L 773 283 Z" fill="#ffffff" stroke="#000000" stroke-width="2" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 773 283 C 775 288 772 293 766 297 L 796 307 Z" fill="#ffffff" stroke="#000000" stroke-width="2" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 482 67 L 566 67 L 566 47 L 621 82 L 566 117 L 566 97 L 482 97 Z" fill="#ffffff" stroke="#000000" stroke-width="2" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 707 173 L 707 231 L 687 231 L 722 270 L 757 231 L 737 231 L 737 173 Z" fill="#ffffff" stroke="#000000" stroke-width="2" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 794 24 L 794 162 L 647 162 L 647 2 L 773 2 Z" fill="#ffffff" stroke="#000000" stroke-width="2" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 773 2 C 775 7 772 12 766 16 L 796 26 Z" fill="#ffffff" stroke="#000000" stroke-width="2" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 469 305 L 469 443 L 322 443 L 322 283 L 448 283 Z" fill="#ffffff" stroke="#000000" stroke-width="2" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 448 283 C 450 288 447 293 441 297 L 471 307 Z" fill="#ffffff" stroke="#000000" stroke-width="2" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 149 305 L 149 443 L 2 443 L 2 283 L 128 283 Z" fill="#ffffff" stroke="#000000" stroke-width="2" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 128 283 C 130 288 127 293 121 297 L 151 307 Z" fill="#ffffff" stroke="#000000" stroke-width="2" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 301 343 L 216 343 L 216 323 L 161 358 L 216 393 L 216 373 L 301 373 Z" fill="#ffffff" stroke="#000000" stroke-width="2" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 621 348 L 536 348 L 536 328 L 481 363 L 536 398 L 536 378 L 621 378 Z" fill="#ffffff" stroke="#000000" stroke-width="2" stroke-miterlimit="10" pointer-events="none"/>
+        <rect x="16" y="47" width="120" height="30" fill="none" stroke="none" pointer-events="none"/>
+        <g transform="translate(25,54)">
+            <switch>
+                <foreignObject pointer-events="all" width="102" height="15" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml"
+                        style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.26; vertical-align: top; white-space: nowrap; text-align: center;"
+                        >Layout Datei lesen<br/></div></foreignObject>
+                <text x="51" y="14" fill="#000000" text-anchor="middle" font-size="12px" font-family="Helvetica">[Not supported by viewer]</text>
+            </switch>
+        </g>
+        <rect x="336" y="57" width="120" height="55" fill="none" stroke="none" pointer-events="none"/>
+        <g transform="translate(340,64)">
+            <switch>
+                <foreignObject pointer-events="all" width="112" height="45" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml"
+                        style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.26; vertical-align: top; white-space: nowrap; text-align: center;"
+                            ><div>XML Repräsentation</div><div> erzeugen</div><div><br/></div></div></foreignObject>
+                <text x="56" y="29" fill="#000000" text-anchor="middle" font-size="12px" font-family="Helvetica">[Not supported by viewer]</text>
+            </switch>
+        </g>
+        <rect x="661" y="57" width="120" height="75" fill="none" stroke="none" pointer-events="none"/>
+        <g transform="translate(652,64)">
+            <switch>
+                <foreignObject pointer-events="all" width="139" height="60" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml"
+                        style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.26; vertical-align: top; white-space: nowrap; text-align: center;"
+                            ><div>Parser aus XML </div><div>Repräsentation erzeugen</div><div><br/></div><div><br/></div></div></foreignObject>
+                <text x="70" y="36" fill="#000000" text-anchor="middle" font-size="12px" font-family="Helvetica">[Not supported by viewer]</text>
+            </switch>
+        </g>
+        <rect x="16" y="343" width="120" height="30" fill="none" stroke="none" pointer-events="none"/>
+        <g transform="translate(36,350)">
+            <switch>
+                <foreignObject pointer-events="all" width="81" height="45" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml"
+                        style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.26; vertical-align: top; white-space: nowrap; text-align: center;"
+                            ><div>PDF / PS Datei</div><div> erzeugen</div><div><br/></div></div></foreignObject>
+                <text x="41" y="29" fill="#000000" text-anchor="middle" font-size="12px" font-family="Helvetica">[Not supported by viewer]</text>
+            </switch>
+        </g>
+        <rect x="336" y="343" width="120" height="30" fill="none" stroke="none" pointer-events="none"/>
+        <g transform="translate(357,350)">
+            <switch>
+                <foreignObject pointer-events="all" width="78" height="45" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml"
+                        style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.26; vertical-align: top; white-space: nowrap; text-align: center;"
+                            ><div>XSL-FO Datei </div><div>erzeugen</div><div><br/></div></div></foreignObject>
+                <text x="39" y="29" fill="#000000" text-anchor="middle" font-size="12px" font-family="Helvetica">[Not supported by viewer]</text>
+            </switch>
+        </g>
+        <rect x="662" y="343" width="120" height="30" fill="none" stroke="none" pointer-events="none"/>
+        <g transform="translate(669,350)">
+            <switch>
+                <foreignObject pointer-events="all" width="107" height="45" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml"
+                        style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.26; vertical-align: top; white-space: nowrap; text-align: center;"
+                            ><div>Erzeugte Text Datei</div><div> einlesen</div><div><br/></div></div></foreignObject>
+                <text x="54" y="29" fill="#000000" text-anchor="middle" font-size="12px" font-family="Helvetica">[Not supported by viewer]</text>
+            </switch>
+        </g>
+    </g>
+</svg>

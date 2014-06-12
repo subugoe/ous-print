@@ -55,7 +55,7 @@ The code is in production us at SUB Göttingen but might have still some rough e
 
 # Development
 
-This package provides a API documentation if you build the Maven site.
+This package provides a API documentation if you build the Maven site. For development Maven version 3 should be used, otherwise version 2 will work as well.
 
 ## Maven Modules
 The following Maven Modules make up this framework:

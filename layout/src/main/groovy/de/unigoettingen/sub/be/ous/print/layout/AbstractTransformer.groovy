@@ -141,7 +141,7 @@ abstract class AbstractTransformer {
     /**
      * Transforms the given document using the given stylesheet with parameters.
      * This is just a wrapper for {@link #transform(URL,Source,Map) transform}
-     * which opens an InputStream to create a Source from it an passes this as parameter
+     * which opens an {@link java.io.InputStream InputStream} to create a Source from it an passes this as parameter
      *
      * @param input the {@link java.net.URL URL} for the input document
      * @param stylesheet the {@link java.net.URL URL} to the stylesheet

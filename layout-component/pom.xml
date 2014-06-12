@@ -44,7 +44,7 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>layout</artifactId>
-            <version> ${project.parent.version}</version>
+            <version>${project.parent.version}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -73,7 +73,7 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>layout-test</artifactId>
-            <version> ${project.parent.version}</version>
+            <version>${project.parent.version}</version>
             <classifier>resources</classifier>
             <type>zip</type>
             <!-- Make sure this isn't included on any classpath-->

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Layout Engine">
+    <body>
+        <menu name="Layout Engine">
+            <item name="GroovyDoc" href="./groovydoc/index.html"/>
+        </menu>
+        <menu name="Slides (German)">
+            <item name="Slides" href="./slides.html"/>
+        </menu>
+        <menu ref="reports"/>
+    </body>
+</project>

@@ -17,9 +17,10 @@ This framework can be used to replace the ous_print_server with a implementation
 * Generate XSL-FO files from ODF (Open / Libre Office)
 
 ## Requirements
-This framework need just Java (Version 1.6 or higher) as runtime environment, to check out and compile you also need Git and Maven.
+This framework need just Java (Version 1.6 or higher) as runtime environment, to check out and compile you also need Git, Maven and a internet connection to resolve required artifacts.
 
 ##Terminology used in this document
+* **Artifact**: A piece of self-contained software
 * **Maven**: A Java build tool like Ant or even Make 
 * **Maven site**: A generated documentation which contains Groovy docs, reports and written documentation, need to be generated since it's not available in HTML format.
 * **XSL-FO**: E**X**stensable **S**tyles sheet **L**anguage **F**ormating **O**bjects, a XML representation of print layouts

@@ -37,7 +37,7 @@ You need the other Maven modules as dependencies in your local Maven Repository 
 ### Checkout from Git repository
 
 Just run the following command to get a copy of the source code:
-> git clone https:github.com/subugoe
+> git clone https://github.com/subugoe/ous-print.git
 
 ### Compile & package
 Not all unit tests are passing yet, therefore you need the following to build all modules:
@@ -49,6 +49,9 @@ This readme file only provides a bird eye view over the framework, to get the wh
 There are also some slides (in German) that reflect the current state of this framework.
 
 >mvn site
+
+## Current Status
+The code is in production us at SUB Göttingen but might have still some rough edges. The ODF to XSL-FO part is untested, the Groovy parts are not finished yet. Some unit tests fail. Not every transformation is implemented in Groovy (CLI) use the Stylesheets directly if needed. 
 
 # Development
 

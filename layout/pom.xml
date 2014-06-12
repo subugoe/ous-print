@@ -42,7 +42,7 @@
         <dependency>
             <groupId>de.unigoettingen.sub</groupId>
             <artifactId>util</artifactId>
-            <version>${parent.version}</version>
+            <version> ${project.parent.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.tika</groupId>
@@ -87,7 +87,7 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>layout-test</artifactId>
-            <version>${parent.version}</version>
+            <version> ${project.parent.version}</version>
             <classifier>resources</classifier>
             <type>zip</type>
             <!-- Make sure this isn't included on any classpath-->

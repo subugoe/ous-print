@@ -102,3 +102,22 @@ header{
 #impress .white {
     background-color: white;
 }
+/* Stolen from http://www.sub.uni-goettingen.de/style/main.css */
+a {
+  color: #1a3771;
+}
+a:link {
+  cursor: pointer;
+}
+a:visited {
+  color: #1a3771;
+}
+a:focus {
+  color: #1a3771;
+}
+a:hover {
+  color: #1a3771;
+}
+a:active {
+  color: #1a3771;
+}

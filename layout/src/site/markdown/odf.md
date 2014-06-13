@@ -18,11 +18,11 @@ Open / Libre Office saves the content of a document in several XML Files which a
 # Usage
 Create your template using Open / Libre Office Writer, you probably want to use frames to be able to place your text on the page. If you right click on a frame you can edit it's description. See below.
 
-![Libre Office Context Menu](./libreoffice.png)
+![Libre Office Context Menu](./img/libreoffice.png)
 
 From there you get a box where you can type your expressions and functions in.
 
-![Libre Office SVG Description](./svgdesc.png)
+![Libre Office SVG Description](./img/svgdesc.png)
 
 ## Basic Syntax
 A reference to a field is expresed as pair of an entity and an attribute:

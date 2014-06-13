@@ -48,14 +48,31 @@ There are two different types of layouts, which use the same file association (.
 5. Text
 
 # The style sheets
-## Asc2Xml.xsl
+## asc2xml.xsl
 The style sheet asc2xml.xsl creates a XML representation of those files which the can be either be transformed to a parser of resulting files or back into ASC files. The XML representation of the ASC files ist straight forward, every line becomes an element, the different columns are transformed into attributes. It supports both, the normal and the text layout format.
 ### Parameters
 * encoding: The encoding to read the file (default: ASCII)
 * layout: the file to read
 
-## Xml2Asc.xsl
-The style sheet xsl2 transfers a XML representation of an ASC file back into text format, this can be used by style sheets that generate ASC files in XML format.
+## xml2asc.xsl
+The style sheet xml2asc.xsl transfers a XML representation of an ASC file back into text format, this can be used by style sheets that generate ASC files in XML format.
 
 ### Parameters:
-* output-heading: Should a field definitiontion be outputted (default: false)
+* output-heading: Should a field definition be outputted (default: false)
+
+## xml2parser.xsl
+The style sheet xml2parser.xsl creates a XSLT based parser for generated text files (slips). It's better to convert the gerated files into UTF-8 before passing the to the stylesheet. The Groovy wrapper does this automaticly.
+
+## layout2fo.xsl
+The style sheet layout2fo.xsl generates a XSL-FO file from a XML Representation of a slip.
+### Parameters:
+* debug: print a text across the generated Layout, which reads "Muster"
+* barcode: should the barcode of a book be included
+
+## odf2xslfo.xsl
+The style sheet odf2xslfo.xsl can be used to generate a XSL-FO file from ODF ([Open](https://www.openoffice.org/) / [Libre Office](http://www.libreoffice.org/)), see [the documentation](./odf.html) of this feature.
+
+# Groovy wrapper classes
+
+The stylesheets are encapsulated in Groovy wrapper classes
+

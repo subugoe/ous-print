@@ -2,6 +2,9 @@
 <project name="Print Server">
     <body>
         <menu name="Print Server">
+            <item name="Overview" href="./overview.html"/>
+            <item name="Usage" href="./usage.html"/>
+            <item name="Configuration" href="./configuration.html"/>
             <item name="GroovyDoc" href="./groovydoc/index.html"/>
         </menu>
         <menu ref="reports"/>

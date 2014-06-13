@@ -44,7 +44,9 @@ This example uses a internal function to set the font size based on several cond
 
 ## print:set-font-size
 Sets font size for given text
+
 **Arguments**:
+
 * The size to be set as `xs:integer`
 * The sting to be shown as `xs:string`
 
@@ -57,6 +59,7 @@ Sets the text in the given font size
 Show text if condition is true
 
 **Arguments**:
+
 * The sting to be shown as `xs:string`
 * The condition to evaluate as `xs:boolean`
 
@@ -71,3 +74,7 @@ Creates a empty line
 **Returns**: A `fo:leader` element
 
 **Description**: Fills a frame with empty space, use this if empty fields would let your frame colapse.
+
+# Open tasks
+* Include barcode printing
+* convert simple shapes like lines and blocks

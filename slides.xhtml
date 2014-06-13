@@ -11,9 +11,13 @@
         <link rel="stylesheet" href="http://yandex.st/highlightjs/8.0/styles/default.min.css" />
         <script src="http://yandex.st/highlightjs/8.0/highlight.min.js"></script>
     </head>
-    <body>
+    <body class="impress-not-supported">
         <script>hljs.initHighlightingOnLoad();</script>
         <header class="header"></header>
+        <div class="fallback-message">
+            <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
+            <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
+        </div>
         <div id="impress">
             <div id="start" class="step">
                 <h1>Bestellzettel 2.0</h1>
@@ -243,13 +247,14 @@
                 </ul>
             </div>
             <div id="slide24" class="step" data-x="9000" data-y="13000">
-                <h2>Layouts grafisch gestalten</h2>
+                <h2>Layouts grafisch gestalten (one more thing...)</h2>
                 <ul>
                     <li>Perspektivisch könnten Layouts auch grafisch gestaltet werdeny</li>
                     <li>Vorlagen können in Open / Libre Office erstellt werden und dann mit XSLT in XSL-FO verwandelt werden</li>
                     <li>Open / Libre Office bietet die Möglichkeit grafische Elemente zu annotieren</li>
                     <li>In diesen Annotationen können die Namen der gewünschten Felder, Funktionsaufrufe und einfache Kontrollstrukturen (if, then, else) hinterlegt werden</li>
                 </ul>
+                <img style="opacity: 0.4; z-index: -1;" src="img/atom.svg" />
             </div>
             <div id="slide25" class="step" data-x="10000" data-y="13000" data-rotate="-90">
                 <div class="fontawesome-edit icon-center"></div>
@@ -269,7 +274,6 @@
                     <li>Mapping der Designvorgaben von Open / Libre Office auf XSL-FO Ausdrücke</li>
                     <li>Einträge können öfter in einem Layout benutzt werden, nur das erste Vorkommen kann weiter verarbeitet werden.</li>
                 </ul>
-                <span class="fontawesome-edit" style="opacity:50%; position: relarive; "></span>
             </div>
             <div id="slide28" class="step" data-x="10000" data-y="17000">
                 <h2 style="margin-bottom:20px">Libre Office – Textboxen annotieren</h2>
@@ -293,7 +297,7 @@
             </p>
             <p>Christian Mahnke</p>
         </footer>
-        <script type="text/javascript" src="https://raw.githubusercontent.com/bartaz/impress.js/master/js/impress.js"></script>
+        <script type="text/javascript" src="http://rawgit.com/bartaz/impress.js/master/js/impress.js"></script>
         <script type="text/javascript">impress().init();</script>
     </body>
 </html>

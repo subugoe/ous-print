@@ -4,7 +4,7 @@ OUS Printing Tools (NG)
 #Introduction
 
 ## Overview
-This framework can be used to replace the ous_print_server with a implementation in Groovy, redirection rules are configured using XML.
+This framework can be used to replace the ous_print_server with a implementation in Groovy, redirection rules are configured using XML. There are some [slides (in German)](http://subugoe.github.io/ous-print/slides.xhtml "Slides") describing the framework. Documentation can be found on the [project site](http://subugoe.github.io/ous-print/ "Project site").
 
 ## Features
 * Convert ASC Files to XML

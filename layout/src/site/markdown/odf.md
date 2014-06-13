@@ -6,12 +6,12 @@ This document describes highly experimental code, do not use it in production, u
 
 # Features
 ## How does it work (technically)? 
-Open / Libre Office saves the content of a document in several XML Files which are stored in a Zip archive. The style sheet takes the file containing the content (content.xml) and transforms it from ODF to XSL-FO. The page size is taken from the style Definition (styles.xml). If an image is found, the style sheet look if the is a SVG representation an includes it into the resulting XSL-FO file. External content from slips need to be referenced in descriptions of frames, you can use all XPath functions in there. See the examples.
+Open / Libre Office saves the content of a document in several XML Files which are stored in a Zip archive. The style sheet takes the file containing the content (content.xml) and transforms it from ODF to XSL-FO. The page size is taken from the style Definition (styles.xml). If an image is found, the style sheet look if the is a SVG representation an includes it into the resulting XSL-FO file. External content from slips need to be referenced in descriptions of frames, you can use all [XPath functions](http://www.w3.org/TR/xpath20/) in there. See the examples.
 
 ## What dosn't work?
 * Shapes
-* Embedded Font
-* Rastered Images
+* Embedded font
+* Rastered images
 * Tables
 * Notes
 

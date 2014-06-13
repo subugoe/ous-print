@@ -12,7 +12,7 @@ The following requirements were taken from the existing implementation.
 
 ## Watching file systems
 * The program should be able to watch file systems.
-* The Program should be able to fall back to a polling mechanism for whatching file systems.
+* The Program should be able to fall back to a polling mechanism for watching file systems.
 
 ## Detection of print type and printer
 * The print type and the printer should be determinate fro the name of the file.

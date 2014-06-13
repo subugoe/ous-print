@@ -2,6 +2,7 @@
 <project name="Layout Command Line Interface">
     <body>
         <menu name="Layout Command Line Interface">
+            <item name="Usage" href="./cli-usage.html"/>
             <item name="GroovyDoc" href="./groovydoc/index.html"/>
         </menu>
         <menu ref="reports"/>

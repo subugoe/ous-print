@@ -20,12 +20,12 @@ This framework can be used to replace the ous_print_server with a implementation
 This framework need just [Java](http://java.com/en/) (Version 1.6 or higher) as runtime environment, to check out and compile you also need [Git](http://git-scm.com/), [Maven](http://maven.apache.org/) and a internet connection to resolve required artifacts.
 
 ##Terminology used in this document
-* **Artifact**: A piece of self-contained software
-* **Maven**: A Java build tool like Ant or even Make, see [1]
+* **Artifact**: A piece of self-contained software.
+* **Maven**: A Java build tool like Ant or even Make, see [1].
 * **Maven site**: A generated documentation which contains Groovy docs, reports and written documentation, need to be generated since it's not available in HTML format.
-* **XSL-FO**: Extensible Stylesheet Language - Formating Objects, a XML representation of print layouts see [2]
+* **XSL-FO**: Extensible Stylesheet Language - Formating Objects, a XML representation of print layouts, see [2].
 
-## Installation and Usage
+## Installation and Usage.
 This package provides two main artifacts that can be used:
 * The command line interface (CLI) for manual conversions and printing as part of the "layout-cli" Maven module
 * The Server component for watching folders for new slips as part of the "print-server" Maven module

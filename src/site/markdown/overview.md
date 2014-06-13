@@ -18,14 +18,14 @@ Just use the GitHub workflow, which is forking the repository, ad your changes, 
 
 The following Maven Modules make up this framework:
 ## 'util'
-Utility functions used by several other modules. Only relevant for developers
+Utility functions used by several other modules. Only relevant for developers.
 ## 'layout'
-The core of this framework, contains the XSLT stylesheets and Groovy wrappers. Go there if you want to understand how this works.
+The core of this framework, contains the XSLT stylesheets and Groovy wrappers. [Go there](./layout/), if you want to understand how this works.
 ## 'layout-cli' 
-One of the main artifacts, a command line interface to work with the stylesheets, can convert and print. Go there if you want to do conversions manually.
+One of the main artifacts, a command line interface to work with the stylesheets, can convert and print. [Go there](./layout-cli/), if you want to do conversions manually.
 ## 'layout-component'
 A Apache Camel component for the layout core, this way Camel can use the layout engine. Only relevant for developers.
 ## 'print-server'
-A command line wrapper for Apache Camel, can act as a daemon to watch for and print slips. Go there if you want the conversion ant printing as a automatic background task.
+A command line wrapper for Apache Camel, can act as a daemon to watch for and print slips. [Go there](./print-server/), if you want the conversion ant printing as a automatic background task.
 # 'layout-test'
 Contains test files for unit tests. Only relevant for developers.

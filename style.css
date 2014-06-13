@@ -127,3 +127,6 @@ a:hover {
 a:active {
   color: #1a3771;
 }
+.fallback-message {
+    display:none
+}

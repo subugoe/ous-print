@@ -14,16 +14,16 @@ This framework can be used to replace the ous_print_server with a implementation
 * Command line interface for conversions 
 * Automatic hot folder for slips that should be converted and printed
 * Uses Apache Camel, you can also mail and print the results 
-* Generate XSL-FO files from ODF (Open / Libre Office)
+* Generate XSL-FO files from ODF ([Open](https://www.openoffice.org/) / [Libre Office](http://www.libreoffice.org/))
 
 ## Requirements
-This framework need just Java (Version 1.6 or higher) as runtime environment, to check out and compile you also need Git, Maven and a internet connection to resolve required artifacts.
+This framework need just [Java](http://java.com/en/) (Version 1.6 or higher) as runtime environment, to check out and compile you also need [Git](http://git-scm.com/), [Maven](http://maven.apache.org/) and a internet connection to resolve required artifacts.
 
 ##Terminology used in this document
 * **Artifact**: A piece of self-contained software
-* **Maven**: A Java build tool like Ant or even Make 
+* **Maven**: A Java build tool like Ant or even Make, see [1]
 * **Maven site**: A generated documentation which contains Groovy docs, reports and written documentation, need to be generated since it's not available in HTML format.
-* **XSL-FO**: E**X**stensable **S**tyles sheet **L**anguage **F**ormating **O**bjects, a XML representation of print layouts
+* **XSL-FO**: Extensible Stylesheet Language - Formating Objects, a XML representation of print layouts see [2]
 
 ## Installation and Usage
 This package provides two main artifacts that can be used:
@@ -72,3 +72,6 @@ The result of the layout process is determinate by XSL-FO files. Either use your
 
 ## Contributing
 Contributions are welcome, but since this code is in a working state, no support can be provided. 
+
+[1]: http://maven.apache.org/     "Apache Maven"
+[2]: http://www.w3.org/Style/XSL/ "W3 XSL Family"

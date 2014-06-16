@@ -17,6 +17,7 @@ The compiled artifacts can be copied to your server, into a empty directory. Mak
 
 ## Example directory layout
 Bullet points represent files, points with subitems are directories.
+
 * layout-cli-1.0-SNAPSHOT.jar
 * print-server-1.0-SNAPSHOT.jar
 * routes.xml

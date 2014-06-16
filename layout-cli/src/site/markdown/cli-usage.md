@@ -112,6 +112,6 @@ Sets the XSLT to transform into XSL-FO to be used.
 Reads a printed Slip ('`sub473_2014030316384670_slip001.printed`') in text format, parse it using the given template ('`ous40_layout_001_du.asc`'), transform it using the XSLT ('`layout2fo.xsl`') into PDF and sends it to the printer ('`bbk-test`').
 
 
-    java -jar ./target/layout-cli-1.0-SNAPSHOT.jar -i ../layout/src/test/resources/slips/sub473_2014030316384670_slip001.printed -j TXT -p PS -t ./ous40_layout_001_du.asc -x ./xslt/layout2fo.xsl -o sub473_2014030316384670_slip001.ps -f A4 -v -I ../resources/xslt
+    java -jar ./target/layout-cli-1.0-SNAPSHOT.jar -i ./resources/slips/sub473_2014030316384670_slip001.printed -j TXT -p PS -t ./ous40_layout_001_du.asc -x ./xslt/layout2fo.xsl -o sub473_2014030316384670_slip001.ps -f A4 -v -I ../resources/xslt
     
-Reads a printed Slip ('`./layout/src/test/resources/slips/sub473_2014030316384670_slip001.printed`') in text format, parse it using the given template ('`ous40_layout_001_du.asc`'), transform it using the XSLT ('`./xslt/layout2fo.xsl`'), using a include directory ('`../resources/xslt`') into Postscript in page size A4 and save the result ('`sub473_2014030316384670_slip001.ps`').
+Reads a printed Slip ('`./resources/slips/sub473_2014030316384670_slip001.printed`') in text format, parse it using the given template ('`ous40_layout_001_du.asc`'), transform it using the XSLT ('`./xslt/layout2fo.xsl`'), using a include directory ('`../resources/xslt`') into Postscript in page size A4 and save the result ('`sub473_2014030316384670_slip001.ps`').

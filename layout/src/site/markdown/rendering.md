@@ -35,3 +35,6 @@ The [GNU FreeFonts](https://www.gnu.org/software/freefont/) are bundled with thi
         <td>LiberationSerif</td><td>FreeSerif</td>
     </tr>
 </table>
+
+# Page sizes
+You will get the best results if you style sheet emits exactly the same page size your printer is configured to. To make this work, it is possible to set the page size either from the route definition of the SUB PrintServer or the command line interface and hand it over to the style sheet. If you create your own style sheet, you are responsible to handle this parameter.

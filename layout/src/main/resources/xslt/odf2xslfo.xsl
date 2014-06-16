@@ -178,8 +178,8 @@
                 </fo:inline>
             </gxsl:function>
             <gxsl:function name="print:show-if" as="element(fo:inline)" xmlns:fo="http://www.w3.org/1999/XSL/Format">
-                <gxsl:param name="obj" as="node()*"></gxsl:param>
-                <gxsl:param name="condition" as="xs:boolean"></gxsl:param>
+                <gxsl:param name="obj" as="node()*"/>
+                <gxsl:param name="condition" as="xs:boolean"/>
                 <fo:inline>
                     <gxsl:attribute name="visibility" select="if ($condition) then 'visible' else 'hidden'"/>
                     <gxsl:copy-of select="$obj"/>
@@ -190,6 +190,33 @@
                 <fo:leader leader-pattern="space"/>
             </gxsl:function>
         </gxsl:stylesheet>
+        <xsl:comment>Adds a barcode</xsl:comment>
+        <gxsl:function name="print:barcode" as="element(fo:instream-foreign-object)" xmlns:fo="http://www.w3.org/1999/XSL/Format">
+            <gxsl:param name="message" as="xs:string"/>
+            <gxsl:param name="scaling" as="xs:string"/>
+            <gxsl:param name="content-width" as="xs:string"/>
+            <gxsl:param name="height" as="xs:string"/>
+            <gxsl:param name="human-readable" as="xs:string"/>
+            <fo:instream-foreign-object>
+                <gxsl:attribute name="scaling" select="$scaling"/>
+                <gxsl:attribute name="content-width" select="$content-width"/>
+                <gxsl:comment>Barcode, see http://barcode4j.sourceforge.net/2.1/fop-ext.html</gxsl:comment>
+                <barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns" render-mode="svg">
+                    <gxsl:attribute name="message">
+                        <gxsl:value-of select="$message"/>
+                    </gxsl:attribute>
+                    <barcode:code39>
+                        <!-- See http://barcode4j.sourceforge.net/2.1/barcode-xml.html -->
+                        <barcode:height>
+                            <gxsl:value-of select="$height"/>
+                        </barcode:height>
+                        <barcode:human-readable>
+                            <gxsl:value-of select="$human-readable"/>
+                        </barcode:human-readable>
+                    </barcode:code39>
+                </barcode:barcode>
+            </fo:instream-foreign-object>
+        </gxsl:function>
     </xsl:template>
     <!-- Templates for styles -->
     <xsl:template match="style:header|style:footer">

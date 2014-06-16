@@ -97,36 +97,42 @@ header{
 .step.hide:not(.active){
     opacity:0;
 }
-#impress .white {
-    background-color: white;
+#impress .white{
+    background-color:white;
 }
-#impress .explanation {
+#impress .explanation{
     font-size:18pt;
     text-align:right;
-    width: 100%;
-    margin-top: 0px;
-    margin-bottom: 0px;
+    width:100%;
+    margin-top:0px;
+    margin-bottom:0px;
 }
-
+#impress .description{
+    font-size:18pt;
+    text-align:right;
+    width:100%;
+    margin-top:0px;
+    margin-bottom:0px;
+}
 /* Stolen from http://www.sub.uni-goettingen.de/style/main.css */
-a {
-  color: #1a3771;
+a{
+    color:#1a3771;
 }
-a:link {
-  cursor: pointer;
+a:link{
+    cursor:pointer;
 }
-a:visited {
-  color: #1a3771;
+a:visited{
+    color:#1a3771;
 }
-a:focus {
-  color: #1a3771;
+a:focus{
+    color:#1a3771;
 }
-a:hover {
-  color: #1a3771;
+a:hover{
+    color:#1a3771;
 }
-a:active {
-  color: #1a3771;
+a:active{
+    color:#1a3771;
 }
-.fallback-message {
+.fallback-message{
     display:none
 }

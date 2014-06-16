@@ -41,7 +41,7 @@
                 <ul>
                     <li>OUS produziert Textdateien auf Basis eines Layouts</li>
                     <li>Ergebnis sind ASCII Dateien</li>
-                    <li>Eigenartiger Zeichensatz (Codepage 858)</li>
+                    <li>Antiquirter Zeichensatz (Codepage 858)</li>
                     <li>Erzeugte Text Dateien werden auf Basis des Dateinamens vom <span class="system-text">ous_print_server</span> an die Drucker (CUPS) geschickt bzw. per Mail verschickt</li>
                     <li>Hotfolder Mechanismus</li>
                 </ul>
@@ -150,7 +150,7 @@
                 <div class="fontawesome-print icon-center"></div>
             </div>
             <div id="slide16" class="step" data-x="13500" data-y="3600" data-scale="6">
-                <h2>PrintServer</h2>
+                <h2>SUB PrintServer</h2>
                 <ul>
                     <li>Regelbasiertes Routing, Änderungen am <span class="system-text">ous_print_server</span> entfallen</li>
                     <li>Eigene Apache Camel Komponente um das Parsen des Layouts in einer Camel Route zu erledigen</li>
@@ -182,11 +182,14 @@
                 <h2>Volständiges Beispiel:</h2>
                 <pre><code>
                 &lt;route>
-                    &lt;from uri="file:/pica/prod/prt/selbstabholbereich?include=sub4235_\d{16}_slip001.print&amp;?move=../sich-selbstabhol"/>
-                    &lt;to uri="layout:.?xslfo=./xslfo/layout2fo.xsl&amp;template=./ous40_layout_001_du.asc&amp;outputFormat=PS"/> 
+                    &lt;from uri="file:/pica/prod/prt/selbstabholbereich?include=sub4235_\d{16}_slip001.print
+                        &amp;?move=../sich-selbstabhol"/>
+                    &lt;to uri="layout:.?xslfo=./xslfo/layout2fo.xsl&amp;template=./ous40_layout_001_du.asc
+                        &amp;outputFormat=PS"/> 
                     &lt;to uri="lpr://localhost/bbk-test"/>
                 &lt;/route>
                 </code></pre>
+                <p class="description">(Umbrüche für die Lesbarkeit eingefügt)</p>
                 <div><svg xmlns="http://www.w3.org/2000/svg" height="100%" width="100%">
                         <path id="svg_2"
                             d="m176.12,177.11501l24.16679,0l0,0l36.24948,0l84.58372,0l0,43.84293l0,0l0,18.79074l0,12.52698l-84.58372,0l-60.18175,36.83934l23.93227,-36.83934l-24.16679,0l0,-12.52698l0,-18.79074l0,0l0,-43.84293z"
@@ -198,7 +201,7 @@
                 <h2>Erste Erfahrungen</h2>
                 <ul>
                     <li>Postscript statt PDF sorgt für bessere Ergebnisse mit unterschiedlichen Druckern und Papierformaten</li>
-                    <li>Höheren Speicherbedarf als mit dem herkömmlichen Print Server</li>
+                    <li>Höheren Speicherbedarf als mit dem herkömmlichen Print Server(<span class="system-text">ous_print_server</span>)</li>
                     <li>Keine Geschwindigkeitseinbußen – die Prozesskette benötigt ca. 0,5 Sekunden – das Verzeichnis wird einfach doppelt so häufig abgefragt</li>
                     <li>Titeldaten werden normalisiert ausgegeben</li>
                     <li>Interpretation des Layouts hat eigenartige Semantiken, wenn die Feldlänge zu kurz ist</li>
@@ -222,12 +225,19 @@
                     </li>
                 </ul>
             </div>
-            <div id="slide22" class="step" data-x="8000" data-y="14000" data-z="-300" data-rotate="-90">
+            <div id="slide22" class="step" data-x="8000" data-y="15500" data-z="-300" data-rotate="-90">
+                <h2>Nachteile</h2>
+                <ul>
+                    <li>Änderungen (z.B. Namen von Theken) müssen an zwei Stellen (OUS und Stylesheet) durchgeführt werden.</li>
+                    <li>Zusätzliche Serverkomponente (SUB PrintServer).</li>
+                </ul>
+            </div>
+            <div id="slide23" class="step" data-x="8000" data-y="14000" data-z="-300" data-rotate="-90">
                 <h2>Ausblick</h2>
                 <ul>
                     <li>Integration ins bestehende System<ul>
                             <li><span class="system-text">ous_print_server</span> kann das Kommandozeilenwerkzeug einbinden</li>
-                            <li>PrintServer kann ous_print_server ersetzen<ul>
+                        <li>SUB PrintServer kann <span class="system-text">ous_print_server</span> ersetzen<ul>
                                     <li>Bon Drucke mit Logo denkbar</li>
                                 </ul></li>
                             <li>Start via Solaris <abbr title="Service Management Facility">SMF</abbr></li>
@@ -238,15 +248,15 @@
                     <li>Handling von Mahnungsmails</li>
                 </ul>
             </div>
-            <div id="slide23" class="step" data-x="8000" data-y="12500" data-z="-300" data-rotate="-90">
-                <h2>Mögliche Verbesserungen (nicht geplant</h2>
+            <div id="slide24" class="step" data-x="8000" data-y="12500" data-z="-300" data-rotate="-90">
+                <h2>Mögliche Verbesserungen (nicht geplant)</h2>
                 <ul>
                     <li>Parser könnten auch in Java generiert werden, bzw. müssten nicht jedes mal neu generiert werden – Performance Optimierung</li>
                     <li>Oder Parsen und Layouten in einem Stylesheet</li>
-                    <li>Datenbankabfrage zeitgesteuert (z.b. für Benachrichtigungen)</li>
+                    <li>Datenbankabfrage zeitgesteuert (z.b. für Benachrichtigungen - mit Hilfe von Quartz)</li>
                 </ul>
             </div>
-            <div id="slide24" class="step" data-x="9000" data-y="13000">
+            <div id="slide25" class="step" data-x="9000" data-y="13000">
                 <h2>Layouts grafisch gestalten (one more thing...)</h2>
                 <ul>
                     <li>Perspektivisch könnten Layouts auch grafisch gestaltet werdeny</li>
@@ -256,10 +266,10 @@
                 </ul>
                 <img style="opacity: 0.4; z-index: -1;" src="img/atom.svg" />
             </div>
-            <div id="slide25" class="step" data-x="10000" data-y="13000" data-rotate="-90">
+            <div id="slide26" class="step" data-x="10000" data-y="13000" data-rotate="-90">
                 <div class="fontawesome-edit icon-center"></div>
             </div>
-            <div id="slide26" class="step" data-x="10600" data-y="14250" data-scale="3" data-rotate="-90">
+            <div id="slide27" class="step" data-x="10600" data-y="14250" data-scale="3" data-rotate="-90">
                 <h2 style="margin-bottom:30px">Technische Anforderungen</h2>
                 <div class="explanation">(<span class="done">✔</span> = möglich, <span class="todo">✖</span> = nicht möglich)</div>
                 <ul>

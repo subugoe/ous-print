@@ -53,4 +53,12 @@ Sets verbose output.
 * **Short form**: -v
 * **Long form**: --verbose
 
-#Example
+#Examples
+
+    java -jar print-server-1.0-SNAPSHOT.jar -c routes.xml
+
+Starts the SUB PrintServer with the given configuration file and sends messages to the console. 
+
+    nohup java -jar print-server-1.0-SNAPSHOT.jar -c routes.xml &
+
+Starts the SUB PrintServer with the given configuration file in the background and sends output to '`nohup.out`'. The process will not be terminated at logout.

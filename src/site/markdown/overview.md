@@ -12,7 +12,7 @@ This framework allows you to get better prints from your OUS 3 (and probably 4) 
 Since this is a framework, not a finished product, you need a bit of knowledge in how this works first. Please read the documentation of the 'layout' module first. After the refer to the 'layout-cli' module to conduct your test. After that use the 'print-server'.
 
 ## To add or have a feature
-Just use the GitHub workflow, which is forking the repository, ad your changes, send a pull request.
+Just use the GitHub workflow, which is forking the repository, add your changes, send a pull request.
 
 # Modules
 
@@ -26,6 +26,6 @@ One of the main artifacts, a command line interface to work with the stylesheets
 ## 'layout-component'
 A Apache Camel component for the layout core, this way Camel can use the layout engine. Only relevant for developers.
 ## 'print-server'
-A command line wrapper for Apache Camel, can act as a daemon to watch for and print slips. [Go there](./print-server/), if you want the conversion ant printing as a automatic background task.
+The SUB PrintServer, a command line wrapper for Apache Camel, can act as a daemon to watch for and print slips. [Go there](./print-server/), if you want the conversion ant printing as a automatic background task.
 # 'layout-test'
 Contains test files for unit tests. Only relevant for developers.

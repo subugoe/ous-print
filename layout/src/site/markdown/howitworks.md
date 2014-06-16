@@ -64,7 +64,7 @@ The style sheet xml2asc.xsl transfers a XML representation of an ASC file back i
 The style sheet xml2parser.xsl creates a XSLT based parser for generated text files (slips). It's better to convert the gerated files into UTF-8 before passing the to the stylesheet. The Groovy wrapper does this automaticly.
 
 ## layout2fo.xsl
-The style sheet layout2fo.xsl generates a XSL-FO file from a XML Representation of a slip.
+The style sheet layout2fo.xsl generates a XSL-FO file from a XML representation of a slip. This is later passed to [Apache FOP](http://xmlgraphics.apache.org/fop/) to generate a PDF or Postscript file from it.
 ### Parameters:
 * debug: print a text across the generated Layout, which reads "Muster"
 * barcode: should the barcode of a book be included
@@ -74,5 +74,5 @@ The style sheet odf2xslfo.xsl can be used to generate a XSL-FO file from ODF ([O
 
 # Groovy wrapper classes
 
-The stylesheets are encapsulated in Groovy wrapper classes
+The stylesheets are encapsulated in Groovy wrapper classes. For more details on the refer to the generated [GroovyDocs](./groovydoc/index.html).
 

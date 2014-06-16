@@ -4,7 +4,7 @@
         <menu name="Layout Engine">
             <item name="How it works" href="./howitworks.html"/>
             <item name="Rendering" href="./rendering.html"/>
-            <item name="Using Lible / Open Office to create Templates" href="./odf.html"/>
+            <item name="Using Libre / Open Office to create Templates" href="./odf.html"/>
             <item name="GroovyDoc" href="./groovydoc/index.html"/>
         </menu>
         <menu ref="reports"/>

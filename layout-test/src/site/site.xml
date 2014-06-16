@@ -2,7 +2,7 @@
 <project name="Layout Engine">
     <body>
         <menu name="Layout Resource bundle">
-            <item name="GroovyDoc" href="./test-files.html"/>
+            <item name="Test files" href="./test-files.html"/>
         </menu>
         <menu ref="reports"/>
     </body>

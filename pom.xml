@@ -24,10 +24,10 @@
     <artifactId>ous-print</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>OUS Layout and Print Server</name>
-    <description><![CDATA[
+    <description>
         Parent module for OUS layout and printing engine, refer to the different
-        modules for documentation or just have a look at the <a href="./overview.html". title="Overview">overview</a>.
-    ]]></description>
+        modules for documentation or just have a look at the overview document.
+    </description>
     <packaging>pom</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding> 
@@ -54,7 +54,7 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
-        <scm>
+    <scm>
         <connection>scm:git:git@github.com:subugoe/ous-print.git</connection>
         <developerConnection>scm:git:git@github.com:subugoe/ous-print.git</developerConnection>
         <url>https://github.com/subugoe/ous-print</url>

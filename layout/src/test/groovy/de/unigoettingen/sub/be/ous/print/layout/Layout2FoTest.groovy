@@ -54,7 +54,7 @@ class Layout2FoTest {
         Xml2Parser x2p = new Xml2Parser(LAYOUT)
         x2p.transform()
         LP = x2p.getParser()
-        //
+        // Slip files
         assertNotNull(SLIPS)
         def p = ~/.*\.print/
         SLIPS.eachFileMatch(p) {

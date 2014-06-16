@@ -101,7 +101,7 @@ class Layout2Fo extends AbstractTransformer {
     /**
      * Construts a Layout2Fo, sets and the parameters of the transformation and sets the given input.
      * @param input the {@link org.w3c.dom.Document Document} of the document to be transformed
-     * @param stylesheet the {@link java.net.URL URL} to be used for the transformation
+     * @param stylesheet the {@link java.net.URL URL} to the style to be used for the transformation
      * @see #Layout2Fo()
      */
     Layout2Fo (Document input, URL stylesheet) {
@@ -115,7 +115,7 @@ class Layout2Fo extends AbstractTransformer {
     /**
      * Construts a Layout2Fo, sets and the parameters of the transformation and sets the given input.
      * @param input the {@link java.net.URL URL} of the document to be transformed
-     * @param stylesheet the {@link java.net.URL URL} to be used for the transformation
+     * @param stylesheet the {@link java.net.URL URL} to the style sheet to be used for the transformation
      * @see #Layout2Fo()
      */
     Layout2Fo (URL input, URL stylesheet) {

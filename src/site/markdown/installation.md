@@ -22,9 +22,9 @@ Bullet points represent files, points with subitems are directories.
 * print-server-1.0-SNAPSHOT.jar
 * routes.xml
 * lib
- * lib.xsl 
+  * lib.xsl 
 * img
- * GAU-SUBlogo-einzeilig.svg
+  * GAU-SUBlogo-einzeilig.svg
 * xslfo
- * layout2fo.xsl
+  * layout2fo.xsl
  

@@ -1,8 +1,8 @@
-Print Server Overview
-=====================
+SUB PrintServer Overview
+=========================
 
 # Introduction
-The new print server was designed as replacement for existing `ous_print_server` installations. It should provide the same capabilities and also provide some additional features.
+The new SUB PrintServer was designed as replacement for existing `ous_print_server` installations. It should provide the same capabilities and also provide some additional features.
 
 #Implementation
 The new print server uses [Apache Camel](http://camel.apache.org/) as its base. This way you can use all [components of Camel](http://camel.apache.org/components.html) using the route [XML syntax](http://camel.apache.org/configuring-camel.html). See the [configuration page](./configuration.html) for examples.

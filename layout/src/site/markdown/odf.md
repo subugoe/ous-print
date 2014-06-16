@@ -47,26 +47,26 @@ Sets font size for given text
 
 **Arguments**:
 
-* The size to be set as `xs:integer`
-* The sting to be shown as `xs:string`
+* **size** :The size to be set as `xs:integer`
+* **text** :The sting to be shown as `xs:string`
 
 **Returns**: A `fo:inline` element
 
 **Description**: Use this function to set the font size based on conditions.
 
 Sets the text in the given font size
-##print:show-if
+## print:show-if
 Show text if condition is true
 
 **Arguments**:
 
-* The sting to be shown as `xs:string`
-* The condition to evaluate as `xs:boolean`
+* **obj**:The nodes to be shown as `node()*`
+* **condition** :The condition to evaluate as `xs:boolean`
 
-**Description**: This function can be used to show or hide fields based on conditions.
+**Description** : This function can be used to show or hide fields based on conditions.
 
 **Returns**: A `fo:inline` element
-##print:leader
+## print:leader
 Creates a empty line
 
 **Arguments**: Takes no arguments
@@ -75,6 +75,21 @@ Creates a empty line
 
 **Description**: Fills a frame with empty space, use this if empty fields would let your frame colapse.
 
+## print:barcode
+Show a barcode for the given text as embedded SVG image
+
+**Arguments**:
+
+* **message** : The sting to be shown as `xs:string`
+* **scaling** : The condition to evaluate as `xs:string`
+* **content-width** : width as `xs:string`
+* **height** : height as `xs:string`
+* **human-readable** : Position of the human readable form as `xs:string`
+
+**Returns**: A `fo:instream-foreign-object` element
+
+**Description**: This function can be used to show a barcode, for futher documentation refer to [the documentation of the used component](http://barcode4j.sourceforge.net/2.1/fop-ext.html).
+
+
 # Open tasks
-* Include barcode printing
 * convert simple shapes like lines and blocks

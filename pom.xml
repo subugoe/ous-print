@@ -24,7 +24,10 @@
     <artifactId>ous-print</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>OUS Layout and Print Server</name>
-    <description>Parent module for OUS layout and printing engine</description>
+    <description><![CDATA[
+        Parent module for OUS layout and printing engine, refer to the different
+        modules for documentation or just have a look at the <a href="./overview.html". title="Overview">overview</a>.
+    ]]></description>
     <packaging>pom</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding> 

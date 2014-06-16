@@ -29,7 +29,7 @@
     <packaging>jar</packaging>
     <name>SUB PrintServer</name>
     <description>
-        This module contains the new SUB PrintServer, basiclly a command line wrapper for Apache Camel, can act as a daemon to watch for and print slips.
+        This module contains the new SUB PrintServer, basically a command line wrapper for Apache Camel, can act as a daemon to watch for and print slips.
     </description>
    
     <dependencies>

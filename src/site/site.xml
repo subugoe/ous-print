@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <project name="OUS Layout and Print Server">
     <body>
+        <head>
+            <link rel="icon" href="favicon.ico"/>
+        </head>
         <menu name="OUS Layout and Print Server">
             <item name="Overview" href="./overview.html"/>
             <item name="Slides (German)" href="./slides.xhtml"/>

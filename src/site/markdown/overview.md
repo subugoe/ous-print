@@ -29,3 +29,20 @@ A Apache Camel component for the layout core, this way Camel can use the layout 
 The SUB PrintServer, a command line wrapper for Apache Camel, can act as a daemon to watch for and print slips. [Go there](./print-server/), if you want the conversion ant printing as a automatic background task.
 # 'layout-test'
 Contains test files for unit tests. Only relevant for developers.
+
+# Development
+
+Just run the following command to get a copy of the source code:
+> git clone https://github.com/subugoe/ous-print.git
+
+### Compile & package
+Not all unit tests are passing yet, therefore you need the following to build all modules:
+> mvn -Dmaven.test.skip=true package
+
+### Create documentation
+This readme file only provides a bird eye view over the framework, to get the whole picture generate the Maven site for this package. You just need to run the following command and look into ./target/site/index.html
+
+There are also some slides (in German) that reflect the current state of this framework.
+
+>mvn site
+

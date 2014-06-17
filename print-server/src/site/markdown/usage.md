@@ -23,7 +23,7 @@ Prints a online help text.
 * **Long form**: --help
 
 ## Configuration
-Sets the routes definition file to be used.
+Sets the routes definition file to be used. See the [configuration page](./configuration.html) for details.
 
 * **Short form**: -c
 * **Long form**: --config

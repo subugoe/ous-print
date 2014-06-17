@@ -104,10 +104,10 @@ class Xml2Parser extends AbstractTransformer {
         if (inDoc == null) {
             log.trace('Processing'  + this.input)
             log.debug("Using stylesheet " + stylesheet.toString())
-            result = transform(this.input, this.stylesheet, this.params)
+            result = transform(this.input, stylesheet, this.params)
         } else {
             log.trace('Processing internal Document')
-            result = transform(new DOMSource(inDoc), new StreamSource(this.stylesheet.openStream()), this.params)
+            result = transform(new DOMSource(inDoc), new StreamSource(stylesheet.openStream()), this.params)
         }
     }
     

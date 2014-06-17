@@ -94,7 +94,7 @@ class Layout {
     /**
      * Creates a Layout object
      * @param inFormat the input FORMAT
-     * @param input the InputStrem to read
+     * @param input the InputStream to read
      * @param outFormat the output FORMAT
      * @param output the {@link java.io.OutputStream OutputStream}
      * @param xslfo, {@link java.net.URL URL} of the XLS-FO file to use
@@ -332,7 +332,7 @@ class Layout {
          */ 
         public static PageSize fromString(String size) {
             if (size != null) {
-                for (PageSize ps : PageSize.values()) {
+                for (PageSize ps : values()) {
                     if (size.equalsIgnoreCase(ps.name)) {
                         return ps
                     }
@@ -346,9 +346,9 @@ class Layout {
          * @returns {@link javax.print.attribute.standard.MediaSizeName MediaSizeName}, the nmae of the media size
          */
         public static MediaSizeName getMediaSizeName (PageSize ps) {
-            if (ps == PageSize.A4) {
+            if (ps == A4) {
                 return MediaSizeName.ISO_A4
-            } else if (ps == PageSize.A5) {
+            } else if (ps == A5) {
                 return MediaSizeName.ISO_A5
             }
         }
@@ -358,7 +358,7 @@ class Layout {
          * @returns {@link javax.print.attribute.standard.OrientationRequested OrientationRequested}, the requested orientation
          */
         public static OrientationRequested getOrientationRequested (PageSize ps) {
-            if (ps == PageSize.A4) {
+            if (ps == A4) {
                 return OrientationRequested.PORTRAIT
             } else if (ps == PageSize.A5) {
                 return OrientationRequested.LANDSCAPE
@@ -371,12 +371,12 @@ class Layout {
          */
         public static Paper getPaper(PageSize ps) {
             Paper paper = null
-            if (ps == PageSize.A4) {
+            if (ps == A4) {
                 paper = new Paper()
                 paper.setSize(595, 842)
                 //A4 (borderless)
                 paper.setImageableArea(0, 0, 595, 842)
-            } else if (ps == PageSize.A5) {
+            } else if (ps == A5) {
                 paper = new Paper()
                 paper.setSize(420, 595)
                 //A5 (borderless)

@@ -667,7 +667,7 @@
         <xsl:variable name="unit" select="replace($arg1, '[\d\.]*?([^\d\.]+)', '$1')" as="xs:string"/>
         <!-- Use this if you  want to check if units match -->
         <xsl:if test="not(contains($arg2, $unit))">
-            <xsl:message terminate="yes">Units dosn't match!</xsl:message>
+            <xsl:message terminate="yes">Units doesn't match!</xsl:message>
         </xsl:if>
         <xsl:variable name="int1" select="number(replace($arg1, '([\d\.]+)[^\d]*', '$1'))" as="xs:double"/>
         <xsl:variable name="int2" select="number(replace($arg2, '([\d\.]+)[^\d]*', '$1'))" as="xs:double"/>

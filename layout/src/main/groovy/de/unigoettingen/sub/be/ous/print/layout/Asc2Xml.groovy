@@ -91,7 +91,7 @@ class Asc2Xml extends AbstractTransformer {
             throw new IllegalStateException('Params not configured');
         }
         log.debug("Using stylesheet " + stylesheet.toString())
-        result = transform(this.input, this.stylesheet, this.params)
+        result = transform(this.input, stylesheet, this.params)
     }
     
     /**

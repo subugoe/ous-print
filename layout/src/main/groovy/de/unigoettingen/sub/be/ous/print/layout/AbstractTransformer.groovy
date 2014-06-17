@@ -104,7 +104,7 @@ abstract class AbstractTransformer {
     def protected static Document transform (Source input, Source xslt, Map params) {
         def factory = TransformerFactory.newInstance()
         //TODO: this is a ugly hack, it's not thread safe
-        if (this.resolver != null) {
+        if (resolver != null) {
             factory.setURIResolver(resolver);
         }
         def transformer
@@ -210,7 +210,7 @@ abstract class AbstractTransformer {
      * @return the {@link java.net.URL URL} of en empty XML file
      */
     static URL getEmptyXml() {
-        return this.xml
+        return xml
     }
     
 }

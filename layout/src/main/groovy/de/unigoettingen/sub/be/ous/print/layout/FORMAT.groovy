@@ -58,7 +58,7 @@ enum FORMAT {
      */ 
     public static String getFormats() {
         def formats = ""
-        for (FORMAT f : FORMAT.values()) {
+        for (FORMAT f : values()) {
             formats + f.name + " "
         }
         return formats

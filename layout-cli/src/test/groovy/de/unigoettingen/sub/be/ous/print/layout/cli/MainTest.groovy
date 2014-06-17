@@ -62,7 +62,7 @@ class MainTest {
         def p = ~/.*\.print/
         SLIPS.eachFileMatch(p) {
             f ->
-            def path = Util.uRL2RelPath(f.toURL())
+            def path = Util.uRL2RelPath(f.toURI().toURL())
             SLIP_FILES.add(path)
             log.info('Added path ' + path + ' to test file list')
         }

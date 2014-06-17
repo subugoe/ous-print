@@ -154,7 +154,7 @@ class Main {
         
         //Input file
         if (opt.i) {
-            inputUrl = new File(opt.i).toURL()
+            inputUrl = new File(opt.i).toURI().toURL()
             log.trace('Input: ' + inputUrl.toString())
             try {
                 input = inputUrl.openStream()
@@ -190,21 +190,21 @@ class Main {
         
         //Template or parser
         if (opt.t) {
-            template = new File(opt.t).toURL()
+            template = new File(opt.t).toURI().toURL()
             log.trace('Template: ' + template.toString())
         }
         
         //Include directory
         if (opt.I) {
             String dir = System.getProperty("user.dir") + File.separator + opt.I
-            include =  new File(dir).toURL()
+            include =  new File(dir).toURI().toURL()
             log.trace('Include directory: ' + include.toString())
         }
         
         //XSL-FO file
         if (opt.x) {
             String dir = System.getProperty("user.dir") + File.separator + opt.x
-            xslfo = new File(dir).toURL()
+            xslfo = new File(dir).toURI().toURL()
             log.trace('XSL-FO: ' + xslfo.toString())
         }
         

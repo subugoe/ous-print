@@ -123,7 +123,7 @@ class PrintServer extends Main {
         if (opt.c) {
             String dir = System.getProperty("user.dir") + File.separator + opt.c
             
-            config = new File(dir).toURL()
+            config = new File(dir).toURI().toURL()
             log.trace('Configuration: ' + config.toString() + ' (generated from ' + dir + ')')
         } else {
             println 'No routes definition given, exiting!'

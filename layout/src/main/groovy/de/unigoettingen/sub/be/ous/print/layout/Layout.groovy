@@ -294,7 +294,7 @@ class Layout {
      * @param path, String the path to resolve
      * @returns {@link java.io.File File} the absolute File
      */
-    protected static File getFile (String path) {
+    public static File getFile (String path) {
         String prefix = ''
         if (!path.startsWith('/')) {
             prefix = System.getProperty("user.dir") + File.separator
@@ -308,8 +308,8 @@ class Layout {
      * @param path, String the path to resolve
      * @returns a absolute {@link java.net.URL URL}
      */
-    protected static URL getURL (String path) {
-        return getFile(path).toURL()
+    public static URL getURL (String path) {
+        return getFile(path).toURI().toURL()
     }
     
     /**

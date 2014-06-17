@@ -89,12 +89,12 @@ class LayoutProcessor implements Processor {
         def absolutePath = input.getHeader('CamelFileAbsolutePath', String.class)
         
         if (absolutePath) {
-            inputURL = new File(absolutePath).toURL()
+            inputURL = new File(absolutePath).toURI().toURL()
         } else {
             temp = File.createTempFile("temp", ".txt");
             temp.deleteOnExit();
             new FileOutputStream(temp).write(input.getBody(String.class).getBytes())
-            inputURL = temp.toURL()
+            inputURL = temp.toURI().toURL()
         }
         log.trace('Using URL: ' + inputURL.toString())
         

@@ -52,8 +52,8 @@ class LayoutTest {
         def p = ~/.*\.print/
         SLIPS.eachFileMatch(p) {
             f ->
-            SLIP_FILES.add(f.toURL())
-            log.info('Added URL ' + f.toURL().toString() + ' to test file list')
+            SLIP_FILES.add(f.toURI().toURL())
+            log.info('Added URL ' + f.toURI().toURL().toString() + ' to test file list')
         }
         assertNotNull(XSLFO)
         assertNotNull(PARSER_XML)
@@ -168,7 +168,7 @@ class LayoutTest {
             SLIPS.eachFileMatch(p) {
                 f ->
                 f.delete()
-                log.info('Removed Test file ' + f.toURL().toString())
+                log.info('Removed Test file ' + f.toURI().toURL().toString())
             }
         }
     }

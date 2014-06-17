@@ -235,7 +235,7 @@ class Util {
      */
     @TypeChecked
     static public String uRL2RelPath (URL u) {
-        def base = new File('.').toURL().toString()
+        def base = new File('.').toURI().toURL().toString()
         return '.' + u.toString().substring(base.length() - 3)
     } 
     

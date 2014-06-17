@@ -78,7 +78,7 @@ class LayoutProcessorTest extends CamelTestSupport {
             public void configure() {
                 
                 LayoutProcessor processor = new LayoutProcessor()
-                processor.setDebugPath(new File('./target/').toURL())
+                processor.setDebugPath(new File('./target/').toURI().toURL())
                 processor.setTemplate(PARSER_TXT)
                 processor.setXslfo(FO)
                 from("file:./target//generated-test-resources/hotfolder/in?noop=true&include=.*.print").shutdownRunningTask(ShutdownRunningTask.CompleteAllTasks).process(processor).to("mock:result")

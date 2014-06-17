@@ -59,8 +59,8 @@ class Layout2FoTest {
         def p = ~/.*\.print/
         SLIPS.eachFileMatch(p) {
             f ->
-            SLIP_FILES.add(f.toURL())
-            log.info('Added URL ' + f.toURL().toString() + ' to test file list')
+            SLIP_FILES.add(f.toURI().toURL())
+            log.info('Added URL ' + f.toURI().toURL().toString() + ' to test file list')
         }
     }
     
@@ -124,7 +124,7 @@ class Layout2FoTest {
             l2f.transform()
             def xslfoOut = slip.toString().substring(5) + '.fo'
             log.trace('Writing XSL-FO file to ' + xslfoOut)
-            Util.writeDocument(l2f.result, new File(xslfoOut).toURL())
+            Util.writeDocument(l2f.result, new File(xslfoOut).toURI().toURL())
         }
         
     }
@@ -135,7 +135,7 @@ class Layout2FoTest {
         SLIPS.eachFileMatch(p) {
             f ->
             f.delete()
-            log.info('Removed Test file ' + f.toURL().toString())
+            log.info('Removed Test file ' + f.toURI().toURL().toString())
         }
     }
 }

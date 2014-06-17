@@ -53,8 +53,8 @@ class Odf2FoTest {
         def p = ~/.*\.print/
         SLIPS.eachFileMatch(p) {
             f ->
-            SLIP_FILES.add(f.toURL())
-            log.info('Added URL ' + f.toURL().toString() + ' to test file list')
+            SLIP_FILES.add(f.toURI().toURL())
+            log.info('Added URL ' + f.toURI().toURL().toString() + ' to test file list')
         }
     }
     

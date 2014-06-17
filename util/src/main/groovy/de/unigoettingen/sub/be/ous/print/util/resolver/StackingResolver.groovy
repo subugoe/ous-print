@@ -19,6 +19,7 @@
 package de.unigoettingen.sub.be.ous.print.util.resolver
 
 import groovy.transform.CompileStatic
+import groovy.transform.TypeChecked
 import groovy.util.logging.Log4j
 
 import javax.xml.transform.Source
@@ -32,6 +33,7 @@ import javax.xml.transform.URIResolver
  * @author cmahnke
  */
 @CompileStatic
+//@TypeChecked
 @Log4j
 class StackingResolver implements URIResolver {
     List<URIResolver> resolvers = new ArrayList<URIResolver>()

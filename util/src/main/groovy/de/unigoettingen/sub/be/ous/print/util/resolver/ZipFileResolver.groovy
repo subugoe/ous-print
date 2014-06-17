@@ -1,5 +1,5 @@
 /*
- * This file is part of the OUS Print Server, Copyright 2011, 2012 SUB Göttingen
+ * This file is part of the OUS print system, Copyright 2014 SUB Göttingen
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Affero General Public License version 3 as published by
@@ -16,7 +16,6 @@
  * MA 02110-1301 USA.
  */
 
-
 package de.unigoettingen.sub.be.ous.print.util.resolver
 
 import groovy.transform.CompileStatic
@@ -28,53 +27,48 @@ import javax.xml.transform.TransformerException
 import javax.xml.transform.URIResolver
 import javax.xml.transform.stream.StreamSource
 
-/**
- * This resolver can be van take a base path and resolve relative URIs against it.
- *
- * @author cmahnke
- * See http://stackoverflow.com/questions/5416421/apache-fop-how-to-set-base-url-for-accessing-external-resource-using-relative-p
+import org.apache.commons.vfs2.FileObject
+import org.apache.commons.vfs2.FileSystemException
+import org.apache.commons.vfs2.FileSystemManager
+import org.apache.commons.vfs2.VFS
 
+/**
+ * A resolver to get the contents of a zip file, used to transform contents of ODF files.
+ * @author cmahnke
  */
 @Log4j
 //@TypeChecked
 @CompileStatic
-class BasePathResolver implements URIResolver {
-    /** The base URL to resolve against */
-    URL baseURL 
+class ZipFileResolver implements URIResolver {
+    /** the zip file to search in. */
+    protected URL zipFile
+    
+    /** The FileObject of the given file  */
+    protected FileObject zipFileObject
     
     /**
-     * Contructs a BasePathResolver for the given URL
+     * Constructor which takes a zip file to resolve files from
+     * @param zipFile
+     * 
+     *
      */
-    
-    public BasePathResolver (URL baseURL) {
-        this.baseURL = baseURL
+    ZipFileResolver (URL zipFile) {
+        FileSystemManager fsManager = VFS.getManager()
+        FileObject zipFileObject = fsManager.resolveFile(zipFile)
+        this.zipFile = zipFile
     }
     
     /**
      * @see URIResolver#resolve(String, String)
      */
-    
     @Override
     public Source resolve(String href, String base) throws TransformerException {
-        log.trace('Resolving \'' + href + '\' with base \'' + base + '\'')
-        log.trace('Base URL set to ' + baseURL)
-        String resolvedPath = baseURL.toString() + File.separator + href
-        log.trace('Trying directory ' + resolvedPath)
-        URL u = new URL(resolvedPath)
-        InputStream input
-        Boolean failed = false
         try {
-            input = u.openStream()
-        } catch (IOException ioe) {
-            log.error('URL ' + u.toString() + ' couldn\'t be opened!')
-            failed = true
-        }
-        if (!failed) {
-            return new StreamSource(input)
-        } else {
-            throw new TransformerException('URL ' + u.toString() + ' couldn\'t be opened!')
+            FileObject result = zipFileObject.resolveFile(href)
+            return new StreamSource(result.getContent().getInputStream())
+        } catch (FileSystemException fse) {
+            throw new TransformerException('File ' + href + ' not found in archive ' + zipFile.toString())
         }
     }
-
 }
 

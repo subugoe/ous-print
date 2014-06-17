@@ -21,6 +21,7 @@ package de.unigoettingen.sub.be.ous.print.util.resolver
 
 import groovy.util.logging.Log4j
 import groovy.transform.CompileStatic
+//import groovy.transform.TypeChecked
 
 import javax.xml.transform.Source
 import javax.xml.transform.TransformerException
@@ -35,6 +36,7 @@ import javax.xml.transform.stream.StreamSource
  */
 
 @Log4j
+//@TypeChecked
 @CompileStatic
 class XSLTIncludeClasspathURIResolver implements URIResolver {
     /** The caller Class (used to get the ClassLaoder) */

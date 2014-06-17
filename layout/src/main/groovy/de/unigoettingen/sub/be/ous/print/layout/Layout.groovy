@@ -29,6 +29,8 @@ import org.apache.tika.parser.Parser
 import org.apache.tika.metadata.TikaMetadataKeys
 import org.apache.tika.metadata.HttpHeaders
 
+import org.w3c.dom.Document
+
 import org.xml.sax.helpers.DefaultHandler
 
 import javax.print.attribute.standard.MediaSizeName
@@ -261,6 +263,29 @@ class Layout {
             }
         }
         return lp
+    }
+    
+    /**
+     * Internal function to get a Layout2Fo for the given {@link java.net.URL URL}.
+     * This can either be a XSL-FO file or a ODD file
+     * 
+     * @param parser, the {@link java.net.URL URL} of the XSL-FO ODF source
+     * @param doc, the {@link org.w3c.dom.Document Document} to be transformed
+     * @returns a Layout2Fo object
+     * @throws IllegalStateException if mime type is not supported
+     */
+    @TypeChecked
+    def static Layout2Fo getFormater(URL parser, Document doc) {
+        Layout2Fo l2f
+        String parserMime = guessContentType(parser)
+        if (parserMime == 'application/vnd.oasis.opendocument.text') {
+            l2f = new Odf2Fo(doc, parser)
+        } else if (parserMime == 'application/xslt+xml') {
+            l2f = new Layout2Fo(doc, parser)
+        } else {
+            throw new IllegalStateException('Mime type ' + parserMime + ' not supported')
+        }
+        return l2f
     }
     
     //Utility Functions

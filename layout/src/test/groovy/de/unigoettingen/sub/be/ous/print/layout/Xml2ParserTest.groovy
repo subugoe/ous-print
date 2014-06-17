@@ -58,8 +58,8 @@ class Xml2ParserTest {
         def p = ~/.*\.print/
         SLIPS.eachFileMatch(p) {
             f ->
-            SLIP_FILES.add(f.toURL())
-            log.info('Added URL ' + f.toURL().toString() + ' to test file list')
+            SLIP_FILES.add(f.toURI().toURL())
+            log.info('Added URL ' + f.toURI().toURL().toString() + ' to test file list')
         }
     }
     
@@ -102,7 +102,7 @@ class Xml2ParserTest {
             log.trace('Result:\n----------------START OF RESULT(' + this.getClass().getName() + ')\n' + lp.getXML())
             log.trace('----------------END OF RESULT(' + this.getClass().getName() + ')\n')
             log.trace('Saving file to ' + xmlOut)
-            Util.writeDocument(lp.result, new File(xmlOut).toURL())
+            Util.writeDocument(lp.result, new File(xmlOut).toURI().toURL())
                
         }
     }

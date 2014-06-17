@@ -58,7 +58,7 @@ footer{
     position:absolute;
     left:0;
     bottom:0;
-    padding: 0px 4px 4px;
+    padding: 0 4px 4px;
 }
 footer p{
     text-align:center;
@@ -97,15 +97,15 @@ header{
     font-size:18pt;
     text-align:right;
     width:100%;
-    margin-top:0px;
-    margin-bottom:0px;
+    margin-top:0;
+    margin-bottom:0;
 }
 #impress .description{
     font-size:18pt;
     text-align:right;
     width:100%;
-    margin-top:0px;
-    margin-bottom:0px;
+    margin-top:0;
+    margin-bottom:0;
 }
 /* Stolen from http://www.sub.uni-goettingen.de/style/main.css */
 a{

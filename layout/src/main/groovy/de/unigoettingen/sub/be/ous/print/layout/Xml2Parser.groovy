@@ -204,7 +204,7 @@ class Xml2Parser extends AbstractTransformer {
             temp.deleteOnExit();
             temp.write(Layout.readFile(input))
             log.debug('Created temp file ' + temp.getAbsolutePath()) 
-            this.params['input'] = temp.toURL().toString()
+            this.params['input'] = temp.toURI().toURL().toString()
             log.trace('Setting input to ' + this.params['input'] + 'starting transformation...')
             try {
                 this.transform()

@@ -70,7 +70,7 @@ class PrinterUtil {
      * Gets a list of names of available PrintServices for this system
      * @returns a list of printers
      */
-    protected static List<String> getPrinterNames () {
+    public static List<String> getPrinterNames () {
         List<String> printers = new ArrayList<String>()
         PrintService[] printServices = PrintServiceLookup.lookupPrintServices(null, null)
         for (PrintService printer : printServices) {
@@ -83,7 +83,7 @@ class PrinterUtil {
      * Gets a list of available PrintServices for this system
      * @returns a list of {@link javax.print.PrintService PrintService}
      */
-    protected static List<PrintService> getPrinters () {
+    public static List<PrintService> getPrinters () {
         List<PrintService> printers = new ArrayList<PrintService>()
         PrintService[] printServices = PrintServiceLookup.lookupPrintServices(null, null)
         for (PrintService printer : printServices) {

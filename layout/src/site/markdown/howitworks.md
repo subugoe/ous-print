@@ -9,7 +9,7 @@ To understand how this is working you need to understand how a layout is defined
 
 There are two different types of layouts, which use the same file association (.asc):
 * Normal layouts are used by the software directly
-* Text layouts are included texts in normal layouts (these aren’t covered completely yet)
+* Text layouts are included texts in normal layouts (these aren't covered completely yet)
 
 ## Sample for a normal layout:
 

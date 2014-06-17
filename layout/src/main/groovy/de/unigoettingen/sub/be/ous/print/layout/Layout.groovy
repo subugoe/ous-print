@@ -81,7 +81,7 @@ class Layout {
     /** The desired page size of the result */
     PageSize pageSize = DEFAULT_PAGE_SIZE
     
-    //The converters, thes are defined at class level to get their content for debunging.
+    //The converters, these are defined at class level to get their content for debunging.
     /** Internal property of the LayoutParser to be used, used for debugging */
     LayoutParser lp
     

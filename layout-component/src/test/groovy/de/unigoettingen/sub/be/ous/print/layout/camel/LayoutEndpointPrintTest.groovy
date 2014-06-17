@@ -53,7 +53,7 @@ import static org.mockito.Mockito.verify
 import static org.mockito.Mockito.when
 
 /**
- * Tests agains a virtual printer, if available, otherwise mock one
+ * Tests against a virtual printer, if available, otherwise mock one
  * @author cmahnke
  */
 //@Log4j
@@ -74,7 +74,7 @@ class LayoutEndpointPrintTest extends CamelTestSupport  {
         for (printer in PrinterUtil.getPrinterNames()) {
             log.info("Available Printer: " + printer) 
         }
-        log.info('Camel startet, waiting for completition')
+        log.info('Camel started, waiting for completition')
         resultEndpoint.setMinimumResultWaitTime(5000)
         resultEndpoint.setResultWaitTime(30000)
         

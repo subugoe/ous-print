@@ -32,7 +32,7 @@ import org.apache.camel.ShutdownRunningTask
 import org.junit.Test
 
 /**
- * This Test file schould test if all results end up at the virtual printer. 
+ * This Test file should test if all results end up at the virtual printer.
  * @author cmahnke
  * See http://camel.apache.org/testing.html
  */

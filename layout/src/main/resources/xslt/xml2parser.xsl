@@ -55,7 +55,7 @@
                 </layout>
             </gxsl:template>
             <!-- Our own replacer, returns an empty string if no match found -->
-            <xsl:comment>This is our own replacer wich returns an empty string if no match found</xsl:comment>
+            <xsl:comment>This is our own replacer which returns an empty string if no match found</xsl:comment>
             <gxsl:function name="print:replace" as="xs:string">
                 <gxsl:param name="input"/>
                 <gxsl:param name="pattern"/>

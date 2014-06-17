@@ -56,7 +56,7 @@ class Layout2Fo extends AbstractTransformer {
     /** The location of the stylesheet */
     def static String xslt = '/xslt/layout2fo.xsl'
     
-    /** The location of the Fop configurtion */
+    /** The location of the Fop configuration */
     def static String fopXconf = '/xconf/fop.xconf'
     
     /** The URL of the stylesheet to used */
@@ -69,7 +69,7 @@ class Layout2Fo extends AbstractTransformer {
     /** Parameters of the stylesheet */
     def static paramPrototypes = ['debugParam': 'false', 'barcodeParam': 'false', 'format': 'A5']
       
-    /** the path to serch for external media like images */
+    /** the path to search for external media like images */
     protected URL includePath = null
     
     /** The {@link org.apache.fop.apps.FopFactory FopFactory} to be used */

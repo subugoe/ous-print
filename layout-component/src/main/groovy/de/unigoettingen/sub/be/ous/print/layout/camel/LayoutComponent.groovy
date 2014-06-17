@@ -91,7 +91,7 @@ class LayoutComponent extends UriEndpointComponent {
     }
        
     /**
-     * Public contructor of the LayoutComponent
+     * Public constructor of the LayoutComponent
      * @see org.apache.camel.impl.UriEndpointComponent#UriEndpointComponent(Class<? extends Endpoint>)
      */
     public LayoutComponent(Class<? extends Endpoint> endpointClass) {

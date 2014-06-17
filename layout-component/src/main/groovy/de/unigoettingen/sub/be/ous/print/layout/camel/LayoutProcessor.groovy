@@ -43,7 +43,7 @@ class LayoutProcessor implements Processor {
     /** A path to write generated results to */
     URL debugPath = null
     
-    /** The URLs of the templte, the XSL-FO and the include path */
+    /** The URLs of the template, the XSL-FO and the include path */
     URL template, xslfo, includePath = null
     
     /** The FORMAT to be read */

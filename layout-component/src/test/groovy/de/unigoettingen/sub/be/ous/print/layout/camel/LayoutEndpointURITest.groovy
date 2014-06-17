@@ -43,7 +43,7 @@ class LayoutEndpointURITest {
                 }
             })
         main.start()
-        log.info('Camel startet, waiting for completition')
+        log.info('Camel started, waiting for completition')
         sleep(3000)
         Integer exchangeCount = main.getCamelContexts().get(0).getInflightRepository().size()
         while (exchangeCount != 0) {

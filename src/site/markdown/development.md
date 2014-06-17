@@ -13,7 +13,7 @@ This page describes the options for developers to use or extend the frame work. 
 * To play with the ODF feature you need ([Open](https://www.openoffice.org/) / [Libre Office](http://www.libreoffice.org/))
 
 # Maven Modules
-See the [overview document](./overview.html) for a shore description of the modules. 
+See the [overview document](./overview.html) for a short description of the modules. 
 
 # Dependencies
 This is just a high level overview about the dependencies, have a look at the Maven dependencies (either in the project site or the project descriptors) for each sub module for a complete list including indirect dependencies and the used versions.

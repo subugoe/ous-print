@@ -13,7 +13,7 @@ This page describes the options for developers to use or extend the frame work. 
 * To play with the ODF feature you need ([Open](https://www.openoffice.org/) / [Libre Office](http://www.libreoffice.org/))
 
 # Dependencies
-This is just a high level overview about the dependencies, have a look at the Maven dependencies (either in the project site or the project descriptors) for each sub module for a complete list including the used versions.
+This is just a high level overview about the dependencies, have a look at the Maven dependencies (either in the project site or the project descriptors) for each sub module for a complete list including indirect dependencies and the used versions.
 
 ## Groovy
 [Groovy](http://groovy.codehaus.org/) is a scripting language on top of the JVM, it's used for the code to glue the used components together.

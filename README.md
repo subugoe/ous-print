@@ -44,14 +44,14 @@ Not all unit tests are passing yet, therefore you need the following to build al
 > mvn -Dmaven.test.skip=true package
 
 ### Create documentation
-This readme file only provides a bird eye view over the framework, to get the whole picture generate the Maven site for this package. You just need to run the following command and look into ./target/site/index.html
+This readme file only provides a bird eye view over the framework, to get the whole picture generate the Maven site for this package (or just look at the [project site](http://subugoe.github.io/ous-print/)). You just need to run the following command and look into ./target/site/index.html
 
-There are also some slides (in German) that reflect the current state of this framework.
+There are also some [slides (in German)](http://subugoe.github.io/ous-print/slides.xhtml) that reflect the current state of this framework.
 
 >mvn site
 
 ## Current Status
-The code is in production us at SUB Göttingen but might have still some rough edges. The ODF to XSL-FO part is untested, the Groovy parts are not finished yet. Some unit tests fail. Not every transformation is implemented in Groovy (CLI) use the Stylesheets directly if needed. 
+The code is in production us at SUB Göttingen but might have still some rough edges. The ODF to XSL-FO part is untested, the Groovy parts are not finished yet. Some unit tests fail. Not every transformation is implemented in Groovy (CLI) use the style sheets directly if needed. 
 
 # Development
 

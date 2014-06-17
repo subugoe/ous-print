@@ -8,6 +8,7 @@
             <item name="Overview" href="./overview.html"/>
             <item name="Slides (German)" href="./slides.xhtml"/>
             <item name="Installation and Usage" href="./installation.html"/>
+            <item name="Development" href="./development.html"/>
         </menu>
         <menu ref="reports"/>
     </body>

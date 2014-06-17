@@ -25,6 +25,7 @@ package de.unigoettingen.sub.be.ous.print.layout
 
 import groovy.util.logging.Log4j
 import javax.xml.transform.Source
+import javax.xml.transform.TransformerException
 import javax.xml.transform.dom.DOMResult
 import javax.xml.transform.dom.DOMSource
 import javax.xml.transform.stream.StreamSource
@@ -72,7 +73,7 @@ class Xml2ParserTest {
             Xml2Parser x2p = new Xml2Parser(xml)
             try {
                 x2p.transform()
-            } catch (javax.xml.transform.TransformerException te) {
+            } catch (TransformerException te) {
                 log.error('Transformation failed!')
                 fail(te.getMessage())
             }

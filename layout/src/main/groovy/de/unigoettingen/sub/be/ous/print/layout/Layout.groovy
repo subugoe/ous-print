@@ -360,7 +360,7 @@ class Layout {
         public static OrientationRequested getOrientationRequested (PageSize ps) {
             if (ps == A4) {
                 return OrientationRequested.PORTRAIT
-            } else if (ps == PageSize.A5) {
+            } else if (ps == A5) {
                 return OrientationRequested.LANDSCAPE
             }
         }

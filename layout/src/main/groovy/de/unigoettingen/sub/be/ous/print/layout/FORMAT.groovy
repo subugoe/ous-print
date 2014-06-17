@@ -43,13 +43,13 @@ enum FORMAT {
      */ 
     public static FORMAT fromString(String format) {
         if (format != null) {
-            for (FORMAT f : FORMAT.values()) {
+            for (FORMAT f : values()) {
                 if (format.equalsIgnoreCase(f.name)) {
                     return f
                 }
             }
         }
-        return FORMAT.UNKNOWN
+        return UNKNOWN
     }
 
     /**

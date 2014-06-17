@@ -5,7 +5,7 @@ Layout Component
 The Layouter can be used as component of [Apache Camel](http://camel.apache.org/). For general Information how to use components refer to the [Camel documentation](http://camel.apache.org/how-do-i-configure-endpoints.html).
 
 # URI parameters
-Note: Formats a described in the form of their definition in [FORMAT.groovy](../layout/groovydoc/de/unigoettingen/sub/be/ous/print/layout/FORMAT.html).
+Note: Formats a described in the form of their definition in [FORMAT.groovy](../layout/groovydoc/de/unigoettingen/sub/be/ous/print/layout/FORMAT.html). If the paths given by the configuration the component will fail to start up.
 
 ## inputFormat
 The format of the input file, defaults to TXT.

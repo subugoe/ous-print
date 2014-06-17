@@ -23,6 +23,7 @@ import groovy.transform.TypeChecked
 
 import java.awt.print.PageFormat
 import java.awt.print.PrinterJob
+
 import javax.print.Doc
 import javax.print.DocFlavor
 import javax.print.DocPrintJob
@@ -34,13 +35,13 @@ import javax.print.attribute.standard.Copies
 import javax.print.attribute.standard.JobName
 
 import org.apache.log4j.Level
+
 import org.apache.pdfbox.rendering.PDFPrinter
 import org.apache.pdfbox.pdmodel.PDDocument
 import org.apache.pdfbox.pdmodel.PDPage
 
 import de.unigoettingen.sub.be.ous.print.layout.Layout
 import de.unigoettingen.sub.be.ous.print.layout.FORMAT
-
 import de.unigoettingen.sub.be.ous.print.util.PrinterUtil
 
 /**
@@ -49,15 +50,25 @@ import de.unigoettingen.sub.be.ous.print.util.PrinterUtil
  */
 @Log4j
 class Main {
+    /** Variuos boolean options */
     static Boolean check, verbose, quiet = false
+    /** The URLs of input and output files */
     static URL inputUrl, outputUrl, template, include, xslfo = null
+    /** The File to save the output to */
     static File outputFile
+    /** The ByteArrayOutputStream to cache the output to */
     static ByteArrayOutputStream output = new ByteArrayOutputStream()
+    /** The InputStream to read the input from */
     static InputStream input = null
+    /** The given input format */
     static FORMAT inFormat = FORMAT.TEXT
+    /** The desired output format */
     static FORMAT outFormat = FORMAT.PDF
+    /** Contains paramters for the style sheets */
     static Map<String, String> params = [:]
+    /** Name of the priter to use */
     static String printer = null
+    /** The page size to use */
     static Layout.PageSize pageSize = Layout.DEFAULT_PAGE_SIZE
     
     /**

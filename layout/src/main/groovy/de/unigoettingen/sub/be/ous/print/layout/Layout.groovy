@@ -66,10 +66,10 @@ class Layout {
     /** The {@link java.net.URL URL} of the location of the XSL-FO file */
     URL xslfo
     
-    /** The {@link java.net.URL URL} of the path to search for files referenced in the XSL-FO file*/
+    /** The {@link java.net.URL URL} of the path to search for files referenced in the XSL-FO file */
     URL includePath
     
-    /** The {@link java.net.URL URL} of the location of tghe parser (can also be an ASC template) */
+    /** The {@link java.net.URL URL} of the location of the parser (can also be an ASC template) */
     URL parser
     
     /** Whether the layouter should work in debug mode */
@@ -78,7 +78,7 @@ class Layout {
     /** Parameters for the XSLT transformation */
     Map<String, String> params = [:]
     
-    /** Thedesired page size of the result */
+    /** The desired page size of the result */
     PageSize pageSize = DEFAULT_PAGE_SIZE
     
     //The converters, thes are defined at class level to get their content for debunging.

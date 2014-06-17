@@ -8,7 +8,7 @@
 
 	<head>
 		<meta charset="UTF-8" />
-		<title>OUS Layout and Print Server - Installation and Usage</title>
+		<title>OUS Layout and Print Server - Development</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="description" content="" />
 		<meta http-equiv="content-language" content="en" />
@@ -34,7 +34,7 @@
 <link rel="icon" href="favicon.ico"/>
 	</head>
 
-	<body class="page-installation project-ous-print" data-spy="scroll" data-offset="60" data-target="#toc-scroll-target">
+	<body class="page-development project-ous-print" data-spy="scroll" data-offset="60" data-target="#toc-scroll-target">
 
 		<div class="navbar navbar-fixed-top">
 			<div class="navbar-inner">
@@ -51,8 +51,8 @@
 								<ul class="dropdown-menu">
 									<li ><a href="overview.html" title="Overview">Overview</a></li>
 									<li ><a href="slides.xhtml" title="Slides (German)">Slides (German)</a></li>
-									<li class="active"><a href="" title="Installation and Usage">Installation and Usage</a></li>
-									<li ><a href="development.html" title="Development">Development</a></li>
+									<li ><a href="installation.html" title="Installation and Usage">Installation and Usage</a></li>
+									<li class="active"><a href="" title="Development">Development</a></li>
 								</ul>
 							</li>
 							<li class="dropdown">
@@ -99,36 +99,65 @@
 		<div class="span12">
 			<div class="body-content">
 <div class="page-header">
- <h1>Installation and Usage</h1>
+ <h1>Development</h1>
 </div> 
-<h1>Checkout from Git repository</h1> 
-<p>Just run the following command to get a copy of the source code:</p> 
-<blockquote> 
- <p>git clone <a class="externalLink" href="https://github.com/subugoe/ous-print.git">https://github.com/subugoe/ous-print.git</a></p> 
-</blockquote> 
-<h1>Compile &amp; package</h1> 
-<p>Not all unit tests are passing yet, therefore you need the following to build all modules:</p> 
-<blockquote> 
- <p>mvn -Dmaven.test.skip=true package</p> 
-</blockquote> 
-<p>The resulting artifacts will be created in the subfolder target in each of the modules. Refer to the module documentaion to learn how to use them.</p> 
-<p><b>You need a internet connection to build this software since dependencies will be downloaded. Without internet connection the build will fail!</b></p> 
-<h1>Installation</h1> 
-<p>The compiled artifacts can be copied to your server, into a empty directory. Make sure you copy the depending files, like the configuration of routes, stylesheets and images as well. The best way is to place the CLI interface and the SUB PrintServer next to each other, this way you can test the settings of the server manually.</p> 
+<h1>Introduction</h1> 
+<p>This page describes the options for developers to use or extend the frame work. The framework is written in XSLT for the parsing parts and in Groovy for the required logic to handle the process itself. Make yourself familiar with both languages if you need to build your own logic. If you just want to create your own stunning layouts XSLT / XSL-FO will be enought. If you want to contribute, learn the usage of Git and GitHub. How to check out the sources from the repository and to compile is described in the <a href="./installation.html">installation document</a>. Groovy sources have a documentation in GroovyDoc format attached to them, check out the generated site for a human readable form. To understand how the sources work have a look at the unit tests, see the <a href="./layout-test/"><tt>layout-test</tt> module</a> for the files of the unit tests.</p> 
+<h1>Needed tools</h1> 
+<ul> 
+ <li>To run the software you need <a class="externalLink" href="http://java.com/en/">Java</a> (Version 1.6 or higher) .</li> 
+ <li>To check out the sources you will need <a class="externalLink" href="http://git-scm.com/">Git</a>.</li> 
+ <li>To build the binaries you will need <a class="externalLink" href="http://maven.apache.org/">Maven</a> (Version 3 and up prefered).</li> 
+ <li>To play around with XSLT and XSL-FO you need a decent XML editor, we recommend <a class="externalLink" href="http://oxygenxml.com/">OxygenXML</a>.</li> 
+ <li>To play with the ODF feature you need (<a class="externalLink" href="https://www.openoffice.org/">Open</a> / <a class="externalLink" href="http://www.libreoffice.org/">Libre Office</a>)</li> 
+</ul> 
+<h1>Maven Modules</h1> 
+<p>See the <a href="./overview.html">overview document</a> for a short description of the modules. </p> 
+<h1>Dependencies</h1> 
+<p>This is just a high level overview about the dependencies, have a look at the Maven dependencies (either in the project site or the project descriptors) for each sub module for a complete list including indirect dependencies and the used versions.</p> 
 <div class="section"> 
- <h2 id="Example_directory_layout">Example directory layout</h2> 
- <p>Bullet points represent files, points with subitems are directories.</p> 
+ <h2 id="Groovy">Groovy</h2> 
+ <p><a class="externalLink" href="http://groovy.codehaus.org/">Groovy</a> is a scripting language on top of the JVM, its used for the code to glue the used components together.</p> 
+</div> 
+<div class="section"> 
+ <h2 id="Apache_FOP">Apache FOP</h2> 
+ <p><a class="externalLink" href="http://xmlgraphics.apache.org/fop/">Apache FOP</a> is a XSL-FO processor which is used to transform the XSL-FO files int PDF or Postscript.</p> 
+</div> 
+<div class="section"> 
+ <h2 id="Apache_Camel">Apache Camel</h2> 
+ <p><a class="externalLink" href="http://camel.apache.org/">Apache Camel</a> is routing framework which is used to implement the SUB PrintServer.</p> 
+</div> 
+<div class="section"> 
+ <h2 id="Log4J_and_SLF4J">Log4J and SLF4J</h2> 
+ <p><a class="externalLink" href="http://logging.apache.org/log4j/1.2/">Log4J</a> and <a class="externalLink" href="http://www.slf4j.org/">SLF4J</a> are logging frameworks. Log4J is used by the this framework, some dependencies use SLF4J. The outputs of SLF4J are redirected to Log4J.</p> 
+</div> 
+<div class="section"> 
+ <h2 id="Apache_Commons">Apache Commons</h2> 
+ <p>Apache Commons are a set of utility components. The following components are used directly in this project:</p> 
  <ul> 
-  <li>layout-cli-1.0-SNAPSHOT.jar</li> 
-  <li>print-server-1.0-SNAPSHOT.jar</li> 
-  <li>routes.xml</li> 
-  <li>lib</li> 
-  <li>lib.xsl</li> 
-  <li>img</li> 
-  <li>GAU-SUBlogo-einzeilig.svg</li> 
-  <li>xslfo</li> 
-  <li>layout2fo.xsl</li> 
+  <li><a class="externalLink" href="http://commons.apache.org/cli/">commons-cli</a> is a library to parse command line arguments.</li> 
+  <li><a class="externalLink" href="http://commons.apache.org/vfs/">commons-vfs</a> is a library to handle virtual file systems, used for access to zipped files.</li> 
  </ul> 
+</div> 
+<div class="section"> 
+ <h2 id="Apache_Tika">Apache Tika</h2> 
+ <p><a class="externalLink" href="http://tika.apache.org/">Apache Tika</a> is a toolkit to detect and analyze text contents and media types. Used to detect input types.</p> 
+</div> 
+<div class="section"> 
+ <h2 id="Saxon">Saxon</h2> 
+ <p><a class="externalLink" href="http://saxon.sourceforge.net/">Saxon</a> is a XLST 2.0 capable XLST processor. Its used for the XSLT transformations.</p> 
+ <h1>Adding your own features</h1> 
+ <p>If you want to add your own features, use the GitHub workflow: Clone the repository and sen a pull request if your feature is complete. Make sure that your feature is documented correctly:</p> 
+ <ul> 
+  <li>Groovy code should have GroovyDoc comments.</li> 
+  <li>Groovy code should have unit tests.</li> 
+  <li>Style sheets should have documentation on each function.</li> 
+  <li>Describe the requirement which made your feature necessary.</li> 
+  <li>Provide a documentation how to use your feature.</li> 
+  <li><b>All</b> provided files need to be under a free license.</li> 
+ </ul> 
+ <h1>Error reporting</h1> 
+ <p>Issues and errors should be reported to the <a class="externalLink" href="https://github.com/subugoe/ous-print/issues">GitHub issues page of this project</a>.</p> 
 </div>
 			</div>
 		</div>
@@ -151,11 +180,11 @@
 						<li >
 							<a href="slides.xhtml" title="Slides (German)">Slides (German)</a>
 						</li>
-						<li class="active">
-							<a href="#" title="Installation and Usage">Installation and Usage</a>
-						</li>
 						<li >
-							<a href="development.html" title="Development">Development</a>
+							<a href="installation.html" title="Installation and Usage">Installation and Usage</a>
+						</li>
+						<li class="active">
+							<a href="#" title="Development">Development</a>
 						</li>
 						<li class="nav-header">Project Documentation</li>
 						<li >

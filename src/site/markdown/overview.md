@@ -48,6 +48,6 @@ There are also some slides (in German) that reflect the current state of this fr
 
 # Example
 
-![SUB Göttingen Selbstabholbereich](/img/selbsabholbereich.jpg)
+![SUB Göttingen Selbstabholbereich](./img/selbsabholbereich.jpg)
 
 This example shows a new generated slip on the left and a old, handwritten on the right.

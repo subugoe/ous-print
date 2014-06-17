@@ -28,7 +28,7 @@ import groovy.transform.CompileStatic
 @CompileStatic
 @TypeChecked
 enum FORMAT {
-    ASC('ASC'), ASCXML('ASCXML'), XML('XML'), ODF('ODF'), PDF('PDF'), PS('PS'), XSLFO('XSLFO'), XSL('XSL'), TEXT('TXT'), UNKNOWN('UNKNOWN')
+    ASC('ASC'), ASCXML('ASCXML'), XML('XML'),/* ODF('ODF'),*/ PDF('PDF'), PS('PS'), XSLFO('XSLFO'), XSL('XSL'), TEXT('TXT'), UNKNOWN('UNKNOWN')
     
     /** The name of this FORMAT */
     String name

@@ -351,6 +351,8 @@ class Layout {
                 return MediaSizeName.ISO_A4
             } else if (ps == A5) {
                 return MediaSizeName.ISO_A5
+            } else {
+                reurn null
             }
         }
         
@@ -363,6 +365,8 @@ class Layout {
                 return OrientationRequested.PORTRAIT
             } else if (ps == A5) {
                 return OrientationRequested.LANDSCAPE
+            } else {
+                return null
             }
         }
         

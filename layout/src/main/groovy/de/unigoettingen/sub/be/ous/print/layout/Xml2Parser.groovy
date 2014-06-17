@@ -223,6 +223,8 @@ class Xml2Parser extends AbstractTransformer {
         String getXML() {
             if (result != null) {
                 return XmlUtil.serialize(result.documentElement)
+            } else {
+                return null
             }
         }
         

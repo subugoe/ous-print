@@ -184,6 +184,8 @@ abstract class AbstractTransformer {
     String getXML() {
         if (result != null) {
             return XmlUtil.serialize(result.documentElement)
+        } else {
+            return null
         }
     }
     

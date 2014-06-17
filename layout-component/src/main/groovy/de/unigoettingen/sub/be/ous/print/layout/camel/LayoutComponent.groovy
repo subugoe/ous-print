@@ -104,7 +104,7 @@ class LayoutComponent extends UriEndpointComponent {
      */
     @Override
     protected Endpoint createEndpoint(String uri, final String remaining, Map<String, Object> parameters) throws Exception {
-        String resourceUri = remaining;
+        //String resourceUri = remaining;
         if (parameters.get("inputFormat") != null) {
             inputFormat = FORMAT.fromString((String) parameters.get("inputFormat"))
             log.trace('Input Format set to ' + inputFormat.toString())

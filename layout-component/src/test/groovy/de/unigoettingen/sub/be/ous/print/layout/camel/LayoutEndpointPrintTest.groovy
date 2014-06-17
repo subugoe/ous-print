@@ -68,9 +68,7 @@ class LayoutEndpointPrintTest extends CamelTestSupport  {
     @TypeChecked
     public void setup() {
         setupJavaPrint()
-        //TODO: Remove
-        
-        PrintService[] printServices = PrintServiceLookup.lookupPrintServices(null, null)
+
         for (printer in PrinterUtil.getPrinterNames()) {
             log.info("Available Printer: " + printer) 
         }

@@ -26,7 +26,7 @@ import javax.print.PrintServiceLookup
 import javax.print.attribute.standard.Media
 
 /**
- * Helper class for printers, static methods to find priners by name and getting
+ * Helper class for printers, static methods to find printers by name and getting
  * information about surported paper formats
  * @author cmahnke
  */
@@ -53,7 +53,7 @@ class PrinterUtil {
     }
 
     /**
-     * Gets a list of supported papersizes for a given PrintService
+     * Gets a list of supported paper sizes for a given PrintService
      * @param printer the {@link javax.print.PrintService PrintService} to query
      * @returns a list of formats
      */

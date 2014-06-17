@@ -39,9 +39,9 @@ import javax.xml.transform.stream.StreamSource
 //@TypeChecked
 @CompileStatic
 class XSLTIncludeClasspathURIResolver implements URIResolver {
-    /** The caller Class (used to get the ClassLaoder) */
+    /** The caller Class (used to get the ClassLoader) */
     protected Class<?> clazz
-    /** The URL of the styleshhet to resolve against */
+    /** The URL of the style sheet to resolve against */
     protected URL stylesheet = null
     
     

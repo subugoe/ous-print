@@ -27,7 +27,7 @@ import javax.xml.transform.TransformerException
 import javax.xml.transform.URIResolver
 
 /**
- * A stacking resolver, wich acts as a meta resolver for a list of given resolvers.
+ * A stacking resolver, which acts as a meta resolver for a list of given resolvers.
  * Note, that the first resolver which doesn't return null is used. exceptions
  * are catched and silently ignored 
  * @author cmahnke

@@ -185,7 +185,7 @@ class PrintServer extends Main {
         FileSystemManager fsManager = VFS.getManager()
         FileObject listenConfig = fsManager.resolveFile(config)
  
-
+        //TODO: Finish this, reloading of routes doesn't work yet
         DefaultFileMonitor fm = new DefaultFileMonitor(new ConfigFileListener(new DefaultCamelContext()))
         fm.setRecursive(false)
         fm.addFile(listenConfig)

@@ -12,6 +12,8 @@ Not all unit tests are passing yet, therefore you need the following to build al
 
 The resulting artifacts will be created in the subfolder 'target' in each of the modules. Refer to the module documentaion to learn how to use them.
 
+**You need a internet connection to build this software since dependencies will be downloaded. Without internet connection the build will fail!**
+
 # Installation
 The compiled artifacts can be copied to your server, into a empty directory. Make sure you copy the depending files, like the configuration of routes, stylesheets and images as well. The best way is to place the CLI interface and the SUB PrintServer next to each other, this way you can test the settings of the server manually.
 

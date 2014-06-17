@@ -66,8 +66,8 @@ class StackingResolver implements URIResolver {
         for (resolver in resolvers) {
             try {
                 s = resolver.resolve(href, base)
-            } catch (TransformerException TE) {
-                log.debug('Resolver ' + resolver.getClass().toString() + ' returned no result')
+            } catch (TransformerException te) {
+                log.debug('Resolver ' + resolver.getClass().toString() + ' returned no result', te)
             } finally {
                 if (s != null) {
                     return s

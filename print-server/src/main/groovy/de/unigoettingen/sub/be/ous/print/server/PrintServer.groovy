@@ -169,7 +169,7 @@ class PrintServer extends Main {
             RouteBuilder rb
             try {
                 rb = new PrintServerRouteBuilder(config)
-            } catch (UnmarshalException) {
+            } catch (UnmarshalException ue) {
                 println 'Couln\'t parse route definitions, probably a XML problem, have you encodeded the \'&\' in the URIs as \'&amp;\'?'
                 System.exit(1)
             } catch (SAXParseException se) {

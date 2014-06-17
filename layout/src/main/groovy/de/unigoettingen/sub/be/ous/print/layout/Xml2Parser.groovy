@@ -150,7 +150,7 @@ class Xml2Parser extends AbstractTransformer {
         protected Document result
         
         /**
-         * Construts a empty LayoutPArser 
+         * Construts a empty LayoutParser
          */
         protected LayoutParser () {
         

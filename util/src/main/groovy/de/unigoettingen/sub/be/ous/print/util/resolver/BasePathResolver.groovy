@@ -66,7 +66,7 @@ class BasePathResolver implements URIResolver {
         try {
             input = u.openStream()
         } catch (IOException ioe) {
-            log.error('URL ' + u.toString() + ' couldn\'t be opened!')
+            log.error('URL ' + u.toString() + ' couldn\'t be opened!', ioe)
             failed = true
         }
         if (!failed) {

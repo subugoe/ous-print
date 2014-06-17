@@ -25,6 +25,8 @@ package de.unigoettingen.sub.be.ous.print.layout
 import groovy.util.logging.Log4j
 import groovy.transform.TypeChecked
 
+import javax.xml.transform.TransformerException
+
 import static org.junit.Assert.*
 import de.unigoettingen.sub.be.ous.print.layout.Asc2Xml
 import org.junit.Ignore
@@ -47,7 +49,7 @@ class Asc2XmlTest {
             Asc2Xml a2x = new Asc2Xml(asc)
             try {
                 a2x.transform()
-            } catch (javax.xml.transform.TransformerException te) {
+            } catch (TransformerException te) {
                 log.error('Transformation failed!')
                 fail(te.getMessage())
             }

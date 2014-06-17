@@ -67,7 +67,7 @@ class ZipFileResolver implements URIResolver {
             FileObject result = zipFileObject.resolveFile(href)
             return new StreamSource(result.getContent().getInputStream())
         } catch (FileSystemException fse) {
-            throw new TransformerException('File ' + href + ' not found in archive ' + zipFile.toString())
+            throw new TransformerException('File ' + href + ' not found in archive ' + zipFile.toString(), fse)
         }
     }
 }

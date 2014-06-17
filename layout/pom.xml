@@ -27,7 +27,6 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>de.unigoettingen.sub</groupId>
     <artifactId>layout</artifactId>
     <name>Layout Engine</name>
     

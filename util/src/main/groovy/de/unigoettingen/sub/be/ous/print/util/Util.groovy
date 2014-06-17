@@ -33,16 +33,10 @@ import javax.xml.transform.stream.StreamSource
 import javax.xml.transform.OutputKeys
 import javax.xml.transform.Source
 import javax.xml.transform.TransformerFactory
-import javax.xml.xpath.XPathExpression
-import javax.xml.xpath.XPath
-import javax.xml.xpath.XPathConstants
-import javax.xml.xpath.XPathFactory
-import javax.xml.namespace.NamespaceContext
+
 import org.w3c.dom.Document
 import org.w3c.dom.Element
 import org.w3c.dom.Node
-import org.w3c.dom.NodeList
-import org.xml.sax.InputSource
 
 /**
  * This class contains some static utility methods for DOM handling (like read and write) and for validation.
@@ -153,7 +147,7 @@ class Util {
      */
     @TypeChecked
     static Document getDocumentFromNode (Node node) {
-        Document docTarget = Util.getDocumentBuilder().newDocument()
+        Document docTarget = getDocumentBuilder().newDocument()
         docTarget.appendChild(docTarget.adoptNode(node.cloneNode(true)));
         return docTarget
     }

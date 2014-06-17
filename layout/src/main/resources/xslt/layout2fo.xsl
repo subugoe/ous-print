@@ -87,9 +87,6 @@
         <xsl:variable name="adress-extra" select="//entry[@entity = '012' and @attribute = '020']/@value" as="xs:string"/>
         <xsl:variable name="notabene" select="//entry[@entity = '001' and @attribute = '016']/@value"/>
         <xsl:variable name="volume" select="//entry[@entity = '004' and @attribute = '010']/@value" as="xs:string"/>
-        <!-- Measurements -->
-        <!-- Set value for bottom references for diferent paper formats -->
-        <xsl:variable name="bottom" select="print:scaleA5toA4('0mm')" as="xs:string"/>
 
         <!-- Other fields -->
         <xsl:variable name="relocation" select="//entry[@entity = '004' and @attribute = '003']/@value" as="xs:string"/>

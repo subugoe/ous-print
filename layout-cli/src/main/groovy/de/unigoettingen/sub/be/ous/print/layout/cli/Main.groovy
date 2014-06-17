@@ -34,6 +34,8 @@ import javax.print.attribute.PrintRequestAttributeSet
 import javax.print.attribute.standard.Copies
 import javax.print.attribute.standard.JobName
 
+import javax.xml.transform.TransformerConfigurationException
+
 import org.apache.log4j.Level
 
 import org.apache.pdfbox.rendering.PDFPrinter
@@ -164,16 +166,16 @@ class Main {
         }
         
         if (opt.prt) {
-            this.printer = opt.prt
+            printer = opt.prt
             if (outFormat != FORMAT.PDF) {
                 println 'Output format needs to be PDF for printing'
                 System.exit(10)
             }
-            if (!PrinterUtil.getPrinterNames().contains(this.printer)) {
-                println 'Printer ' + this.printer + ' not known to system'
+            if (!PrinterUtil.getPrinterNames().contains(printer)) {
+                println 'Printer ' + printer + ' not known to system'
                 System.exit(11)
             }
-            log.trace('Printer set to: ' + this.printer)
+            log.trace('Printer set to: ' + printer)
         }
         
         //No output method specified
@@ -281,7 +283,7 @@ class Main {
         }
         try {
             l.layout()
-        } catch (javax.xml.transform.TransformerConfigurationException tce) {
+        } catch (TransformerConfigurationException tce) {
             log.error('Error while transforming', tce)
             println 'Couldn\'t transform file' 
             System.exit(30)

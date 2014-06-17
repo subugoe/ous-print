@@ -18,7 +18,11 @@
 
 package de.unigoettingen.sub.be.ous.print.layout
 
+import de.unigoettingen.sub.be.ous.print.util.Util
+
 import groovy.util.logging.Log4j
+
+import org.w3c.dom.Document
 
 /**
  * This class extends Layout2Fo since it's XSL-FO capabilities can be sued for 
@@ -35,7 +39,9 @@ class Odf2Fo extends Layout2Fo {
     /** The URL of the stylesheet to used */
     protected static URL stylesheet = this.getClass().getResource(xslt)
     
-    
+    /** The URL of the ODF to generate the XSL-FO from */
+    protected URL odf
+       
     /**
      * Construts a empty Odf2Fo and sets 
      * the parameters of the transformation.
@@ -46,13 +52,27 @@ class Odf2Fo extends Layout2Fo {
     }
     
     /**
-     * Construts a Odf2Fo, sets and the parameters of the transformation and sets the given input.
+     * Construts a Odf2Fo and sets the given input.
      * @param input the {@link java.net.URL URL} of the document to be transformed
-     * @see #Xml2Asc()
+     * @param odf the {@link java.net.URL URL} for the ODF file which will be used to create a transformator
+     * @see #Layout2Fo(URL, URL)
      */
-    Odf2Fo (URL input) {
+    Odf2Fo (URL input, URL odf) {
+        this(Util.loadDocument(input), odf)
+    }
+    
+    /**
+     * Construts a Odf2Fo and sets the given input.
+     * @param input the {@link org.w3c.dom.Document Document} of the document to be transformed
+     * @param odf the {@link java.net.URL URL} for the ODF file which will be used to create a transformator
+     * @see #Layout2Fo(Document, URL)
+     */
+    Odf2Fo (Document input, URL odf) {
         this()
-        this.input = input
+        //Input as Document
+        this.inDoc = input
+        //Transformation to XSL-FO
+        this.stylesheet = stylesheet
     }
     
     /**

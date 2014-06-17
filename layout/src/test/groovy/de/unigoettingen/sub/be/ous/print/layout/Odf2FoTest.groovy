@@ -13,6 +13,8 @@ import groovy.util.logging.Log4j
 import org.junit.BeforeClass
 import org.junit.Test
 
+import static org.junit.Assert.*
+
 /**
  * Unit tests for converting ODf into XSL-FO
  * @author cmahnke
@@ -20,7 +22,7 @@ import org.junit.Test
 @Log4j
 class Odf2FoTest {
     static URL LAYOUT = Layout2FoTest.getClass().getResource("/layouts-xml/ous40_layout_001_du.asc.xml")
-    static URL ODF = Layout2FoTest.getClass().getResource("/odf/Bestellschein%20Template.odf")
+    static URL ODF = Layout2FoTest.getClass().getResource("/odf/Bestellschein%20Template.odt")
     static LayoutParser LP
     static File SLIPS = new File(Xml2ParserTest.getClass().getResource('/hotfolder/in/').toURI())
     static List<URL> SLIP_FILES = new ArrayList<URL>()
@@ -32,9 +34,9 @@ class Odf2FoTest {
         Xml2Parser x2p = new Xml2Parser(LAYOUT)
         x2p.transform()
         LP = x2p.getParser()
-        assertNotNull(ODF)
+        assertNotNull('ODF file not found', ODF)
         // Slip files
-        assertNotNull(SLIPS)
+        assertNotNull('Test data not found', SLIPS)
         def p = ~/.*\.print/
         SLIPS.eachFileMatch(p) {
             f ->

@@ -78,7 +78,15 @@ class LayoutTest {
             log.trace('Writing PDF file to ' + pdfOut)
             FileOutputStream fos = new FileOutputStream(new File(pdfOut))
             Layout l = new Layout(FORMAT.TEXT, slip.openStream(), FORMAT.PDF, fos, XSLFO, null, PARSER_XML)
-            l.layout()
+            try {
+                l.layout()
+            } catch (Exception e) {
+                log.error('Transformation failed', e)
+                log.warn('Result:\n----------------START OF RESULT(' + this.getClass().getName() + ')\n')
+                log.warn(Util.docAsString(l.l2f.result))
+                log.warn('----------------END OF RESULT(' + this.getClass().getName() + ')\n')
+                fail()
+            }
             l = null
         }
     }
@@ -103,7 +111,16 @@ class LayoutTest {
             log.trace('Writing PDF file to ' + pdfOut)
             FileOutputStream fos = new FileOutputStream(new File(pdfOut))
             Layout l = new Layout(FORMAT.TEXT, slip.openStream(), FORMAT.PDF, fos, XSLFO, null, PARSER_TXT)
-            l.layout()
+            //Use try / catch block to get the offending content
+            try {
+                l.layout()
+            } catch (Exception e) {
+                log.error('Transformation failed', e)
+                log.warn('Result:\n----------------START OF RESULT(' + this.getClass().getName() + ')\n')
+                log.warn(Util.docAsString(l.l2f.result))
+                log.warn('----------------END OF RESULT(' + this.getClass().getName() + ')\n')
+                fail()
+            }
             l = null
         }
     }
@@ -116,12 +133,16 @@ class LayoutTest {
             FileOutputStream fos = new FileOutputStream(new File(pdfOut))
             Layout l = new Layout(FORMAT.TEXT, slip.openStream(), FORMAT.PDF, fos, XSLFO, null, PARSER_TXT)
             l.setPageSize(Layout.PageSize.A5)
-            l.layout()
-            /* Use thi fragment to get the content of the XSL-FO
-            log.trace('Result:\n----------------START OF RESULT(' + this.getClass().getName() + ')\n')
-            log.trace(Util.docAsString(l.l2f.result))
-            log.trace('----------------END OF RESULT(' + this.getClass().getName() + ')\n')
-            */
+            //Use try / catch block to get the offending content
+            try {
+                l.layout()
+            } catch (Exception e) {
+                log.error('Transformation failed', e)
+                log.warn('Result:\n----------------START OF RESULT(' + this.getClass().getName() + ')\n')
+                log.warn(Util.docAsString(l.l2f.result))
+                log.warn('----------------END OF RESULT(' + this.getClass().getName() + ')\n')
+                fail()
+            }
             l = null
         }
     }

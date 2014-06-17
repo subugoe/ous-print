@@ -96,7 +96,16 @@ class Layout2FoTest {
             def pdfOut = slip.toString().substring(5) + '.pdf'
             log.trace('Writing PDF file to ' + pdfOut)
             FileOutputStream fos = new FileOutputStream(new File(pdfOut))
-            l2f.format(fos)
+            //Use try / catch block to get the offending content
+            try {
+                l2f.format(fos)
+            } catch (Exception e) {
+                log.error('Transformation failed', e)
+                log.warn('Result:\n----------------START OF RESULT(' + this.getClass().getName() + ')\n')
+                log.warn(Util.docAsString(l2f.result))
+                log.warn('----------------END OF RESULT(' + this.getClass().getName() + ')\n')
+                fail()
+            }
         }
         
     }

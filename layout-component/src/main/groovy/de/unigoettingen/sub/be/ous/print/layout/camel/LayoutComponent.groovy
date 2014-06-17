@@ -33,7 +33,7 @@ import groovy.util.logging.Log4j
 
 /**
  * Apache Camel Component for the layout engine. Properties will be given as 
- * strings and are also stored in their requred types. these will be feed into 
+ * strings and are also stored in their required types. these will be feed into
  * the Layout object
  * @see org.apache.camel.impl.UriEndpointComponent
  * @author cmahnke

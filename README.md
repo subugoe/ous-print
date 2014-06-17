@@ -23,7 +23,7 @@ This framework need just [Java](http://java.com/en/) (Version 1.6 or higher) as 
 * **Artifact**: A piece of self-contained software.
 * **Maven**: A Java build tool like Ant or even Make, see [1].
 * **Maven site**: A generated documentation which contains Groovy docs, reports and written documentation, need to be generated since it's not available in HTML format.
-* **XSL-FO**: Extensible Stylesheet Language - Formating Objects, a XML representation of print layouts, see [2].
+* **XSL-FO**: Extensible Stylesheet Language - Formatting Objects, a XML representation of print layouts, see [2].
 
 ## Installation and Usage.
 This package provides two main artifacts that can be used:

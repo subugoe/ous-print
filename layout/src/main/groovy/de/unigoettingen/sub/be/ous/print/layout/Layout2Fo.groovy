@@ -120,10 +120,21 @@ class Layout2Fo extends AbstractTransformer {
      */
     Layout2Fo (URL input, URL stylesheet) {
         this()
-        //XML Representation of filed layout
+        //XML Representation of filled layout
         this.input = input
         //Transformation to XSL-FO
         this.stylesheet = stylesheet
+    }
+    
+    /**
+     * Construts a Layout2Fo, using the preconfigured transformation and sets the given input.
+     * @param input the {@link java.net.URL URL} of the document to be transformed
+     * @see #Layout2Fo()
+     */
+    Layout2Fo (URL input) {
+        this()
+        //XML Representation of filled layout
+        this.input = input
     }
     
     /**

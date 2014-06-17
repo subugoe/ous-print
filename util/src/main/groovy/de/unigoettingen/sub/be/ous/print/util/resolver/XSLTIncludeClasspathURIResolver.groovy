@@ -62,7 +62,7 @@ class XSLTIncludeClasspathURIResolver implements URIResolver {
      * to get resources in Jar files and on class path
      * @param Class of the caller, to get the right class loader
      * @author cmahnke
-     * @see http://www.publicstaticfinal.de/2011/01/26/fop-embedding-fonts-from-classpath/
+     * @see {@link http://www.publicstaticfinal.de/2011/01/26/fop-embedding-fonts-from-classpath/}
      */
     XSLTIncludeClasspathURIResolver(Class<?> clazz) {
         this.clazz = clazz

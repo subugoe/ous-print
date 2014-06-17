@@ -123,7 +123,7 @@ class Util {
     }
     
     /**
-     * Transforms a {@Link org.w3c.dom.Node Node} into it's own {@link org.w3c.dom.Elementt element}
+     * Transforms a {@Link org.w3c.dom.Node Node} into it's own {@link org.w3c.dom.Element element}
      * @param node the {@Link org.w3c.dom.Node Node} to be transformed
      * @return a {@link org.w3c.dom.Element element}
      */

@@ -2,6 +2,7 @@
 <project name="Layout Camel Component">
     <body>
         <menu name="Layout Camel Component">
+            <item name="Documentation" href="./component.html"/>
             <item name="GroovyDoc" href="./groovydoc/index.html"/>
         </menu>
         <menu ref="reports"/>

@@ -51,3 +51,7 @@ If you want to add your own features, use the GitHub workflow: Clone the reposit
 * Describe the requirement which made your feature necessary.
 * Provide a documentation how to use your feature.
 * **All** provided files need to be under a free license.
+
+# Error reporting
+Issues and errors should be reported to the [GitHub issues page of this project](https://github.com/subugoe/ous-print/issues).
+

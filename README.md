@@ -71,7 +71,10 @@ The following Maven Modules make up this framework:
 The result of the layout process is determinate by XSL-FO files. Either use your own, change the provided one, or generate one using a ODF template. A description how to use ODF to create a XSL-FO file can be found in the Maven site.
 
 ## Contributing
-Contributions are welcome, but since this code is in a working state, no support can be provided. 
+Contributions are welcome, but since this code is in a working state, no support can be provided.
+
+### Error reporting
+Issues and errors should be reported to the [GitHub issues page of this project](https://github.com/subugoe/ous-print/issues).
 
 [1]: http://maven.apache.org/     "Apache Maven"
 [2]: http://www.w3.org/Style/XSL/ "W3 XSL Family"

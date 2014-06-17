@@ -51,7 +51,7 @@ There are also some [slides (in German)](http://subugoe.github.io/ous-print/slid
 >mvn site
 
 ## Current Status
-The code is in production us at SUB Göttingen but might have still some rough edges. The ODF to XSL-FO part is untested, the Groovy parts are not finished yet. Some unit tests fail. Not every transformation is implemented in Groovy (CLI) use the style sheets directly if needed. 
+The code is in production use at SUB Göttingen but might have still some rough edges. The ODF to XSL-FO part is untested, the Groovy parts are not finished yet. Some unit tests may fail. Not every possible transformation is implemented in Groovy (CLI), use the style sheets directly if needed. 
 
 # Development
 

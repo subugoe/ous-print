@@ -11,6 +11,7 @@ import groovy.transform.TypeChecked
 
 import groovy.util.logging.Log4j
 import org.junit.BeforeClass
+import org.junit.Ignore
 import org.junit.Test
 
 import static org.junit.Assert.*
@@ -22,7 +23,7 @@ import static org.junit.Assert.*
 @Log4j
 class Odf2FoTest {
     static URL LAYOUT = Layout2FoTest.getClass().getResource("/layouts-xml/ous40_layout_001_du.asc.xml")
-    static URL ODF = Layout2FoTest.getClass().getResource("/odf/Bestellschein%20Template.odt")
+    static URL ODF = Layout2FoTest.getClass().getResource("/odf/Bestellschein-Template.odt")
     static LayoutParser LP
     static File SLIPS = new File(Xml2ParserTest.getClass().getResource('/hotfolder/in/').toURI())
     static List<URL> SLIP_FILES = new ArrayList<URL>()
@@ -46,6 +47,7 @@ class Odf2FoTest {
     }
     
     @Test
+    @Ignore
     @TypeChecked
     void testFormatFo() {
         for (slip in SLIP_FILES) {

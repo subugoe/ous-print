@@ -112,7 +112,11 @@ abstract class AbstractTransformer {
             transformer = factory.newTransformer(xslt)
         } catch (TransformerConfigurationException tce) {
             log.error('Cought TransformerConfigurationException: ', tce)
-            log.debug('Offending stylesheet:\n' + Util.sourceToString(xslt))
+            if (xslt == null) {
+                log.error('Style sheet is null!')
+            } else {
+                log.debug('Offending stylesheet:\n' + Util.sourceToString(xslt))
+            }
             throw tce
         }
         def listener = new LogErrorListener()

@@ -2,7 +2,7 @@ Rendering process
 =================
 
 # Introduction
-This document describes how Layouts are rendered. And how to influence the process. The redering is done by [Apache FOP](http://xmlgraphics.apache.org/fop/). This is a Java library to convert XSL-FO into PDF, Postscript and various other formats. Since it is only with the usual Postscript and PDF fonts(Standard 14 fonts), it fall back to fonts known to the system if another font is specified. Therefore the redering can be done with bundled fonts.
+This document describes how Layouts are rendered. And how to influence the process. The rendering is done by [Apache FOP](http://xmlgraphics.apache.org/fop/). This is a Java library to convert XSL-FO into PDF, Postscript and various other formats. Since it is only with the usual Postscript and PDF fonts(Standard 14 fonts), it fall back to fonts known to the system if another font is specified. Therefore the rendering can be done with bundled fonts.
 
 # XSL-FO 
 XSL-FO is a XML based style sheet language for XML document formatting. It has a lot of features to describe the desired layout of a page object (either printed or in Formats like PDF or Postscript). Have a look at the [Wikipedia](http://en.wikipedia.org/wiki/XSL_Formatting_Objects) for a broader description. There are several tutorials on the web which can help you learn XSL-FO. Also have a look at the bundled style sheet (`./src/main/resources/xslt/layout2fo.xsl`).

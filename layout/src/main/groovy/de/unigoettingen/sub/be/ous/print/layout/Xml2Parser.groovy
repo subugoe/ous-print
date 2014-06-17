@@ -124,7 +124,7 @@ class Xml2Parser extends AbstractTransformer {
     }
     
     /**
-     * Returns a Java Object, representing the parser ftom a given styleheet
+     * Returns a Java Object, representing the parser from a given style sheet
      * Use this if you are working with precompiled parsers
      * @return LayoutParser the parser for the given stylesheet
      */

@@ -1,7 +1,7 @@
 Using Open / Libre Office to create XSL-FO
 ==========================================
 
-# Intoduction
+# Introduction
 This document describes highly experimental code, do not use it in production, use the generated FO instead and customize it.
 
 # Features

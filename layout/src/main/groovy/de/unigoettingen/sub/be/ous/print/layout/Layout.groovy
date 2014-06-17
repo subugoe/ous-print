@@ -206,6 +206,7 @@ class Layout {
         try {
             f = new File(url.toURI())
         } catch(URISyntaxException e) {
+            log.trace('Cought URISyntaxException', e)
             f = new File(url.getPath())
         }
         return f

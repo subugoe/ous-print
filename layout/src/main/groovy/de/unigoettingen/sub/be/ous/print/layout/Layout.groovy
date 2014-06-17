@@ -235,7 +235,7 @@ class Layout {
      * type of the file and can create LayoutParser objects for TXT (ASC) and XML
      * reprentations
      * 
-     * @param {@link java.net.URL URL} of the layout representation
+     * @param parser, the {@link java.net.URL URL} of the layout representation
      * @returns a LayoutParser object
      */
     @TypeChecked

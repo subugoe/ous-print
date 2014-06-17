@@ -12,10 +12,10 @@ Since the configuration is done in XML the configuration file start with an XML 
 
 Without these the server can't parse the configuration and will fail at startup. Make sure to close the the root element at the end of the configuration file
 
->`<routes>`
+>`</routes>`
 
 # Routes
-Route definitions start with the element `<route>`, the have on start point (element `<from>`) specified by an URI (attribute `@uri`) and the
+Route definitions start with the element `<route>`, they have one start point (element `<from>`) specified by an URI (attribute `@uri`) and several endpoints (element `<to>`) which will be called in the given order. For the options of the `file:` URI scheme consult the [Camel documentation](http://camel.apache.org/file2.html). The endpoint of the `layout` URI scheme is documented in the [`layout-component` module](../layout-component/).
 
 
 ## Example

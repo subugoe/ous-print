@@ -154,12 +154,12 @@
                             <xsl:value-of select="$time"/>
                         </fo:block>
                     </fo:block-container>
+                    <!--
                     <xsl:comment>Heading</xsl:comment>
                     <fo:block-container position="absolute" top="25mm" left="0mm">
-                        <!--
                         <fo:block font-family="FreeSans" font-size="20pt" font-weight="bold">Begleitzettel</fo:block>
-                        -->
                     </fo:block-container>
+                    -->
 
                     <xsl:comment>Autor and title</xsl:comment>
                     <fo:block-container position="absolute" top="50mm" left="0mm">

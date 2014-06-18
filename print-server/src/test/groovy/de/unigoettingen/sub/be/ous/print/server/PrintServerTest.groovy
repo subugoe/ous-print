@@ -116,7 +116,7 @@ class PrintServerTest {
         public void run() {
                 //Wait n seconds then stop
                 sleep(wait)
-                log.info('Stoping PrintServer')
+                log.info('Stopping PrintServer')
                 ps.stop()
             }
     }

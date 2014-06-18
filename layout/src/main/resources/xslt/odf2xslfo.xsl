@@ -315,7 +315,7 @@
             <!--
             <xsl:when test="ends-with(@xlink:href, '.png')">   
                 <xsl:variable name="image" select="unparsed-text(@xlink:href)"/>
-                <fo:external-graphic src="url('data:imge/png;base64,<DATA BASE64 ENCODED HERE')"/>
+                <fo:external-graphic src="url('data:image/png;base64,<DATA BASE64 ENCODED HERE')"/>
             </xsl:when>
             -->
             <xsl:otherwise>
@@ -417,7 +417,7 @@
     </xsl:template>
 
     <!-- Attributes to match, this is mainly a mapping from one namespace to another.
-         This way we can use a wildcard to catch unmaped attribute.
+         This way we can use a wildcard to catch unmapped attribute.
          There is one mode for XSL-FO results and one for SVG (not fully implemented yet)
     -->
     <!-- First Attributes in XSL-FO -->
@@ -480,16 +480,16 @@
 
     <!-- Wrap options, currently ignored -->
     <xsl:template match="@style:wrap|@style:number-wrapped-paragraphs|@style:wrap-contour|@draw:wrap-influence-on-position|@style:text-autospace">
-        <xsl:message>Unmached attribute ignored: <xsl:value-of select="name(.)"/>, value: <xsl:value-of select="data(.)"/></xsl:message>
+        <xsl:message>Unmatched attribute ignored: <xsl:value-of select="name(.)"/>, value: <xsl:value-of select="data(.)"/></xsl:message>
     </xsl:template>
-    <!-- Other atriutes that may be mapped in the future -->
+    <!-- Other attributes that may be mapped in the future -->
     <xsl:template match="@style:horizontal-pos|@style:horizontal-rel|@style:mirror">
-        <xsl:message>Unmached attribute ignored: <xsl:value-of select="name(.)"/>, value: <xsl:value-of select="data(.)"/></xsl:message>
+        <xsl:message>Unmatched attribute ignored: <xsl:value-of select="name(.)"/>, value: <xsl:value-of select="data(.)"/></xsl:message>
     </xsl:template>
     <!-- Attributes that might can be mapped to SVG -->
     <xsl:template
         match="@draw:luminance|@draw:contrast|@draw:red|@draw:green|@draw:blue|@draw:gamma|@draw:color-inversion|@draw:image-opacity|@draw:color-mode|@style:run-through|@style:flow-with-text">
-        <xsl:message>Unmached attribute ignored: <xsl:value-of select="name(.)"/>, value: <xsl:value-of select="data(.)"/></xsl:message>
+        <xsl:message>Unmatched attribute ignored: <xsl:value-of select="name(.)"/>, value: <xsl:value-of select="data(.)"/></xsl:message>
     </xsl:template>
     <!-- Stuff to map to SVG -->
     <xsl:template match="@style:vertical-pos|@draw:stroke|@draw:fill|@draw:fill-color|@fooo:font-weight" mode="svg">
@@ -509,23 +509,23 @@
     <xsl:template match="text()" mode="svg">
         <xsl:value-of select="."/>
     </xsl:template>
-    <!-- SVG Atributes to map -->
+    <!-- SVG attributes to map -->
     <xsl:template match="@style:wrap|@style:number-wrapped-paragraphs|@style:wrap-contour|@draw:wrap-influence-on-position|@style:text-autospace|@fooo:text-align|@fooo:min-height|@style:font-name"
         mode="svg"/>
 
-    <!-- Unmactched atibutes in svg mode -->
+    <!-- Unmatched attributes in svg mode -->
     <xsl:template match="@*" mode="svg">
-        <xsl:message>Unmached attribute: <xsl:value-of select="name(.)"/>, value: <xsl:value-of select="data(.)"/></xsl:message>
+        <xsl:message>Unmatched attribute: <xsl:value-of select="name(.)"/>, value: <xsl:value-of select="data(.)"/></xsl:message>
     </xsl:template>
     <!-- All other attributes -->
     <xsl:template match="@*" mode="#default">
-        <xsl:message terminate="yes">Unmached attribute: <xsl:value-of select="name(.)"/>, value: <xsl:value-of select="data(.)"/></xsl:message>
+        <xsl:message terminate="yes">Unmatched attribute: <xsl:value-of select="name(.)"/>, value: <xsl:value-of select="data(.)"/></xsl:message>
     </xsl:template>
 
     <!-- Other Stuff -->
     <!-- Catch template to find unmapped tags -->
     <xsl:template match="*">
-        <xsl:message terminate="yes">Unmached element: <xsl:value-of select="name(.)"/></xsl:message>
+        <xsl:message terminate="yes">Unmatched element: <xsl:value-of select="name(.)"/></xsl:message>
     </xsl:template>
     <!-- Elements to ignore on direct match -->
     <xsl:template match="office:scripts|office:font-face-decls|office:automatic-styles|svgoo:desc|text:sequence-decls" mode="#all"/>
@@ -560,7 +560,7 @@
          Functions are XPath functions, note that these will be evaluated at runtime, errors won't be reported by this stylesheet
     -->
     <!-- Check if expression is atomic
-         Expresions are atomic if the string only contains a reference
+         Expressions are atomic if the string only contains a reference
     -->
     <xsl:function name="print:el-is-atomic" as="xs:boolean">
         <xsl:param name="str" as="xs:string"/>
@@ -574,7 +574,7 @@
         </xsl:choose>
     </xsl:function>
     <!-- Check if expression is complex
-         Expresions are complex if the string contains one ore more references and other things like functions
+         Expressions are complex if the string contains one ore more references and other things like functions
     -->
     <xsl:function name="print:el-is-complex" as="xs:boolean">
         <xsl:param name="str" as="xs:string"/>
@@ -630,7 +630,7 @@
         <xsl:attribute name="top" select="$top"/>
     </xsl:function>
 
-    <!-- Takes a string and escapes charackters that should me matched literaly -->
+    <!-- Takes a string and escapes characters that should me matched literaly -->
     <xsl:function name="print:escape-regex" as="xs:string">
         <xsl:param name="str" as="xs:string"/>
         <xsl:value-of select="replace($str, '\.|\*|\?|\+|\^\|\$|\{|\}|\[|\]|\(|\)|\-|\\', '\\$1')"/>

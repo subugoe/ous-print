@@ -155,7 +155,7 @@ class Util {
     /**
      * Returns the namespace of the root element of the given {@link java.net.URL URL}
      * Make sure that the parser being used is namespace aware.
-     * @param xml the {@link java.net.URL URL} of the document which root namespace should be retrived.
+     * @param xml the {@link java.net.URL URL} of the document which root namespace should be retrieved.
      * @returns the namespace URI as String
      * @see #getRootNamespace(org.w3c.dom.Document)
      */
@@ -167,7 +167,7 @@ class Util {
     /**
      * Returns the namespace of the root element of the given {@link org.w3c.dom.Document Document}#+
      * Make sure that the parser being used is namespace aware.
-     * @param doc the {@link org.w3c.dom.Document Document} which root namespace should be retrived.
+     * @param doc the {@link org.w3c.dom.Document Document} which root namespace should be retrieved.
      * @returns the namespace URI as String 
      */
     @TypeChecked

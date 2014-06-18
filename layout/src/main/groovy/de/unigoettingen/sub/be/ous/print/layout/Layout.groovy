@@ -322,7 +322,7 @@ class Layout {
         String name
         
         /**
-         * Contructor, sets up a PageSize object
+         * Constructor, sets up a PageSize object
          */
         PageSize(String name) { 
             this.name = name 
@@ -344,7 +344,7 @@ class Layout {
         
         /**
          * Returns the MediaSizeName for the given PageSize
-         * @returns {@link javax.print.attribute.standard.MediaSizeName MediaSizeName}, the nmae of the media size
+         * @returns {@link javax.print.attribute.standard.MediaSizeName MediaSizeName}, the name of the media size
          */
         public static MediaSizeName getMediaSizeName (PageSize ps) {
             if (ps == A4) {

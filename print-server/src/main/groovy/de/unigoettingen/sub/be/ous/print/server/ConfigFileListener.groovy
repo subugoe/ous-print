@@ -48,7 +48,7 @@ class ConfigFileListener implements FileListener {
     }
 
     /**
-     * Whatches for changes of configuration file
+     * Watches for changes of configuration file
      * @see org.apache.commons.vfs2.FileListener#fileChanged()
      */
     void fileChanged(FileChangeEvent event){
@@ -63,7 +63,7 @@ class ConfigFileListener implements FileListener {
         }
         if (newRoutes != null) {
             for (RouteDefinition r in cc.getRouteDefinitions()) {
-                log.info('Shuting down routes - Does nothing yet')
+                log.info('Shutting down routes - Does nothing yet')
             }
         }
     }

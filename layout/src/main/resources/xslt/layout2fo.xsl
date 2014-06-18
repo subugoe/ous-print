@@ -357,7 +357,7 @@
         <xsl:param name="bottom" as="xs:string"/>
         <xsl:choose>
             <xsl:when test="upper-case($format) = 'A4'">
-                <!-- Bottom 0mm from A5 is half hight of A6 plus margin -->
+                <!-- Bottom 0mm from A5 is half height of A6 plus margin -->
                 <xsl:variable name="half-A4" select="print:calculate($paper-formats/format[@name = 'A4']/@height, '/', '2')"/>
                 <xsl:value-of select="print:calculate($half-A4, '+', $bottom)"/>
             </xsl:when>

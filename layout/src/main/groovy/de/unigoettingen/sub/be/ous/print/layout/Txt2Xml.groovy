@@ -60,7 +60,7 @@ class Txt2Xml extends AbstractTransformer {
     
     /**
      * Checks if the required parameters are set and performes the transformation
-     * @throws IllegalStateException if the paramters are empty or not set
+     * @throws IllegalStateException if the parameters are empty or not set
      * @see de.unigoettingen.sub.be.ous.print.layout.AbstractTransformer#transform()
      */
     @Override

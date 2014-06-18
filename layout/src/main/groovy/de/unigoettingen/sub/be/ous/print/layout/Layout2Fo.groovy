@@ -99,7 +99,7 @@ class Layout2Fo extends AbstractTransformer {
     }
     
     /**
-     * Construts a Layout2Fo, sets and the parameters of the transformation and sets the given input.
+     * Constructs a Layout2Fo, sets and the parameters of the transformation and sets the given input.
      * @param input the {@link org.w3c.dom.Document Document} of the document to be transformed
      * @param stylesheet the {@link java.net.URL URL} to the style to be used for the transformation
      * @see #Layout2Fo()
@@ -139,7 +139,7 @@ class Layout2Fo extends AbstractTransformer {
     
     /**
      * Checks if the required parameters are set and performes the transformation
-     * @throws IllegalStateException if the paramters are empty or not set
+     * @throws IllegalStateException if the parameters are empty or not set
      * @see de.unigoettingen.sub.be.ous.print.layout.AbstractTransformer#transform()
      */
     @Override

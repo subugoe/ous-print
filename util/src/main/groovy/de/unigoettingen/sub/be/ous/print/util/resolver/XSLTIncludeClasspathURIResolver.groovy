@@ -46,7 +46,7 @@ class XSLTIncludeClasspathURIResolver implements URIResolver {
     
     
     /**
-     * Constructor which takes the calling classloader into account
+     * Constructor which takes the calling class loader into account
      * @param caller the {@link java.lang.Object} caller, needed to get the used class loader
      * @param xslt
      *

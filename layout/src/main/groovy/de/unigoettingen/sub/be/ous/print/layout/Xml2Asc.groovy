@@ -71,7 +71,7 @@ class Xml2Asc extends AbstractTransformer {
     }
     
     /**
-     * Checks if the required parameters are set and performes the transformation
+     * Checks if the required parameters are set and performs the transformation
      * @throws IllegalStateException if the parameters are empty or not set
      * @see de.unigoettingen.sub.be.ous.print.layout.AbstractTransformer#transform()
      */

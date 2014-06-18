@@ -347,8 +347,8 @@ class Main {
             try {
             pddocument.silentPrint(job)
             } catch (javax.print.PrintException pe) {
-            log.error('Couln\'t print', pe)
-            println 'Couln\'t print result'
+            log.error('Couldn\'t print', pe)
+            println 'Couldn\'t print result'
             System.exit(21)
             }
              */

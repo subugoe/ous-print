@@ -101,7 +101,7 @@
             <xsl:variable name="column" select="number(@column)" as="xs:double"/>
             <!-- length, the length of the output-->
             <xsl:variable name="length" select="number(@length)" as="xs:double"/>
-            <!-- Check if the positions are overwriten by other outputs -->
+            <!-- Check if the positions are overwritten by other outputs -->
             <!-- Get the line number -->
             <xsl:variable name="line" select="number(@line)" as="xs:double"/>
             <!-- output-start, position where the output starts -->
@@ -125,7 +125,7 @@
                 <!-- Check if this isn't a text layout -->
                 <xsl:if test="@file">
                     <xsl:message terminate="yes">
-                        This parser generator dosn't support text layouts yet!
+                        This parser generator doesn't support text layouts yet!
                     </xsl:message>
                 </xsl:if>
                 <!-- Check if the line contains external data -->

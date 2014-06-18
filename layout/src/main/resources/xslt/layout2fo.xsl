@@ -66,7 +66,7 @@
         <!-- Full user ID -->
         <xsl:variable name="user-id-full" select="(//entry[@entity = '001' and @attribute = '002']/@value)[1]"/>
         <!-- Truncated user ID -->
-        <!-- User may contain X chrackter, so \w isn' sufficient  -->
+        <!-- User may contain X character, so \w isn' sufficient  -->
         <xsl:variable name="user-id" select="replace((//entry[@entity = '001' and @attribute = '002']/@value)[1], '^.*(\w{5})$', '$1')" as="xs:string"/>
         <xsl:variable name="location" select="//entry[@entity = '052' and @attribute = '005']/@value" as="xs:string"/>
         <xsl:variable name="target" select="//entry[@entity = '011' and @attribute = '004']/@value" as="xs:string"/>
@@ -121,7 +121,7 @@
 
                     <fo:block-container position="absolute" top="0mm" left="0mm" width="125mm">
                         <fo:block font-family="FreeSans" font-size="30pt">
-                            <!-- We use XPath based logic here to be able to inject it from elsewere, like a better layouting system  -->
+                            <!-- We use XPath based logic here to be able to inject it from else were, like a better layouting system  -->
                             <xsl:copy-of
                                 select="if (string-length($shelfmark) &lt; 17) then print:set-font-size(36) 
                                             else if (string-length($shelfmark) &lt; 23) then print:set-font-size(30)
@@ -326,7 +326,7 @@
         <xsl:variable name="unit" select="replace($arg1, '[\d\.]*?([^\d\.]+)', '$1')" as="xs:string"/>
         <!-- Use this if you  want to check if units match
         <xsl:if test="not(contains($arg2, $unit))">
-            <xsl:message terminate="yes">Units dosn't match!</xsl:message>
+            <xsl:message terminate="yes">Units doesn't match!</xsl:message>
         </xsl:if>
         -->
         <xsl:variable name="int1" select="number(replace($arg1, '([\d\.]+)[^\d]*', '$1'))" as="xs:double"/>

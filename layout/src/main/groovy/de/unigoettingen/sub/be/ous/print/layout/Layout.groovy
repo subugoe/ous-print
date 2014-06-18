@@ -174,8 +174,8 @@ class Layout {
     }
     
     /**
-     * Returns the contents of a given {@link java.net.URL URL} in codepage 858
-     * @return String the contents (converted from codepage 858 into UTF-8) of the given URL
+     * Returns the contents of a given {@link java.net.URL URL} in code page 858
+     * @return String the contents (converted from code page 858 into UTF-8) of the given URL
      */
     @TypeChecked
     def static String readFile (URL input) {
@@ -185,8 +185,8 @@ class Layout {
     }
     
     /**
-     * Returns the contents of a given {@link java.io.InputStream InputStream} in codepage 858
-     * @return String the contents (converted from codepage 858 into UTF-8) of the given InputStream
+     * Returns the contents of a given {@link java.io.InputStream InputStream} in code page 858
+     * @return String the contents (converted from code page 858 into UTF-8) of the given InputStream
      */
     @TypeChecked
     def static String readFile (InputStream input) {
@@ -291,7 +291,7 @@ class Layout {
     
     //Utility Functions
     /**
-     * Resolves relative file pathes
+     * Resolves relative file paths
      * @param path, String the path to resolve
      * @returns {@link java.io.File File} the absolute File
      */

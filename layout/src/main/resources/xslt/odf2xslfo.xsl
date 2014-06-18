@@ -270,7 +270,7 @@
     </xsl:template>
 
     <!-- Shapes, currently unsupported, use at your own risk -->
-    <!-- TODO: check if it works this way otherwise hande elements seperatly -->
+    <!-- TODO: check if it works this way otherwise handle elements seperatly -->
     <xsl:template match="draw:ellipse|draw:rect|draw:line">
         <!-- TODO: map styles and size -->
         <gxsl:comment>A <xsl:value-of select="local-name(.)"/></gxsl:comment>

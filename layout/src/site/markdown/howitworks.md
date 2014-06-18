@@ -61,7 +61,7 @@ The style sheet xml2asc.xsl transfers a XML representation of an ASC file back i
 * output-heading: Should a field definition be outputted (default: false)
 
 ## xml2parser.xsl
-The style sheet xml2parser.xsl creates a XSLT based parser for generated text files (slips). It's better to convert the gerated files into UTF-8 before passing the to the stylesheet. The Groovy wrapper does this automaticly.
+The style sheet xml2parser.xsl creates a XSLT based parser for generated text files (slips). It's better to convert the generated files into UTF-8 before passing the to the stylesheet. The Groovy wrapper does this automaticly.
 
 ## layout2fo.xsl
 The style sheet layout2fo.xsl generates a XSL-FO file from a XML representation of a slip. This is later passed to [Apache FOP](http://xmlgraphics.apache.org/fop/) to generate a PDF or Postscript file from it.

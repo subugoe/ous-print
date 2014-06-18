@@ -48,7 +48,7 @@ import org.apache.log4j.Level
 import org.xml.sax.SAXParseException
 
 /**
- * Apache Camel based print server main class. Takes some comandline arguments to
+ * Apache Camel based print server main class. Takes some command line arguments to
  * boot up a camel instance. Configuration is done via XML file. Ths configuration
  * can be watched during runtime to reload new routes or shut down old ones.
  * @author cmahnke

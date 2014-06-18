@@ -49,7 +49,7 @@ class Txt2Xml extends AbstractTransformer {
     }
     
     /**
-     * Construts a Txt2Xml, sets and the parameters of the transformation and sets the given input.
+     * Constructs a Txt2Xml, sets and the parameters of the transformation and sets the given input.
      * @param input the {@link java.net.URL URL} of the document to be transformed
      * @see #Txt2Xml()
      */

@@ -76,7 +76,7 @@ class LayoutComponent extends UriEndpointComponent {
     String pageSize = Layout.DEFAULT_PAGE_SIZE
     
     /**
-     * Public contructor of the LayoutComponent
+     * Public constructor of the LayoutComponent
      */
     public LayoutComponent () {
         super(LayoutEndpoint.class)

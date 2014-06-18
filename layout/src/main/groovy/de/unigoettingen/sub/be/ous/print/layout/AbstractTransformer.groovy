@@ -191,7 +191,7 @@ abstract class AbstractTransformer {
     
     /**
      * Abstract method that needs to be implemented by extending classes that do
-     * the actual transformation. These are usually just wrappers around the preotected transform methods.
+     * the actual transformation. These are usually just wrappers around the protected transform methods.
      * @see #transform(java.net.URL,java.net.URL)
      * @see #transform(java.net.URL,java.net.URL,java.util.Map)
      * @see #transform(java.net.URL,javax.xml.transform.Source,java.util.Map)

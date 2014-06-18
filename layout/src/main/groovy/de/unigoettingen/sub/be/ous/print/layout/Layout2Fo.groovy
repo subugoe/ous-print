@@ -90,7 +90,7 @@ class Layout2Fo extends AbstractTransformer {
     }
     
     /**
-     * Construts a empty Layout2Fo and sets 
+     * Constructs a empty Layout2Fo and sets
      * the parameters of the transformation.
      */
     protected Layout2Fo () {
@@ -113,7 +113,7 @@ class Layout2Fo extends AbstractTransformer {
     }
     
     /**
-     * Construts a Layout2Fo, sets and the parameters of the transformation and sets the given input.
+     * Constructs a Layout2Fo, sets and the parameters of the transformation and sets the given input.
      * @param input the {@link java.net.URL URL} of the document to be transformed
      * @param stylesheet the {@link java.net.URL URL} to the style sheet to be used for the transformation
      * @see #Layout2Fo()
@@ -127,7 +127,7 @@ class Layout2Fo extends AbstractTransformer {
     }
     
     /**
-     * Construts a Layout2Fo, using the preconfigured transformation and sets the given input.
+     * Constructs a Layout2Fo, using the preconfigured transformation and sets the given input.
      * @param input the {@link java.net.URL URL} of the document to be transformed
      * @see #Layout2Fo()
      */

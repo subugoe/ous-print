@@ -50,7 +50,7 @@ class Xml2Asc extends AbstractTransformer {
     }
     
     /**
-     * Construts a empty Xml2Asc and sets 
+     * Constructs a empty Xml2Asc and sets
      * the parameters of the transformation.
      */
     Xml2Asc () {
@@ -61,7 +61,7 @@ class Xml2Asc extends AbstractTransformer {
     }
     
     /**
-     * Construts a Xml2Asc, sets and the parameters of the transformation and sets the given input.
+     * Constructs a Xml2Asc, sets and the parameters of the transformation and sets the given input.
      * @param input the {@link java.net.URL URL} of the document to be transformed
      * @see #Xml2Asc()
      */
@@ -72,7 +72,7 @@ class Xml2Asc extends AbstractTransformer {
     
     /**
      * Checks if the required parameters are set and performes the transformation
-     * @throws IllegalStateException if the paramters are empty or not set
+     * @throws IllegalStateException if the parameters are empty or not set
      * @see de.unigoettingen.sub.be.ous.print.layout.AbstractTransformer#transform()
      */
     @Override

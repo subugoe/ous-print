@@ -62,7 +62,7 @@ class Xml2Parser extends AbstractTransformer {
     }
     
     /**
-     * Construts a empty Xml2Parser 
+     * Constructs a empty Xml2Parser
      */
     Xml2Parser () {
         // Fill the map with the names of the params
@@ -71,7 +71,7 @@ class Xml2Parser extends AbstractTransformer {
     }
     
     /**
-     * Construts a Xml2Parser, sets and the parameters of the transformation and sets the given input.
+     * Constructs a Xml2Parser, sets and the parameters of the transformation and sets the given input.
      * @param input the {@link java.net.URL URL} of the document to be transformed
      * @see #Xml2Parser()
      */
@@ -81,7 +81,7 @@ class Xml2Parser extends AbstractTransformer {
     }
     
     /**
-     * Construts a Xml2Parser, sets and the parameters of the transformation and sets the given input.
+     * Constructs a Xml2Parser, sets and the parameters of the transformation and sets the given input.
      * @param input the {@link org.w3c.dom.Document Document} of the document to be transformed
      * @see #Xml2Parser()
      */
@@ -93,7 +93,7 @@ class Xml2Parser extends AbstractTransformer {
     
     /**
      * Checks if the required parameters are set and performes the transformation
-     * @throws IllegalStateException if the paramters are empty or not set
+     * @throws IllegalStateException if the parameters are empty or not set
      * @see de.unigoettingen.sub.be.ous.print.layout.AbstractTransformer#transform()
      */
     @Override
@@ -128,7 +128,7 @@ class Xml2Parser extends AbstractTransformer {
      * Use this if you are working with precompiled parsers
      * @return LayoutParser the parser for the given stylesheet
      */
-    static LayoutParser getParser(URL stylsheet, String name) {
+    static LayoutParser getParser(URL stylesheet, String name) {
         return new LayoutParser(new StreamSource(stylesheet.openStream()), name)
     }
     
@@ -150,14 +150,14 @@ class Xml2Parser extends AbstractTransformer {
         protected Document result
         
         /**
-         * Construts a empty LayoutParser
+         * Constructs a empty LayoutParser
          */
         protected LayoutParser () {
         
         }
         
         /**
-         * Construts a LayoutParser using a parser given as document and the name of the source layout
+         * Constructs a LayoutParser using a parser given as document and the name of the source layout
          * @param {@link org.w3c.dom.Document Document} the parser
          * @param {@link java.lang.String String} the name of the source layout
          */
@@ -171,7 +171,7 @@ class Xml2Parser extends AbstractTransformer {
         
         /**
          * Checks if the required parameters are set and performes the transformation
-         * @throws IllegalStateException if the paramters are empty or not set
+         * @throws IllegalStateException if the parameters are empty or not set
          * @see de.unigoettingen.sub.be.ous.print.layout.AbstractTransformer#transform()
          */
         @Override

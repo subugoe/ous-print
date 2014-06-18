@@ -231,7 +231,7 @@ class Util {
     }
     
     /**
-     * Convert a given URL into a Strig representation of a relative path
+     * Convert a given URL into a String representation of a relative path
      */
     @TypeChecked
     static public String uRL2RelPath (URL u) {

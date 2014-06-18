@@ -635,7 +635,7 @@
         <xsl:param name="str" as="xs:string"/>
         <xsl:value-of select="replace($str, '\.|\*|\?|\+|\^\|\$|\{|\}|\[|\]|\(|\)|\-|\\', '\\$1')"/>
     </xsl:function>
-    <!-- Rewrite Transfor attribute from rad (Libre / Open Office) to degree (SVG) -->
+    <!-- Rewrite transform attribute from rad (Libre / Open Office) to degree (SVG) -->
     <xsl:function name="print:rewrite-transform">
         <!-- See http://mail-archives.apache.org/mod_mbox/incubator-ooo-dev/201208.mbox/%3C50269758.3090901@t-online.de%3E -->
         <xsl:param name="str"/>

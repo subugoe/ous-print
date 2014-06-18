@@ -125,7 +125,7 @@
                 </executions>
             </plugin>
             <!--
-            Downloads opensorce replacement fonts for Arial / Helvetica ant Times / Times New Roman
+            Downloads open source replacement fonts for Arial / Helvetica ant Times / Times New Roman
             TODO: Make this work in offline mode 
             -->
             <plugin>

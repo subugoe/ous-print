@@ -25,7 +25,7 @@ From there you get a box where you can type your expressions and functions in.
 ![Libre Office SVG Description](./img/svgdesc.png)
 
 ## Basic Syntax
-A reference to a field is expresed as pair of an entity and an attribute:
+A reference to a field is expressed as pair of an entity and an attribute:
 `${entity = 052,attribute = 005}`. Errors will be caught during compile time, when the XSL-FO is generated. Errors in functions are more difficult to spot, they will be raised if the resulting XSL-FO is evaluated. You can mix Expressions and functions like `concat(${entity=001, attribute = 010}, ${entity = 001,attribute = 006}, ${entity = 001 attribute = 008})`. You can use all XPath 2.0 functions and even add your own to the XSL-FO style sheet. See a [XPath 2.0 Reference](http://www.w3.org/TR/xpath20/) to get all posibilities.
 
 ## Examples for functions

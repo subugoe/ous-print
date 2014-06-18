@@ -157,7 +157,7 @@ class LayoutComponent extends UriEndpointComponent {
         if (parameters.get("template") != null) {
             File f = Layout.getFile((String) parameters.get("template"))
             if (!f.exists()) {
-                log.trace('Template ' + f.getAbsolutePath()  + 'couln\'t be found')
+                log.trace('Template ' + f.getAbsolutePath()  + 'couldn\'t be found')
                 throw new ResolveEndpointFailedException('Template doesn\'t exist')
             }
         }
@@ -171,14 +171,14 @@ class LayoutComponent extends UriEndpointComponent {
         if (parameters.get("includePath") != null) {
             File f = Layout.getFile((String) parameters.get("includePath"))
             if (!f.exists()) {
-                log.trace('Include path ' + f.getAbsolutePath()  + 'couln\'t be found') 
+                log.trace('Include path ' + f.getAbsolutePath()  + 'couldn\'t be found')
                 throw new ResolveEndpointFailedException('Include path doesn\'t exist')
             }
         }
         if (parameters.get("debugPath") != null) {
             File f = Layout.getFile((String) parameters.get("includePath"))
             if (!f.exists()) {
-                log.trace('Debug path ' + f.getAbsolutePath()  + 'couln\'t be found') 
+                log.trace('Debug path ' + f.getAbsolutePath()  + 'couldn\'t be found')
                 throw new ResolveEndpointFailedException('debug path doesn\'t exist')
             }
         }

@@ -66,7 +66,7 @@ class Main {
     static FORMAT inFormat = FORMAT.TEXT
     /** The desired output format */
     static FORMAT outFormat = FORMAT.PDF
-    /** Contains paramters for the style sheets */
+    /** Contains parameters for the style sheets */
     static Map<String, String> params = [:]
     /** Name of the printer to use */
     static String printer = null

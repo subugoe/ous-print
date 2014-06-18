@@ -164,7 +164,7 @@ class LayoutComponent extends UriEndpointComponent {
         if (parameters.get("xslfo") != null) {
             File f = Layout.getFile((String) parameters.get("xslfo"))
             if (!f.exists()) {
-                log.trace('XSL-FO ' + f.getAbsolutePath()  + 'couln\'t be found')
+                log.trace('XSL-FO ' + f.getAbsolutePath()  + 'couldn\'t be found')
                 throw new ResolveEndpointFailedException('XSL-FO doesn\'t exist')
             }
         }        

@@ -27,7 +27,7 @@ import javax.print.attribute.standard.Media
 
 /**
  * Helper class for printers, static methods to find printers by name and getting
- * information about surported paper formats
+ * information about supported paper formats
  * @author cmahnke
  */
 @CompileStatic

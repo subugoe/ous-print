@@ -41,7 +41,7 @@ class LayoutEndpoint extends ProcessorEndpoint {
     protected LayoutProcessor lp
     
     /**
-     * Simple constructor, that calles the constructor of the super class
+     * Simple constructor, that calls the constructor of the super class
      * @param endpointUri, the endpoint URI
      * @param component, the component
      * @param lp, the LayoutProcessor

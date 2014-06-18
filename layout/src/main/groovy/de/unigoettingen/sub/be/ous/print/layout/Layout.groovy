@@ -236,7 +236,7 @@ class Layout {
     /**
      * Internal function to get a LayoutParser for the given {@link java.net.URL URL}. Detects the Mime
      * type of the file and can create LayoutParser objects for TXT (ASC) and XML
-     * reprentations
+     * representations
      * 
      * @param parser, the {@link java.net.URL URL} of the layout representation
      * @returns a LayoutParser object
@@ -254,7 +254,7 @@ class Layout {
         } else if (parserMime == 'text/xml' | parserMime == 'application/xml') {
             //TODO: Check if input is a XSL file
             if (Util.getRootElementName(parser) == 'layout') {
-                //XML Representaion of ASC file
+                //XML Representation of ASC file
                 Xml2Parser x2p = new Xml2Parser(parser)
                 x2p.transform()
                 lp = x2p.getParser()

@@ -198,7 +198,7 @@
                         <xsl:if
                             test="($user-type = '40' or $user-type = '15') or ($target != 'Zentralbib./Selbstabholbereich' and $target != 'Zentralbibliothek/Selbstabholbereich' and $target != 'Abholregal BB Kulturwiss.')">
                             <xsl:if test="$co != ''">
-                                <xsl:comment>Add adress for intitute delivery service</xsl:comment>
+                                <xsl:comment>Add address for institute delivery service</xsl:comment>
                                 <fo:block font-family="FreeSans" font-size="12pt">
                              <xsl:value-of select="concat('&#x2192;', $co)"/>
                                 </fo:block>
@@ -275,8 +275,8 @@
                         </fo:block>
                         <!-- See http://stackoverflow.com/a/590335 -->
                         <fo:block margin-top="0.5mm" font-family="FreeSans" font-size="12pt">
-                            <!-- Adress extra -->
-                            <xsl:comment>Adress extra</xsl:comment>
+                            <!-- Address extra -->
+                            <xsl:comment>Address extra</xsl:comment>
                             <xsl:value-of select="$adress-extra"/>
                             <!-- Empty Space to get the empty block get rendered correctly -->
                             <fo:leader/>
@@ -365,7 +365,7 @@
                 <xsl:value-of select="$bottom"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:message terminate="yes">Unsurported Format <xsl:value-of select="$format"/></xsl:message>
+                <xsl:message terminate="yes">Unsupported Format <xsl:value-of select="$format"/></xsl:message>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:function>

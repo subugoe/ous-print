@@ -27,7 +27,7 @@ import javax.xml.transform.ErrorListener
 
 
 /**
- * This Helper class is used to redirect output of an XSLT Proccesor to the logger
+ * This Helper class is used to redirect output of an XSLT Processor to the logger
  * @author cmahnke
  */
 @Log4j

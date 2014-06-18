@@ -165,7 +165,7 @@ class Xml2Parser extends AbstractTransformer {
             this()
             this.parser = parser
             this.layoutName = layoutName
-            this.input = AbstractTransformer.getEmptyXml()
+            this.input = getEmptyXml()
         }
 
         

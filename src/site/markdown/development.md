@@ -40,7 +40,7 @@ Apache Commons are a set of utility components. The following components are use
 [Apache Tika](http://tika.apache.org/) is a toolkit to detect and analyze text contents and media types. Used to detect input types.
 
 ## Saxon
-[Saxon](http://saxon.sourceforge.net/) is a XLST 2.0 capable XLST processor. It's used for the XSLT transformations.
+[Saxon](http://saxon.sourceforge.net/) is a XSLT 2.0 capable XLST processor. It's used for the XSLT transformations.
 
 # Adding your own features
 If you want to add your own features, use the GitHub workflow: Clone the repository and sen a pull request if your feature is complete. Make sure that your feature is documented correctly:

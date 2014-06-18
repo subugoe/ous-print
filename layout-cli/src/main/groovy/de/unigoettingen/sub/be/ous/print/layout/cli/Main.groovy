@@ -138,7 +138,7 @@ class Main {
         
         //Print formats
         if(opt.lf) {
-            println "This programm supports a number of input formats:"
+            println "This program supports a number of input formats:"
             println "ASC: A text file containing a layout definition"
             println "ASCXML: A XML file containing a layout definition"
             println "TXT: A printed text file - input only"

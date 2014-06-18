@@ -10,7 +10,7 @@ Just run the following command to get a copy of the source code:
 Not all unit tests are passing yet, therefore you need the following to build all modules:
 > mvn -Dmaven.test.skip=true package
 
-The resulting artifacts will be created in the subfolder 'target' in each of the modules. Refer to the module documentaion to learn how to use them.
+The resulting artifacts will be created in the subfolder 'target' in each of the modules. Refer to the module documentation to learn how to use them.
 
 **You need a internet connection to build this software since dependencies will be downloaded. Without internet connection the build will fail!**
 

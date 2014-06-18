@@ -43,7 +43,7 @@ import org.w3c.dom.Document
 
 /**
  * This abstract class is used as base for all classes that wrap XSLT stylesheets.
- * It wraps common methods for transformation and validaion and contains fields
+ * It wraps common methods for transformation and validation and contains fields
  * needed for this tasks like a link to a schema or the name of the required stylesheet.
  * @author cmahnke
  */

@@ -31,6 +31,8 @@ import groovy.transform.TypeChecked
 import org.junit.Ignore
 import org.junit.Test
 
+import javax.xml.transform.TransformerException
+
 import static org.junit.Assert.*
 
 @TypeChecked
@@ -48,7 +50,7 @@ class Xml2AscTest {
             Xml2Asc x2a = new Xml2Asc(xml)
             try {
                 x2a.transform()
-            } catch (javax.xml.transform.TransformerException te) {
+            } catch (TransformerException te) {
                 log.error('Transformation failed!', te)
                 fail('Xml2AscTest: Failed ' + te.getMessage())
             }

@@ -42,7 +42,7 @@ class Txt2Xml extends AbstractTransformer {
     }
     
     /**
-     * Construts a empty Txt2Xml
+     * Constructs a empty Txt2Xml
      */
     Txt2Xml () {
         

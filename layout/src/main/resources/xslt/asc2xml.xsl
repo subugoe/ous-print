@@ -35,7 +35,7 @@
     <xsl:output indent="yes"/>
     <xsl:template match="/">
         <xsl:message>
-            If this fails, there are special chracters in the input file
+            If this fails, there are special characters in the input file
             perl -pi -e 's/[\x10-\x1f]/ /g' file-name
         </xsl:message>
         <xsl:variable name="text" select="unparsed-text($layoutFile, $encoding)"/>

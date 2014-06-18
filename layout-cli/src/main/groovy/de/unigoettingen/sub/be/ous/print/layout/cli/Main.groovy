@@ -68,7 +68,7 @@ class Main {
     static FORMAT outFormat = FORMAT.PDF
     /** Contains paramters for the style sheets */
     static Map<String, String> params = [:]
-    /** Name of the priter to use */
+    /** Name of the printer to use */
     static String printer = null
     /** The page size to use */
     static Layout.PageSize pageSize = Layout.DEFAULT_PAGE_SIZE

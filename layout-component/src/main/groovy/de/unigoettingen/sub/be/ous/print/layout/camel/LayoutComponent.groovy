@@ -134,7 +134,7 @@ class LayoutComponent extends UriEndpointComponent {
             pageSize = (String) parameters.get("pageSize")
             log.trace('Page size set to ' + pageSize) 
         }
-        log.trace('Setup LayoutProcessor for incomming files using Template ' + templateURL.toString() + ' include path ' + includePathURL.toString() + ' and XSL-FO ' + xslfoURL.toString())
+        log.trace('Setup LayoutProcessor for incoming files using Template ' + templateURL.toString() + ' include path ' + includePathURL.toString() + ' and XSL-FO ' + xslfoURL.toString())
 
         LayoutProcessor lp = new LayoutProcessor(inputFormat, outputFormat, xslfoURL, includePathURL, templateURL, pageSize)
         return new LayoutEndpoint(uri, this, lp)

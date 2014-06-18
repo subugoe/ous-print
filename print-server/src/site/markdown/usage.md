@@ -29,7 +29,7 @@ Sets the routes definition file to be used. See the [configuration page](./confi
 * **Long form**: --config
 
 ## Non daemon
-Disable daemon mode, used for debuging.
+Disable daemon mode, used for debugging.
 
 * **Short form**: -nd
 * **Long form**: --no-daemon

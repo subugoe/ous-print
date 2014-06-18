@@ -29,7 +29,7 @@ import org.apache.commons.vfs2.FileChangeEvent
 import org.apache.commons.vfs2.FileListener
 
 /**
- * This FileListener whatches a Camel XML configuration and loads changes in the
+ * This FileListener watches a Camel XML configuration and loads changes in the
  * given {@link org.apache.camel.CamelContext CamelContext}.
  * @author cmahnke
  */
@@ -40,7 +40,7 @@ class ConfigFileListener implements FileListener {
     CamelContext cc
     
     /**
-     * Contructor taking a {@link org.apache.camel.CamelContext CamelContext} to update
+     * Constructor taking a {@link org.apache.camel.CamelContext CamelContext} to update
      * @param cc the {@link org.apache.camel.CamelContext CamelContext} to change if a new file is found
      */
     ConfigFileListener(CamelContext cc) {

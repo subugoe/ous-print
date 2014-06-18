@@ -43,7 +43,7 @@ class BasePathResolver implements URIResolver {
     URL baseURL 
     
     /**
-     * Contructs a BasePathResolver for the given URL
+     * Constructs a BasePathResolver for the given URL
      */
     
     public BasePathResolver (URL baseURL) {

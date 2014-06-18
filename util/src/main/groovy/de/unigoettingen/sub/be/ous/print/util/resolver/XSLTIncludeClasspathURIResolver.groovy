@@ -46,7 +46,7 @@ class XSLTIncludeClasspathURIResolver implements URIResolver {
     
     
     /**
-     * Constructor which takes the calling classloader into acount
+     * Constructor which takes the calling classloader into account
      * @param caller the {@link java.lang.Object} caller, needed to get the used class loader
      * @param xslt
      *
@@ -58,7 +58,7 @@ class XSLTIncludeClasspathURIResolver implements URIResolver {
     }
     
     /**
-     * Using this contructor, just look into the class path of the caller
+     * Using this constructor, just look into the class path of the caller
      * to get resources in Jar files and on class path
      * @param Class of the caller, to get the right class loader
      * @author cmahnke
@@ -85,7 +85,7 @@ class XSLTIncludeClasspathURIResolver implements URIResolver {
                 return new StreamSource(source)
             }
             
-            //Try to work arount an issue with sources in Jar files
+            //Try to work around an issue with sources in Jar files
             if (href.startsWith('./')) {
                 log.trace('Converting relative path to absolute to look it um in side classpath')
                 String absolutePath = href.substring(2)

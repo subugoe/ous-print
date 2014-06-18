@@ -135,7 +135,7 @@ class PrintServer extends Main {
     }
     
     /**
-     * A protectec constructor used for unit tests
+     * A protected constructor used for unit tests
      * @param args, the command line arguments
      */    
     protected PrintServer (String[] args) {
@@ -143,7 +143,7 @@ class PrintServer extends Main {
     }
     
     /**
-     * A protectec constructor used for unit tests
+     * A protected constructor used for unit tests
      * @param url, the configuration file
      * @param watch, if changes should be watched
      */

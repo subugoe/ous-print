@@ -158,7 +158,7 @@
                     </execution>   
                 </executions>
             </plugin>
-            <!-- this prevents Surefire from stealing Fokus on Mac OS X -->
+            <!-- this prevents Surefire from stealing focus on Mac OS X -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>

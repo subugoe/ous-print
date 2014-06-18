@@ -305,7 +305,7 @@ class Layout {
     }
     
     /**
-     * Resolves relative file pathes
+     * Resolves relative file paths
      * @param path, String the path to resolve
      * @returns a absolute {@link java.net.URL URL}
      */

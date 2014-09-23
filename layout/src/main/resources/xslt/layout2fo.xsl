@@ -184,7 +184,7 @@
                         </fo:block>
                     </fo:block-container>
 
-                    <fo:block-container position="absolute" top="90mm" left="0mm">
+                    <fo:block-container position="absolute" top="90mm" left="0mm" width="125mm">
                         <xsl:comment>Additional loan information</xsl:comment>
                         <xsl:if test="$loan-free-text != ''">
                             <xsl:comment>Additional info</xsl:comment>
@@ -237,6 +237,10 @@
                     <fo:block-container reference-orientation="90" position="absolute" top="0mm" left="130mm" bottom="{print:scaleA5toA4('15mm')}" border-start-style="solid" border-color="grey"
                         border-start-width="2pt">
                         <xsl:choose>
+                            <!--
+                            <xsl:when
+                                test="($user-type = '40' or $user-type = '15' or $user-type = '30'  or $user-type = '35' or $user-type = '50'  or $user-type = '55') or ($target != 'Zentralbib./Selbstabholbereich' and $target != 'Zentralbibliothek/Selbstabholbereich' and $target != 'Abholregal BB Kulturwiss.' and $target != 'Zentralbibliothek / Selbstabholberei')">
+                                -->
                             <xsl:when
                                 test="($user-type = '40' or $user-type = '15') or ($target != 'Zentralbib./Selbstabholbereich' and $target != 'Zentralbibliothek/Selbstabholbereich' and $target != 'Abholregal BB Kulturwiss.' and $target != 'Zentralbibliothek / Selbstabholberei')">
                                 <fo:block padding-top="2.5pt" font-family="FreeSans" font-size="24pt">

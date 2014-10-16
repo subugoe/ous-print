@@ -46,6 +46,7 @@ class PrintServerTest {
     static URL TEST_ROUTES = PrintServerTest.getClass().getResource("/config/test-routes.xml")
     static URL TEST_A5_ROUTES = PrintServerTest.getClass().getResource("/config/a5route.xml")
     static URL TEST_ROUTES_BROKEN = PrintServerTest.getClass().getResource("/config/test-routes-broken.xml")
+    static URL TEST_ROUTES_RENAME = PrintServerTest.getClass().getResource("/config/file-rename-route.xml")
     static Long RUN_TIME = 15000 
     
     //See http://stackoverflow.com/questions/6141252/dealing-with-system-exit0-in-junit-tests
@@ -60,7 +61,7 @@ class PrintServerTest {
         /* Variant invoking the Main method
         String[] args = ['-v', '-c', routes]
         PrintServer.main(args)
-        */
+         */
         log.trace('Setting up PrintServer and stopping it after ' + RUN_TIME.toString() + ' millis')
         PrintServer ps = new PrintServer(TEST_ROUTES)
         Watcher w = new Watcher(ps, RUN_TIME)
@@ -103,6 +104,15 @@ class PrintServerTest {
         w.start()
     }
     
+    @Test
+    void testRenameAndDebug () {
+        def routes = Util.uRL2RelPath(TEST_ROUTES_RENAME)
+        log.debug('Using test Rename route from ' + routes)
+        log.trace('Setting up PrintServer for A5 and stopping it after ' + RUN_TIME.toString() + ' millis')
+        PrintServer ps = new PrintServer(TEST_ROUTES_RENAME)
+        Watcher w = new Watcher(ps, RUN_TIME)
+    }
+    
     @Log4j
     private class Watcher extends Thread {
         long wait
@@ -114,11 +124,11 @@ class PrintServerTest {
         }
         
         public void run() {
-                //Wait n seconds then stop
-                sleep(wait)
-                log.info('Stopping PrintServer')
-                ps.stop()
-            }
+            //Wait n seconds then stop
+            sleep(wait)
+            log.info('Stopping PrintServer')
+            ps.stop()
+        }
     }
     
 }

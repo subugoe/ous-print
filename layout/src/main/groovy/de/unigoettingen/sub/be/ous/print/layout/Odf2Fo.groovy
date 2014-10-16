@@ -19,8 +19,11 @@
 package de.unigoettingen.sub.be.ous.print.layout
 
 import de.unigoettingen.sub.be.ous.print.util.Util
+import de.unigoettingen.sub.be.ous.print.util.resolver.ZipFileResolver
 
 import groovy.util.logging.Log4j
+
+import javax.xml.transform.URIResolver
 
 import org.w3c.dom.Document
 
@@ -37,13 +40,18 @@ class Odf2Fo extends Layout2Fo {
     def static String xslt = "/xslt/odf2xslfo.xsl"
     
     /** The URL of the stylesheet to used */
-    protected static URL stylesheet = this.getClass().getResource(xslt)
+    protected static URL odfStylesheet = this.getClass().getResource(xslt)
+    
+    protected Document odf2xslfo
+    
+    /** The resolver for looking into zip files */
+    URIResolver resolver
     
     /** The URL of the ODF to generate the XSL-FO from */
     protected URL odf
        
     /**
-     * Construts a empty Odf2Fo and sets 
+     * Constructs a empty Odf2Fo and sets
      * the parameters of the transformation.
      */
     Odf2Fo () {
@@ -52,17 +60,19 @@ class Odf2Fo extends Layout2Fo {
     }
     
     /**
-     * Construts a Odf2Fo and sets the given input.
+     * Constructs a Odf2Fo and sets the given input.
      * @param input the {@link java.net.URL URL} of the document to be transformed
      * @param odf the {@link java.net.URL URL} for the ODF file which will be used to create a transformator
      * @see #Layout2Fo(URL, URL)
      */
     Odf2Fo (URL input, URL odf) {
-        this(Util.loadDocument(input), odf)
+        this()
+        this.input = input
+        //this(Util.loadDocument(input), odf)
     }
     
     /**
-     * Construts a Odf2Fo and sets the given input.
+     * Constructs a Odf2Fo and sets the given input.
      * @param input the {@link org.w3c.dom.Document Document} of the document to be transformed
      * @param odf the {@link java.net.URL URL} for the ODF file which will be used to create a transformator
      * @see #Layout2Fo(Document, URL)
@@ -76,17 +86,20 @@ class Odf2Fo extends Layout2Fo {
     }
     
     /**
-     * Checks if the required parameters are set and performes the transformation
-     * @throws IllegalStateException if the paramters are empty or not set
+     * Checks if the required parameters are set and performs the transformation
+     * @throws IllegalStateException if the parameters are empty or not set
      * @see de.unigoettingen.sub.be.ous.print.layout.AbstractTransformer#transform()
      */
     @Override
     void transform () {
-        if (!validateParams(params)) {
-            throw new IllegalStateException('Params not configured');
-        }
+        //We need to transform twice, first ODF to XSL-FO
+        //But first set up the Resolver
+        //resolver = new ZipFileResolver(input)
+        odf2xslfo = transform(this.input, stylesheet, this.params)
+        
+        //Second given input with the generated XSL-FO
         log.debug("Using stylesheet " + stylesheet.toString())
-        result = transform(this.input, this.stylesheet, this.params)
+        result = transform(this.input, stylesheet, this.params)
     }
 }
 

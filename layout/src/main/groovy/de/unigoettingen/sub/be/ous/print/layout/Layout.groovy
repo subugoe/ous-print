@@ -174,8 +174,8 @@ class Layout {
     }
     
     /**
-     * Returns the contents of a given {@link java.net.URL URL} in code page 858
-     * @return String the contents (converted from code page 858 into UTF-8) of the given URL
+     * Returns the contents of a given {@link java.net.URL URL} in code page 850
+     * @return String the contents (converted from code page 850 into UTF-8) of the given URL
      */
     @TypeChecked
     def static String readFile (URL input) {
@@ -185,14 +185,14 @@ class Layout {
     }
     
     /**
-     * Returns the contents of a given {@link java.io.InputStream InputStream} in code page 858
-     * @return String the contents (converted from code page 858 into UTF-8) of the given InputStream
+     * Returns the contents of a given {@link java.io.InputStream InputStream} in code page 850
+     * @return String the contents (converted from code page 850 into UTF-8) of the given InputStream
      */
     @TypeChecked
     def static String readFile (InputStream input) {
         //See http://docs.oracle.com/javase/8/docs/technotes/guides/intl/encoding.doc.html
         //See http://www.torsten-horn.de/techdocs/encoding.htm
-        return input.getText('Cp858')
+        return input.getText('Cp850')
     }
     
     /**

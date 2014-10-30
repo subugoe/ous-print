@@ -64,7 +64,17 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
-
+    <repositories>
+        <repository>
+            <id>apache-snapshots</id>
+            <name>Apache Snapshots</name>
+            <url>http://http://repository.apache.org/content/groups/snapshots/</url>
+            <layout>default</layout>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
     <build>
         <testResources>
             <testResource>
@@ -114,10 +124,10 @@
                     </execution>
                 </executions>
             </plugin>
-          
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.0</version>
                 <executions>
                     <execution>
                         <id>unpack-shared-resources</id>

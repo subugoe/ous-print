@@ -244,10 +244,10 @@
                             <xsl:when
                                 test="($user-type = '40' or $user-type = '15') or ($target != 'Zentralbib./Selbstabholbereich' and $target != 'Zentralbibliothek/Selbstabholbereich' and $target != 'Abholregal BB Kulturwiss.' and $target != 'Zentralbibliothek / Selbstabholberei')">
                                 <fo:block padding-top="2.5pt" font-family="FreeSans" font-size="24pt">
-                                    <xsl:value-of select="concat($user-title, ' ', print:replace-umlauts($user-lastname))"/>
+                                    <xsl:value-of select="concat($user-title, ' ', $user-lastname)"/>
                                 </fo:block>
                                 <fo:block padding-top="2.5pt" font-family="FreeSans" font-size="24pt">
-                                    <xsl:value-of select="print:replace-umlauts($user-firstname)"/>
+                                    <xsl:value-of select="$user-firstname"/>
                                 </fo:block>
                                 <fo:block font-family="FreeSans" font-size="12pt" text-align-last="justify">
                                     <!--
@@ -292,7 +292,7 @@
                         <fo:block margin-top="0.5mm" font-family="FreeSans" font-size="12pt">
                             <!-- Address extra -->
                             <xsl:comment>Address extra</xsl:comment>
-                            <xsl:value-of select="print:replace-umlauts($adress-extra)"/>
+                            <xsl:value-of select="$adress-extra"/>
                             <!-- Empty Space to get the empty block get rendered correctly -->
                             <fo:leader/>
                         </fo:block>

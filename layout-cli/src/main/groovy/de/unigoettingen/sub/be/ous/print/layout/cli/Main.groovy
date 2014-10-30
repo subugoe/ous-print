@@ -80,7 +80,8 @@ class Main {
         //Silence the logger
         log.setLevel(Level.ERROR)
         def cli = new CliBuilder(usage: 'java -jar ous-layout.jar', posix: false)
-	cli.D(args:2, valueSeparator:'=', argName:'property=value', 'use value for given property for XSLT')
+	cli.c(longOpt: 'charset', 'prints the used Java char set')
+        cli.D(args:2, valueSeparator:'=', argName:'property=value', 'use value for given property for XSLT')
         cli.f(longOpt: 'format', 'page format, either A4 or A5, defaults to ' + Layout.DEFAULT_PAGE_SIZE, args: 1)
         cli.h(longOpt: 'help', 'usage information')
         cli.i(longOpt: 'input', 'input file', args: 1)
@@ -130,14 +131,22 @@ class Main {
         }
 
         //Print help
-        if(opt.h) {
+        if (opt.h) {
             cli.usage()
             log.trace('Help requested')
             return
         }
         
+        //Print charset
+        if (opt.c) {
+            println "File encoding: " + System.getProperty("file.encoding")
+            println "Default charset: " + java.nio.charset.Charset.defaultCharset().name()
+            log.trace('Charset requested')
+            return
+        }
+        
         //Print formats
-        if(opt.lf) {
+        if (opt.lf) {
             println "This program supports a number of input formats:"
             println "ASC: A text file containing a layout definition"
             println "ASCXML: A XML file containing a layout definition"

@@ -244,10 +244,10 @@
                             <xsl:when
                                 test="($user-type = '40' or $user-type = '15') or ($target != 'Zentralbib./Selbstabholbereich' and $target != 'Zentralbibliothek/Selbstabholbereich' and $target != 'Abholregal BB Kulturwiss.' and $target != 'Zentralbibliothek / Selbstabholberei')">
                                 <fo:block padding-top="2.5pt" font-family="FreeSans" font-size="24pt">
-                                    <xsl:value-of select="concat($user-title, ' ', $user-lastname)"/>
+                                    <xsl:value-of select="concat($user-title, ' ', print:replace-umlauts($user-lastname))"/>
                                 </fo:block>
                                 <fo:block padding-top="2.5pt" font-family="FreeSans" font-size="24pt">
-                                    <xsl:value-of select="$user-firstname"/>
+                                    <xsl:value-of select="print:replace-umlauts($user-firstname)"/>
                                 </fo:block>
                                 <fo:block font-family="FreeSans" font-size="12pt" text-align-last="justify">
                                     <!--
@@ -292,7 +292,7 @@
                         <fo:block margin-top="0.5mm" font-family="FreeSans" font-size="12pt">
                             <!-- Address extra -->
                             <xsl:comment>Address extra</xsl:comment>
-                            <xsl:value-of select="$adress-extra"/>
+                            <xsl:value-of select="print:replace-umlauts($adress-extra)"/>
                             <!-- Empty Space to get the empty block get rendered correctly -->
                             <fo:leader/>
                         </fo:block>
@@ -417,5 +417,11 @@
                 </barcode:code39>
             </barcode:barcode>
         </fo:instream-foreign-object>
+    </xsl:function>
+    <xsl:function name="print:replace-umlauts" as="xs:string">
+        <xsl:param name="str" as="xs:string"/>
+        <xsl:variable name="small" select="replace(replace(replace(replace($str,' ß','ss'),'ü','ue'),'ö','oe'),'ä','ae')"/>
+        <xsl:variable name="result" select="replace(replace(replace($small,'Ü','Ue'),'Ö', 'Oe'),'Ä','Ae')"/>
+        <xsl:value-of select="$result"/>
     </xsl:function>
 </xsl:stylesheet>

@@ -52,6 +52,8 @@ import de.unigoettingen.sub.be.ous.print.util.PrinterUtil
  */
 @Log4j
 class Main {
+    /** Paper cut sequence in bytes */
+    static byte[] cutSeq = [27, 105]
     /** Variuos boolean options */
     static Boolean check, verbose, quiet = false
     /** The URLs of input and output files */
@@ -380,6 +382,19 @@ class Main {
         
         
         output.close()
+    }
+    
+    /**
+     * Cuts paper on the given printer
+     * @see http://stackoverflow.com/questions/19409456/thermal-receipt-printer-problems-with-auto-cut
+     */
+    @TypeChecked
+    protected static void cut(String printer) {
+        PrintService ps = PrinterUtil.getPrinter(printer)
+        DocPrintJob job = ps.createPrintJob() 
+        DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE
+        Doc doc = new SimpleDoc(cutSeqeq, flavor, null)
+        job.print(doc, null)
     }
     
     /**

@@ -38,7 +38,7 @@ import javax.xml.transform.TransformerConfigurationException
 
 import org.apache.log4j.Level
 
-import org.apache.pdfbox.rendering.PDFPrinter
+import org.apache.pdfbox.printing.PDFPrinter
 import org.apache.pdfbox.pdmodel.PDDocument
 import org.apache.pdfbox.pdmodel.PDPage
 

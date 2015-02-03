@@ -202,7 +202,7 @@ class Xml2Parser extends AbstractTransformer {
         void parse (InputStream input) {
             File temp = File.createTempFile("temp", ".txt");
             temp.deleteOnExit();
-            temp.write(Layout.readFile(input))
+            temp.write(Layout.readFile(input, Layout.DEFAULT_ENCODING))
             log.debug('Created temp file ' + temp.getAbsolutePath()) 
             this.params['input'] = temp.toURI().toURL().toString()
             log.trace('Setting input to ' + this.params['input'] + 'starting transformation...')

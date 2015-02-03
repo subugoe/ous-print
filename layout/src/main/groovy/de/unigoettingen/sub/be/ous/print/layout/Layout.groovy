@@ -49,7 +49,11 @@ import de.unigoettingen.sub.be.ous.print.util.Util
 
 @Log4j
 class Layout {
+    /** The defaul page size */
     static PageSize DEFAULT_PAGE_SIZE = PageSize.A4
+    
+    /** The default encoding for files to be read */
+    static String DEFAULT_ENCODING = 'Cp850'
     
     /** The input FORMAT */
     FORMAT inFormat
@@ -174,25 +178,25 @@ class Layout {
     }
     
     /**
-     * Returns the contents of a given {@link java.net.URL URL} in code page 850
+     * Returns the contents of a given {@link java.net.URL URL} in the requested encoding
      * @return String the contents (converted from code page 850 into UTF-8) of the given URL
      */
     @TypeChecked
-    def static String readFile (URL input) {
+    def static String readFile (URL input, String encoding) {
         //See http://docs.oracle.com/javase/8/docs/technotes/guides/intl/encoding.doc.html
         //See http://www.torsten-horn.de/techdocs/encoding.htm
-        return readFile(input.openStream())
+        return readFile(input.openStream(), encoding)
     }
     
     /**
-     * Returns the contents of a given {@link java.io.InputStream InputStream} in code page 850
+     * Returns the contents of a given {@link java.io.InputStream InputStream} in the requested encoding
      * @return String the contents (converted from code page 850 into UTF-8) of the given InputStream
      */
     @TypeChecked
-    def static String readFile (InputStream input) {
+    def static String readFile (InputStream input, String encoding) {
         //See http://docs.oracle.com/javase/8/docs/technotes/guides/intl/encoding.doc.html
         //See http://www.torsten-horn.de/techdocs/encoding.htm
-        return input.getText('Cp850')
+        return input.getText(encoding)
     }
     
     /**

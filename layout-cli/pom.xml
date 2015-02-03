@@ -68,7 +68,10 @@
         <repository>
             <id>apache-snapshots</id>
             <name>Apache Snapshots</name>
-            <url>http://http://repository.apache.org/content/groups/snapshots/</url>
+            <!--
+            <url>http://repository.apache.org/content/groups/snapshots/</url>
+            -->
+            <url>http://repository.apache.org/snapshots</url>
             <layout>default</layout>
             <snapshots>
                 <enabled>true</enabled>

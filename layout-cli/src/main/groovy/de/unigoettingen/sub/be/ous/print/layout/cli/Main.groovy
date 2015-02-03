@@ -312,7 +312,13 @@ class Main {
             Boolean rotate = false
             
             if (rotate) {
-                for (page in pddocument.getDocumentCatalog().getAllPages()) {
+                /*
+                Old API (PDFBox 1.8)
+                List<PDPage> pageList = pddocument.getDocumentCatalog().getAllPages()
+                New API (PDFBox 2.0)
+                Iterator<PDPage> pageIterator = pddocument.getDocumentCatalog().getPages()
+                */
+                for (page in pddocument.getDocumentCatalog().getPages()) {
                     ((PDPage) page).setRotation(90)
                 }
             }

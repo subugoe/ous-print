@@ -393,7 +393,7 @@ class Main {
         PrintService ps = PrinterUtil.getPrinter(printer)
         DocPrintJob job = ps.createPrintJob() 
         DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE
-        Doc doc = new SimpleDoc(cutSeqeq, flavor, null)
+        Doc doc = new SimpleDoc(cutSeq, flavor, null)
         job.print(doc, null)
     }
     

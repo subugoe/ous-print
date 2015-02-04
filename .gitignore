@@ -21,3 +21,4 @@
 **/*.iml
 *.iml
 .idea/**
+/ous-db/target/

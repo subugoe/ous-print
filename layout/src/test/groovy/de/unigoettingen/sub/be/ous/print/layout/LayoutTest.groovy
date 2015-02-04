@@ -65,7 +65,7 @@ class LayoutTest {
     void testEncoding() {
         for (slip in SLIP_FILES) {
             log.info('converting ' + slip.toString())
-            log.trace('Result:\n----------------START OF RESULT(' + this.getClass().getName() + ')\n' + Layout.readFile(slip))
+            log.trace('Result:\n----------------START OF RESULT(' + this.getClass().getName() + ')\n' + Layout.readFile(slip, Layout.DEFAULT_ENCODING))
             log.trace('----------------END OF RESULT(' + this.getClass().getName() + ')\n')
             
         }

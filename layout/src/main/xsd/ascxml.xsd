@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:element name="layout">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="line"/>
+      </xs:sequence>
+      <xs:attribute name="iln" use="required" type="xs:integer"/>
+      <xs:attribute name="language" use="required" type="languageType"/>
+      <xs:attribute name="layout-file" use="required" type="xs:integer"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="line">
+    <xs:complexType>
+      <xs:attribute name="attribute" use="required" type="xs:integer"/>
+      <xs:attribute name="column" use="required" type="xs:integer"/>
+      <xs:attribute name="comment" type="xs:boolean"/>
+      <xs:attribute name="entity" use="required" type="xs:integer"/>
+      <xs:attribute name="length" use="required" type="xs:integer"/>
+      <xs:attribute name="line" use="required" type="xs:integer"/>
+      <xs:attribute name="sequence" use="required" type="xs:integer"/>
+      <xs:attribute name="text" use="required"/>
+      <xs:attribute name="type" use="required" type="typeType"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:simpleType name="typeType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="T"/>
+      <xs:enumeration value="A"/>
+      <xs:enumeration value="I"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="languageType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="DU"/>
+      <xs:enumeration value="EN"/>
+      <xs:enumeration value="FR"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

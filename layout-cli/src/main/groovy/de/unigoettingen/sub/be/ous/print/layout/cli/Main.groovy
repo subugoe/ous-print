@@ -52,10 +52,8 @@ import de.unigoettingen.sub.be.ous.print.util.PrinterUtil
  */
 @Log4j
 class Main {
-    /** Paper cut sequence in bytes */
-    static byte[] cutSeq = [27, 105]
     /** Variuos boolean options */
-    static Boolean check, verbose, quiet = false
+    static Boolean check, verbose, quiet, cut = false
     /** The URLs of input and output files */
     static URL inputUrl, outputUrl, template, include, xslfo = null
     /** The File to save the output to */
@@ -82,7 +80,8 @@ class Main {
         //Silence the logger
         log.setLevel(Level.ERROR)
         def cli = new CliBuilder(usage: 'java -jar ous-layout.jar', posix: false)
-	cli.c(longOpt: 'charset', 'prints the used Java char set')
+	cli.jc(longOpt: 'charset', 'prints the used Java char set')
+        cli.c(longOpt: 'cut', 'signals the printer to cut the paper (only with prt)')
         cli.D(args:2, valueSeparator:'=', argName:'property=value', 'use value for given property for XSLT')
         cli.f(longOpt: 'format', 'page format, either A4 or A5, defaults to ' + Layout.DEFAULT_PAGE_SIZE, args: 1)
         cli.h(longOpt: 'help', 'usage information')
@@ -140,7 +139,7 @@ class Main {
         }
         
         //Print charset
-        if (opt.c) {
+        if (opt.jc) {
             println "File encoding: " + System.getProperty("file.encoding")
             println "Default charset: " + java.nio.charset.Charset.defaultCharset().name()
             log.trace('Charset requested')
@@ -187,6 +186,15 @@ class Main {
                 System.exit(11)
             }
             log.trace('Printer set to: ' + printer)
+        }
+        
+        if (opt.c) {
+            if (printer == null) {
+                println 'Cutting the paper only works with a printer'
+                System.exit(12)
+            }
+            cut = true
+            log.trace('Cutting enabled')
         }
         
         //No output method specified
@@ -370,6 +378,10 @@ class Main {
             }
              */
             println 'Generated file send to Printer ' + printer
+            if (cut) {
+                PrinterUtil.cut(printer)
+                println 'Sended paper cut signal'
+            }
         
         } else if (outFormat == FORMAT.PS && printer != null && output != null) {
             //TODO: Finish this
@@ -388,19 +400,6 @@ class Main {
         
         
         output.close()
-    }
-    
-    /**
-     * Cuts paper on the given printer
-     * @see http://stackoverflow.com/questions/19409456/thermal-receipt-printer-problems-with-auto-cut
-     */
-    @TypeChecked
-    protected static void cut(String printer) {
-        PrintService ps = PrinterUtil.getPrinter(printer)
-        DocPrintJob job = ps.createPrintJob() 
-        DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE
-        Doc doc = new SimpleDoc(cutSeq, flavor, null)
-        job.print(doc, null)
     }
     
     /**

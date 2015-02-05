@@ -20,9 +20,13 @@ package de.unigoettingen.sub.be.ous.print.util
 
 import groovy.transform.CompileStatic
 import groovy.transform.TypeChecked
+import javax.print.Doc
+import javax.print.DocFlavor
+import javax.print.DocPrintJob
 
 import javax.print.PrintService
 import javax.print.PrintServiceLookup
+import javax.print.SimpleDoc
 import javax.print.attribute.standard.Media
 
 /**
@@ -33,6 +37,8 @@ import javax.print.attribute.standard.Media
 @CompileStatic
 @TypeChecked
 class PrinterUtil {
+    /** Paper cut sequence in bytes */
+    static byte[] cutSeq = [27, 105]
     
     /**
      * Gets a {@link javax.print.PrintService PrintService} by name
@@ -90,6 +96,19 @@ class PrinterUtil {
             printers.add(printer) 
         }
         return printers
+    }
+    
+    /**
+     * Cuts paper on the given printer
+     * @see http://stackoverflow.com/questions/19409456/thermal-receipt-printer-problems-with-auto-cut
+     */
+    @TypeChecked
+    protected static void cut(String printer) {
+        PrintService ps = PrinterUtil.getPrinter(printer)
+        DocPrintJob job = ps.createPrintJob() 
+        DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE
+        Doc doc = new SimpleDoc(cutSeq, flavor, null)
+        job.print(doc, null)
     }
 }
 

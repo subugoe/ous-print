@@ -81,7 +81,9 @@ class LayoutProcessorTest extends CamelTestSupport {
                 processor.setDebugPath(new File('./target/').toURI().toURL())
                 processor.setTemplate(PARSER_TXT)
                 processor.setXslfo(FO)
-                from("file:./target//generated-test-resources/hotfolder/in?noop=true&include=.*.print").shutdownRunningTask(ShutdownRunningTask.CompleteAllTasks).process(processor).to("mock:result")
+                from("file:./target//generated-test-resources/hotfolder/in?noop=true&include=.*.print")
+                .shutdownRunningTask(ShutdownRunningTask.CompleteAllTasks)
+                .process(processor).to("mock:result")
                 
             }
         };

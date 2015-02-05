@@ -130,7 +130,7 @@
             -->
             <plugin>
                 <artifactId>maven-antrun-plugin</artifactId>
-                <version>1.7</version>
+                <version>1.8</version>
                 <executions>
                     <execution>
                         <phase>process-resources</phase>
@@ -161,13 +161,7 @@
                             <goal>run</goal>
                         </goals>
                     </execution>
-                </executions>
-            </plugin>
-            <!-- Create the folder for generated XML representations of layouts -->
-            <plugin>
-                <artifactId>maven-antrun-plugin</artifactId>
-                <version>1.7</version>
-                <executions>
+                    <!-- Create the folder for generated XML representations of layouts -->
                     <execution>
                         <phase>generate-test-resources</phase>
                         <configuration>

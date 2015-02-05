@@ -255,6 +255,7 @@
                 </executions>
                 <configuration>
                     <packageName>de.unigoettingen.sub.be.ous.models</packageName>
+                     <locale>en</locale>
                 </configuration>
             </plugin>
             <plugin>

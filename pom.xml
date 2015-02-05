@@ -252,6 +252,9 @@
                     <locales>en</locales>
                 </configuration>
                 -->
+                <configuration>
+                    <skipDeploy>true</skipDeploy>
+                </configuration>
                 <dependencies>
                     <dependency>
                         <groupId>org.apache.maven.doxia</groupId>
@@ -288,7 +291,7 @@
                         <goals>
                             <goal>site</goal>
                         </goals>
-                        <phase>site</phase>
+                        <phase>site-deploy</phase>
                     </execution>
                 </executions>
             </plugin>

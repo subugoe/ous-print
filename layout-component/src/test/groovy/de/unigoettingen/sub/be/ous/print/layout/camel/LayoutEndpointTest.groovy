@@ -32,7 +32,7 @@ import org.junit.Test
  * Also uses the Endpoint URI, not the processor
  * @author cmahnke
  */
-class LayoutEndpointTest  extends CamelTestSupport  {
+class LayoutEndpointTest extends CamelTestSupport  {
     static URL PARSER_TXT = LayoutProcessorTest.getClass().getResource("/layouts/ous40_layout_001_du.asc")
     static URL FO = LayoutProcessorTest.getClass().getResource("/xslt/layout2fo.xsl")
     

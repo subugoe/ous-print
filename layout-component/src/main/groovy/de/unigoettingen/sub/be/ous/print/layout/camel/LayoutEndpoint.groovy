@@ -18,16 +18,12 @@
 
 package de.unigoettingen.sub.be.ous.print.layout.camel
 
-import de.unigoettingen.sub.be.ous.print.layout.FORMAT
-
 import groovy.transform.CompileStatic
 import groovy.transform.TypeChecked
 
 import org.apache.camel.Component
-import org.apache.camel.api.management.ManagedAttribute
 import org.apache.camel.impl.ProcessorEndpoint
 import org.apache.camel.spi.UriEndpoint
-import org.apache.camel.spi.UriParam
 
 /**
  * A simple endpoint for the LayoutProcessor, extending ProcessorEndpoint
@@ -50,6 +46,5 @@ class LayoutEndpoint extends ProcessorEndpoint {
         super(endpointUri, component, lp)
         this.lp = lp
     }
-  
 }
 

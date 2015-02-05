@@ -6,6 +6,7 @@
             <item name="Rendering" href="./rendering.html"/>
             <item name="Using Libre / Open Office to create Templates" href="./odf.html"/>
             <item name="GroovyDoc" href="./groovydoc/index.html"/>
+            <item name="JavaDoc (genarated classes)" href="./apidocs/index.html"/>
         </menu>
         <menu ref="reports"/>
     </body>

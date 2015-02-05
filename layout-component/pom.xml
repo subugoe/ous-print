@@ -38,6 +38,12 @@
     <dependencies>
         <dependency>
             <groupId>org.apache.camel</groupId>
+            <artifactId>camel-fop</artifactId>
+            <version>${apache.camel.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
             <artifactId>camel-core</artifactId>
             <version>${apache.camel.version}</version>
         </dependency>

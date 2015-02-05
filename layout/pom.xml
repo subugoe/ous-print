@@ -250,7 +250,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <packageName>de.unigoettingen.sub.be.ous.models</packageName>
+                    <packageName>de.unigoettingen.sub.be.ous.models.asc</packageName>
                     <extension>true</extension>
                     <args>
                         <arg>-Duser.language=en</arg>

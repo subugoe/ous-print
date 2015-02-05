@@ -19,7 +19,7 @@
  */
 -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
-    xmlns:print="http://www.sub.uni-goettingen.de/BE/OUS/print" xmlns:gxsl="http://www.sub.uni-goettingen.de/BE/OUS/gXSL" exclude-result-prefixes="xd" version="2.0">
+    xmlns:print="http://www.sub.uni-goettingen.de/BE/OUS/print" xmlns:gxsl="http://www.sub.uni-goettingen.de/BE/OUS/gXSL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" exclude-result-prefixes="xd" version="2.0">
     <xd:doc scope="stylesheet">
         <xd:desc>
             <xd:p><xd:b>Created on:</xd:b> Mar 18, 2014</xd:p>

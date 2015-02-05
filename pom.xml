@@ -177,7 +177,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-antrun-plugin</artifactId>
-                <version>1.7</version>
+                <version>1.8</version>
                 <executions>
                     <execution>
                         <id>groovydoc</id>
@@ -223,7 +223,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
-                <version>3.2</version>
+                <version>3.3</version>
                 <!-- TODO: this doesn't work with Maven 3, see http://maven.apache.org/plugins/maven-site-plugin/maven-3.html#New_Configuration_Maven_3_only_no_reports_configuration_inheritance
                 <configuration>
                     <reportPlugins>
@@ -301,5 +301,6 @@
         <module>layout-cli</module>
         <module>layout-component</module>
         <module>layout-test</module>
+        <module>ous-db</module>
     </modules>
 </project>

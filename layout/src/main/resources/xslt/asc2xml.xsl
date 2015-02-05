@@ -18,8 +18,9 @@
  * MA 02110-1301 USA.
  */
 -->
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:print="http://www.sub.uni-goettingen.de/BE/OUS/print"
-                xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" exclude-result-prefixes="xs xd" version="2.0">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:print="http://www.sub.uni-goettingen.de/BE/OUS/print" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" exclude-result-prefixes="xs xd" version="2.0">
     <xd:doc scope="stylesheet">
         <xd:desc>
             <xd:p>
@@ -73,6 +74,8 @@
                     <line>
                         <xsl:choose>
                             <xsl:when test="matches(., '^\s*;.*$')">
+                                <!-- Set schema instance Type commentLine -->
+                                <xsl:attribute name="xsi:type" select="'commentLine'"/>
                                 <xsl:attribute name="comment" select="'true'"/>
                                 <xsl:attribute name="text">
                                     <xsl:copy-of select="."/>
@@ -82,6 +85,8 @@
                                 <!-- Check the type of layout -->
                                 <xsl:choose>
                                     <xsl:when test="$layout-type = 'normal'">
+                                        <!-- Set schema instance Type commentLine -->
+                                        <xsl:attribute name="xsi:type" select="'positionLine'"/>
                                         <!-- 
                                         Regex Groups:
                                             1) LIN: line
@@ -93,7 +98,8 @@
                                             7) LEN: length
                                             8) TEXT: text
                                         -->
-                                        <xsl:analyze-string select="." regex="^\s*(\d{{3}})\s*(\d{{3}})\s*(\d{{3}})\s*(\d{{3}})\s*(\d{{3}})\s*([\w^\d]{{1}})\s*(\d{{3}})(.*)$">
+                                        <xsl:analyze-string select="."
+                                            regex="^\s*(\d{{3}})\s*(\d{{3}})\s*(\d{{3}})\s*(\d{{3}})\s*(\d{{3}})\s*([\w^\d]{{1}})\s*(\d{{3}})(.*)$">
                                             <xsl:matching-substring>
                                                 <xsl:attribute name="line" select="regex-group(1)"/>
                                                 <xsl:attribute name="column" select="regex-group(2)"/>
@@ -107,6 +113,8 @@
                                         </xsl:analyze-string>
                                     </xsl:when>
                                     <xsl:when test="$layout-type = 'text'">
+                                        <!-- Set schema instance Type commentLine -->
+                                        <xsl:attribute name="xsi:type" select="'textLine'"/>
                                         <!--
                                         Regex Groups:
                                         1) file

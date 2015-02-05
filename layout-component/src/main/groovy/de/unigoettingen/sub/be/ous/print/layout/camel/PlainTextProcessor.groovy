@@ -18,6 +18,7 @@
 
 package de.unigoettingen.sub.be.ous.print.layout.camel
 
+import groovy.transform.CompileStatic
 import groovy.transform.TypeChecked
 import groovy.util.logging.Log4j
 
@@ -34,9 +35,10 @@ import org.apache.commons.io.FilenameUtils
 
 @Log4j
 @TypeChecked
+//@CompileStatic
 class PlainTextProcessor implements Processor  {
     /** The path to the XSL-FO template */
-    def static String XSL_FO_TEMPLATE = "xslfo/plaintext.fo"
+    def static URL XSL_FO_TEMPLATE = PlainTextProcessor.getClass().getResource('/xslfo/plaintext.fo')
     
     /**
      * Processes the contents of the given {@link org.apache.camel.Exchange Exchange}
@@ -45,10 +47,10 @@ class PlainTextProcessor implements Processor  {
     @Override
     public void process(Exchange exchange) throws Exception {
         String body = exchange.getIn().getBody(String.class)
-        String fileNameWithoutExtension = FilenameUtils.getBaseName((String) exchange.getIn().getHeader(Exchange.FILE_NAME))
+        String fileName = FilenameUtils.getBaseName((String) exchange.getIn().getHeader(Exchange.FILE_NAME))
         String xslFoBody = getXslFo(body)
         exchange.getIn().setBody(xslFoBody)
-        exchange.getIn().setHeader(Exchange.FILE_NAME, fileNameWithoutExtension + ".pdf")
+        exchange.getIn().setHeader(Exchange.FILE_NAME, fileName + ".fo")
     }
     
     /**
@@ -57,8 +59,8 @@ class PlainTextProcessor implements Processor  {
      */
     //TODO: Include height and width here as well to simulate different paper sizes
     protected String getXslFo(String text) {
-        String fopBlockTemplate = PlainTextProcessor.getClass().getResource(XSL_FO_TEMPLATE).getText('UTF-8')
-        return fopBlockTemplate.replaceAll("#CONTENT", text);
+        String fopTemplate = XSL_FO_TEMPLATE.getText('UTF-8')
+        return fopTemplate.replace("#CONTENT", text);
     }
 }
 

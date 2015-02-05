@@ -38,8 +38,8 @@ class PlainTextProcessorTest extends CamelTestSupport {
     @Test
     public void testMessageCount() {
         //We've got 36 Test files - This takes some time
-        resultEndpoint.setMinimumResultWaitTime(3000)
-        resultEndpoint.setResultWaitTime(30000)
+        resultEndpoint.setMinimumResultWaitTime(1000)
+        resultEndpoint.setResultWaitTime(10000)
         resultEndpoint.expectedMessageCount(36)
         assertMockEndpointsSatisfied();       
     }
@@ -49,7 +49,10 @@ class PlainTextProcessorTest extends CamelTestSupport {
         return new RouteBuilder() {
             public void configure() {
                 PlainTextProcessor processor = new PlainTextProcessor()
-                from("file:./target//generated-test-resources/hotfolder/in?noop=true&include=.*.print&charset=Cp850").shutdownRunningTask(ShutdownRunningTask.CompleteAllTasks).process(processor).to("mock:result")
+                from("file:./target//generated-test-resources/hotfolder/in?noop=true&include=.*.print&charset=Cp850")
+                .shutdownRunningTask(ShutdownRunningTask.CompleteAllTasks)
+                .process(processor)
+                .to("mock:result")
             }
         };
     }

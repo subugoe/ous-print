@@ -133,6 +133,7 @@
                 <version>1.8</version>
                 <executions>
                     <execution>
+                        <id>process-resources</id>
                         <phase>process-resources</phase>
                         <configuration>
                             <target>
@@ -163,6 +164,7 @@
                     </execution>
                     <!-- Create the folder for generated XML representations of layouts -->
                     <execution>
+                        <id>generate-test-resources</id>
                         <phase>generate-test-resources</phase>
                         <configuration>
                             <target>

@@ -53,7 +53,7 @@ class LayoutEndpointTest extends CamelTestSupport  {
         return new RouteBuilder() {
             @Override
             public void configure() throws Exception {
-                from("file:./target/generated-test-resources/hotfolder/in?include=.*.print&noop=true")
+                from("file:./target/generated-test-resources/hotfolder/lbs3/in?include=.*.print&noop=true")
                 .to("layout:.?xslfo=./target/test-classes/xslt/layout2fo.xsl&template=./target/test-classes/layouts/ous40_layout_001_du.asc")
                 .to('file:./target/?fileName=${file:name}.pdf')
                 .to("mock:result");

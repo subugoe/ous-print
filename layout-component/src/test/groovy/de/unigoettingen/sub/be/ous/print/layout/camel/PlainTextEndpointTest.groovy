@@ -47,7 +47,7 @@ class PlainTextEndpointTest  extends CamelTestSupport {
         return new RouteBuilder() {
             @Override
             public void configure() throws Exception {
-                from("file:./target/generated-test-resources/hotfolder/in?include=.*.print&noop=true&charset=Cp850")
+                from("file:./target/generated-test-resources/hotfolder/lbs3/in?include=.*.print&noop=true&charset=Cp850")
                 .to("plainText:foo")
                 .to("fop:application/pdf")
                 .to('file:./target/?fileName=${file:name}.pdf')

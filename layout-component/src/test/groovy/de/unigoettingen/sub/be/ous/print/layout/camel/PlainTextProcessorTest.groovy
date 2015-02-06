@@ -49,7 +49,7 @@ class PlainTextProcessorTest extends CamelTestSupport {
         return new RouteBuilder() {
             public void configure() {
                 PlainTextProcessor processor = new PlainTextProcessor()
-                from("file:./target//generated-test-resources/hotfolder/in?noop=true&include=.*.print&charset=Cp850")
+                from("file:./target//generated-test-resources/hotfolder/lbs3/in?noop=true&include=.*.print&charset=Cp850")
                 .shutdownRunningTask(ShutdownRunningTask.CompleteAllTasks)
                 .process(processor)
                 .to("mock:result")

@@ -325,6 +325,16 @@ class Layout {
         /** The name of this PageSize */
         String name
         
+        /** Page dimensions */
+        /*
+         * <!-- A5 landscape -->
+         * <format name="A5" width="210mm" height="148mm" margin="13mm" orientation="LANDSCAPE"/>
+         * <!-- A4 portrait -->
+         * <format name="A4" width="210mm" height="297mm" margin="13mm" orientation="PORTRAIT"/>
+         */
+        static Map<PageSize, Map<String, String>> dimensions = [A4: ['height':'297mm', 'width': '210mm', 'margin': '13mm', 'orientation': 'PORTRAIT'],
+            A5:['height':'148mm', 'width': '210mm', 'margin': '13mm', 'orientation': 'LANDSCAPE']]
+        
         /**
          * Constructor, sets up a PageSize object
          */
@@ -392,6 +402,14 @@ class Layout {
                 paper.setImageableArea(0,0,334,509)
             }
             return paper
+        }
+        
+        /**
+         * Return a Map of page dimensions for use in XSL-FO files
+         * @returns {@java.util.Map}, a Map containing hight, width, margin and orientation
+         */
+        public static Map<String, String> getDimension(PageSize ps) {
+            return dimensions.get(ps)
         }
         
     }

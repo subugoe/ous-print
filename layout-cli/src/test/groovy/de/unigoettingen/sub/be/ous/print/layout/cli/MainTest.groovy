@@ -50,7 +50,7 @@ import static org.junit.Assert.*
 
 @Log4j
 class MainTest {
-    static File SLIPS = new File(MainTest.getClass().getResource('/hotfolder/in/').toURI())
+    static File SLIPS = new File(MainTest.getClass().getResource('/hotfolder/lbs3/in/').toURI())
     static List<String> SLIP_FILES = new ArrayList<String>()
     static URL FO = MainTest.getClass().getResource("/xslt/layout2fo.xsl")
     static URL TEMPLATE = MainTest.getClass().getResource("/layouts/ous40_layout_001_du.asc")

@@ -18,6 +18,8 @@
 
 package de.unigoettingen.sub.be.ous.print.layout.camel
 
+import de.unigoettingen.sub.be.ous.print.layout.Layout.PageSize
+
 import groovy.transform.CompileStatic
 import groovy.transform.TypeChecked
 import groovy.util.logging.Log4j
@@ -40,6 +42,15 @@ class PlainTextProcessor implements Processor  {
     /** The path to the XSL-FO template */
     def static URL XSL_FO_TEMPLATE = PlainTextProcessor.getClass().getResource('/xslfo/plaintext.fo')
     
+    def PageSize pageSize
+    
+    /**
+     * Creates a PlainTextProcessor
+     */
+    PlainTextProcessor(PageSize pageSize = PageSize.A4) {
+        this.pageSize = pageSize
+    }
+    
     /**
      * Processes the contents of the given {@link org.apache.camel.Exchange Exchange}
      * @see {@link org.apache.camel.Processor#process(org.apache.camel.Exchange)}
@@ -59,8 +70,13 @@ class PlainTextProcessor implements Processor  {
      */
     //TODO: Include height and width here as well to simulate different paper sizes
     protected String getXslFo(String text) {
+        Map<String, String> dimensions = PageSize.getDimension(pageSize)
         String fopTemplate = XSL_FO_TEMPLATE.getText('UTF-8')
-        return fopTemplate.replace("#CONTENT", text);
+        fopTemplate = fopTemplate.replace('{$width}', dimensions.get('width'))
+        fopTemplate = fopTemplate.replace('{$height}', dimensions.get('hight'))
+        fopTemplate = fopTemplate.replace('{$master-name}', dimensions.get('master-name'))
+        fopTemplate = fopTemplate.replace('{$margin}', dimensions.get('margin'))
+        return fopTemplate.replace('{$content}', text)
     }
 }
 

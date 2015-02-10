@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
     <fo:layout-master-set>
-        <fo:simple-page-master master-name="A4">
+        <fo:simple-page-master master-name="{$master-name}" page-width="{$width}" page-height="{$height}" margin="{$margin}">
             <fo:region-body margin="25pt"/>
         </fo:simple-page-master>
     </fo:layout-master-set>
-    <fo:page-sequence master-reference="A4">
+    <fo:page-sequence master-reference="{$master-name}">
         <fo:flow flow-name="xsl-region-body">
             <fo:block font-family="Courier" font-weight="normal" font-style="normal" score-spaces="true" white-space="pre" linefeed-treatment="preserve"
-                white-space-collapse="false" white-space-treatment="preserve" font-size="10pt">#CONTENT</fo:block>
+                white-space-collapse="false" white-space-treatment="preserve" font-size="10pt">{$content}</fo:block>
         </fo:flow>
     </fo:page-sequence>
 </fo:root>

@@ -118,7 +118,7 @@ class Xml2Parser extends AbstractTransformer {
      */
     LayoutParser getParser() {
         if (result != null) {
-            return new LayoutParser(result, input.toString())
+            return new LayoutParser(result, input.toString(), Layout.DEFAULT_ENCODING)
         }
         throw new IllegalStateException('No result stylesheet')
     }
@@ -128,8 +128,8 @@ class Xml2Parser extends AbstractTransformer {
      * Use this if you are working with precompiled parsers
      * @return LayoutParser the parser for the given stylesheet
      */
-    static LayoutParser getParser(URL stylesheet, String name) {
-        return new LayoutParser(new StreamSource(stylesheet.openStream()), name)
+    static LayoutParser getParser(URL stylesheet, String name, String encoding = Layout.DEFAULT_ENCODING) {
+        return new LayoutParser(new StreamSource(stylesheet.openStream()), name, encoding)
     }
     
     /**
@@ -163,8 +163,9 @@ class Xml2Parser extends AbstractTransformer {
          * Constructs a LayoutParser using a parser given as document and the name of the source layout
          * @param {@link org.w3c.dom.Document Document} the parser
          * @param {@link java.lang.String String} the name of the source layout
+         * @param {@link java.lang.String String} the name of encoding teo be used, defaults to Layout.DEFAULT_ENCODING
          */
-        protected LayoutParser (Document parser, String layoutName, String encoding = Layout.DEFAULT_ENCODING) {
+        protected LayoutParser (Document parser, String layoutName, String encoding) {
             this()
             this.parser = parser
             this.layoutName = layoutName

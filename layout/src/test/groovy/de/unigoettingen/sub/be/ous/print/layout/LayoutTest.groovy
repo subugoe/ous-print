@@ -39,7 +39,7 @@ import static org.junit.Assert.*
 
 @Log4j
 class LayoutTest {
-    static File SLIPS = new File(Xml2ParserTest.getClass().getResource('/hotfolder/in/').toURI())
+    static File SLIPS = new File(Xml2ParserTest.getClass().getResource('/hotfolder/lbs3/in/').toURI())
     static List<URL> SLIP_FILES = new ArrayList<URL>()
     static URL PARSER_XML = Xml2ParserTest.getClass().getResource("/layouts-xml/ous40_layout_001_du.asc.xml")
     static URL PARSER_TXT = Xml2ParserTest.getClass().getResource("/layouts/ous40_layout_001_du.asc")

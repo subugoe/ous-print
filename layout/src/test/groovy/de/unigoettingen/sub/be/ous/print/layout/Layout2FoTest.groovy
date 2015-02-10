@@ -44,7 +44,7 @@ class Layout2FoTest {
     static URL LAYOUT = Layout2FoTest.getClass().getResource("/layouts-xml/ous40_layout_001_du.asc.xml")
     static URL FO = Layout2FoTest.getClass().getResource("/xslt/layout2fo.xsl")
     static LayoutParser LP
-    static File SLIPS = new File(Xml2ParserTest.getClass().getResource('/hotfolder/in/').toURI())
+    static File SLIPS = new File(Xml2ParserTest.getClass().getResource('/hotfolder/lbs3/in/').toURI())
     static List<URL> SLIP_FILES = new ArrayList<URL>()
     
     @BeforeClass
@@ -72,7 +72,7 @@ class Layout2FoTest {
                 log.warn('File contains invalid characters: ' + slip.toString())
                 continue
             }
-        
+            //This will fail if the charset is wrong
             LP.parse(slip)
             Layout2Fo l2f = new Layout2Fo(LP.result, FO)
             l2f.transform()

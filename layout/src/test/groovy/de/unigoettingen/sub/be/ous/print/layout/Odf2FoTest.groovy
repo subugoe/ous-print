@@ -37,7 +37,7 @@ class Odf2FoTest {
     static URL LAYOUT = Layout2FoTest.getClass().getResource("/layouts-xml/ous40_layout_001_du.asc.xml")
     static URL ODF = Layout2FoTest.getClass().getResource("/odf/Bestellschein-Template.odt")
     static LayoutParser LP
-    static File SLIPS = new File(Xml2ParserTest.getClass().getResource('/hotfolder/in/').toURI())
+    static File SLIPS = new File(Xml2ParserTest.getClass().getResource('/hotfolder/lbs3/in/').toURI())
     static List<URL> SLIP_FILES = new ArrayList<URL>()
     
     @BeforeClass

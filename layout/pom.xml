@@ -256,6 +256,7 @@
                         <arg>-Duser.language=en</arg>
                     </args>
                     <locale>en</locale>
+                    <target>2.0</target>
                 </configuration>
             </plugin>
             <plugin>

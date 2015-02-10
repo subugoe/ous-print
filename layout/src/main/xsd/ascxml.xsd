@@ -7,7 +7,7 @@
       </xs:sequence>
       <xs:attribute name="iln" use="required" type="xs:integer"/>
       <xs:attribute name="language" use="required" type="languageType"/>
-      <xs:attribute name="layout-file" use="required" type="xs:integer"/>
+      <xs:attribute name="layout-file" use="required" type="layoutType"/>
     </xs:complexType>
   </xs:element>
   <!-- See http://lists.xml.org/archives/xml-dev/200107/msg00038.html -->
@@ -75,6 +75,11 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="positionType">
+    <xs:restriction base="xs:token">
+      <xs:pattern value="[0-9]{3}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="layoutType">
     <xs:restriction base="xs:token">
       <xs:pattern value="[0-9]{3}"/>
     </xs:restriction>

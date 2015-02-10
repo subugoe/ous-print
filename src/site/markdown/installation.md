@@ -13,6 +13,8 @@ Not all unit tests are passing yet, therefore you need the following to build al
 On platforms that use their own encoding (Solaris, Windows, MacOS) you may need to set UTF-8 as platform encoding.
 You can do this by seting your own .mavenrc file (on Solaris and MacOS)
 > echo "MAVEN_OPTS=' -Dfile.encoding=UTF-8'" > ~/.mavenrc
+If you are working on MacOS with a current JDK from Oraclte (not Apple) make sure it's used by Maven
+> echo "JAVA_HOME=`/usr/libexec/java_home`" >> ~/.mavenrc
 
 The resulting artifacts will be created in the subfolder 'target' in each of the modules. Refer to the module documentation to learn how to use them.
 

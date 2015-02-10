@@ -56,8 +56,8 @@ class Xml2Parser extends AbstractTransformer {
     static {
         paramPrototypes.keySet().each { name ->
             def methodName = name[0].toUpperCase() + name[1..-1]
-            Asc2Xml.metaClass."set${methodName}" = {String value -> params."${name}" = value }
-            Asc2Xml.metaClass."get${methodName}" = {-> params."${name}" }
+            Xml2Parser.metaClass."set${methodName}" = {String value -> params."${name}" = value }
+            Xml2Parser.metaClass."get${methodName}" = {-> params."${name}" }
         }
     }
     
@@ -144,10 +144,13 @@ class Xml2Parser extends AbstractTransformer {
         String layoutName
         
         /** Params */
-        def Map params = ['input': '']
+        def Map params = ['input': '', 'encoding': '']
         
         /** The result {@link org.w3c.dom.Document Document} */
         protected Document result
+        
+        /** The encoding to be used */
+        protected String encoding
         
         /**
          * Constructs a empty LayoutParser
@@ -161,11 +164,12 @@ class Xml2Parser extends AbstractTransformer {
          * @param {@link org.w3c.dom.Document Document} the parser
          * @param {@link java.lang.String String} the name of the source layout
          */
-        protected LayoutParser (Document parser, String layoutName) {
+        protected LayoutParser (Document parser, String layoutName, String encoding = Layout.DEFAULT_ENCODING) {
             this()
             this.parser = parser
             this.layoutName = layoutName
             this.input = getEmptyXml()
+            this.encoding = encoding
         }
 
         
@@ -199,6 +203,7 @@ class Xml2Parser extends AbstractTransformer {
          * @param the InputStream to be parsed
          * @throws TransformerException
          */
+        @Deprecated
         void parse (InputStream input) {
             File temp = File.createTempFile("temp", ".txt");
             temp.deleteOnExit();

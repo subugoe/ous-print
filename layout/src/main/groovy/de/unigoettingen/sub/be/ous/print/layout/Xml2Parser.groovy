@@ -193,8 +193,14 @@ class Xml2Parser extends AbstractTransformer {
          * @param URL of the file to be parsed
          */
         void parse (URL input) {
-            log.trace('Parsing InputStream')
-            parse(input.openStream())
+            log.trace("Parsing URL ${input} with encoding ${this.encoding}")
+            this.params['encoding'] = this.encoding
+            this.params['input'] = input.toString()
+            try {
+                this.transform()
+            } catch (TransformerException te) {
+                throw te
+            }
         }
         
         /**
@@ -204,12 +210,13 @@ class Xml2Parser extends AbstractTransformer {
          * @throws TransformerException
          */
         @Deprecated
-        void parse (InputStream input) {
+        protected void parse (InputStream input) {
             File temp = File.createTempFile("temp", ".txt");
             temp.deleteOnExit();
             temp.write(Layout.readFile(input, Layout.DEFAULT_ENCODING))
             log.debug('Created temp file ' + temp.getAbsolutePath()) 
             this.params['input'] = temp.toURI().toURL().toString()
+            this.params['encoding'] = this.encoding
             log.trace('Setting input to ' + this.params['input'] + 'starting transformation...')
             try {
                 this.transform()

@@ -168,7 +168,7 @@
                         <phase>generate-test-resources</phase>
                         <configuration>
                             <target>
-                                <mkdir dir="${project.build.directory}/generated-test-resources/layouts-xml"/>
+                                <mkdir dir="${project.build.directory}/test-classes/layouts-xml"/>
                             </target>
                         </configuration>
                         <goals>
@@ -195,7 +195,7 @@
                         <transformationSet>
                             <dir>src/main/resources/xml/</dir>
                             <stylesheet>src/main/resources/xslt/asc2xml.xsl</stylesheet>
-                            <outputDir>${project.build.directory}/generated-test-resources/layouts-xml</outputDir>
+                            <outputDir>${project.build.directory}/test-classes/layouts-xml</outputDir>
                             <fileMappers>                           
                                 <fileMapper implementation="org.codehaus.plexus.components.io.filemappers.MergeFileMapper">
                                     <targetName>ous40_layout_001_du.asc.xml</targetName>
@@ -212,7 +212,7 @@
                         <transformationSet>
                             <dir>src/main/resources/xml/</dir>
                             <stylesheet>src/main/resources/xslt/asc2xml.xsl</stylesheet>
-                            <outputDir>${project.build.directory}/generated-test-resources/layouts-xml</outputDir>
+                            <outputDir>${project.build.directory}/test-classes/layouts-xml</outputDir>
                             <fileMappers>                           
                                 <fileMapper implementation="org.codehaus.plexus.components.io.filemappers.MergeFileMapper">
                                     <targetName>ous40_layout_001_en.asc.xml</targetName>

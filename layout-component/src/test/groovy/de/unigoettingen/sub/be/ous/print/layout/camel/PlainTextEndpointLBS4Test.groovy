@@ -36,7 +36,7 @@ class PlainTextEndpointLBS4Test  extends CamelTestSupport {
     @Test
     public void testMessageCount() {
         //We've got 36 Test files - This takes some time
-        resultEndpoint.setMinimumResultWaitTime(1500)
+        resultEndpoint.setMinimumResultWaitTime(500)
         resultEndpoint.setResultWaitTime(20000)
         resultEndpoint.expectedMessageCount(2)
         assertMockEndpointsSatisfied();       

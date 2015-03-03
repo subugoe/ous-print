@@ -14,6 +14,16 @@
         <appender-ref ref="console"/>
     </logger>
 
+    <logger name="org.apache.camel" additivity="true">
+        <level value="warn"/>
+        <appender-ref ref="console"/>
+    </logger>
+
+    <logger name="org.apache.fop" additivity="true">
+        <level value="warn"/>
+        <appender-ref ref="console"/>
+    </logger>
+    
     <root>
         <priority value="trace"/>
         <appender-ref ref="console"/>

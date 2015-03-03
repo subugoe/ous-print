@@ -87,7 +87,9 @@ class Db2Asc {
         ps.setString(3, language)
 
         ResultSet res = ps.executeQuery()
-        res.next()
+        if (!res.next()) {
+            throw new IllegalStateException('Result set is empty')
+        }
         //We need to copy the stream since it will be otherwise lost if the connection is closed, took some time to figure this out :(
         byte[] blob = IOUtils.toByteArray(res.getBlob('content').getBinaryStream())
         return new ByteArrayInputStream(blob)
@@ -149,10 +151,10 @@ class Db2Asc {
                 ps.setType(TypeType.valueOf('I'))
                 log.trace('Type of entry: I (73) ')
 
-            } else if (l.get(5) == '032') {
-                //
-                ps.setType(TypeType.valueOf('I'))
-                log.trace('Type of entry: T (32) ')
+            } else if (l.get(5) == '077') {
+                //Money
+                ps.setType(TypeType.valueOf('M'))
+                log.trace('Type of entry: M (77) ')
             } else {
                 throw new IllegalStateException("Unknown type: " + l.get(5))
             }

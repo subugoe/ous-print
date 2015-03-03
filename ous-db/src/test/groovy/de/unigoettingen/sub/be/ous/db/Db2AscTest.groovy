@@ -43,7 +43,7 @@ class Db2AscTest {
     static String PASS = ''
     
     //Extraction settings
-    static List<Integer> numbers = [1, 2]
+    static List<Integer> numbers = [1, 24, 310]
     static List<Integer> inls = [40]
     static List<String> languages = ['EN', 'DE']
     

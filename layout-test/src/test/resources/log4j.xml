@@ -28,7 +28,7 @@
     </logger>
     
     <root>
-        <priority value="trace"/>
+        <priority value="error"/>
         <appender-ref ref="console"/>
     </root>
 

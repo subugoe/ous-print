@@ -37,7 +37,7 @@ class Db2AscTest {
     //Database settings
     static String DATABASE = 'lbsdb'
     static String TABLE = 'lbs_report_layout'
-    static String DB_URI = 'jdbc:hsqldb:file:./target/test-classes/db/' + DATABASE
+    static String DB_URI = 'jdbc:hsqldb:file:./target/test-classes/database/lbsdb' + DATABASE
     static String USER = 'SA'
     static String PASS = ''
     

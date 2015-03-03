@@ -48,7 +48,7 @@ class PlainTextEndpointTest  extends CamelTestSupport {
             @Override
             public void configure() throws Exception {
                 from("file:./target/generated-test-resources/hotfolder/lbs3/in?include=.*.print&noop=true&charset=Cp850")
-                .to("plainText:foo")
+                .to("plainText:.&pageSize=A5")
                 .to("fop:application/pdf")
                 .to('file:./target/?fileName=${file:name}.pdf')
                 .to("mock:result");

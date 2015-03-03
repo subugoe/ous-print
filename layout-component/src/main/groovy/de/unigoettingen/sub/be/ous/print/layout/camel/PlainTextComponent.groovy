@@ -21,6 +21,7 @@ package de.unigoettingen.sub.be.ous.print.layout.camel
 import de.unigoettingen.sub.be.ous.print.layout.FORMAT
 import de.unigoettingen.sub.be.ous.print.layout.Layout
 
+import groovy.transform.CompileStatic
 import groovy.transform.TypeChecked
 import groovy.util.logging.Log4j
 
@@ -36,8 +37,7 @@ import org.apache.camel.spi.UriParam
  */
 @Log4j
 @TypeChecked
-class PlainTextComponent extends UriEndpointComponent {
-    
+class PlainTextComponent extends UriEndpointComponent {   
     @UriParam
     /** The desired page size of the result */
     String pageSize = Layout.DEFAULT_PAGE_SIZE
@@ -72,7 +72,12 @@ class PlainTextComponent extends UriEndpointComponent {
     @Override
     protected Endpoint createEndpoint(String uri, final String remaining, Map<String, Object> parameters) throws Exception {
         log.trace('Setup PlainTextProcessor')
-        PlainTextProcessor ptp = new PlainTextProcessor()
+        PlainTextProcessor ptp
+        if (parameters.get("pageSize") == null) {
+            ptp = new PlainTextProcessor()
+        } else {
+            ptp = new PlainTextProcessor((String) parameters.get("pageSize"))
+        }
         return new PlainTextEndpoint(uri, this, ptp)
     }
     
@@ -89,15 +94,8 @@ class PlainTextComponent extends UriEndpointComponent {
      */
     @Override
     protected void validateParameters(String uri, Map<String, Object> parameters, String optionPrefix) {
-        //TODO: check for valid pageSize
-        if (parameters.get("pageSize") != null) {
-            /*
-            File f = Layout.getFile((String) parameters.get("includePath"))
-            if (!f.exists()) {
-                log.trace('Debug path ' + f.getAbsolutePath()  + 'couldn\'t be found')
-                throw new ResolveEndpointFailedException('debug path doesn\'t exist')
-            }
-            */
+        if (parameters.get("pageSize") == null) {
+            log.warn('Page Size not set, using default!')
         }
     }
     

@@ -18,6 +18,7 @@
 
 package de.unigoettingen.sub.be.ous.print.layout.camel
 
+import de.unigoettingen.sub.be.ous.print.layout.Layout
 import de.unigoettingen.sub.be.ous.print.layout.Layout.PageSize
 
 import groovy.transform.CompileStatic
@@ -37,18 +38,46 @@ import org.apache.commons.io.FilenameUtils
 
 @Log4j
 @TypeChecked
-//@CompileStatic
 class PlainTextProcessor implements Processor  {
     /** The path to the XSL-FO template */
     def static URL XSL_FO_TEMPLATE = PlainTextProcessor.getClass().getResource('/xslfo/plaintext.fo')
     
-    def PageSize pageSize
+    def PageSize pageSize = Layout.DEFAULT_PAGE_SIZE
+    
+        enum Dimensions {
+            HEIGHT('height'), WIDTH('width'), MARGIN('margin'), ORIENTATION('orientation')
+        }
+        
+        /** Page dimensions */
+        /*
+         * <!-- A5 landscape -->
+         * <format name="A5" width="210mm" height="148mm" margin="13mm" orientation="LANDSCAPE"/>
+         * <!-- A4 portrait -->
+         * <format name="A4" width="210mm" height="297mm" margin="13mm" orientation="PORTRAIT"/>
+         */
+        static Map<PageSize, Map<String, String>> dimensions = [:]
+        static {
+            dimensions.put(PageSize.A4, ['height':'297mm', 'width': '210mm', 'margin': '13mm', 'orientation': 'PORTRAIT'])
+            dimensions.put(PageSize.A5, ['height':'148mm', 'width': '210mm', 'margin': '13mm', 'orientation': 'LANDSCAPE'])
+        }
+    
     
     /**
      * Creates a PlainTextProcessor
      */
-    PlainTextProcessor(PageSize pageSize = PageSize.A4) {
-        this.pageSize = pageSize
+    PlainTextProcessor(String pageSize) {
+        this.pageSize = PageSize.fromString(pageSize)
+        if (PageSize.fromString(pageSize) != null) {
+            this.pageSize = PageSize.fromString(pageSize)
+            log.warn("Page size set to to ${Layout.DEFAULT_PAGE_SIZE}")
+        }
+    }
+    
+    /**
+     * Creates a PlainTextProcessor
+     */
+    PlainTextProcessor() {
+        log.warn("Page size not given! defaulting to ${Layout.DEFAULT_PAGE_SIZE}")
     }
     
     /**
@@ -68,15 +97,19 @@ class PlainTextProcessor implements Processor  {
      * Creates a XSL-FO String from the template file and the given String
      * @return String the resulting XSL-FO
      */
-    //TODO: Include height and width here as well to simulate different paper sizes
     protected String getXslFo(String text) {
-        Map<String, String> dimensions = PageSize.getDimension(pageSize)
+        String height = dimensions.get(pageSize).get('height')
+        String width = dimensions.get(pageSize).get('width')
+        String masterName = pageSize.name()
+        String margin = dimensions.get(pageSize).get('margin')
+        
+        log.trace("Setting XSLT Parameters for ${masterName}, width: ${width}, height ${height}")
         String fopTemplate = XSL_FO_TEMPLATE.getText('UTF-8')
-        fopTemplate = fopTemplate.replace('{$width}', dimensions.get('width'))
-        fopTemplate = fopTemplate.replace('{$height}', dimensions.get('hight'))
-        fopTemplate = fopTemplate.replace('{$master-name}', dimensions.get('master-name'))
-        fopTemplate = fopTemplate.replace('{$margin}', dimensions.get('margin'))
-        return fopTemplate.replace('{$content}', text)
+        fopTemplate = fopTemplate.replace('${width}', width)
+        fopTemplate = fopTemplate.replace('${height}', height)
+        fopTemplate = fopTemplate.replace('${master-name}', masterName)
+        fopTemplate = fopTemplate.replace('${margin}', margin)
+        return fopTemplate.replace('${content}', text)
     }
 }
 

@@ -394,14 +394,6 @@ class Layout {
             return paper
         }
         
-        /**
-         * Return a Map of page dimensions for use in XSL-FO files
-         * @returns {@java.util.Map}, a Map containing hight, width, margin and orientation
-         */
-        public static Map<String, String> getDimension(PageSize ps) {
-            return dimensions.get(ps)
-        }
-        
     }
     
 }

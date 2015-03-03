@@ -1,87 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
-  <xs:element name="layout">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element maxOccurs="unbounded" ref="line"/>
-      </xs:sequence>
-      <xs:attribute name="iln" use="required" type="layoutType"/>
-      <xs:attribute name="language" use="required" type="languageType"/>
-      <xs:attribute name="layout-file" use="required" type="layoutType"/>
+    <xs:element name="layout">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" ref="line"/>
+            </xs:sequence>
+            <xs:attribute name="iln" use="required" type="layoutType"/>
+            <xs:attribute name="language" use="required" type="languageType"/>
+            <xs:attribute name="layout-file" use="required" type="layoutType"/>
+        </xs:complexType>
+    </xs:element>
+    <!-- See http://lists.xml.org/archives/xml-dev/200107/msg00038.html -->
+    <xs:element name="line" type="lineType"/>
+    <xs:complexType name="lineType" abstract="true"/>
+    <xs:complexType name="commentLine">
+        <xs:complexContent mixed="true">
+            <xs:extension base="lineType">
+                <xs:attributeGroup ref="lineAttr"/>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
-  </xs:element>
-  <!-- See http://lists.xml.org/archives/xml-dev/200107/msg00038.html -->
-  <xs:element name="line" type="lineType"/>
-  <xs:complexType name="lineType" abstract="true"/>
-  <xs:complexType name="commentLine">
-    <xs:complexContent mixed="true">
-      <xs:extension base="lineType">
-        <xs:attributeGroup ref="lineAttr"/>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:complexType name="positionLine">
-    <xs:complexContent mixed="true">
-      <xs:extension base="lineType">
-        <xs:attributeGroup ref="lineAttr"/>
-        <xs:attributeGroup ref="positionAttr"/>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:complexType name="textLine">
-    <xs:complexContent mixed="true">
-      <xs:extension base="lineType">
-        <xs:attributeGroup ref="lineAttr"/>
-        <xs:attributeGroup ref="textAttr"/>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
+    <xs:complexType name="positionLine">
+        <xs:complexContent mixed="true">
+            <xs:extension base="lineType">
+                <xs:attributeGroup ref="lineAttr"/>
+                <xs:attributeGroup ref="positionAttr"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="textLine">
+        <xs:complexContent mixed="true">
+            <xs:extension base="lineType">
+                <xs:attributeGroup ref="lineAttr"/>
+                <xs:attributeGroup ref="textAttr"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
 
-  <xs:attributeGroup name="lineAttr">
-    <xs:attribute name="text" use="required"/>
-    <xs:attribute name="comment" type="xs:boolean"/>
-  </xs:attributeGroup>
+    <xs:attributeGroup name="lineAttr">
+        <xs:attribute name="text" use="required"/>
+        <xs:attribute name="comment" type="xs:boolean"/>
+    </xs:attributeGroup>
 
-  <xs:attributeGroup name="positionAttr">
-    <xs:attribute name="attribute" use="required" type="positionType"/>
-    <xs:attribute name="column" use="required" type="positionType"/>
-    <xs:attribute name="entity" use="required" type="positionType"/>
-    <xs:attribute name="length" use="required" type="positionType"/>
-    <xs:attribute name="line" use="required" type="positionType"/>
-    <xs:attribute name="sequence" use="required" type="positionType"/>
-    <xs:attribute name="type" use="required" type="typeType"/>
-  </xs:attributeGroup>
+    <xs:attributeGroup name="positionAttr">
+        <xs:attribute name="attribute" use="required" type="positionType"/>
+        <xs:attribute name="column" use="required" type="positionType"/>
+        <xs:attribute name="entity" use="required" type="positionType"/>
+        <xs:attribute name="length" use="required" type="positionType"/>
+        <xs:attribute name="line" use="required" type="positionType"/>
+        <xs:attribute name="sequence" use="required" type="positionType"/>
+        <xs:attribute name="type" use="required" type="typeType"/>
+    </xs:attributeGroup>
 
-  <xs:attributeGroup name="textAttr">
-    <xs:attribute name="file" use="required" type="xs:string"/>
-    <xs:attribute name="type" use="required" type="xs:string"/>
-    <xs:attribute name="nr" use="required" type="xs:string"/>
-    <xs:attribute name="language" use="required" type="xs:string"/>
-  </xs:attributeGroup>
+    <xs:attributeGroup name="textAttr">
+        <xs:attribute name="file" use="required" type="xs:string"/>
+        <xs:attribute name="type" use="required" type="xs:string"/>
+        <xs:attribute name="nr" use="required" type="xs:string"/>
+        <xs:attribute name="language" use="required" type="xs:string"/>
+    </xs:attributeGroup>
 
-  <xs:simpleType name="typeType">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="T"/>
-      <xs:enumeration value="A"/>
-      <xs:enumeration value="I"/>
-      <xs:enumeration value="D"/>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:simpleType name="languageType">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="DU"/>
-      <xs:enumeration value="EN"/>
-      <xs:enumeration value="FR"/>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:simpleType name="positionType">
-    <xs:restriction base="xs:token">
-      <xs:pattern value="[0-9]{3}"/>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:simpleType name="layoutType">
-    <xs:restriction base="xs:token">
-      <xs:pattern value="[0-9]{3}"/>
-    </xs:restriction>
-  </xs:simpleType>
+    <xs:simpleType name="typeType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="T"/>
+            <xs:enumeration value="A"/>
+            <xs:enumeration value="I"/>
+            <xs:enumeration value="D"/>
+            <xs:enumeration value="M"/>
+            <xs:enumeration value="R"/>
+            <xs:enumeration value="W"/>
+            <xs:enumeration value="H"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="languageType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="DU"/>
+            <xs:enumeration value="EN"/>
+            <xs:enumeration value="FR"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="positionType">
+        <xs:restriction base="xs:token">
+            <xs:pattern value="[0-9]{3}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="layoutType">
+        <xs:restriction base="xs:token">
+            <xs:pattern value="[0-9]{3}"/>
+        </xs:restriction>
+    </xs:simpleType>
 </xs:schema>

@@ -23,14 +23,13 @@ import de.unigoettingen.sub.be.ous.models.asc.PositionLine
 import de.unigoettingen.sub.be.ous.models.asc.LanguageType
 import de.unigoettingen.sub.be.ous.models.asc.TypeType
 
-import groovy.sql.GroovyResultSet
 import groovy.sql.Sql
 import groovy.transform.TypeChecked
 import groovy.util.logging.Log4j
 
-import java.sql.Blob
-import java.sql.SQLException
-import javax.sql.DataSource
+import java.sql.Connection
+import java.sql.PreparedStatement
+import java.sql.ResultSet
 
 import org.apache.commons.io.IOUtils
 
@@ -40,54 +39,61 @@ import org.apache.commons.io.IOUtils
  */
 @Log4j
 class Db2Asc {
-    /** The database table */ 
+    /** The database table */
     def static String DB_TABLE = 'lbs_report_layout'
-    
+
     /** The column containing the layout definition */
     def static String DB_COLUMN = 'content'
-    
-    def Sql database
-    
+
+    def Connection connection
+
     def Integer number, iln
-    
+
     def String language
-    
+
     def Layout layout
-    
-    Db2Asc (DataSource ds, Integer number, Integer iln, String language) {
-        this(new Sql(ds), number, iln, language)
+
+    Db2Asc(Sql database, Integer number, Integer iln, String language) {
+        this(database.getConnection(), number, iln, language)
     }
-    
-    Db2Asc (Sql database, Integer number, Integer iln, String language) {
-        this.database = database
+
+    Db2Asc(Connection connection, Integer number, Integer iln, String language) {
+        this.connection = connection
+        this.number = number
         this.iln = iln
         this.language = language
     }
-    
-        @TypeChecked
-    void extract () {
+
+    @TypeChecked
+    void extract() {
         layout = new Layout()
         layout.setIln(String.format('%03d', iln))
         layout.setLayoutFile(String.format('%03d', number))
-        layout.setLanguage(LanguageType.valueOf(language))
-        parse(query())
-    }
-    
-    protected InputStream query () {
-        database.eachRow("select ${DB_COLUMN} from ${DB_TABLE} where number = ? and iln = ? and language_code = ?", [number, iln, language]) { GroovyResultSet it ->
-            /*
-            if (it.getBlob(DB_COLUMN) != null) {
-                return it.getBlob(DB_COLUMN).getBinaryStream()
-            */
-            if (it.content instanceof Blob) {
-                return ((Blob) it.content).getBinaryStream()
-            } else {
-                throw new SQLException('No matching layout found!')
-            }
+        //Language code for german is broken
+        if (language == 'DE') {
+            layout.setLanguage(LanguageType.valueOf('DU'))
+        } else {
+            layout.setLanguage(LanguageType.valueOf(language))
         }
+        ByteArrayInputStream is = query()
+        parse(is)
     }
-    
-    protected void parse (InputStream is) {
+
+    protected ByteArrayInputStream query() {
+        String query = "select ${DB_COLUMN} from ${DB_TABLE} where number = ? and iln = ? and language_code = ?"
+        PreparedStatement ps = connection.prepareStatement(query)
+        ps.setInt(1, number)
+        ps.setInt(2, iln)
+        ps.setString(3, language)
+
+        ResultSet res = ps.executeQuery()
+        res.next()
+        //We need to copy the stream since it will be otherwise lost if the connection is closed, took some time to figure this out :(
+        byte[] blob = IOUtils.toByteArray(res.getBlob('content').getBinaryStream())
+        return new ByteArrayInputStream(blob)
+    }
+
+    protected void parse(ByteArrayInputStream is) {
         log.info("Got a InputStream with ${is.available()} Bytes")
         /* Line definition
         Byte 0: Row / Line (LIN)
@@ -109,14 +115,18 @@ class Db2Asc {
         println ';h1: ' + h1 + ' h2: ' + h2 
         */
         byte[] bytes = new byte[8]
-    
-        
-        while(data != -1){
+
+
+        while (data != -1) {
             data = is.read(bytes)
             List<String> l = new ArrayList<String>(bytes.length - 1)
             for (i in 0..bytes.length - 2) {
                 //Byte s = Arrays.asList(bytes).get(i) & 0xff
                 l.add(i, String.format('%03d', bytes[i] & 0xff))
+            }
+            //Stop if there is trailing garbage
+            if (l.get(0) == '032' && l.get(1) == '032' && l.get(2) == '032' && l.get(3) == '032' && l.get(4) == '032' && l.get(5) == '032') {
+                break
             }
             PositionLine ps = new PositionLine()
             ps.setLine(l.get(0))
@@ -124,14 +134,25 @@ class Db2Asc {
             ps.setEntity(l.get(2))
             ps.setAttribute(l.get(3))
             ps.setSequence(l.get(4))
-            
+
 
             if (l.get(5) == '065') {
+                //TEXT
                 ps.setType(TypeType.valueOf('T'))
+                log.trace('Type of entry: T (65) ')
             } else if (l.get(5) == '068') {
+                //Date
                 ps.setType(TypeType.valueOf('A'))
+                log.trace('Type of entry: A (68) ')
             } else if (l.get(5) == '073') {
+                //Integer
                 ps.setType(TypeType.valueOf('I'))
+                log.trace('Type of entry: I (73) ')
+
+            } else if (l.get(5) == '032') {
+                //
+                ps.setType(TypeType.valueOf('I'))
+                log.trace('Type of entry: T (32) ')
             } else {
                 throw new IllegalStateException("Unknown type: " + l.get(5))
             }
@@ -148,10 +169,10 @@ class Db2Asc {
             }
         }
     }
-    
-    Layout getLayout () {
+
+    Layout getLayout() {
         return layout
     }
-    
+
 }
 

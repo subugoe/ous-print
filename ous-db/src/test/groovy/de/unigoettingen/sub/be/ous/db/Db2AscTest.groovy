@@ -19,6 +19,7 @@
 package de.unigoettingen.sub.be.ous.db
 
 import de.unigoettingen.sub.be.ous.models.asc.AscSerializer
+import groovy.sql.GroovyResultSet
 import groovy.sql.Sql
 import groovy.transform.TypeChecked
 import groovy.util.logging.Log4j
@@ -37,7 +38,7 @@ class Db2AscTest {
     //Database settings
     static String DATABASE = 'lbsdb'
     static String TABLE = 'lbs_report_layout'
-    static String DB_URI = 'jdbc:hsqldb:file:./target/test-classes/database/lbsdb' + DATABASE
+    static String DB_URI = 'jdbc:hsqldb:file:./target/test-classes/database/lbsdb;shutdown=true' + DATABASE
     static String USER = 'SA'
     static String PASS = ''
     
@@ -63,6 +64,14 @@ class Db2AscTest {
         ds.setPassword(PASS)
         return ds
     }
+
+    @Test
+    void testDatabase() {
+        Sql database = new Sql(ds)
+        database.eachRow("SELECT * FROM INFORMATION_SCHEMA.SYSTEM_TABLES where TABLE_TYPE='TABLE'") { row ->
+            log.info("Got table ${row}")
+        }
+    }
     
     @Test
     void testExtract () {
@@ -70,9 +79,10 @@ class Db2AscTest {
             for (Integer inl in inls) {
                 for (String language in languages) {
                     log.info("Testing Layout ${number}, for INL ${inl}, language ${language}")
-                    Db2Asc d2a = new Db2Asc(ds, number, inl, language)
+                    Db2Asc d2a = new Db2Asc(ds.getConnection(), number, inl, language)
                     d2a.extract()
                     AscSerializer asr = new AscSerializer(d2a.getLayout())
+                    log.info("Generated Layout:\n${asr.serialze()}")
                 }
             }
         }

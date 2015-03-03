@@ -53,7 +53,7 @@ class AscSerializer extends Layout {
             if (line instanceof CommentLine) {
                 asc <<= ";${((CommentLine) line).getText()}"
             } else if (line instanceof PositionLine) {
-                asc <<= "${((PositionLine) line).getLine()} ${((PositionLine) line).getColumn()} ${((PositionLine) line).getEntity()} ${((PositionLine) line).getAttribute()} ${((PositionLine) line).getSequence()} ${((PositionLine) line).getType()} ${((PositionLine) line).getLength()} ${((PositionLine) line).getText()}"
+                asc <<= "${((PositionLine) line).getLine()} ${((PositionLine) line).getColumn()} ${((PositionLine) line).getEntity()} ${((PositionLine) line).getAttribute()} ${((PositionLine) line).getSequence()} ${((PositionLine) line).getType()} ${((PositionLine) line).getLength()} ${((PositionLine) line).getText()}\n"
             } else {
                 throw new UnsupportedOperationException('Text layouts are not supported yet')
             }

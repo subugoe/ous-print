@@ -18,8 +18,11 @@
         <level value="warn"/>
         <appender-ref ref="console"/>
     </logger>
-
     <logger name="org.apache.fop" additivity="true">
+        <level value="warn"/>
+        <appender-ref ref="console"/>
+    </logger>
+    <logger name="org.apache.xmlgraphics" additivity="true">
         <level value="warn"/>
         <appender-ref ref="console"/>
     </logger>

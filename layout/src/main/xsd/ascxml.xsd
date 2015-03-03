@@ -5,7 +5,7 @@
       <xs:sequence>
         <xs:element maxOccurs="unbounded" ref="line"/>
       </xs:sequence>
-      <xs:attribute name="iln" use="required" type="xs:integer"/>
+      <xs:attribute name="iln" use="required" type="layoutType"/>
       <xs:attribute name="language" use="required" type="languageType"/>
       <xs:attribute name="layout-file" use="required" type="layoutType"/>
     </xs:complexType>

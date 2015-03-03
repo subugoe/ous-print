@@ -123,10 +123,10 @@ class Db2Asc {
             data = is.read(bytes)
             List<String> l = new ArrayList<String>(bytes.length - 1)
             for (i in 0..bytes.length - 2) {
-                //Byte s = Arrays.asList(bytes).get(i) & 0xff
                 l.add(i, String.format('%03d', bytes[i] & 0xff))
             }
             //Stop if there is trailing garbage
+            //TODO: There are different form of Garbage, this doesn't work everytime yet
             if (l.get(0) == '032' && l.get(1) == '032' && l.get(2) == '032' && l.get(3) == '032' && l.get(4) == '032' && l.get(5) == '032') {
                 break
             }
@@ -139,22 +139,25 @@ class Db2Asc {
 
 
             if (l.get(5) == '065') {
-                //TEXT
-                ps.setType(TypeType.valueOf('T'))
-                log.trace('Type of entry: T (65) ')
+                //Fixed Text
+                ps.setType(TypeType.valueOf('A'))
+                log.trace('Type of entry: A (65) ')
             } else if (l.get(5) == '068') {
                 //Date
-                ps.setType(TypeType.valueOf('A'))
-                log.trace('Type of entry: A (68) ')
+                ps.setType(TypeType.valueOf('D'))
+                log.trace('Type of entry: D (68) ')
             } else if (l.get(5) == '073') {
                 //Integer
                 ps.setType(TypeType.valueOf('I'))
                 log.trace('Type of entry: I (73) ')
-
             } else if (l.get(5) == '077') {
                 //Money
                 ps.setType(TypeType.valueOf('M'))
                 log.trace('Type of entry: M (77) ')
+            } else if (l.get(5) == '084') {
+                //Text
+                ps.setType(TypeType.valueOf('T'))
+                log.trace('Type of entry: T (84) ')
             } else {
                 throw new IllegalStateException("Unknown type: " + l.get(5))
             }

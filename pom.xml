@@ -43,6 +43,12 @@
         <saxon.version>9.6.0-4</saxon.version>
         <powermock.version>1.5.4</powermock.version>
         <github.global.server>github</github.global.server>
+        <junit.version>4.11</junit.version>
+        <log4j.version>1.2.17</log4j.version>
+        <commons-collection.version>3.1</commons-collection.version>
+        <commons-logging.version>1.2</commons-logging.version>
+        <commons-io.version>2.4</commons-io.version>
+        <xml-apis.version>1.3.04</xml-apis.version>
     </properties>
 
     <organization>
@@ -91,13 +97,13 @@
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
-            <version>1.2.14</version>
+            <version>${log4j.version}</version>
         </dependency>
         <!-- Test dependencies -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.10</version>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -105,6 +111,12 @@
             <artifactId>system-rules</artifactId>
             <version>1.5.0</version>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>junit</groupId>
+                    <artifactId>junit</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
     <build>
@@ -292,6 +304,24 @@
                             <goal>site</goal>
                         </goals>
                         <phase>site-deploy</phase>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>1.4</version>
+                <executions>
+                    <execution>
+                        <id>enforce</id>
+                        <configuration>
+                            <rules>
+                                <dependencyConvergence/>
+                            </rules>
+                        </configuration>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>

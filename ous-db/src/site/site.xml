@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="OUS Database access">
+    <body>
+        <menu name="OUS Database access">
+            <item name="Database Acess" href="./database-access.html"/>
+            <item name="GroovyDoc" href="./groovydoc/index.html"/>
+        </menu>
+        <menu ref="reports"/>
+    </body>
+</project>

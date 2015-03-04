@@ -137,7 +137,7 @@ class LayoutProcessor implements Processor {
         
         // propagate headers
         log.trace('Copying headers')
-        exchange.getOut().getHeaders().putAll(exchange.getIn().getHeaders());
+        exchange.getOut().getHeaders().putAll(exchange.getIn().getHeaders())
         
         if (temp != null) {
             temp.delete()

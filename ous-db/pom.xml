@@ -24,6 +24,11 @@
             <version>${apache.camel.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.6.6</version>
+        </dependency>
+        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>layout</artifactId>
             <version>${project.parent.version}</version>

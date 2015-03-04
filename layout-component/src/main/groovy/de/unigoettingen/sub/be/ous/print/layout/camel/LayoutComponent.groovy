@@ -146,39 +146,39 @@ class LayoutComponent extends UriEndpointComponent {
     @Override
     protected void validateURI(String uri, String path, Map<String,Object> parameters) {
         if (!parameters.get('template')) {
-            log.trace('Endpoint not correctly configured: template')
+            log.error('Endpoint not correctly configured: template')
             throw new ResolveEndpointFailedException('Template not set')
         }
         if (!parameters.get('xslfo')) {
-            log.trace('Endpoint not correctly configured: xslfo')
+            log.error('Endpoint not correctly configured: xslfo')
             throw new ResolveEndpointFailedException('XSLFO not set')
         }
         //Validate Paths
         if (parameters.get("template") != null) {
             File f = Layout.getFile((String) parameters.get("template"))
             if (!f.exists()) {
-                log.trace('Template ' + f.getAbsolutePath()  + 'couldn\'t be found')
+                log.error('Template ' + f.getAbsolutePath()  + 'couldn\'t be found')
                 throw new ResolveEndpointFailedException('Template doesn\'t exist')
             }
         }
         if (parameters.get("xslfo") != null) {
             File f = Layout.getFile((String) parameters.get("xslfo"))
             if (!f.exists()) {
-                log.trace('XSL-FO ' + f.getAbsolutePath()  + 'couldn\'t be found')
+                log.error('XSL-FO ' + f.getAbsolutePath()  + 'couldn\'t be found')
                 throw new ResolveEndpointFailedException('XSL-FO doesn\'t exist')
             }
         }        
         if (parameters.get("includePath") != null) {
             File f = Layout.getFile((String) parameters.get("includePath"))
             if (!f.exists()) {
-                log.trace('Include path ' + f.getAbsolutePath()  + 'couldn\'t be found')
+                log.error('Include path ' + f.getAbsolutePath()  + 'couldn\'t be found')
                 throw new ResolveEndpointFailedException('Include path doesn\'t exist')
             }
         }
         if (parameters.get("debugPath") != null) {
             File f = Layout.getFile((String) parameters.get("includePath"))
             if (!f.exists()) {
-                log.trace('Debug path ' + f.getAbsolutePath()  + 'couldn\'t be found')
+                log.error('Debug path ' + f.getAbsolutePath()  + 'couldn\'t be found')
                 throw new ResolveEndpointFailedException('debug path doesn\'t exist')
             }
         }

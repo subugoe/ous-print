@@ -42,15 +42,15 @@ class PlainTextComponent extends UriEndpointComponent {
     /** The desired page size of the result */
     String pageSize = Layout.DEFAULT_PAGE_SIZE
     
-	    /**
+    /**
      * Public constructor of the PlainTextComponent
      */
     public PlainTextComponent () {
         super(PlainTextEndpoint.class)
     }
     
-        /**
-     * Public constructor of the LayoutComponent
+    /**
+     * Public constructor of the PlainTextComponent
      * @see org.apache.camel.impl.UriEndpointComponent#UriEndpointComponent(CamelContext, Class<? extends Endpoint>)
      */
     public PlainTextComponent(CamelContext context, Class<? extends Endpoint> endpointClass) {
@@ -58,7 +58,7 @@ class PlainTextComponent extends UriEndpointComponent {
     }
        
     /**
-     * Public constructor of the LayoutComponent
+     * Public constructor of the PlainTextComponent
      * @see org.apache.camel.impl.UriEndpointComponent#UriEndpointComponent(Class<? extends Endpoint>)
      */
     public PlainTextComponent(Class<? extends Endpoint> endpointClass) {

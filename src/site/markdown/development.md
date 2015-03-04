@@ -16,7 +16,7 @@ This page describes the options for developers to use or extend the frame work. 
 See the [overview document](./overview.html) for a short description of the modules. 
 
 # Dependencies
-This is just a high level overview about the dependencies, have a look at the Maven dependencies (either in the project site or the project descriptors) for each sub module for a complete list including indirect dependencies and the used versions.
+This is just a high level overview about the dependencies, have a look at the Maven dependencies (either in the project site or the project descriptors) for each sub module for a complete list including indirect dependencies (which aren't listed here) and the used versions.
 
 ## Groovy
 [Groovy](http://groovy.codehaus.org/) is a scripting language on top of the JVM, it's used for the code to glue the used components together.
@@ -35,12 +35,25 @@ Apache Commons are a set of utility components. The following components are use
 
 * [commons-cli](http://commons.apache.org/cli/) is a library to parse command line arguments.
 * [commons-vfs](http://commons.apache.org/vfs/) is a library to handle virtual file systems, used for access to zipped files.
+* [commons-io](http://commons.apache.org/proper/commons-io/) is a library to handle data streams and low level data structures.
 
 ## Apache Tika
 [Apache Tika](http://tika.apache.org/) is a toolkit to detect and analyze text contents and media types. Used to detect input types.
 
 ## Saxon
 [Saxon](http://saxon.sourceforge.net/) is a XSLT 2.0 capable XSLT processor. It's used for the XSLT transformations.
+
+## Scriptella
+[Scriptella](http://scriptella.javaforge.com/) is a ETL tool, it is used for database duplication / extraction (for the data).
+
+## Apache DdlUtils
+[Apache DdlUtils](http://db.apache.org/ddlutils/) is a database tool, it is used for database duplication / extraction (for the metadata / structure).
+
+## HyperSQL (HSQLDB)
+[HSQLDB](http://hsqldb.org/) is a embedded pure Java database, used for test data.
+
+## jTDS
+[jTDS](http://jtds.sourceforge.net/) is a Java driver for Sybase databases.
 
 # Adding your own features
 If you want to add your own features, use the GitHub workflow: Clone the repository and sen a pull request if your feature is complete. Make sure that your feature is documented correctly:

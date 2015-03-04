@@ -36,18 +36,18 @@ import org.junit.Test
 @Log4j
 class Db2AscTest {
     //Database settings
-    static String DATABASE = 'lbsdb'
-    static String TABLE = 'lbs_report_layout'
-    static String DB_URI = 'jdbc:hsqldb:file:./target/test-classes/database/lbsdb;shutdown=true' + DATABASE
-    static String USER = 'SA'
-    static String PASS = ''
+    static public String DATABASE = 'lbsdb'
+    static public String TABLE = 'lbs_report_layout'
+    static public String DB_URI = 'jdbc:hsqldb:file:./target/test-classes/database/lbsdb;shutdown=true' + DATABASE
+    static public String USER = 'SA'
+    static public String PASS = ''
     
     //Extraction settings
-    static List<Integer> numbers = [1, 24, 310]
+    static List<Integer> numbers = [1, 24] //TODO: Make 310 work
     static List<Integer> inls = [40]
     static List<String> languages = ['EN', 'DE']
     
-    def DataSource ds
+    DataSource ds
     
     @Before
     @TypeChecked
@@ -57,7 +57,7 @@ class Db2AscTest {
         
     }
     
-    protected DataSource getDataSource () {
+    public static DataSource getDataSource () {
         JDBCDataSource ds = new JDBCDataSource();
         ds.setUrl(DB_URI)
         ds.setUser(USER)

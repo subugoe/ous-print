@@ -27,6 +27,7 @@ import groovy.sql.Sql
 import groovy.transform.TypeChecked
 import groovy.util.logging.Log4j
 
+import java.sql.Blob
 import java.sql.Connection
 import java.sql.PreparedStatement
 import java.sql.ResultSet
@@ -40,18 +41,34 @@ import org.apache.commons.io.IOUtils
 @Log4j
 class Db2Asc {
     /** The database table */
-    def static String DB_TABLE = 'lbs_report_layout'
+    static public String DB_TABLE = 'lbs_report_layout'
 
     /** The column containing the layout definition */
-    def static String DB_COLUMN = 'content'
+    static public String DB_COLUMN = 'content'
 
-    def Connection connection
+    Connection connection
 
-    def Integer number, iln
+    Integer number, iln
 
-    def String language
+    String language
 
-    def Layout layout
+    Layout layout
+
+    String table = DB_TABLE
+    String column = DB_COLUMN
+
+    /**
+     * Creates a Db2Asc without database access, useful for parsing raw blobs
+     * @param iln
+     * @param number
+     * @param language
+     */
+
+    Db2Asc(Integer iln, Integer number, String language) {
+        this.iln = iln
+        this.number = number
+        this.language = language
+    }
 
     Db2Asc(Sql database, Integer number, Integer iln, String language) {
         this(database.getConnection(), number, iln, language)
@@ -79,8 +96,11 @@ class Db2Asc {
         parse(is)
     }
 
-    protected ByteArrayInputStream query() {
-        String query = "select ${DB_COLUMN} from ${DB_TABLE} where number = ? and iln = ? and language_code = ?"
+    public ByteArrayInputStream query() {
+        if (connection == null) {
+            throw new IllegalStateException('No database connection!')
+        }
+        String query = "select ${column} from ${table} where number = ? and iln = ? and language_code = ?"
         PreparedStatement ps = connection.prepareStatement(query)
         ps.setInt(1, number)
         ps.setInt(2, iln)
@@ -95,7 +115,20 @@ class Db2Asc {
         return new ByteArrayInputStream(blob)
     }
 
-    protected void parse(ByteArrayInputStream is) {
+    /**
+     * Parses a given database Blob
+     * @param b
+     */
+    public void parse (Blob b) {
+        byte[] blob = IOUtils.toByteArray(b.getBinaryStream())
+        parse(ByteArrayInputStream(blob))
+    }
+
+    /**
+     * Parses a given InputStream
+     * @param is
+     */
+    public void parse(ByteArrayInputStream is) {
         log.info("Got a InputStream with ${is.available()} Bytes")
         /* Line definition
         Byte 0: Row / Line (LIN)

@@ -35,4 +35,9 @@ Bullet points represent files, points with subitems are directories.
   * GAU-SUBlogo-einzeilig.svg
 * xslfo
   * layout2fo.xsl
- 
+
+# Running on Solaris
+Make sure that you start java with the right encoding setting (-Dfile.encoding=UTF-8) otherwise umlauts will be missing
+
+Example:
+> java -Dfile.encoding=UTF-8 -jar print-server-1.0-SNAPSHOT.jar -c test-routes.xml

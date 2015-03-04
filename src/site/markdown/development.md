@@ -43,6 +43,9 @@ Apache Commons are a set of utility components. The following components are use
 ## Saxon
 [Saxon](http://saxon.sourceforge.net/) is a XSLT 2.0 capable XSLT processor. It's used for the XSLT transformations.
 
+##Barcode4J
+[Barcode4J](http://barcode4j.sourceforge.net/) is needed to create Barcodes from Java and XSLT.
+
 ## Scriptella
 [Scriptella](http://scriptella.javaforge.com/) is a ETL tool, it is used for database duplication / extraction (for the data).
 

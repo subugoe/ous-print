@@ -37,6 +37,6 @@ In this example only the URI starting with 'layout:' is relevant. Note that you 
 
 >`    <to uri="layout:.?xslfo=./xslfo/layout2fo.xsl&amp;template=./ous40_layout_001_du.asc&amp;outputFormat=PS"/>`
 
->`   <to uri="lpr://localhost/bbk-test"/>`
+>`    <to uri="lpr://localhost/bbk-test"/>`
 
 >`</route>`

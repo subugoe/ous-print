@@ -15,6 +15,8 @@ This framework can be used to replace the ous_print_server with a implementation
 * Automatic hot folder for slips that should be converted and printed
 * Uses Apache Camel, you can also mail and print the results 
 * Generate XSL-FO files from ODF ([Open](https://www.openoffice.org/) / [Libre Office](http://www.libreoffice.org/))
+* Extract ASC files from database definitions
+* Convert plain text to PDF
 
 ## Requirements
 This framework need just [Java](http://java.com/en/) (Version 1.6 or higher) as runtime environment, to check out and compile you also need [Git](http://git-scm.com/), [Maven](http://maven.apache.org/) and a internet connection to resolve required artifacts.
@@ -65,6 +67,7 @@ The following Maven Modules make up this framework:
 * **layout-component** - A Apache Camel component for the layout core, this way Camel can use the layout engine.
 * **print-server** - A command line wrapper for Apache Camel, can act as a daemon to watch for and print slips
 * **layout-test** - Contains test files for unit tests
+* **ous-db** - Contains objects for OUS database access
 
 
 ## XSL-FO Files

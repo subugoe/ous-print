@@ -22,3 +22,5 @@
 *.iml
 .idea/**
 /ous-db/target/
+ous-db/src/test/resources/database/lbsdb.lck
+ous-db/src/test/resources/database/lbsdb.log

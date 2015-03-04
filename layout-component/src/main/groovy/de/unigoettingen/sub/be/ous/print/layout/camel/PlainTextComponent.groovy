@@ -18,16 +18,13 @@
 
 package de.unigoettingen.sub.be.ous.print.layout.camel
 
-import de.unigoettingen.sub.be.ous.print.layout.FORMAT
 import de.unigoettingen.sub.be.ous.print.layout.Layout
 
-import groovy.transform.CompileStatic
 import groovy.transform.TypeChecked
 import groovy.util.logging.Log4j
 
 import org.apache.camel.CamelContext
 import org.apache.camel.Endpoint
-import org.apache.camel.ResolveEndpointFailedException
 import org.apache.camel.impl.UriEndpointComponent
 import org.apache.camel.spi.UriParam
 

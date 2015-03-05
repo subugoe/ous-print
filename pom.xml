@@ -129,6 +129,8 @@
                     <compilerId>groovy-eclipse-compiler</compilerId>
                     <source>${maven.compiler.source}</source>
                     <target>${maven.compiler.target}</target>
+                    <showWarnings>true</showWarnings>
+                    <showDeprecation>true</showDeprecation>
                 </configuration>
                 <dependencies>
                     <dependency>

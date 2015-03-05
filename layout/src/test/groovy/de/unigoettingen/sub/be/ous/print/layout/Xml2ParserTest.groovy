@@ -46,28 +46,29 @@ import de.unigoettingen.sub.be.ous.print.layout.Xml2Parser.LayoutParser
 
 @Log4j
 class Xml2ParserTest {
-    static List<URL> URLS = [Xml2ParserTest.getClass().getResource("/layouts-xml/ous40_layout_001_du.asc.xml"), 
-        Xml2ParserTest.getClass().getResource("/layouts-xml/ous40_layout_001_en.asc.xml")]
+    static List<URL> URLS = [Xml2ParserTest.getClass().getResource("/layouts-xml/ous40_layout_001_du.asc.xml"),
+                             Xml2ParserTest.getClass().getResource("/layouts-xml/ous40_layout_001_en.asc.xml")]
     static URL PARSER_XML = Xml2ParserTest.getClass().getResource("/layouts-xml/ous40_layout_001_du.asc.xml")
+    static URL PARSER_TXT_LBS4 = Xml2ParserTest.getClass().getResource("/layouts/ous40_layout_001_du-lbs4.asc")
     static File SLIPS = new File(Xml2ParserTest.getClass().getResource('/hotfolder/lbs3/in/').toURI())
     static List<URL> SLIP_FILES = new ArrayList<URL>()
-    
+
     //Build file list
     @BeforeClass
-    static void setUp () {
+    static void setUp() {
         assertNotNull(SLIPS)
         def p = ~/.*\.print/
         SLIPS.eachFileMatch(p) {
             f ->
-            SLIP_FILES.add(f.toURI().toURL())
-            log.info('Added URL ' + f.toURI().toURL().toString() + ' to test file list')
+                SLIP_FILES.add(f.toURI().toURL())
+                log.info('Added URL ' + f.toURI().toURL().toString() + ' to test file list')
         }
     }
-    
+
     //Test transformations
     @Test
     @TypeChecked
-    void testTransform () {
+    void testTransform() {
         for (xml in URLS) {
             log.info('Transforming XML File ' + xml.toString() + ' to parser')
             Xml2Parser x2p = new Xml2Parser(xml)
@@ -80,9 +81,43 @@ class Xml2ParserTest {
             log.trace('Result:\n----------------START OF RESULT(' + this.getClass().getName() + ')\n' + x2p.getXML())
             log.trace('----------------END OF RESULT(' + this.getClass().getName() + ')\n')
         }
-        
     }
-    
+
+    //Test transformations
+    @Test
+    @TypeChecked
+    void testTransformEncoded() {
+        for (xml in URLS) {
+            log.info('Transforming XML File ' + xml.toString() + ' to parser')
+            Xml2Parser x2p = new Xml2Parser(xml, 'ISO-8859-1')
+            try {
+                x2p.transform()
+            } catch (TransformerException te) {
+                log.error('Transformation failed!')
+                fail(te.getMessage())
+            }
+            log.trace('Result:\n----------------START OF RESULT(' + this.getClass().getName() + ')\n' + x2p.getXML())
+            log.trace('----------------END OF RESULT(' + this.getClass().getName() + ')\n')
+        }
+    }
+
+    @Test
+    @TypeChecked
+    void testTransformLBS4() {
+        log.info('Transforming ASC File ' + PARSER_TXT_LBS4.toString() + ' to parser')
+        Asc2Xml a2x = new Asc2Xml(PARSER_TXT_LBS4)
+        a2x.transform()
+        Xml2Parser x2p = new Xml2Parser(a2x.result, 'ISO-8859-1')
+        try {
+            x2p.transform()
+        } catch (TransformerException te) {
+            log.error('Transformation failed!')
+            fail(te.getMessage())
+        }
+        log.trace('Result:\n----------------START OF RESULT(' + this.getClass().getName() + ')\n' + x2p.getXML())
+        log.trace('----------------END OF RESULT(' + this.getClass().getName() + ')\n')
+    }
+
     //Test if the parsers read files
     @Test
     @TypeChecked
@@ -104,9 +139,9 @@ class Xml2ParserTest {
             log.trace('----------------END OF RESULT(' + this.getClass().getName() + ')\n')
             log.trace('Saving file to ' + xmlOut)
             Util.writeDocument(lp.result, new File(xmlOut).toURI().toURL())
-               
+
         }
     }
-    
+
 }
 

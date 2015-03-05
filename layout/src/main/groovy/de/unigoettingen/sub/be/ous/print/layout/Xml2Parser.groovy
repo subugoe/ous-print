@@ -82,13 +82,25 @@ class Xml2Parser extends AbstractTransformer {
 
     /**
      * Constructs a Xml2Parser, sets and the parameters of the transformation and sets the given input.
+     * @param input the {@link java.net.URL URL} of the document to be transformed
+     * @param encoding the encoding the generated parser should read
+     * @see #Xml2Parser()
+     */
+    Xml2Parser(URL input, String encoding) {
+        this(input)
+        this.params['encoding'] = encoding
+    }
+
+    /**
+     * Constructs a Xml2Parser, sets and the parameters of the transformation and sets the given input.
      * @param input the {@link org.w3c.dom.Document Document} of the document to be transformed
      * @see #Xml2Parser()
      */
-    Xml2Parser(Document inDoc) {
+    Xml2Parser(Document inDoc, String encoding) {
         this()
         //Input as Document
         this.inDoc = inDoc
+        this.params['encoding'] = encoding
     }
 
     /**
@@ -128,7 +140,7 @@ class Xml2Parser extends AbstractTransformer {
      * Use this if you are working with precompiled parsers
      * @return LayoutParser the parser for the given stylesheet
      */
-    static LayoutParser getParser(URL stylesheet, String name, String encoding = Layout.DEFAULT_ENCODING) {
+    static LayoutParser getParser(URL stylesheet, String name, String encoding) {
         return new LayoutParser(new StreamSource(stylesheet.openStream()), name, encoding)
     }
 
@@ -163,17 +175,7 @@ class Xml2Parser extends AbstractTransformer {
          * Constructs a LayoutParser using a parser given as document and the name of the source layout
          * @param {@link org.w3c.dom.Document Document} the parser
          * @param {@link java.lang.String String} the name of the source layout
-         * @param {@link java.lang.String String} the name of encoding teo be used, defaults to Layout.DEFAULT_ENCODING
-         */
-        protected LayoutParser(Document parser, String layoutName) {
-            this(parser, layoutName, Layout.DEFAULT_ENCODING)
-        }
-
-        /**
-         * Constructs a LayoutParser using a parser given as document and the name of the source layout
-         * @param {@link org.w3c.dom.Document Document} the parser
-         * @param {@link java.lang.String String} the name of the source layout
-         * @param {@link java.lang.String String} the name of encoding teo be used, defaults to Layout.DEFAULT_ENCODING
+         * @param {@link java.lang.String String} the name of encoding to be used, defaults to Layout.DEFAULT_ENCODING
          */
         protected LayoutParser(Document parser, String layoutName, String encoding) {
             this()
@@ -195,6 +197,7 @@ class Xml2Parser extends AbstractTransformer {
             }
             log.debug("Using stylesheet generated from " + layoutName)
             log.trace('XSLT: \n' + Util.docAsString(parser))
+            this.params['encoding'] = this.encoding
             result = transform(new StreamSource(input.openStream()), new DOMSource(parser), this.params)
         }
 
@@ -262,8 +265,8 @@ class Xml2Parser extends AbstractTransformer {
             temp.write(Layout.readFile(input, Layout.DEFAULT_ENCODING))
             log.debug('Created temp file ' + temp.getAbsolutePath())
             this.params['input'] = temp.toURI().toURL().toString()
-            this.params['encoding'] = this.encoding
-            log.trace("Setting input to ${params['input']}, ${params['encoding']}encoding starting transformation...")
+            this.params['encoding'] = encoding
+            log.trace("Setting input to ${params['input']}, ${params['encoding']} as encoding starting transformation...")
             try {
                 this.transform()
             } catch (TransformerException te) {

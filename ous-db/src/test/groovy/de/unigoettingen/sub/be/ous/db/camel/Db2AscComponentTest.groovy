@@ -23,6 +23,7 @@ import de.unigoettingen.sub.be.ous.db.Db2AscTest
 import groovy.transform.TypeChecked
 
 import org.apache.camel.EndpointInject
+import org.apache.camel.Exchange
 import org.apache.camel.builder.RouteBuilder
 import org.apache.camel.component.mock.MockEndpoint
 import org.apache.camel.impl.JndiRegistry
@@ -57,16 +58,17 @@ class Db2AscComponentTest extends CamelTestSupport {
     @TypeChecked
     void testAsc2Db() {
         resultEndpoint.setMinimumResultWaitTime(300)
-        resultEndpoint.setResultWaitTime(120000)
+        resultEndpoint.setResultWaitTime(1000)
         context.addRoutes(new RouteBuilder() {
             public void configure() {
-                from("timer:database?fixedRate=true&period=60000")
-                        .to("db2asc:.?slip=1&iln=40&lang=de&dataSource=#jdbc/testDataSource")
-                        .to("file:./target/test-classes/ous40_layout_001_du.asc")
-                        .to('mock:result')
+                from('timer:database?fixedRate=true&period=60000')
+                        .to('db2asc:.?slip=1&iln=40&lang=de&dataSource=#jdbc/testDataSource')
+                        //.setHeader(Exchange.FILE_NAME, constant("ous40_layout_001_du.asc"))
+                        .to('file:./target/test-classes?fileName=ous40_layout_001_du.asc&fileExist=Override', 'mock:result')
             }
         })
-        resultEndpoint.expectedMessageCount(1)
+        //resultEndpoint.expectedMessageCount(1)
+        resultEndpoint.expectedFileExists("target/test-classes/ous40_layout_001_du.asc")
         assertMockEndpointsSatisfied()
     }
 }

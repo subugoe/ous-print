@@ -63,7 +63,7 @@ class Xml2ParserTest extends TestBase {
     void testTransformEncoded() {
         for (xml in URLS) {
             log.info('Transforming XML File ' + xml.toString() + ' to parser')
-            Xml2Parser x2p = new Xml2Parser(xml, 'ISO-8859-1')
+            Xml2Parser x2p = new Xml2Parser(xml, LBS4_CHARSET)
             try {
                 x2p.transform()
             } catch (TransformerException te) {
@@ -81,7 +81,7 @@ class Xml2ParserTest extends TestBase {
         log.info('Transforming ASC File ' + PARSER_TXT_LBS4.toString() + ' to parser')
         Asc2Xml a2x = new Asc2Xml(PARSER_TXT_LBS4)
         a2x.transform()
-        Xml2Parser x2p = new Xml2Parser(a2x.result, 'ISO-8859-1')
+        Xml2Parser x2p = new Xml2Parser(a2x.result, LBS4_CHARSET)
         try {
             x2p.transform()
         } catch (TransformerException te) {
@@ -97,7 +97,7 @@ class Xml2ParserTest extends TestBase {
     @TypeChecked
     void testParse() {
         log.info('[LBS3] Generating Parser for ' + PARSER_XML)
-        Xml2Parser x2p = new Xml2Parser(PARSER_XML)
+        Xml2Parser x2p = new Xml2Parser(PARSER_XML, LBS3_CHARSET)
         x2p.transform()
         LayoutParser lp = x2p.getParser()
         def xslt = new DOMSource(x2p.result)
@@ -109,8 +109,8 @@ class Xml2ParserTest extends TestBase {
             def xmlOut = slip.toString().substring(5) + '.xml'
             lp.parse(slip)
 
-            log.trace('Result:\n----------------START OF RESULT(' + this.getClass().getName() + ')\n' + lp.getXML())
-            log.trace('----------------END OF RESULT(' + this.getClass().getName() + ')\n')
+            log.trace('Result:\n----------------[LBS3] START OF RESULT(' + this.getClass().getName() + ')\n' + lp.getXML())
+            log.trace('----------------[LBS3] END OF RESULT(' + this.getClass().getName() + ')\n')
             log.trace('Saving file to ' + xmlOut)
             Util.writeDocument(lp.result, new File(xmlOut).toURI().toURL())
 
@@ -121,12 +121,14 @@ class Xml2ParserTest extends TestBase {
     @Test
     @TypeChecked
     void testParseLBS4() {
-        log.info('[LBS4] Generating Parser for ' + PARSER_XML)
-        Xml2Parser x2p = new Xml2Parser(PARSER_XML)
+        log.info('[LBS4] Generating Parser for ' + PARSER_TXT_LBS4)
+        Asc2Xml a2x = new Asc2Xml(PARSER_TXT_LBS4)
+        a2x.transform()
+        Xml2Parser x2p = new Xml2Parser(a2x.result, LBS4_CHARSET)
         x2p.transform()
         LayoutParser lp = x2p.getParser()
         def xslt = new DOMSource(x2p.result)
-        for (slip in SLIP_LBS3_FILES) {
+        for (slip in SLIP_LBS4_FILES) {
             if (!Layout.validateAsc(slip)) {
                 log.warn('File contains invalid characters: ' + slip.toString())
                 continue
@@ -134,8 +136,8 @@ class Xml2ParserTest extends TestBase {
             def xmlOut = slip.toString().substring(5) + '.xml'
             lp.parse(slip)
 
-            log.trace('Result:\n----------------START OF RESULT(' + this.getClass().getName() + ')\n' + lp.getXML())
-            log.trace('----------------END OF RESULT(' + this.getClass().getName() + ')\n')
+            log.trace('Result:\n----------------[LBS4] START OF RESULT(' + this.getClass().getName() + ')\n' + lp.getXML())
+            log.trace('----------------[LBS4] END OF RESULT(' + this.getClass().getName() + ')\n')
             log.trace('Saving file to ' + xmlOut)
             Util.writeDocument(lp.result, new File(xmlOut).toURI().toURL())
 

@@ -26,6 +26,8 @@ class TestBase {
     static List<URL> URLS = [TestBase.getClass().getResource("/layouts-xml/ous40_layout_001_du.asc.xml"),
                              TestBase.getClass().getResource("/layouts-xml/ous40_layout_001_en.asc.xml")]
 
+    static String LBS3_CHARSET = 'Cp850'
+    static String LBS4_CHARSET = 'ISO-8859-1'
 
     @BeforeClass
     static void setUp () {

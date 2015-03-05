@@ -24,3 +24,5 @@
 /ous-db/target/
 ous-db/src/test/resources/database/lbsdb.lck
 ous-db/src/test/resources/database/lbsdb.log
+layout-test/src/test/resources/database/lbsdb.lck
+layout-test/src/test/resources/database/lbsdb.log

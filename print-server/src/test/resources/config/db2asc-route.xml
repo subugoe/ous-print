@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<routes xmlns="http://camel.apache.org/schema/spring">
+
+    <route>
+        <from uri="timer:database?fixedRate=true&amp;period=60000"/>
+        <to uri="db2asc:.?slip=1&amp;iln=40&amp;lang=de&amp;dataSource=#jdbc/testDataSource"/>
+        <!-- Output to file -->
+        <to uri="file:./target/test-classes?fileName=ous40_layout_001_du.asc&amp;fileExist=Override"/>
+    </route>
+</routes>

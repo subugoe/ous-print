@@ -20,8 +20,10 @@ package de.unigoettingen.sub.be.ous.db.camel
 
 import de.unigoettingen.sub.be.ous.db.Db2Asc
 import de.unigoettingen.sub.be.ous.models.asc.AscSerializer
-import groovy.transform.TypeChecked
+
+import groovy.transform.CompileStatic
 import groovy.util.logging.Log4j
+
 import org.apache.camel.Exchange
 import org.apache.camel.Processor
 
@@ -31,7 +33,7 @@ import javax.sql.DataSource
  * Created by cmahnke on 04.03.15.
  */
 @Log4j
-@TypeChecked
+@CompileStatic
 class Db2AscProcessor implements Processor {
     Integer iln
     Integer number
@@ -68,12 +70,14 @@ class Db2AscProcessor implements Processor {
     @Override
     public void process(Exchange exchange) throws Exception {
         log.trace('Processing Exchange')
-        ByteArrayInputStream bis = exchange.getIn(ByteArrayInputStream.class)
         Db2Asc d2a
-        if (bis != null && bis.available() > 0) {
-            log.trace('Parsing ByteArrayInputStream, should be content of a Blob')
-            d2a = new Db2Asc(iln, number, language)
-            d2a.parse(bis)
+        if (exchange.getIn().getBody(ByteArrayInputStream.class) != null) {
+            ByteArrayInputStream bis = exchange.getIn(ByteArrayInputStream.class)
+            if (bis != null && bis.available() > 0) {
+                log.trace('Parsing ByteArrayInputStream, should be content of a Blob')
+                d2a = new Db2Asc(iln, number, language)
+                d2a.parse(bis)
+            }
         } else {
             log.trace('Using direct database access')
             d2a = new Db2Asc(ds.getConnection(), number, iln, language)
@@ -81,7 +85,10 @@ class Db2AscProcessor implements Processor {
             d2a.column = column
             d2a.extract()
         }
-        AscSerializer asr = new AscSerializer(d2a.getLayout())
-        exchange.getOut()setBody(asr.serialze())
+        String asrr = new AscSerializer(d2a.getLayout()).serialze()
+        log.trace('Copying headers')
+        exchange.getOut().getHeaders().putAll(exchange.getIn().getHeaders());
+        log.trace("Result is:\n${asrr}")
+        exchange.getOut()setBody(asrr)
     }
 }

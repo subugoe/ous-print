@@ -18,7 +18,7 @@
 
 package de.unigoettingen.sub.be.ous.db.camel
 
-import groovy.transform.TypeChecked
+import groovy.transform.CompileStatic
 import groovy.util.logging.Log4j
 
 import org.apache.camel.CamelContext
@@ -33,7 +33,7 @@ import javax.sql.DataSource
  * Created by cmahnke on 04.03.15.
  */
 @Log4j
-@TypeChecked
+@CompileStatic
 class Db2AscComponent extends UriEndpointComponent {
     @UriParam
     String table
@@ -95,7 +95,7 @@ class Db2AscComponent extends UriEndpointComponent {
         }
 
         if (parameters.get("slip") != null) {
-            slip = Integer.parseInt((String) parameters.get("iln"))
+            slip = Integer.parseInt((String) parameters.get("slip"))
             log.trace("Slip set to ${slip}")
         }
 

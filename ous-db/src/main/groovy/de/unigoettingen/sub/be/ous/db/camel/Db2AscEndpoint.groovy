@@ -19,17 +19,17 @@
 package de.unigoettingen.sub.be.ous.db.camel
 
 import groovy.transform.CompileStatic
-import groovy.transform.TypeChecked
+
 import org.apache.camel.Component
+import org.apache.camel.Consumer
 import org.apache.camel.impl.ProcessorEndpoint
 import org.apache.camel.spi.UriEndpoint
 
 /**
  * Created by cmahnke on 04.03.15.
  */
-@TypeChecked
 @CompileStatic
-@UriEndpoint(scheme = "db2asc")
+@UriEndpoint(scheme = "db2asc" /*, consumerClass = Db2AscConsumer.class */)
 class Db2AscEndpoint extends ProcessorEndpoint {
     /** The Db2AscProcessor to be used */
     protected Db2AscProcessor d2ap
@@ -44,5 +44,9 @@ class Db2AscEndpoint extends ProcessorEndpoint {
     public Db2AscEndpoint(String endpointUri, Component component, Db2AscProcessor d2ap) throws Exception {
         super(endpointUri, component, d2ap)
         this.d2ap = d2ap
+    }
+
+    public Consumer createConsumer() throws Exception {
+        return new Db2AscConsumer(this)
     }
 }

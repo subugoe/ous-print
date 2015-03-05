@@ -23,47 +23,21 @@ package de.unigoettingen.sub.be.ous.print.layout
  * @author cmahnke
  */
 
-import groovy.util.logging.Log4j
-import javax.xml.transform.Source
-import javax.xml.transform.TransformerException
-import javax.xml.transform.dom.DOMResult
-import javax.xml.transform.dom.DOMSource
-import javax.xml.transform.stream.StreamSource
-import javax.xml.transform.TransformerFactory
-import org.junit.BeforeClass
 import groovy.transform.TypeChecked
+import groovy.util.logging.Log4j
+
+import javax.xml.transform.TransformerException
+import javax.xml.transform.dom.DOMSource
 
 import static org.junit.Assert.*
-import de.unigoettingen.sub.be.ous.print.layout.Xml2Parser
-import de.unigoettingen.sub.be.ous.print.util.LogErrorListener
-import de.unigoettingen.sub.be.ous.print.util.Util
-import org.junit.Ignore
 import org.junit.Test
-import org.w3c.dom.Document
 
+import de.unigoettingen.sub.be.ous.print.util.Util
 import de.unigoettingen.sub.be.ous.print.layout.Xml2Parser.LayoutParser
 
 
 @Log4j
-class Xml2ParserTest {
-    static List<URL> URLS = [Xml2ParserTest.getClass().getResource("/layouts-xml/ous40_layout_001_du.asc.xml"),
-                             Xml2ParserTest.getClass().getResource("/layouts-xml/ous40_layout_001_en.asc.xml")]
-    static URL PARSER_XML = Xml2ParserTest.getClass().getResource("/layouts-xml/ous40_layout_001_du.asc.xml")
-    static URL PARSER_TXT_LBS4 = Xml2ParserTest.getClass().getResource("/layouts/ous40_layout_001_du-lbs4.asc")
-    static File SLIPS = new File(Xml2ParserTest.getClass().getResource('/hotfolder/lbs3/in/').toURI())
-    static List<URL> SLIP_FILES = new ArrayList<URL>()
-
-    //Build file list
-    @BeforeClass
-    static void setUp() {
-        assertNotNull(SLIPS)
-        def p = ~/.*\.print/
-        SLIPS.eachFileMatch(p) {
-            f ->
-                SLIP_FILES.add(f.toURI().toURL())
-                log.info('Added URL ' + f.toURI().toURL().toString() + ' to test file list')
-        }
-    }
+class Xml2ParserTest extends TestBase {
 
     //Test transformations
     @Test
@@ -122,12 +96,37 @@ class Xml2ParserTest {
     @Test
     @TypeChecked
     void testParse() {
-        log.info('Generating Parser for ' + PARSER_XML)
+        log.info('[LBS3] Generating Parser for ' + PARSER_XML)
         Xml2Parser x2p = new Xml2Parser(PARSER_XML)
         x2p.transform()
         LayoutParser lp = x2p.getParser()
         def xslt = new DOMSource(x2p.result)
-        for (slip in SLIP_FILES) {
+        for (slip in SLIP_LBS3_FILES) {
+            if (!Layout.validateAsc(slip)) {
+                log.warn('File contains invalid characters: ' + slip.toString())
+                continue
+            }
+            def xmlOut = slip.toString().substring(5) + '.xml'
+            lp.parse(slip)
+
+            log.trace('Result:\n----------------START OF RESULT(' + this.getClass().getName() + ')\n' + lp.getXML())
+            log.trace('----------------END OF RESULT(' + this.getClass().getName() + ')\n')
+            log.trace('Saving file to ' + xmlOut)
+            Util.writeDocument(lp.result, new File(xmlOut).toURI().toURL())
+
+        }
+    }
+
+    //Test if the parsers read files
+    @Test
+    @TypeChecked
+    void testParseLBS4() {
+        log.info('[LBS4] Generating Parser for ' + PARSER_XML)
+        Xml2Parser x2p = new Xml2Parser(PARSER_XML)
+        x2p.transform()
+        LayoutParser lp = x2p.getParser()
+        def xslt = new DOMSource(x2p.result)
+        for (slip in SLIP_LBS3_FILES) {
             if (!Layout.validateAsc(slip)) {
                 log.warn('File contains invalid characters: ' + slip.toString())
                 continue

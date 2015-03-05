@@ -28,7 +28,6 @@ import de.unigoettingen.sub.be.ous.print.layout.Xml2Asc
 import groovy.util.logging.Log4j
 import groovy.transform.TypeChecked
 
-import org.junit.Ignore
 import org.junit.Test
 
 import javax.xml.transform.TransformerException
@@ -37,11 +36,8 @@ import static org.junit.Assert.*
 
 @TypeChecked
 @Log4j
-class Xml2AscTest {
-    static List<URL> URLS = [Xml2AscTest.getClass().getResource("/layouts-xml/ous40_layout_001_du.asc.xml"), 
-        Xml2AscTest.getClass().getResource("/layouts-xml/ous40_layout_001_en.asc.xml")]
-    
-    @Ignore
+class Xml2AscTest extends TestBase {
+
     @Test
     @TypeChecked
     void testTransform () {

@@ -28,15 +28,11 @@ import groovy.transform.TypeChecked
 import javax.xml.transform.TransformerException
 
 import static org.junit.Assert.*
-import de.unigoettingen.sub.be.ous.print.layout.Asc2Xml
-import org.junit.Ignore
 import org.junit.Test
 
 @TypeChecked
 @Log4j
-class Asc2XmlTest {
-    static List<URL> URLS = [Asc2XmlTest.getClass().getResource("/layouts/ous40_layout_001_du.asc"), 
-        Asc2XmlTest.getClass().getResource("/layouts/ous40_layout_001_en.asc")]
+class Asc2XmlTest extends TestBase {
     static List<URL> BROKEN = [Asc2XmlTest.getClass().getResource("/layouts-broken/ous40_layout_001_du.asc"), 
         Asc2XmlTest.getClass().getResource("/layouts-broken/ous40_layout_001_en.asc")]
     

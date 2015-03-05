@@ -30,8 +30,12 @@
     <!-- Generated xslt will be in the gxsl namespace, and is aliased for output -->
     <xsl:namespace-alias result-prefix="xsl" stylesheet-prefix="gxsl"/>
     <xsl:param name="encoding" select="'ASCII'"/>
+    <!-- This controls if regular expressions should always match the whole line ^.*$ -->
+    <xsl:param name="whole-line" as="xs:boolean" select="true()"/>
+    <!-- LBS4 seem to use other line Endings the LBS3, so we will have &#xD; at the end of broken strings -->
+    <xsl:param name="clear-xD" as="xs:boolean" select="true()"/>
     <xsl:include href="./lib/lib.xsl"/>
-    <xsl:output indent="yes"/>
+    <xsl:output indent="yes" encoding="UTF-8"/>
     <xsl:template match="/">
         <gxsl:stylesheet version="2.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
             <xsl:comment>Inline Comments are taken from the layout definition ASC file.</xsl:comment>
@@ -46,7 +50,7 @@
                     <xsl:text>'</xsl:text>
                 </xsl:attribute>
             </gxsl:variable>
-            <gxsl:output indent="yes"/>
+            <gxsl:output indent="yes" encoding="UTF-8"/>
             <gxsl:template match="/">
                 <gxsl:variable name="text" select="unparsed-text($input, $encoding)"/>
                 <gxsl:variable name="lines" select="tokenize($text, $break)"/>
@@ -143,7 +147,10 @@
             <!-- Generate Regex -->
             <xsl:variable name="regex" as="xs:string*">
                 <!-- Start -->
-                <xsl:text>'^</xsl:text>
+                <xsl:text>'</xsl:text>
+                <xsl:if test="$whole-line">
+                    <xsl:text>^</xsl:text>
+                </xsl:if>
                 <!-- Stuff at the beginning to ignore -->
                 <xsl:value-of select="concat('.{', $column + $ident - 1, '}')"/>
                 <!-- length, the result should be in here -->
@@ -151,20 +158,36 @@
                 <!-- The rest -->
                 <xsl:value-of select="'.*'"/>
                 <!-- End -->
-                <xsl:text>$'</xsl:text>
+                <xsl:if test="$whole-line">
+                    <xsl:text>$</xsl:text>
+                </xsl:if>
+                <xsl:text>'</xsl:text>
             </xsl:variable>
             <entry>
                 <xsl:attribute name="entity" select="@entity"/>
                 <xsl:attribute name="attribute" select="@attribute"/>
                 <xsl:attribute name="sequence" select="@sequence"/>
                 <xsl:attribute name="type" select="@type"/>
+                <gxsl:variable name="line">
+                    <xsl:attribute name="select">
+                    <xsl:choose>
+                        <xsl:when test="$clear-xD">
+                            <xsl:value-of select="concat('translate($lines[', $line ,'], ')"/>
+                            <xsl:text>'&#xD;', '')</xsl:text>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:value-of select="concat('$lines[', $line ,']')"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                    </xsl:attribute>
+                </gxsl:variable>
                 <xsl:choose>
                     <!-- Contains whitespace that might gets overriden -->
                     <xsl:when test="$left-overflow != 0">
                         <xsl:comment>This contains the raw string, including possible leading whitespace</xsl:comment>
                         <gxsl:variable name="raw-value" as="xs:string">
                             <xsl:attribute name="select">
-                                <xsl:value-of select="concat('print:replace($lines[', $line ,'] , ', string-join($regex, ''))"/>
+                                <xsl:value-of select="concat('print:replace($line , ', string-join($regex, ''))"/>
                                 <xsl:text>, '$1')</xsl:text>
                             </xsl:attribute>
                         </gxsl:variable>
@@ -183,7 +206,7 @@
                     <xsl:otherwise>
                         <gxsl:attribute name="value">
                             <xsl:attribute name="select">
-                                <xsl:value-of select="concat('print:replace($lines[', $line ,'] , ', string-join($regex, ''))"/>
+                                <xsl:value-of select="concat('print:replace($line , ', string-join($regex, ''))"/>
                                 <xsl:text>, '$1')</xsl:text>
                             </xsl:attribute>
                         </gxsl:attribute>

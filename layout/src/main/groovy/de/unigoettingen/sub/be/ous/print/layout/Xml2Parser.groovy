@@ -39,70 +39,70 @@ import org.w3c.dom.Document
 @Log4j
 class Xml2Parser extends AbstractTransformer {
     protected Document inDoc = null
-    
+
     /** The location of the stylesheet */
     def static String xslt = "/xslt/xml2parser.xsl"
-    
+
     /** The URL of the stylesheet to used */
     protected static URL stylesheet = this.getClass().getResource(xslt)
-    
+
     //Configuration of Stylesheet
     /** Parameters of the stylesheet */
     def static paramPrototypes = ['encoding': 'UTF-8']
-            
+
     /*
      * This generates accessor methods for the parameters which live inside of the params Map 
      */
     static {
         paramPrototypes.keySet().each { name ->
             def methodName = name[0].toUpperCase() + name[1..-1]
-            Xml2Parser.metaClass."set${methodName}" = {String value -> params."${name}" = value }
-            Xml2Parser.metaClass."get${methodName}" = {-> params."${name}" }
+            Xml2Parser.metaClass."set${methodName}" = { String value -> params."${name}" = value }
+            Xml2Parser.metaClass."get${methodName}" = { -> params."${name}" }
         }
     }
-    
+
     /**
      * Constructs a empty Xml2Parser
      */
-    Xml2Parser () {
+    Xml2Parser() {
         // Fill the map with the names of the params
         paramPrototypes.each() { name, value -> params[name] = value }
         AbstractTransformer.resolver = new XSLTIncludeClasspathURIResolver(this, xslt)
     }
-    
+
     /**
      * Constructs a Xml2Parser, sets and the parameters of the transformation and sets the given input.
      * @param input the {@link java.net.URL URL} of the document to be transformed
      * @see #Xml2Parser()
      */
-    Xml2Parser (URL input) {
+    Xml2Parser(URL input) {
         this()
         this.input = input
     }
-    
+
     /**
      * Constructs a Xml2Parser, sets and the parameters of the transformation and sets the given input.
      * @param input the {@link org.w3c.dom.Document Document} of the document to be transformed
      * @see #Xml2Parser()
      */
-    Xml2Parser (Document inDoc) {
+    Xml2Parser(Document inDoc) {
         this()
         //Input as Document
         this.inDoc = inDoc
     }
-    
+
     /**
      * Checks if the required parameters are set and performs the transformation
      * @throws IllegalStateException if the parameters are empty or not set
      * @see de.unigoettingen.sub.be.ous.print.layout.AbstractTransformer#transform()
      */
     @Override
-    void transform () {
+    void transform() {
         if (!validateParams(params)) {
             throw new IllegalStateException('Params not configured');
         }
         if (inDoc == null) {
-            log.trace('Processing'  + this.input)
+            log.trace('Processing' + this.input)
             log.debug("Using stylesheet " + stylesheet.toString())
             result = transform(this.input, stylesheet, this.params)
         } else {
@@ -110,7 +110,7 @@ class Xml2Parser extends AbstractTransformer {
             result = transform(new DOMSource(inDoc), new StreamSource(stylesheet.openStream()), this.params)
         }
     }
-    
+
     /**
      * Returns a Java Object, representing the generated parser 
      * @throws IllegalStateException if not configured correctly
@@ -122,7 +122,7 @@ class Xml2Parser extends AbstractTransformer {
         }
         throw new IllegalStateException('No result stylesheet')
     }
-    
+
     /**
      * Returns a Java Object, representing the parser from a given style sheet
      * Use this if you are working with precompiled parsers
@@ -131,7 +131,7 @@ class Xml2Parser extends AbstractTransformer {
     static LayoutParser getParser(URL stylesheet, String name, String encoding = Layout.DEFAULT_ENCODING) {
         return new LayoutParser(new StreamSource(stylesheet.openStream()), name, encoding)
     }
-    
+
     /**
      * Class encapsulating a generated XSLT based parser
      */
@@ -139,33 +139,43 @@ class Xml2Parser extends AbstractTransformer {
     protected class LayoutParser extends AbstractTransformer {
         /** The memory representaion of the parser */
         Document parser
-        
+
         /** The Name of the layout used */
         String layoutName
-        
+
         /** Params */
         def Map params = ['input': '', 'encoding': '']
-        
+
         /** The result {@link org.w3c.dom.Document Document} */
         protected Document result
-        
+
         /** The encoding to be used */
         protected String encoding
-        
+
         /**
          * Constructs a empty LayoutParser
          */
-        protected LayoutParser () {
-        
+        private LayoutParser() {
+            super()
         }
-        
+
         /**
          * Constructs a LayoutParser using a parser given as document and the name of the source layout
          * @param {@link org.w3c.dom.Document Document} the parser
          * @param {@link java.lang.String String} the name of the source layout
          * @param {@link java.lang.String String} the name of encoding teo be used, defaults to Layout.DEFAULT_ENCODING
          */
-        protected LayoutParser (Document parser, String layoutName, String encoding) {
+        protected LayoutParser(Document parser, String layoutName) {
+            this(parser, layoutName, Layout.DEFAULT_ENCODING)
+        }
+
+        /**
+         * Constructs a LayoutParser using a parser given as document and the name of the source layout
+         * @param {@link org.w3c.dom.Document Document} the parser
+         * @param {@link java.lang.String String} the name of the source layout
+         * @param {@link java.lang.String String} the name of encoding teo be used, defaults to Layout.DEFAULT_ENCODING
+         */
+        protected LayoutParser(Document parser, String layoutName, String encoding) {
             this()
             this.parser = parser
             this.layoutName = layoutName
@@ -173,14 +183,13 @@ class Xml2Parser extends AbstractTransformer {
             this.encoding = encoding
         }
 
-        
         /**
          * Checks if the required parameters are set and performs the transformation
          * @throws IllegalStateException if the parameters are empty or not set
          * @see de.unigoettingen.sub.be.ous.print.layout.AbstractTransformer#transform()
          */
         @Override
-        void transform () {
+        void transform() {
             if (parser == null) {
                 throw new IllegalStateException('No parser stylesheet given')
             }
@@ -188,12 +197,12 @@ class Xml2Parser extends AbstractTransformer {
             log.trace('XSLT: \n' + Util.docAsString(parser))
             result = transform(new StreamSource(input.openStream()), new DOMSource(parser), this.params)
         }
-        
+
         /**
          * Parses a given URL with the generated parser
          * @param URL of the file to be parsed
          */
-        void parse (URL input) {
+        void parse(URL input) {
             log.trace("Parsing URL ${input} with encoding ${this.encoding}")
             this.params['encoding'] = this.encoding
             this.params['input'] = input.toString()
@@ -203,22 +212,34 @@ class Xml2Parser extends AbstractTransformer {
                 throw te
             }
         }
-        
+
         /**
          * Parses a given InputStream
-         * Creates a temp file for converting the content of the InputStream into UTF-8
+         * Creates a temp file for converting the content of the InputStream from the given encoding into UTF-8
          * @param the InputStream to be parsed
+         * @param the charset to use for parsing
          * @throws TransformerException
          */
-        @Deprecated
-        protected void parse (InputStream input) {
-            File temp = File.createTempFile("temp", ".txt");
-            temp.deleteOnExit();
-            temp.write(Layout.readFile(input, Layout.DEFAULT_ENCODING))
-            log.debug('Created temp file ' + temp.getAbsolutePath()) 
+        public void parse(InputStream input, String encoding) {
+            this.encoding = encoding
+            parseStream(input)
+        }
+
+        /**
+         * Parses a given String
+         * Creates a temp file for the content of the InputStream
+         * Use this if you already have a String in the Java platform encoding
+         * @param the String to be parsed
+         * @throws TransformerException
+         */
+        public void parse(String input) {
+            File temp = File.createTempFile("temp", ".txt")
+            temp.deleteOnExit()
+            temp.write(input)
+            log.debug('Created temp file ' + temp.getAbsolutePath())
             this.params['input'] = temp.toURI().toURL().toString()
-            this.params['encoding'] = this.encoding
-            log.trace('Setting input to ' + this.params['input'] + 'starting transformation...')
+            this.params['encoding'] = System.getProperty('file.encoding')
+            log.trace("Setting input to ${params['input']}, ${params['encoding']}encoding starting transformation...")
             try {
                 this.transform()
             } catch (TransformerException te) {
@@ -227,7 +248,31 @@ class Xml2Parser extends AbstractTransformer {
                 temp.delete()
             }
         }
-        
+
+        /**
+         * Parses a given InputStream
+         * Creates a temp file for converting the content of the InputStream into UTF-8
+         * @param the InputStream to be parsed
+         * @throws TransformerException
+         */
+        @Deprecated
+        private void parseStream(InputStream input) {
+            File temp = File.createTempFile("temp", ".txt")
+            temp.deleteOnExit()
+            temp.write(Layout.readFile(input, Layout.DEFAULT_ENCODING))
+            log.debug('Created temp file ' + temp.getAbsolutePath())
+            this.params['input'] = temp.toURI().toURL().toString()
+            this.params['encoding'] = this.encoding
+            log.trace("Setting input to ${params['input']}, ${params['encoding']}encoding starting transformation...")
+            try {
+                this.transform()
+            } catch (TransformerException te) {
+                throw te
+            } finally {
+                temp.delete()
+            }
+        }
+
         //TODO: Check why this method isn't inherited
         /**
          * Returns the result XML as String
@@ -240,7 +285,7 @@ class Xml2Parser extends AbstractTransformer {
                 return null
             }
         }
-        
+
     }
 }
 

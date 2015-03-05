@@ -89,11 +89,11 @@ class PlainTextProcessor implements Processor  {
         String body = exchange.getIn().getBody(String.class)
         String fileName = FilenameUtils.getBaseName((String) exchange.getIn().getHeader(Exchange.FILE_NAME))
         String xslFoBody = getXslFo(body)
-        exchange.getIn().setBody(xslFoBody)
+        exchange.getOut().setBody(xslFoBody)
         log.trace('Copying headers')
         exchange.getOut().getHeaders().putAll(exchange.getIn().getHeaders())
         //Setting our header
-        exchange.getIn().setHeader(Exchange.FILE_NAME, fileName + ".fo")
+        exchange.getOut().setHeader(Exchange.FILE_NAME, fileName + ".fo")
     }
     
     /**

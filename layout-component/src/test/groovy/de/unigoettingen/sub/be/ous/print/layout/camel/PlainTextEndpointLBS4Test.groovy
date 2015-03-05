@@ -50,7 +50,7 @@ class PlainTextEndpointLBS4Test  extends CamelTestSupport {
                 from("file:./target/generated-test-resources/hotfolder/lbs3/in?include=.*.print&noop=true&charset=ISO-8859-1")
                 .to("plainText:.&pageSize=A5")
                 .to("fop:application/pdf")
-                .to('file:./target/?fileName=${file:name}.pdf')
+                .to('file:./target/?fileName=${file:name}-plain-lbs4.pdf')
                 .to("mock:result");
             }
         };

@@ -46,6 +46,9 @@ class Xml2Parser extends AbstractTransformer {
     /** The URL of the stylesheet to used */
     protected static URL stylesheet = this.getClass().getResource(xslt)
 
+    /** The endoding to be used for parsing */
+    protected String encoding = Layout.DEFAULT_ENCODING
+
     //Configuration of Stylesheet
     /** Parameters of the stylesheet */
     def static paramPrototypes = ['encoding': 'UTF-8']
@@ -72,6 +75,7 @@ class Xml2Parser extends AbstractTransformer {
 
     /**
      * Constructs a Xml2Parser, sets and the parameters of the transformation and sets the given input.
+     * Note that the default Charset for parsers is UTF-8, thus the default constructor neither works with LBS4 nor LBS4
      * @param input the {@link java.net.URL URL} of the document to be transformed
      * @see #Xml2Parser()
      */
@@ -88,18 +92,21 @@ class Xml2Parser extends AbstractTransformer {
      */
     Xml2Parser(URL input, String encoding) {
         this(input)
+        this.encoding = encoding
         this.params['encoding'] = encoding
     }
 
     /**
      * Constructs a Xml2Parser, sets and the parameters of the transformation and sets the given input.
      * @param input the {@link org.w3c.dom.Document Document} of the document to be transformed
+     * @param encoding the encoding the generated parser should read
      * @see #Xml2Parser()
      */
     Xml2Parser(Document inDoc, String encoding) {
         this()
         //Input as Document
         this.inDoc = inDoc
+        this.encoding = encoding
         this.params['encoding'] = encoding
     }
 
@@ -130,7 +137,7 @@ class Xml2Parser extends AbstractTransformer {
      */
     LayoutParser getParser() {
         if (result != null) {
-            return new LayoutParser(result, input.toString(), Layout.DEFAULT_ENCODING)
+            return new LayoutParser(result, input.toString(), encoding)
         }
         throw new IllegalStateException('No result stylesheet')
     }
@@ -223,9 +230,9 @@ class Xml2Parser extends AbstractTransformer {
          * @param the charset to use for parsing
          * @throws TransformerException
          */
-        public void parse(InputStream input, String encoding) {
-            this.encoding = encoding
-            parseStream(input)
+        @Deprecated
+        private void parseStream(InputStream input) {
+            parse(input, System.getProperty('file.encoding'))
         }
 
         /**
@@ -236,6 +243,7 @@ class Xml2Parser extends AbstractTransformer {
          * @throws TransformerException
          */
         public void parse(String input) {
+            parse(new ByteArrayInputStream(input.getBytes()), System.getProperty('file.encoding'))
             File temp = File.createTempFile("temp", ".txt")
             temp.deleteOnExit()
             temp.write(input)
@@ -258,11 +266,10 @@ class Xml2Parser extends AbstractTransformer {
          * @param the InputStream to be parsed
          * @throws TransformerException
          */
-        @Deprecated
-        private void parseStream(InputStream input) {
+        public void parse(InputStream input, String encoding) {
             File temp = File.createTempFile("temp", ".txt")
             temp.deleteOnExit()
-            temp.write(Layout.readFile(input, Layout.DEFAULT_ENCODING))
+            temp.write(Layout.readFile(input, encoding))
             log.debug('Created temp file ' + temp.getAbsolutePath())
             this.params['input'] = temp.toURI().toURL().toString()
             this.params['encoding'] = encoding

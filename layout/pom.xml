@@ -266,6 +266,23 @@
                                 </parameter>
                             </parameters>
                         </transformationSet>
+                        <!-- LBS4 layout definition -->
+                        <transformationSet>
+                            <dir>src/main/resources/xml/</dir>
+                            <stylesheet>src/main/resources/xslt/asc2xml.xsl</stylesheet>
+                            <outputDir>${project.build.directory}/test-classes/layouts-xml</outputDir>
+                            <fileMappers>
+                                <fileMapper implementation="org.codehaus.plexus.components.io.filemappers.MergeFileMapper">
+                                    <targetName>ous40_layout_001_du-lbs4.asc.xml</targetName>
+                                </fileMapper>
+                            </fileMappers>
+                            <parameters>
+                                <parameter>
+                                    <name>layoutFile</name>
+                                    <value>${project.build.directory}/generated-test-resources/layouts/ous40_layout_001_du-lbs4.asc</value>
+                                </parameter>
+                            </parameters>
+                        </transformationSet>
                     </transformationSets>
                 </configuration>
                 <dependencies>

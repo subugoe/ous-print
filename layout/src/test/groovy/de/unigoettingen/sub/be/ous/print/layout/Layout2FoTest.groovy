@@ -40,12 +40,10 @@ import org.w3c.dom.Document
 import static org.junit.Assert.*
 
 @Log4j
-class Layout2FoTest {
+class Layout2FoTest extends TestBase {
     static URL LAYOUT = Layout2FoTest.getClass().getResource("/layouts-xml/ous40_layout_001_du.asc.xml")
-    static URL FO = Layout2FoTest.getClass().getResource("/xslt/layout2fo.xsl")
     static LayoutParser LP
-    static File SLIPS = new File(Xml2ParserTest.getClass().getResource('/hotfolder/lbs3/in/').toURI())
-    static List<URL> SLIP_FILES = new ArrayList<URL>()
+
     
     @BeforeClass
     static void setUp () {
@@ -54,27 +52,20 @@ class Layout2FoTest {
         Xml2Parser x2p = new Xml2Parser(LAYOUT)
         x2p.transform()
         LP = x2p.getParser()
-        // Slip files
-        assertNotNull(SLIPS)
-        def p = ~/.*\.print/
-        SLIPS.eachFileMatch(p) {
-            f ->
-            SLIP_FILES.add(f.toURI().toURL())
-            log.info('Added URL ' + f.toURI().toURL().toString() + ' to test file list')
-        }
+
     }
     
     @Test
     @TypeChecked
     void testFormatFo() {
-        for (slip in SLIP_FILES) {
+        for (slip in SLIP_LBS3_FILES) {
             if (!Layout.validateAsc(slip)) {
                 log.warn('File contains invalid characters: ' + slip.toString())
                 continue
             }
             //This will fail if the charset is wrong
             LP.parse(slip)
-            Layout2Fo l2f = new Layout2Fo(LP.result, FO)
+            Layout2Fo l2f = new Layout2Fo(LP.result, XSLFO)
             l2f.transform()
             log.trace('Result:\n----------------START OF RESULT(' + this.getClass().getName() + ')\n' + l2f.getXML())
             log.trace('----------------END OF RESULT(' + this.getClass().getName() + ')\n')
@@ -84,14 +75,14 @@ class Layout2FoTest {
     @Test
     @TypeChecked
     void testFormatPdf() {
-        for (slip in SLIP_FILES) {
+        for (slip in SLIP_LBS3_FILES) {
             if (!Layout.validateAsc(slip)) {
                 log.warn('File contains invalid characters: ' + slip.toString())
                 continue
             }
         
             LP.parse(slip)
-            Layout2Fo l2f = new Layout2Fo(LP.result, FO)
+            Layout2Fo l2f = new Layout2Fo(LP.result, XSLFO)
             l2f.transform()
             def pdfOut = slip.toString().substring(5) + '.pdf'
             log.trace('Writing PDF file to ' + pdfOut)
@@ -107,20 +98,19 @@ class Layout2FoTest {
                 fail()
             }
         }
-        
     }
     
     @Test
     @TypeChecked
     void testFormatXslfo() {
-        for (slip in SLIP_FILES) {
+        for (slip in SLIP_LBS3_FILES) {
             if (!Layout.validateAsc(slip)) {
                 log.warn('File contains invalid characters: ' + slip.toString())
                 continue
             }
         
             LP.parse(slip)
-            Layout2Fo l2f = new Layout2Fo(LP.result, FO)
+            Layout2Fo l2f = new Layout2Fo(LP.result, XSLFO)
             l2f.transform()
             def xslfoOut = slip.toString().substring(5) + '.fo'
             log.trace('Writing XSL-FO file to ' + xslfoOut)
@@ -132,7 +122,7 @@ class Layout2FoTest {
     @AfterClass
     static void cleanUp () {
         def p = ~/.*\.pdf/
-        SLIPS.eachFileMatch(p) {
+        SLIPS_LBS3.eachFileMatch(p) {
             f ->
             f.delete()
             log.info('Removed Test file ' + f.toURI().toURL().toString())

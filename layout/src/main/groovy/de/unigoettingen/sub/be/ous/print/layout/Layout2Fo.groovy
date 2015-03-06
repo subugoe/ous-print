@@ -21,15 +21,12 @@ package de.unigoettingen.sub.be.ous.print.layout
 import de.unigoettingen.sub.be.ous.print.util.resolver.XSLTIncludeClasspathURIResolver
 import de.unigoettingen.sub.be.ous.print.util.resolver.BasePathResolver
 
-import groovy.transform.TypeChecked
 import groovy.util.logging.Log4j
 
 import javax.xml.transform.Result
-import javax.xml.transform.Source
 import javax.xml.transform.Transformer
 import javax.xml.transform.TransformerException
 import javax.xml.transform.TransformerFactory
-import javax.xml.transform.URIResolver
 import javax.xml.transform.dom.DOMSource
 import javax.xml.transform.sax.SAXResult
 import javax.xml.transform.stream.StreamSource

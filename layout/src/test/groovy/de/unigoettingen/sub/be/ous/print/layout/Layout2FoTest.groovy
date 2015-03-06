@@ -35,8 +35,6 @@ import org.junit.BeforeClass
 import org.junit.Ignore
 import org.junit.Test
 
-import org.w3c.dom.Document
-
 import static org.junit.Assert.*
 
 @Log4j
@@ -47,6 +45,8 @@ class Layout2FoTest extends TestBase {
     
     @BeforeClass
     static void setUp () {
+        //Stupid JUnit doesn't support @Before classes from base class
+        super.setUp()
         //Set Up parser
         log.info('Generating Parser for ' + LAYOUT)
         Xml2Parser x2p = new Xml2Parser(LAYOUT)
@@ -65,13 +65,13 @@ class Layout2FoTest extends TestBase {
             }
             //This will fail if the charset is wrong
             LP.parse(slip)
-            Layout2Fo l2f = new Layout2Fo(LP.result, XSLFO)
+            Layout2Fo l2f = new Layout2Fo(LP.getResult(), XSLFO)
             l2f.transform()
-            log.trace('Result:\n----------------START OF RESULT(' + this.getClass().getName() + ')\n' + l2f.getXML())
-            log.trace('----------------END OF RESULT(' + this.getClass().getName() + ')\n')
+            String xslfoOut = slip.toString().substring(5) + '-lbs3.fo'
+            dumpFile(xslfoOut, l2f, this.getClass(),'LBS3')
         }
     }
-    
+
     @Test
     @TypeChecked
     void testFormatPdf() {

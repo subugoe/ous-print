@@ -1,5 +1,6 @@
 package de.unigoettingen.sub.be.ous.print.layout
 
+import de.unigoettingen.sub.be.ous.print.util.Util
 import groovy.util.logging.Log4j
 import org.junit.BeforeClass
 
@@ -32,7 +33,7 @@ class TestBase {
     static String LBS4_CHARSET = 'ISO-8859-1'
 
     @BeforeClass
-    static void setUp () {
+    static void setUp() {
         assertNotNull(SLIPS_LBS3)
         def p = ~/.*\.print/
         SLIPS_LBS3.eachFileMatch(p) {
@@ -49,5 +50,12 @@ class TestBase {
         assertNotNull(PARSER_XML)
         assertNotNull(PARSER_TXT_LBS3)
         assertNotNull(PARSER_TXT_LBS4)
+    }
+
+    public static dumpFile(String out, AbstractTransformer at, Class c, String prefix) {
+        log.trace("Result:\n----------------[${prefix}] START OF RESULT(" + c.getName() + ')\n' + at.getXML())
+        log.trace("----------------[${prefix}] END OF RESULT(" + c.getName() + ')\n')
+        log.trace('Saving file to ' + out)
+        Util.writeDocument(at.getResult(), new File(out).toURI().toURL())
     }
 }

@@ -214,6 +214,18 @@ abstract class AbstractTransformer {
     static URL getEmptyXml() {
         return xml
     }
+
+    /**
+     * Returns the result XML as Document
+     * @return the result {@link org.w3c.dom.Document Document}
+     */
+    Document getResult() {
+        if (result != null) {
+            return result
+        } else {
+            return null
+        }
+    }
     
 }
 

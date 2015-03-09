@@ -1,13 +1,12 @@
 package de.unigoettingen.sub.be.ous.print.layout
 
 import de.unigoettingen.sub.be.ous.print.util.Util
+
 import groovy.util.logging.Log4j
+
+import org.junit.AfterClass
 import org.junit.BeforeClass
 
-import static org.junit.Assert.assertNotNull
-import static org.junit.Assert.assertNotNull
-import static org.junit.Assert.assertNotNull
-import static org.junit.Assert.assertNotNull
 import static org.junit.Assert.assertNotNull
 
 /**
@@ -31,6 +30,8 @@ class TestBase {
 
     static String LBS3_CHARSET = 'Cp850'
     static String LBS4_CHARSET = 'ISO-8859-1'
+
+    static List<File> generatedTestFiles = []
 
     @BeforeClass
     static void setUp() {
@@ -57,5 +58,21 @@ class TestBase {
         log.trace("----------------[${prefix}] END OF RESULT(" + c.getName() + ')\n')
         log.trace('Saving file to ' + out)
         Util.writeDocument(at.getResult(), new File(out).toURI().toURL())
+    }
+
+    public void addTestfile(File f) {
+        generatedTestFiles.add(f)
+    }
+
+    @AfterClass
+    public void removeTestFiles() {
+        if (System.getProperty('test.file.delete').equalsIgnoreCase('TRUE')) {
+            for (File f in generatedTestFiles) {
+                log.info("Deleting ${f.absolutePath}" on exit)
+                f.deleteOnExit()
+            }
+        } else {
+            log.info('Keeping generated test files')
+        }
     }
 }

@@ -38,11 +38,11 @@ import static org.junit.Assert.*
 @Log4j
 class Xml2AscTest extends TestBase {
 
-    @Test
+    @Test(expected=IllegalStateException.class)
     @TypeChecked
     void testTransform () {
         for (xml in URLS) {
-            log.info('Transforming ASC File ' + Xml2Asc.toString())
+            log.info('Transforming ASC File (' + Xml2Asc.toString() + '):' +xml)
             Xml2Asc x2a = new Xml2Asc(xml)
             try {
                 x2a.transform()

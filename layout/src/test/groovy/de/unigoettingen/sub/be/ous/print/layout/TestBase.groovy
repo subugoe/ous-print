@@ -1,7 +1,7 @@
 package de.unigoettingen.sub.be.ous.print.layout
 
 import de.unigoettingen.sub.be.ous.print.util.Util
-
+import groovy.transform.CompileStatic
 import groovy.util.logging.Log4j
 
 import org.junit.AfterClass
@@ -13,6 +13,7 @@ import static org.junit.Assert.assertNotNull
  * Created by cmahnke on 05.03.15.
  */
 @Log4j
+@CompileStatic
 class TestBase {
     static File SLIPS_LBS3 = new File(TestBase.getClass().getResource('/hotfolder/lbs3/in/').toURI())
     static File SLIPS_LBS4 = new File(TestBase.getClass().getResource('/hotfolder/lbs4/in/').toURI())
@@ -25,6 +26,9 @@ class TestBase {
 
     static List<URL> URLS = [TestBase.getClass().getResource("/layouts-xml/ous40_layout_001_du.asc.xml"),
                              TestBase.getClass().getResource("/layouts-xml/ous40_layout_001_en.asc.xml")]
+
+    static List<URL> URLS_ASC = [Asc2XmlTest.getClass().getResource("/layouts/ous40_layout_001_du.asc"),
+                                     Asc2XmlTest.getClass().getResource("/layouts/ous40_layout_001_en.asc")]
 
     static URL LAYOUT = Layout2FoTest.getClass().getResource("/layouts-xml/ous40_layout_001_du.asc.xml")
 
@@ -60,15 +64,19 @@ class TestBase {
         Util.writeDocument(at.getResult(), new File(out).toURI().toURL())
     }
 
+    public static generateFileName(URL file, Class c, String suffix, Integer remove = 0) {
+        return  file.toString().substring(remove) + c.getSimpleName() + suffix
+    }
+
     public void addTestfile(File f) {
         generatedTestFiles.add(f)
     }
 
     @AfterClass
-    public void removeTestFiles() {
-        if (System.getProperty('test.file.delete').equalsIgnoreCase('TRUE')) {
+    public static void removeTestFiles() {
+        if (System.getProperty('test.file.delete')?.equalsIgnoreCase('TRUE')) {
             for (File f in generatedTestFiles) {
-                log.info("Deleting ${f.absolutePath}" on exit)
+                log.info("Deleting ${f.absolutePath} on exit")
                 f.deleteOnExit()
             }
         } else {

@@ -51,9 +51,10 @@ class LayoutTest extends TestBase {
     @Test
     void testLayoutXml() {
         for (slip in SLIP_LBS3_FILES) {
-            def pdfOut = slip.toString().substring(5) + '.pdf'
+            String pdfOut = generateFileName(slip, this.class, '.pdf', 5)
             log.trace('Writing PDF file to ' + pdfOut)
             FileOutputStream fos = new FileOutputStream(new File(pdfOut))
+            addTestfile(new File(pdfOut))
             Layout l = new Layout(FORMAT.TEXT, slip.openStream(), FORMAT.PDF, fos, XSLFO, null, PARSER_XML, 'Cp850')
             try {
                 l.layout()
@@ -71,9 +72,10 @@ class LayoutTest extends TestBase {
     @Test
     void testLayoutXmlDebug() {
         for (slip in SLIP_LBS3_FILES) {
-            def pdfOut = slip.toString().substring(5) + '.pdf'
+            String pdfOut = generateFileName(slip, this.class, '.pdf', 5)
             log.trace('Writing PDF file to ' + pdfOut)
             FileOutputStream fos = new FileOutputStream(new File(pdfOut))
+            addTestfile(new File(pdfOut))
             Layout l = new Layout(FORMAT.TEXT, slip.openStream(), FORMAT.PDF, fos, XSLFO, null, PARSER_XML, 'Cp850')
             l.setDebug(true)
             l.layout()
@@ -84,9 +86,10 @@ class LayoutTest extends TestBase {
     @Test
     void testLayoutTxt() {
         for (slip in SLIP_LBS3_FILES) {
-            def pdfOut = slip.toString().substring(5) + '.a4.pdf'
+            String pdfOut = generateFileName(slip, this.class, '.a4.pdf', 5)
             log.trace('Writing PDF file to ' + pdfOut)
             FileOutputStream fos = new FileOutputStream(new File(pdfOut))
+            addTestfile(new File(pdfOut))
             Layout l = new Layout(FORMAT.TEXT, slip.openStream(), FORMAT.PDF, fos, XSLFO, null, PARSER_TXT_LBS3, 'Cp850')
             //Use try / catch block to get the offending content
             try {
@@ -105,9 +108,10 @@ class LayoutTest extends TestBase {
     @Test
     void testLayoutTxtLBS4() {
         for (slip in SLIP_LBS4_FILES) {
-            def pdfOut = slip.toString().substring(5) + '.a4.pdf'
+            String pdfOut = generateFileName(slip, this.class, '.a4-lbs4.pdf', 5)
             log.trace('Writing PDF file to ' + pdfOut)
             FileOutputStream fos = new FileOutputStream(new File(pdfOut))
+            addTestfile(new File(pdfOut))
             Layout l = new Layout(FORMAT.TEXT, slip.openStream(), FORMAT.PDF, fos, XSLFO, null, PARSER_TXT_LBS4, 'ISO-8859-1')
             //Use try / catch block to get the offending content
             try {
@@ -126,9 +130,10 @@ class LayoutTest extends TestBase {
     @Test
     void testLayoutA5() {
         for (slip in SLIP_LBS3_FILES) {
-            def pdfOut = slip.toString().substring(5) + '.a5.pdf'
+            String pdfOut = generateFileName(slip, this.class, '.a5.pdf', 5)
             log.trace('Writing PDF file to ' + pdfOut)
             FileOutputStream fos = new FileOutputStream(new File(pdfOut))
+            addTestfile(new File(pdfOut))
             Layout l = new Layout(FORMAT.TEXT, slip.openStream(), FORMAT.PDF, fos, XSLFO, null, PARSER_TXT_LBS3)
             l.setPageSize(Layout.PageSize.A5)
             //Use try / catch block to get the offending content
@@ -141,6 +146,8 @@ class LayoutTest extends TestBase {
                 log.warn('----------------END OF RESULT(' + this.getClass().getName() + ')\n')
                 fail()
             }
+
+
             l = null
         }
     }
@@ -148,9 +155,10 @@ class LayoutTest extends TestBase {
     @Test
     void testLayoutPs() {
         for (slip in SLIP_LBS3_FILES) {
-            def psOut = slip.toString().substring(5) + '.ps'
+            String psOut = generateFileName(slip, this.class, '.ps', 5)
             log.trace('Writing Postscript file to ' + psOut)
             FileOutputStream fos = new FileOutputStream(new File(psOut))
+            addTestfile(new File(psOut))
             Layout l = new Layout(FORMAT.TEXT, slip.openStream(), FORMAT.PS, fos, XSLFO, null, PARSER_TXT_LBS3)
             
             l.layout()
@@ -158,24 +166,6 @@ class LayoutTest extends TestBase {
             
         }
     }
-    
-    @AfterClass
-    static void cleanUp () {
-        if (CLEANUP) {
-            def p = ~/.*\.pdf/
-            SLIPS_LBS3.eachFileMatch(p) {
-                f ->
-                f.delete()
-                log.info('Removed Test file ' + f.toURI().toURL().toString())
-            }
-            SLIPS_LBS4.eachFileMatch(p) {
-                f ->
-                    f.delete()
-                    log.info('Removed Test file ' + f.toURI().toURL().toString())
-            }
-        }
-    }
-
     
 }
 

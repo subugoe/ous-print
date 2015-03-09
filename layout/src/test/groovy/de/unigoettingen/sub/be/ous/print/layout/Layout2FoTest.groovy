@@ -23,8 +23,6 @@ package de.unigoettingen.sub.be.ous.print.layout
  * @author cmahnke
  */
 
-import de.unigoettingen.sub.be.ous.print.layout.Xml2Asc
-import de.unigoettingen.sub.be.ous.print.util.Util
 import de.unigoettingen.sub.be.ous.print.layout.Xml2Parser.LayoutParser
 
 import groovy.util.logging.Log4j
@@ -32,7 +30,6 @@ import groovy.transform.TypeChecked
 
 import org.junit.AfterClass
 import org.junit.BeforeClass
-import org.junit.Ignore
 import org.junit.Test
 
 import static org.junit.Assert.*
@@ -40,7 +37,8 @@ import static org.junit.Assert.*
 @Log4j
 class Layout2FoTest extends TestBase {
     static URL LAYOUT = Layout2FoTest.getClass().getResource("/layouts-xml/ous40_layout_001_du.asc.xml")
-    static LayoutParser LP
+    static LayoutParser LP_LBS3
+    static LayoutParser LP_LBS4
 
     
     @BeforeClass
@@ -48,11 +46,13 @@ class Layout2FoTest extends TestBase {
         //Stupid JUnit doesn't support @Before classes from base class
         super.setUp()
         //Set Up parser
-        log.info('Generating Parser for ' + LAYOUT)
-        Xml2Parser x2p = new Xml2Parser(LAYOUT)
-        x2p.transform()
-        LP = x2p.getParser()
-
+        log.info("Generating Parser for ${LAYOUT} for LBS3 and LBS4")
+        Xml2Parser x2pLbs3 = new Xml2Parser(LAYOUT, LBS3_CHARSET)
+        Xml2Parser x2pLbs4 = new Xml2Parser(LAYOUT, LBS4_CHARSET)
+        x2pLbs3.transform()
+        x2pLbs4.transform()
+        LP_LBS3 = x2pLbs3.getParser()
+        LP_LBS4 = x2pLbs4.getParser()
     }
     
     @Test
@@ -64,11 +64,12 @@ class Layout2FoTest extends TestBase {
                 continue
             }
             //This will fail if the charset is wrong
-            LP.parse(slip)
-            Layout2Fo l2f = new Layout2Fo(LP.getResult(), XSLFO)
+            LP_LBS3.parse(slip)
+            Layout2Fo l2f = new Layout2Fo(LP_LBS3.getResult(), XSLFO)
             l2f.transform()
-            String xslfoOut = slip.toString().substring(5) + '-lbs3.fo'
+            String xslfoOut = generateFileName(slip, this.class, '-lbs3.fo', 5)
             dumpFile(xslfoOut, l2f, this.getClass(),'LBS3')
+            addTestfile(new File(xslfoOut))
         }
     }
 
@@ -81,20 +82,20 @@ class Layout2FoTest extends TestBase {
                 continue
             }
         
-            LP.parse(slip)
-            Layout2Fo l2f = new Layout2Fo(LP.result, XSLFO)
+            LP_LBS3.parse(slip)
+            Layout2Fo l2f = new Layout2Fo(LP_LBS3.result, XSLFO)
             l2f.transform()
-            def pdfOut = slip.toString().substring(5) + '.pdf'
+            String pdfOut = generateFileName(slip, this.class, '.pdf', 5)
             log.trace('Writing PDF file to ' + pdfOut)
             FileOutputStream fos = new FileOutputStream(new File(pdfOut))
+            addTestfile(new File(pdfOut))
             //Use try / catch block to get the offending content
             try {
                 l2f.format(fos)
             } catch (Exception e) {
                 log.error('Transformation failed', e)
-                log.warn('Result:\n----------------START OF RESULT(' + this.getClass().getName() + ')\n')
-                log.warn(Util.docAsString(l2f.result))
-                log.warn('----------------END OF RESULT(' + this.getClass().getName() + ')\n')
+                String xslfoOut = slip.toString().substring(5) + 'error..fo'
+                dumpFile(xslfoOut, l2f, this.getClass(),'LBS3-ERROR')
                 fail()
             }
         }
@@ -108,25 +109,34 @@ class Layout2FoTest extends TestBase {
                 log.warn('File contains invalid characters: ' + slip.toString())
                 continue
             }
-        
-            LP.parse(slip)
-            Layout2Fo l2f = new Layout2Fo(LP.result, XSLFO)
+            LP_LBS3.parse(slip)
+            Layout2Fo l2f = new Layout2Fo(LP_LBS3.result, XSLFO)
             l2f.transform()
-            def xslfoOut = slip.toString().substring(5) + '.fo'
-            log.trace('Writing XSL-FO file to ' + xslfoOut)
-            Util.writeDocument(l2f.result, new File(xslfoOut).toURI().toURL())
-        }
-        
-    }
-    
-    @AfterClass
-    static void cleanUp () {
-        def p = ~/.*\.pdf/
-        SLIPS_LBS3.eachFileMatch(p) {
-            f ->
-            f.delete()
-            log.info('Removed Test file ' + f.toURI().toURL().toString())
+            String xslfoOut = generateFileName(slip, this.class, '-.fo', 5)
+            dumpFile(xslfoOut, l2f, this.getClass(),'LBS3')
+            addTestfile(new File(xslfoOut))
         }
     }
+
+    @Test
+    @TypeChecked
+    void testFormatPdfLBS4() {
+        for (slip in SLIP_LBS4_FILES) {
+            if (!Layout.validateAsc(slip)) {
+                log.warn('File contains invalid characters: ' + slip.toString())
+                continue
+            }
+
+            LP_LBS4.parse(slip)
+            Layout2Fo l2f = new Layout2Fo(LP_LBS4.result, XSLFO)
+            l2f.transform()
+            String pdfOut = generateFileName(slip, this.class, '-lbs4.fo', 5)
+            log.trace('Writing PDF file to ' + pdfOut)
+            FileOutputStream fos = new FileOutputStream(new File(pdfOut))
+            addTestfile(new File(pdfOut))
+            l2f.format(fos)
+        }
+    }
+
 }
 

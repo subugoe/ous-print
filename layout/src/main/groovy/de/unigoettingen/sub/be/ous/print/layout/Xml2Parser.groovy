@@ -67,7 +67,7 @@ class Xml2Parser extends AbstractTransformer {
     /**
      * Constructs a empty Xml2Parser
      */
-    Xml2Parser() {
+    protected Xml2Parser() {
         // Fill the map with the names of the params
         paramPrototypes.each() { name, value -> params[name] = value }
         AbstractTransformer.resolver = new XSLTIncludeClasspathURIResolver(this, xslt)
@@ -82,6 +82,7 @@ class Xml2Parser extends AbstractTransformer {
     Xml2Parser(URL input) {
         this()
         this.input = input
+        log.warn("Generating parser for UTF-8, this is probably not what you want")
     }
 
     /**
@@ -126,7 +127,7 @@ class Xml2Parser extends AbstractTransformer {
             result = transform(this.input, stylesheet, this.params)
         } else {
             log.trace('Processing internal Document')
-            result = transform(new DOMSource(inDoc), new StreamSource(stylesheet.openStream()), this.params)
+            result = transform(new DOMSource(inDoc), readAsDOMSorce(stylesheet), this.params)
         }
     }
 
@@ -269,7 +270,7 @@ class Xml2Parser extends AbstractTransformer {
         public void parse(InputStream input, String encoding) {
             File temp = File.createTempFile("temp", ".txt")
             temp.deleteOnExit()
-            temp.write(Layout.readFile(input, encoding))
+            temp.write(input.getText(encoding), encoding)
             log.debug('Created temp file ' + temp.getAbsolutePath())
             this.params['input'] = temp.toURI().toURL().toString()
             this.params['encoding'] = encoding

@@ -148,7 +148,7 @@ class Layout {
         //TODO: Finish other in and outputs
         //Create Parser XML File
         if (parser != null) {
-            lp = getLayoutParser(parser)
+            lp = getLayoutParser(parser, encoding)
             //Layout parser should be ready
             if (inFormat == FORMAT.TEXT || inFormat == FORMAT.ASC) {
                 lp.parse(input, encoding)
@@ -202,6 +202,7 @@ class Layout {
      * @return String the contents (converted from code page 850 into UTF-8) of the given URL
      */
     @TypeChecked
+    @Deprecated
     def static String readFile(URL input, String encoding) {
         //See http://docs.oracle.com/javase/8/docs/technotes/guides/intl/encoding.doc.html
         //See http://www.torsten-horn.de/techdocs/encoding.htm
@@ -213,6 +214,7 @@ class Layout {
      * @return String the contents (converted from code page 850 into UTF-8) of the given InputStream
      */
     @TypeChecked
+    @Deprecated
     def static String readFile(InputStream input, String encoding) {
         //See http://docs.oracle.com/javase/8/docs/technotes/guides/intl/encoding.doc.html
         //See http://www.torsten-horn.de/techdocs/encoding.htm
@@ -263,28 +265,29 @@ class Layout {
      * representations
      *
      * @param parser , the {@link java.net.URL URL} of the layout representation
+     * @param encoding , the encoding that the layout parser should read
      * @returns a LayoutParser object
      */
     @TypeChecked
-    protected LayoutParser getLayoutParser(URL parser) {
+    protected LayoutParser getLayoutParser(URL parser, String encoding) {
         LayoutParser lp
         String parserMime = guessContentType(parser)
         if (parserMime == "text/plain") {
             Asc2Xml a2x = new Asc2Xml(parser)
             a2x.transform()
-            Xml2Parser x2p = new Xml2Parser(a2x.result)
+            Xml2Parser x2p = new Xml2Parser(a2x.result, encoding)
             x2p.transform()
             lp = x2p.getParser()
         } else if (parserMime == 'text/xml' | parserMime == 'application/xml') {
             //TODO: Check if input is a XSL file
             if (Util.getRootElementName(parser) == 'layout') {
                 //XML Representation of ASC file
-                Xml2Parser x2p = new Xml2Parser(parser)
+                Xml2Parser x2p = new Xml2Parser(parser, encoding)
                 x2p.transform()
                 lp = x2p.getParser()
             } else {
                 x2p = new Xml2Parser()
-                lp = x2p.getParser(parser, parser.toString())
+                lp = x2p.getParser(parser, parser.toString(), encoding)
             }
         }
         return lp

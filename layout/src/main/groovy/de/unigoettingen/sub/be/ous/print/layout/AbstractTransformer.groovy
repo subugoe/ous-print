@@ -28,8 +28,10 @@ import groovy.xml.XmlUtil
 import javax.xml.parsers.DocumentBuilder
 import javax.xml.parsers.DocumentBuilderFactory
 import javax.xml.transform.Result
+import javax.xml.transform.Transformer
 import javax.xml.transform.TransformerFactory
 import javax.xml.transform.URIResolver
+import javax.xml.transform.stream.StreamResult
 import javax.xml.transform.stream.StreamSource
 import javax.xml.transform.dom.DOMResult
 import javax.xml.transform.dom.DOMSource
@@ -69,33 +71,33 @@ abstract class AbstractTransformer {
     /** The URL of the empty XML file to used */
     def static URL xml = AbstractTransformer.class.getResource(xmlFile)
 
-        
-    protected static URIResolver resolver = null 
-    
+
+    protected static URIResolver resolver = null
+
     /**
      * Transforms the given document using the given stylesheet with parameters.
      * @param input the {@link java.net.URL URL} for the input document
      * @param xslt the {@link javax.xml.transform.dom.DOMSource DOMSource} of the stylesheet
      * @param params parameters of the stylesheet
      * @return the result {@link org.w3c.dom.Document Document}
-     * @see #transform(javax.xml.transform.Source,javax.xml.transform.Source,java.util.Map)
+     * @see #transform(javax.xml.transform.Source, javax.xml.transform.Source, java.util.Map)
      */
-    def protected static Document transform (URL input, DOMSource xslt, Map params) {
-        transform (new StreamSource(input.openStream()), xslt, params)
+    def protected static Document transform(URL input, DOMSource xslt, Map params) {
+        transform(new StreamSource(input.openStream()), xslt, params)
     }
-    
+
     /**
      * Transforms the given document using the given stylesheet with parameters.
      * @param doc the {@link org.w3c.dom.Document Document} of the input document
      * @param xslt the {@link javax.xml.transform.dom.DOMSource DOMSource} of the stylesheet
      * @param params parameters of the stylesheet
      * @return the result {@link org.w3c.dom.Document Document}
-     * @see #transform(javax.xml.transform.Source,javax.xml.transform.Source,java.util.Map)
+     * @see #transform(javax.xml.transform.Source, javax.xml.transform.Source, java.util.Map)
      */
-    def protected static Document transform (Document doc, DOMSource xslt, Map params) {
-        transform (new DOMSource(doc), xslt, params)
+    def protected static Document transform(Document doc, DOMSource xslt, Map params) {
+        transform(new DOMSource(doc), xslt, params)
     }
-    
+
     /**
      * Transforms the given document using the given stylesheet with parameters.
      * @param input the {@link javax.xml.transform.Source Source} of the input document
@@ -103,7 +105,7 @@ abstract class AbstractTransformer {
      * @param params parameters of the stylesheet
      * @return the result {@link org.w3c.dom.Document Document}
      */
-    def protected static Document transform (Source input, DOMSource xslt, Map params) {
+    def protected static Document transform(Source input, DOMSource xslt, Map params) {
         def factory = TransformerFactory.newInstance()
         //TODO: this is a ugly hack, it's not thread safe
         if (resolver != null) {
@@ -151,24 +153,24 @@ abstract class AbstractTransformer {
         if (listener.fatal) {
             log.error('Transformation failed, check the log!')
         }
-        
+
         def domResult = (Document) result.getNode()
         return domResult
     }
-    
+
     /**
      * Transforms the given document using the given stylesheet with parameters.
-     * This is just a wrapper for {@link #transform(URL,Source,Map) transform}
+     * This is just a wrapper for {@link #transform(URL, Source, Map) transform}
      * which opens an {@link java.io.InputStream InputStream} to create a Source from it an passes this as parameter
      *
      * @param input the {@link java.net.URL URL} for the input document
      * @param stylesheet the {@link java.net.URL URL} to the stylesheet
      * @param params parameters of the stylesheet
      * @return Document the result Document
-     * @see #transform(javax.xml.transform.Source,javax.xml.transform.Source,java.util.Map)
+     * @see #transform(javax.xml.transform.Source, javax.xml.transform.Source, java.util.Map)
      */
     @TypeChecked
-    protected static Document transform (URL input, URL stylesheet, Map params) {
+    protected static Document transform(URL input, URL stylesheet, Map params) {
         log.trace("Transforming " + input.toString() + " using stylesheet " + stylesheet.toString())
 
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance()
@@ -178,25 +180,25 @@ abstract class AbstractTransformer {
         Document dom = db.parse(stylesheet.openStream())
 
         DOMSource xslt = new DOMSource(dom)
-        return transform (input, xslt, params)
+        return transform(input, readAsDOMSorce(stylesheet), params)
     }
-    
+
     /**
      * Transforms the given document using the given stylesheet without parameters.
-     * This is just a wrapper for {@link #transform(URL,URL,Map) transform}
+     * This is just a wrapper for {@link #transform(URL, URL, Map) transform}
      * which passes a empty Map as parameter
-     * 
+     *
      * @param input the {@link java.net.URL URL} for the input document
      * @param stylesheet the {@link java.net.URL URL} to the stylesheet
      * @return the result {@link org.w3c.dom.Document Document}
-     * @see #transform(java.net.URL,java.net.URL,java.util.Map)
-     * 
+     * @see #transform(java.net.URL, java.net.URL, java.util.Map)
+     *
      */
-    
-    protected static Document transform (URL input, URL stylesheet) {
-        return transform (input, stylesheet, [:])
+
+    protected static Document transform(URL input, URL stylesheet) {
+        return transform(input, stylesheet, [:])
     }
-    
+
     /**
      * Returns the result XML as String
      * @return String the result of the Transformation as String
@@ -208,22 +210,22 @@ abstract class AbstractTransformer {
             return null
         }
     }
-    
+
     /**
      * Abstract method that needs to be implemented by extending classes that do
      * the actual transformation. These are usually just wrappers around the protected transform methods.
-     * @see #transform(java.net.URL,java.net.URL)
-     * @see #transform(java.net.URL,java.net.URL,java.util.Map)
-     * @see #transform(java.net.URL,javax.xml.transform.Source,java.util.Map)
-     * 
+     * @see #transform(java.net.URL, java.net.URL)
+     * @see #transform(java.net.URL, java.net.URL, java.util.Map)
+     * @see #transform(java.net.URL, javax.xml.transform.Source, java.util.Map)
+     *
      */
-    abstract void transform ();
-    
+    abstract void transform();
+
     /**
      * Stub of a validation method, overide it fi your stylesheet needs a validation of params
      * @return Boolean the result of the validation
      */
-    protected static Boolean validateParams (Map params) {
+    protected static Boolean validateParams(Map params) {
         return true
     }
 
@@ -246,6 +248,39 @@ abstract class AbstractTransformer {
             return null
         }
     }
-    
+
+    /**
+     * Converts a DOMSource into a StreamSource
+     * @param src
+     * @return
+     */
+    /*
+    protected StreamSource streamToDOMSource(DOMSource src) {
+        TransformerFactory factory = TransformerFactory.newInstance()
+        Transformer transformer = factory.newTransformer()
+        StreamResult result = new StreamResult()
+        ByteArrayOutputStream out = new ByteArrayOutputStream()
+        result.setOutputStream(out)
+        transformer.transform(src, result)
+        ByteArrayInputStream in = new ByteArrayInputStream(out.toByteArray())
+        return StreamSource(in)
+    }
+    */
+
+    /**
+     * Reads a URL and returns a DOMSource
+     *
+     * @param stylesheet
+     * @return
+     */
+    protected static DOMSource readAsDOMSorce (URL stylesheet) {
+        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance()
+        dbf.setNamespaceAware(true)
+        DocumentBuilder db = dbf.newDocumentBuilder()
+        Document dom = db.parse(stylesheet.openStream())
+
+        return new DOMSource(dom)
+    }
+
 }
 

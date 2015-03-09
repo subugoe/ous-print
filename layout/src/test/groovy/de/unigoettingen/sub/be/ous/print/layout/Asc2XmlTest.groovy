@@ -40,7 +40,7 @@ class Asc2XmlTest extends TestBase {
     @Test
     @TypeChecked
     void testTransform () {
-        for (asc in URLS) {
+        for (asc in URLS_ASC) {
             log.info('Transforming ASC File ' + asc.toString())
             Asc2Xml a2x = new Asc2Xml(asc)
             try {

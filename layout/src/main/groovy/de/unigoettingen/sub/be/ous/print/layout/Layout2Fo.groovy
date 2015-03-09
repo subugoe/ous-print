@@ -151,7 +151,7 @@ class Layout2Fo extends AbstractTransformer {
             result = transform(this.input, stylesheet, this.params)
         } else {
             log.trace('Processing internal Document')
-            result = transform(new DOMSource(inDoc), new StreamSource(stylesheet.openStream()), this.params)
+            result = transform(new DOMSource(inDoc), readAsDOMSorce(stylesheet), this.params)
         }
     }
 

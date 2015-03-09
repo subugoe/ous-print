@@ -52,8 +52,9 @@ class Xml2ParserTest extends TestBase {
                 log.error('Transformation failed!')
                 fail(te.getMessage())
             }
-            log.trace('Result:\n----------------START OF RESULT(' + this.getClass().getName() + ')\n' + x2p.getXML())
-            log.trace('----------------END OF RESULT(' + this.getClass().getName() + ')\n')
+            String parser = generateFileName(xml, this.class, '.-lbs3.xml', 5)
+            dumpFile(parser, x2p, this.getClass(),'LBS3')
+            addTestfile(new File(parser))
         }
     }
 
@@ -70,8 +71,9 @@ class Xml2ParserTest extends TestBase {
                 log.error('Transformation failed!')
                 fail(te.getMessage())
             }
-            log.trace('Result:\n----------------START OF RESULT(' + this.getClass().getName() + ')\n' + x2p.getXML())
-            log.trace('----------------END OF RESULT(' + this.getClass().getName() + ')\n')
+            String parser = generateFileName(xml, this.class, '.-lbs3.xml', 5)
+            dumpFile(parser, x2p, this.getClass(),'LBS3')
+            addTestfile(new File(parser))
         }
     }
 
@@ -88,8 +90,9 @@ class Xml2ParserTest extends TestBase {
             log.error('Transformation failed!')
             fail(te.getMessage())
         }
-        log.trace('Result:\n----------------START OF RESULT(' + this.getClass().getName() + ')\n' + x2p.getXML())
-        log.trace('----------------END OF RESULT(' + this.getClass().getName() + ')\n')
+        String parser = generateFileName(PARSER_TXT_LBS4, this.class, '.-lbs4.xml', 5)
+        dumpFile(parser, x2p, this.getClass(),'LBS4')
+        addTestfile(new File(parser))
     }
 
     //Test if the parsers read files
@@ -113,7 +116,7 @@ class Xml2ParserTest extends TestBase {
             log.trace('----------------[LBS3] END OF RESULT(' + this.getClass().getName() + ')\n')
             log.trace('Saving file to ' + xmlOut)
             Util.writeDocument(lp.result, new File(xmlOut).toURI().toURL())
-
+            addTestfile(new File(xmlOut))
         }
     }
 
@@ -140,7 +143,7 @@ class Xml2ParserTest extends TestBase {
             log.trace('----------------[LBS4] END OF RESULT(' + this.getClass().getName() + ')\n')
             log.trace('Saving file to ' + xmlOut)
             Util.writeDocument(lp.result, new File(xmlOut).toURI().toURL())
-
+            addTestfile(new File(xmlOut))
         }
     }
 

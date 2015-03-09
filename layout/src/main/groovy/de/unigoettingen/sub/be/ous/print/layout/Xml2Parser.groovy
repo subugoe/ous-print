@@ -283,7 +283,8 @@ class Xml2Parser extends AbstractTransformer {
             }
         }
 
-        //TODO: Check why this method isn't inherited
+        //TODO: Check why this methods aren't inherited
+        //Newer Versions of Groovy don't fix this
         /**
          * Returns the result XML as String
          * @return String the result of the Transformation as String
@@ -291,6 +292,18 @@ class Xml2Parser extends AbstractTransformer {
         String getXML() {
             if (result != null) {
                 return XmlUtil.serialize(result.documentElement)
+            } else {
+                return null
+            }
+        }
+
+        /**
+         * Returns the result XML as Document
+         * @return the result {@link org.w3c.dom.Document Document}
+         */
+        Document getResult() {
+            if (result != null) {
+                return result
             } else {
                 return null
             }

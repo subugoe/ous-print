@@ -20,26 +20,28 @@ package de.unigoettingen.sub.be.ous.print.layout
 
 import de.unigoettingen.sub.be.ous.print.util.LogErrorListener
 import de.unigoettingen.sub.be.ous.print.util.Util
-
+import de.unigoettingen.sub.commons.metsmerger.util.NamespaceConstants
 import groovy.util.logging.Log4j
 import groovy.transform.TypeChecked
 import groovy.xml.XmlUtil
-import groovy.xml.DOMBuilder
 
+import javax.xml.parsers.DocumentBuilder
+import javax.xml.parsers.DocumentBuilderFactory
+import javax.xml.transform.Result
 import javax.xml.transform.TransformerFactory
 import javax.xml.transform.URIResolver
-import javax.xml.transform.stream.StreamResult
 import javax.xml.transform.stream.StreamSource
 import javax.xml.transform.dom.DOMResult
 import javax.xml.transform.dom.DOMSource
 import javax.xml.transform.Source
 import javax.xml.transform.TransformerConfigurationException
 import javax.xml.transform.TransformerException
-import javax.xml.transform.ErrorListener
-import javax.xml.validation.Schema
-import javax.xml.validation.SchemaFactory
 
 import org.w3c.dom.Document
+
+import javax.xml.xpath.XPath
+import javax.xml.xpath.XPathExpression
+import javax.xml.xpath.XPathFactory
 
 /**
  * This abstract class is used as base for all classes that wrap XSLT stylesheets.
@@ -73,35 +75,35 @@ abstract class AbstractTransformer {
     /**
      * Transforms the given document using the given stylesheet with parameters.
      * @param input the {@link java.net.URL URL} for the input document
-     * @param xslt the {@link javax.xml.transform.Source Source} of the stylesheet
+     * @param xslt the {@link javax.xml.transform.dom.DOMSource DOMSource} of the stylesheet
      * @param params parameters of the stylesheet
      * @return the result {@link org.w3c.dom.Document Document}
      * @see #transform(javax.xml.transform.Source,javax.xml.transform.Source,java.util.Map)
      */
-    def protected static Document transform (URL input, Source xslt, Map params) {
+    def protected static Document transform (URL input, DOMSource xslt, Map params) {
         transform (new StreamSource(input.openStream()), xslt, params)
     }
     
     /**
      * Transforms the given document using the given stylesheet with parameters.
      * @param doc the {@link org.w3c.dom.Document Document} of the input document
-     * @param xslt the {@link javax.xml.transform.Source Source} of the stylesheet
+     * @param xslt the {@link javax.xml.transform.dom.DOMSource DOMSource} of the stylesheet
      * @param params parameters of the stylesheet
      * @return the result {@link org.w3c.dom.Document Document}
      * @see #transform(javax.xml.transform.Source,javax.xml.transform.Source,java.util.Map)
      */
-    def protected static Document transform (Document doc, Source xslt, Map params) {
+    def protected static Document transform (Document doc, DOMSource xslt, Map params) {
         transform (new DOMSource(doc), xslt, params)
     }
     
     /**
      * Transforms the given document using the given stylesheet with parameters.
      * @param input the {@link javax.xml.transform.Source Source} of the input document
-     * @param xslt the {@link javax.xml.transform.Source Source} of the stylesheet
+     * @param xslt the {@link javax.xml.transform.dom.DOMSource DOMSource} of the stylesheet
      * @param params parameters of the stylesheet
      * @return the result {@link org.w3c.dom.Document Document}
      */
-    def protected static Document transform (Source input, Source xslt, Map params) {
+    def protected static Document transform (Source input, DOMSource xslt, Map params) {
         def factory = TransformerFactory.newInstance()
         //TODO: this is a ugly hack, it's not thread safe
         if (resolver != null) {
@@ -121,7 +123,19 @@ abstract class AbstractTransformer {
         }
         def listener = new LogErrorListener()
         transformer.setErrorListener(listener)
-        def resultStylesheet = new DOMResult()
+        Result result = new DOMResult()
+        log.info('Checking if result will be DOM')
+        //TODO: Add Handling for Result that are not DOM (like HTML or Text)
+        //new StreamResult(new FileOutputStream(output)))
+        XPathFactory xpathFactory = XPathFactory.newInstance()
+        XPath xpath = xpathFactory.newXPath()
+        xpath.setNamespaceContext(new NamespaceConstants())
+        XPathExpression expr = xpath.compile('/xsl:stylesheet/xsl:output/@method')
+        String method = expr.evaluate(xslt.getNode())
+        if (method.equalsIgnoreCase('text') || method.equalsIgnoreCase('html')) {
+            throw new IllegalStateException('No Dom Result to expect')
+        }
+
         //Pass params to the stylesheet
         params.entrySet().each() {
             log.trace('Transformation Parameter \'' + it.key + '\', Value: \'' + it.value + '\'')
@@ -129,7 +143,7 @@ abstract class AbstractTransformer {
         }
 
         try {
-            transformer.transform(input, resultStylesheet)
+            transformer.transform(input, result)
         } catch (TransformerException te) {
             log.error('Transformation failed ', te)
             throw te
@@ -138,7 +152,7 @@ abstract class AbstractTransformer {
             log.error('Transformation failed, check the log!')
         }
         
-        def domResult = (Document) resultStylesheet.getNode()
+        def domResult = (Document) result.getNode()
         return domResult
     }
     
@@ -153,11 +167,17 @@ abstract class AbstractTransformer {
      * @return Document the result Document
      * @see #transform(javax.xml.transform.Source,javax.xml.transform.Source,java.util.Map)
      */
+    @TypeChecked
     protected static Document transform (URL input, URL stylesheet, Map params) {
         log.trace("Transforming " + input.toString() + " using stylesheet " + stylesheet.toString())
-        
-        def reader = new BufferedReader(new InputStreamReader(stylesheet.openStream()))
-        Source xslt = new StreamSource(reader)
+
+        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance()
+        dbf.setNamespaceAware(true)
+        // We need to have the style sheet as DOM to be able to use XPATH
+        DocumentBuilder db = dbf.newDocumentBuilder()
+        Document dom = db.parse(stylesheet.openStream())
+
+        DOMSource xslt = new DOMSource(dom)
         return transform (input, xslt, params)
     }
     

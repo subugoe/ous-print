@@ -19,24 +19,17 @@
 package de.unigoettingen.sub.be.ous.print.layout.camel
 
 import de.unigoettingen.sub.be.ous.print.util.PrinterUtil
-import de.unigoettingen.sub.be.ous.print.util.Util
+
 
 import groovy.transform.TypeChecked
-import groovy.util.logging.Log4j
-import javax.xml.bind.Unmarshaller
+
 import org.apache.camel.EndpointInject
-import org.apache.camel.Produce
-import org.apache.camel.ProducerTemplate
 
 import org.apache.camel.builder.RouteBuilder
 import org.apache.camel.component.mock.MockEndpoint
-import org.apache.camel.model.RouteDefinition
-import org.apache.camel.model.RoutesDefinition
 import org.apache.camel.test.junit4.CamelTestSupport
-import org.apache.camel.impl.DefaultShutdownStrategy
 
 import org.junit.Before
-import org.junit.BeforeClass
 import org.junit.Test
 
 import javax.print.DocPrintJob
@@ -48,16 +41,12 @@ import javax.print.attribute.standard.Media
 
 import static org.mockito.Matchers.any
 import static org.mockito.Mockito.mock
-import static org.mockito.Mockito.times
-import static org.mockito.Mockito.verify
 import static org.mockito.Mockito.when
 
 /**
  * Tests against a virtual printer, if available, otherwise mock one
  * @author cmahnke
  */
-//@Log4j
-
 class LayoutEndpointPrintTest extends CamelTestSupport  {
     static String VIRTUAL_PRINTER = 'PDFwriter'
     
@@ -86,12 +75,12 @@ class LayoutEndpointPrintTest extends CamelTestSupport  {
                 public void configure() {
                     if (PrinterUtil.getPrinterNames().contains(VIRTUAL_PRINTER)) {
                         log.warn("Printing to ${VIRTUAL_PRINTER}")
-                        from("file:./target/generated-test-resources/hotfolder/lbs3/in?include=.*.print&noop=true")
+                        from("file:./target/generated-test-resources/hotfolder/lbs3/in?include=.*.print&noop=true&charset=Cp850")
                         .to("layout:.?xslfo=./target/test-classes/xslt/layout2fo.xsl&template=./target/test-classes/layouts/ous40_layout_001_du.asc")
                         .to('lpr://localhost/' + VIRTUAL_PRINTER).to('mock:result')
                     } else {
                         log.warn("Printing to default printer")
-                        from("file:./target/generated-test-resources/hotfolder/lbs3/in?noop=true&include=.*.print&idempotent=true")
+                        from("file:./target/generated-test-resources/hotfolder/lbs3/in?noop=true&include=.*.print&idempotent=true&charset=Cp850")
                         .to("layout:.?xslfo=./target/test-classes/xslt/layout2fo.xsl&template=./target/test-classes/layouts/ous40_layout_001_du.asc")
                         .to("lpr://localhost/default").to('mock:result')
                     }

@@ -54,7 +54,10 @@ class LayoutProcessor implements Processor {
     
     /** The requested page size */
     String pageSize = null
-    
+
+    /** The required encoding */
+    String encoding
+
     /**
      * Creates a LayoutProcessor
      */
@@ -66,7 +69,7 @@ class LayoutProcessor implements Processor {
      * Creates a LayoutProcessor
      * @see {@link de.unigoettingen.sub.be.ous.print.layout.Layout} 
      */
-    LayoutProcessor (FORMAT inputFormat, FORMAT outputFormat, URL xslfo, URL includePath, URL template, String pageSize) {
+    LayoutProcessor (FORMAT inputFormat, FORMAT outputFormat, URL xslfo, URL includePath, URL template, String pageSize, String encoding) {
         this()
         this.inputFormat = inputFormat
         this.outputFormat = outputFormat
@@ -74,6 +77,7 @@ class LayoutProcessor implements Processor {
         this.includePath = includePath
         this.template = template
         this.pageSize = pageSize
+        this.encoding = encoding
     }
     
     /**
@@ -84,9 +88,40 @@ class LayoutProcessor implements Processor {
     public void process(Exchange exchange) throws Exception {
         Message input = exchange.getIn()
         log.info('Got request: ' + input.getMessageId())
-        URL inputURL
+        //Prepare Streams
+        ByteArrayInputStream body = new ByteArrayInputStream(exchange.getIn().getBody(String.class).getBytes())
+        OutputStream bos = new ByteArrayOutputStream()
+        Layout l
         File temp = null
-        def absolutePath = input.getHeader('CamelFileAbsolutePath', String.class)
+        String inputName = input.getHeader('CamelFileAbsolutePath', String.class)
+        //Check if we get a body or just a file name
+        if (body != null) {
+            l = new Layout(inputFormat, body, outputFormat, bos, xslfo, includePath, template, System.getProperty('file.encoding'))
+        } else {
+            URL inputURL
+
+            String absolutePath = input.getHeader('CamelFileAbsolutePath', String.class)
+
+            if (absolutePath) {
+                inputURL = new File(absolutePath).toURI().toURL()
+            } else {
+                temp = File.createTempFile("temp", ".txt");
+                temp.deleteOnExit();
+                new FileOutputStream(temp).write(input.getBody(String.class).getBytes())
+                inputURL = temp.toURI().toURL()
+            }
+            inputName = inputURL.toString()
+            log.trace('Using URL: ' + inputURL.toString())
+            l = new Layout(inputFormat, inputURL.openStream(), outputFormat, bos, xslfo, includePath, template, encoding)
+        }
+
+
+        //Message input = exchange.getIn()
+        //log.info('Got request: ' + input.getMessageId())
+        //URL inputURL
+        /*
+        File temp = null
+        String absolutePath = input.getHeader('CamelFileAbsolutePath', String.class)
         
         if (absolutePath) {
             inputURL = new File(absolutePath).toURI().toURL()
@@ -98,25 +133,26 @@ class LayoutProcessor implements Processor {
         }
         log.trace('Using URL: ' + inputURL.toString())
         
-        OutputStream bos = new ByteArrayOutputStream() 
+        //OutputStream bos = new ByteArrayOutputStream()
         Layout l = new Layout(inputFormat, inputURL.openStream(), outputFormat, bos, xslfo, includePath, template)
+        */
         if (pageSize != null) {
             l.setPageSize(Layout.PageSize.fromString(pageSize))
             log.trace('Set page size ' + pageSize)
         }
-        log.trace('Setup Layouter for input ' + inputURL.toString() + ' using Template ' + template.toString() + ' include path ' + includePath.toString() + ' and XSL-FO ' + xslfo.toString())
+        log.trace("Setup Layouter for input ${inputName} using Template " + template.toString() + ' include path ' + includePath.toString() + ' and XSL-FO ' + xslfo.toString())
         l.layout()
         
         if (debugPath != null && new File(debugPath.toURI()).exists()) {
-            def fileName = debugPath.toString() + File.separator + inputURL.toString().replaceAll('^.*/([\\w\\.^/]*?)$', '$1') + '.pdf'
+            def fileName = debugPath.toString() + File.separator + inputName.replaceAll('^.*/([\\w\\.^/]*?)$', '$1') + '.pdf'
             log.trace('Writing debug output to ' + fileName)
             File f = new File(new URI(fileName))
             f.createNewFile()
             OutputStream outputStream = new FileOutputStream(f); 
             bos.writeTo(outputStream);
         }
-        log.trace('Setting print job name to  ' + absolutePath)
-        exchange.getOut().setHeader('PrinterJobName', absolutePath)
+        log.trace("Setting print job name to ${inputName}")
+        exchange.getOut().setHeader('PrinterJobName', inputName)
         
         if (outputFormat == FORMAT.PDF) {
             exchange.getOut().setHeader('Content-Type', 'application/pdf')

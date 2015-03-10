@@ -18,11 +18,9 @@
 
 package de.unigoettingen.sub.be.ous.print.layout.camel
 
-import org.apache.camel.CamelContext
 import org.apache.camel.EndpointInject
 import org.apache.camel.builder.RouteBuilder
 import org.apache.camel.component.mock.MockEndpoint
-import org.apache.camel.impl.DefaultCamelContext
 import org.apache.camel.test.junit4.CamelTestSupport
 
 import org.junit.Before
@@ -53,7 +51,7 @@ class LayoutEndpointTest extends CamelTestSupport  {
         return new RouteBuilder() {
             @Override
             public void configure() throws Exception {
-                from("file:./target/generated-test-resources/hotfolder/lbs3/in?include=.*.print&noop=true")
+                from("file:./target/generated-test-resources/hotfolder/lbs3/in?include=.*.print&noop=true&charset=Cp850")
                 .to("layout:.?xslfo=./target/test-classes/xslt/layout2fo.xsl&template=./target/test-classes/layouts/ous40_layout_001_du.asc")
                 .to('file:./target/?fileName=${file:name}.pdf')
                 .to("mock:result");

@@ -47,7 +47,7 @@ class PlainTextEndpointLBS4Test  extends CamelTestSupport {
         return new RouteBuilder() {
             @Override
             public void configure() throws Exception {
-                from("file:./target/generated-test-resources/hotfolder/lbs3/in?include=.*.print&noop=true&charset=ISO-8859-1")
+                from("file:./target/generated-test-resources/hotfolder/lbs4/in?include=.*.print&noop=true&charset=ISO-8859-1")
                 .to("plainText:.&pageSize=A5")
                 .to("fop:application/pdf")
                 .to('file:./target/?fileName=${file:name}-plain-lbs4.pdf')

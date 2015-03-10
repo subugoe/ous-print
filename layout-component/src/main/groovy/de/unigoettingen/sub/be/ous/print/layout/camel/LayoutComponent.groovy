@@ -74,7 +74,10 @@ class LayoutComponent extends UriEndpointComponent {
     @UriParam
     /** The desired page size of the result */
     String pageSize = Layout.DEFAULT_PAGE_SIZE
-    
+
+    @UriParam
+    /** The required encoding */
+    String charset
     /**
      * Public constructor of the LayoutComponent
      */
@@ -134,9 +137,17 @@ class LayoutComponent extends UriEndpointComponent {
             pageSize = (String) parameters.get("pageSize")
             log.trace('Page size set to ' + pageSize) 
         }
+
+        if (parameters.get("charset") != null) {
+            charset = (String) parameters.get("charset")
+            log.trace('Chatset size set to ' + charset)
+        } else {
+            charset = Layout.DEFAULT_ENCODING
+            log.trace('Chatset size set to default: ' + charset)
+        }
         log.trace('Setup LayoutProcessor for incoming files using Template ' + templateURL.toString() + ' include path ' + includePathURL.toString() + ' and XSL-FO ' + xslfoURL.toString())
 
-        LayoutProcessor lp = new LayoutProcessor(inputFormat, outputFormat, xslfoURL, includePathURL, templateURL, pageSize)
+        LayoutProcessor lp = new LayoutProcessor(inputFormat, outputFormat, xslfoURL, includePathURL, templateURL, pageSize, charset)
         return new LayoutEndpoint(uri, this, lp)
     }
     

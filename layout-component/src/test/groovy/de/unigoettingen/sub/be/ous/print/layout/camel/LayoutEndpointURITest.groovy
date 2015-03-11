@@ -39,7 +39,7 @@ class LayoutEndpointURITest {
                 public void configure() {
                     from('file:./target/generated-test-resources/hotfolder/lbs3/in?include=sub473_\\d{16}_slip001.print&noop=true&charset=Cp850').
                         to('layout:.?xslfo=./target/test-classes/xslt/layout2fo.xsl&template=./target/test-classes/layouts/ous40_layout_001_du.asc&outputFormat=PDF&pageSize=A5').
-                        to('file:./target/?fileName=${file:name}.a5.pdf&fileExist=Override')
+                        to('file:./target/?fileName=${file:name}-' + this.class.getName() + '.a5.pdf&fileExist=Override')
                 }
             })
         main.start()

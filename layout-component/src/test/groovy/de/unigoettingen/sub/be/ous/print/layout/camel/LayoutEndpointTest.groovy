@@ -53,7 +53,7 @@ class LayoutEndpointTest extends CamelTestSupport  {
             public void configure() throws Exception {
                 from("file:./target/generated-test-resources/hotfolder/lbs3/in?include=.*.print&noop=true&charset=Cp850")
                 .to("layout:.?xslfo=./target/test-classes/xslt/layout2fo.xsl&template=./target/test-classes/layouts/ous40_layout_001_du.asc")
-                .to('file:./target/?fileName=${file:name}.pdf')
+                .to('file:./target/?fileName=${file:name}-' + this.class.getName() + '.pdf')
                 .to("mock:result");
             }
         };

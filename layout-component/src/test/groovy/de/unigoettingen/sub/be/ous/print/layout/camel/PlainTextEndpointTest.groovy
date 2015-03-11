@@ -50,7 +50,7 @@ class PlainTextEndpointTest  extends CamelTestSupport {
                 from("file:./target/generated-test-resources/hotfolder/lbs3/in?include=.*.print&noop=true&charset=Cp850")
                 .to("plainText:.&pageSize=A5")
                 .to("fop:application/pdf")
-                .to('file:./target/?fileName=${file:name}-plain.pdf')
+                .to('file:./target/?fileName=${file:name}-' + this.class.getName() + '-plain.pdf')
                 .to("mock:result");
             }
         };

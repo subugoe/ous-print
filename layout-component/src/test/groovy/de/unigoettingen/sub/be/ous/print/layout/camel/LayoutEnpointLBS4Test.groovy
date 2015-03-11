@@ -57,7 +57,7 @@ class LayoutEnpointLBS4Test extends CamelTestSupport {
             public void configure() throws Exception {
                 from("file:./target/generated-test-resources/hotfolder/lbs4/in?include=.*.print&noop=true&charset=ISO-8859-1")
                         .to("layout:.?xslfo=./target/test-classes/xslt/layout2fo.xsl&template=./target/test-classes/layouts/ous40_layout_001_du-lbs4.asc")
-                        .to('file:./target/?fileName=${file:name}-lbs4.pdf')
+                        .to('file:./target/?fileName=${file:name}-' + this.class.getName() + '-lbs4.pdf')
                         .to("mock:result");
             }
         };

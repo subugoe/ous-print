@@ -62,7 +62,6 @@ class LayoutProcessorTest extends CamelTestSupport {
         boolean res1 = PrintServiceLookup.registerService(ps1);
         assertTrue("PrintService #1 should be registered.", res1);
 
-
         PrintService[] pss = PrintServiceLookup.lookupPrintServices(null, null);
         assertEquals("lookup should report two PrintServices.", numberOfPrintservicesBefore + 2, pss.length);
 
@@ -79,7 +78,8 @@ class LayoutProcessorTest extends CamelTestSupport {
                 processor.setDebugPath(new File('./target/').toURI().toURL())
                 processor.setTemplate(PARSER_TXT)
                 processor.setXslfo(FO)
-                from("file:./target//generated-test-resources/hotfolder/lbs3/in?noop=true&include=.*.print&charset=ISO-8859-1")
+                //processor.setEncoding('Cp850')
+                from("file:./target//generated-test-resources/hotfolder/lbs3/in?noop=true&include=.*.print&charset=Cp850")
                         .shutdownRunningTask(ShutdownRunningTask.CompleteAllTasks)
                         .process(processor).to("mock:result")
 

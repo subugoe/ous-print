@@ -46,6 +46,8 @@ import de.unigoettingen.sub.be.ous.print.layout.Layout
 import de.unigoettingen.sub.be.ous.print.layout.FORMAT
 import de.unigoettingen.sub.be.ous.print.util.PrinterUtil
 
+import java.nio.charset.Charset
+
 /**
  * Main class for command line interface
  * @author cmahnke
@@ -72,6 +74,8 @@ class Main {
     static String printer = null
     /** The page size to use */
     static Layout.PageSize pageSize = Layout.DEFAULT_PAGE_SIZE
+    /** The encoding to be used */
+    static String encoding = System.getProperty('file.encoding')
     
     /**
      * Sets options passed on commandline Use the help command to get a list.
@@ -83,6 +87,7 @@ class Main {
 	cli.jc(longOpt: 'charset', 'prints the used Java char set')
         cli.c(longOpt: 'cut', 'signals the printer to cut the paper (only with prt)')
         cli.D(args:2, valueSeparator:'=', argName:'property=value', 'use value for given property for XSLT')
+        cli.e(longOpt: 'encoding', 'the encoding to be used used, defaults to ' + System.getProperty('file.encoding') + ' (Note: this is probably not what you want!)', args:1)
         cli.f(longOpt: 'format', 'page format, either A4 or A5, defaults to ' + Layout.DEFAULT_PAGE_SIZE, args: 1)
         cli.h(longOpt: 'help', 'usage information')
         cli.i(longOpt: 'input', 'input file', args: 1)
@@ -235,6 +240,14 @@ class Main {
         } else {
             log.trace('PageSize set to ' + pageSize.toString() + ' (Default)')
         }
+
+        //Encoding
+        if (opt.e) {
+            encoding = opt.e
+            log.trace('Set encoding to ' + encoding)
+        } else {
+            log.trace('Using default encoding ' + encoding)
+        }
         /*
         else if (opt.f) {
         log.warn('Unknown page size to ' + opt.f)
@@ -285,6 +298,24 @@ class Main {
                 log.trace('XSLT Param ' + key + ' is set to ' + value)
             }
         }
+
+        //Validate charset
+        if (encoding != System.getProperty('file.encoding')) {
+            Boolean found = false
+            for (c in Charset.availableCharsets().keySet()) {
+                if (encoding == c) {
+                    found = true
+                    break
+                }
+            }
+            if (!found) {
+                log.info("Charset ${encoding} not found, exiting")
+                println "Encoding ${encoding} not supported"
+                System.exit(6)
+            }
+
+        }
+
         
         start()
     }

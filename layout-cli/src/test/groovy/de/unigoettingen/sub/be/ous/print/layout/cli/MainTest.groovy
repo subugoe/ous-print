@@ -88,21 +88,21 @@ class MainTest {
     @TypeChecked
     public void testHelp() {
         String[] args = ['--help']
-        Main.main(args);
+        Main.main(args)
     }
     
     @Test
     @TypeChecked
     public void testFormats() {
         String[] args = ['-lf']
-        Main.main(args);
+        Main.main(args)
     }
     
     @Test
     @TypeChecked
     public void testPrinters() {
         String[] args = ['-lp']
-        Main.main(args);
+        Main.main(args)
     }
     
     @Test

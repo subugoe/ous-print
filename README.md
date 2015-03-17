@@ -55,6 +55,9 @@ There are also some [slides (in German)](http://subugoe.github.io/ous-print/slid
 ## Current Status
 The code is in production use at SUB Göttingen but might have still some rough edges. The ODF to XSL-FO part is untested, the Groovy parts are not finished yet. Some unit tests may fail. Not every possible transformation is implemented in Groovy (CLI), use the style sheets directly if needed. The SUB PrintServer doesn't reload it's configuration on changes yet. 
 
+### TODO
+* Make the Tests of the print-server module pass
+
 # Development
 
 This package provides a API documentation if you build the Maven site. For development Maven version 3 should be used, otherwise version 2 will work as well.

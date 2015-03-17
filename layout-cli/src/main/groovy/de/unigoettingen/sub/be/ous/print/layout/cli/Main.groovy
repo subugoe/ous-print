@@ -326,7 +326,7 @@ class Main {
     @TypeChecked
     static void start () {
         //output = new FileOutputStream(outputFile)
-        Layout l = new Layout(inFormat, input, outFormat, (OutputStream) output, xslfo, include, template)
+        Layout l = new Layout(inFormat, input, outFormat, (OutputStream) output, xslfo, include, template, encoding)
         l.setParams(params)
         if (pageSize != Layout.DEFAULT_PAGE_SIZE) {
             l.setPageSize(pageSize)

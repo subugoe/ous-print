@@ -21,7 +21,6 @@ package de.unigoettingen.sub.be.ous.print.layout.camel
 import de.unigoettingen.sub.be.ous.print.layout.Layout
 import de.unigoettingen.sub.be.ous.print.layout.Layout.PageSize
 
-import groovy.transform.CompileStatic
 import groovy.transform.TypeChecked
 import groovy.util.logging.Log4j
 
@@ -29,7 +28,7 @@ import org.apache.camel.Exchange
 import org.apache.camel.Processor
 
 import org.apache.commons.io.FilenameUtils
-
+import org.apache.commons.lang.StringEscapeUtils
 /**
  * Converts a plain text file into XSL-FO
  * See http://techdiary.bitourea.com/2014/05/using-camel-fop-to-convert-text.html
@@ -101,6 +100,7 @@ class PlainTextProcessor implements Processor  {
      * @return String the resulting XSL-FO
      */
     protected String getXslFo(String text) {
+        text = StringEscapeUtils.escapeXml(text)
         String height = dimensions.get(pageSize).get('height')
         String width = dimensions.get(pageSize).get('width')
         String masterName = pageSize.name()

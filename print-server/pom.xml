@@ -180,7 +180,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>1.2.1</version>
+                <version>1.3</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -193,10 +193,16 @@
                                         implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                     <mainClass>de.unigoettingen.sub.be.ous.print.server.PrintServer</mainClass>
                                 </transformer>
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                                    <resource>META-INF/services/org.apache.fop.fo.ElementMapping</resource>
+                                </transformer>
                             </transformers>
                             <artifactSet>
                                 <excludes>
                                     <exclude>junit:junit</exclude>
+                                    <exclude>xml-apis:xml-apis</exclude>
+                                    <exclude>stax:stax-api</exclude>
                                 </excludes>
                             </artifactSet>
                             <filters>
@@ -210,9 +216,24 @@
                                 </filter>
                                 <!-- Make sure only our log configuration is used -->
                                 <filter>
-                                    <artifact>*:*</artifact>
+                                    <artifact>${project.groupId}:ous-db</artifact>
                                     <excludes>
                                         <exclude>log4j.properties</exclude>
+                                    </excludes>
+                                </filter>
+                                <filter>
+                                    <artifact>${project.groupId}:layout-component</artifact>
+                                    <excludes>
+                                        <exclude>log4j.properties</exclude>
+                                    </excludes>
+                                </filter>
+                                <!-- Don't let dependencies decide which XML Parser to use -->
+                                <filter>
+                                    <artifact>*:*</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/services/javax.xml.parsers.SAXParserFactory</exclude>
+                                        <exclude>META-INF/services/javax.xml.parsers.DocumentBuilderFactory</exclude>
+                                        <exclude>javax/xml/**</exclude>
                                     </excludes>
                                 </filter>
                             </filters>

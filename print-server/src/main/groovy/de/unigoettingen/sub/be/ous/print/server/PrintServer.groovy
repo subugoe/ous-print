@@ -163,6 +163,7 @@ class PrintServer extends Main {
         // enable hangup support so you can press ctrl + c to terminate the JVM
         if (!noDeamon) {
             main.enableHangupSupport()
+            log.trace('Enabled Hangup support')
         }
         
         //Configuration
@@ -178,11 +179,13 @@ class PrintServer extends Main {
                 System.exit(1)
             }
             //Add the loaded routes
-            main.addRouteBuilder(rb);
+            log.info('Setting loaded routes')
+            main.addRouteBuilder(rb)
         } else {
             println 'Using internal routes'
         }
         //File watcher
+        log.info("Setting up File Monitor")
         FileSystemManager fsManager = VFS.getManager()
         FileObject listenConfig = fsManager.resolveFile(config)
  
@@ -194,10 +197,11 @@ class PrintServer extends Main {
         
         
         //Start
+        println 'Starting Camel. Use ctrl + c to terminate the JVM.\n'
         main.run()
         
         // run until you terminate the JVM
-        println 'Starting Camel. Use ctrl + c to terminate the JVM.\n'
+
         //See http://saltnlight5.blogspot.de/2013/08/getting-started-with-apache-camel-using.html
         
         

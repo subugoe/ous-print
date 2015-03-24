@@ -42,10 +42,13 @@ class PlainTextProcessor implements Processor {
     /** The path to the XSL-FO template */
     def static URL XSL_FO_TEMPLATE = PlainTextProcessor.getClass().getResource('/xslfo/plaintext.fo')
 
-    /** Th page size
-     def PageSize pageSize = Layout.DEFAULT_PAGE_SIZE
+    /** The page size */
+    def PageSize pageSize = Layout.DEFAULT_PAGE_SIZE
 
-     enum Dimensions {HEIGHT('height'), WIDTH('width'), MARGIN('margin'), ORIENTATION('orientation')}/** Page dimensions */
+    enum Dimensions {
+        HEIGHT('height'), WIDTH('width'), MARGIN('margin'), ORIENTATION('orientation')
+    }
+    /** Page dimensions */
     /*
      * <!-- A5 landscape -->
      * <format name="A5" width="210mm" height="148mm" margin="13mm" orientation="LANDSCAPE"/>

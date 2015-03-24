@@ -29,6 +29,7 @@ import org.apache.camel.Processor
 
 import org.apache.commons.io.FilenameUtils
 import org.apache.commons.lang.StringEscapeUtils
+
 /**
  * Converts a plain text file into XSL-FO
  * See http://techdiary.bitourea.com/2014/05/using-camel-fop-to-convert-text.html
@@ -37,32 +38,30 @@ import org.apache.commons.lang.StringEscapeUtils
 
 @Log4j
 @TypeChecked
-class PlainTextProcessor implements Processor  {
+class PlainTextProcessor implements Processor {
     /** The path to the XSL-FO template */
     def static URL XSL_FO_TEMPLATE = PlainTextProcessor.getClass().getResource('/xslfo/plaintext.fo')
-    
 
     /** Th page size
-    def PageSize pageSize = Layout.DEFAULT_PAGE_SIZE
-    
-    enum Dimensions {
-        HEIGHT('height'), WIDTH('width'), MARGIN('margin'), ORIENTATION('orientation')
+     def PageSize pageSize = Layout.DEFAULT_PAGE_SIZE
+
+     enum Dimensions {HEIGHT('height'), WIDTH('width'), MARGIN('margin'), ORIENTATION('orientation')}/** Page dimensions */
+    /*
+     * <!-- A5 landscape -->
+     * <format name="A5" width="210mm" height="148mm" margin="13mm" orientation="LANDSCAPE"/>
+     * <!-- A4 portrait -->
+     * <format name="A4" width="210mm" height="297mm" margin="13mm" orientation="PORTRAIT"/>
+     */
+    static Map<PageSize, Map<String, String>> dimensions = [:]
+    /** A Map containing replacements, which will be applied to the text after the input is XML escaped */
+    static Map<String, String> replacements = [:]
+
+    static {
+        dimensions.put(PageSize.A4, ['height': '297mm', 'width': '210mm', 'margin': '13mm', 'orientation': 'PORTRAIT'])
+        dimensions.put(PageSize.A5, ['height': '148mm', 'width': '210mm', 'margin': '13mm', 'orientation': 'LANDSCAPE'])
+        replacements.put('###UMBRUCH###', '<fo:block break-after="page"/>')
     }
-        
-        /** Page dimensions */
-        /*
-         * <!-- A5 landscape -->
-         * <format name="A5" width="210mm" height="148mm" margin="13mm" orientation="LANDSCAPE"/>
-         * <!-- A4 portrait -->
-         * <format name="A4" width="210mm" height="297mm" margin="13mm" orientation="PORTRAIT"/>
-         */
-        static Map<PageSize, Map<String, String>> dimensions = [:]
-        static {
-            dimensions.put(PageSize.A4, ['height':'297mm', 'width': '210mm', 'margin': '13mm', 'orientation': 'PORTRAIT'])
-            dimensions.put(PageSize.A5, ['height':'148mm', 'width': '210mm', 'margin': '13mm', 'orientation': 'LANDSCAPE'])
-        }
-    
-    
+
     /**
      * Creates a PlainTextProcessor
      */
@@ -73,14 +72,14 @@ class PlainTextProcessor implements Processor  {
             log.warn("Page size set to to ${Layout.DEFAULT_PAGE_SIZE}")
         }
     }
-    
+
     /**
      * Creates a PlainTextProcessor
      */
     PlainTextProcessor() {
         log.warn("Page size not given! defaulting to ${Layout.DEFAULT_PAGE_SIZE}")
     }
-    
+
     /**
      * Processes the contents of the given {@link org.apache.camel.Exchange Exchange}
      * @see {@link org.apache.camel.Processor#process(org.apache.camel.Exchange)}
@@ -96,18 +95,21 @@ class PlainTextProcessor implements Processor  {
         //Setting our header
         exchange.getOut().setHeader(Exchange.FILE_NAME, fileName + ".fo")
     }
-    
+
     /**
      * Creates a XSL-FO String from the template file and the given String
      * @return String the resulting XSL-FO
      */
     protected String getXslFo(String text) {
         text = StringEscapeUtils.escapeXml(text)
+        for (String r in replacements.keySet()) {
+            text = text.replace(r, replacements.get(r))
+        }
         String height = dimensions.get(pageSize).get('height')
         String width = dimensions.get(pageSize).get('width')
         String masterName = pageSize.name()
         String margin = dimensions.get(pageSize).get('margin')
-        
+
         log.trace("Setting XSLT Parameters for ${masterName}, width: ${width}, height ${height}")
         String fopTemplate = XSL_FO_TEMPLATE.getText('UTF-8')
         fopTemplate = fopTemplate.replace('${width}', width)

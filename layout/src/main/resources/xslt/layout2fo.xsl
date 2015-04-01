@@ -18,8 +18,8 @@
  * MA 02110-1301 USA.
  */
 -->
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" exclude-result-prefixes="xs xd print"
-    xmlns:print="http://www.sub.uni-goettingen.de/BE/OUS/print" version="2.0">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
+    exclude-result-prefixes="xs xd print" xmlns:print="http://www.sub.uni-goettingen.de/BE/OUS/print" version="2.0">
     <xd:doc scope="stylesheet">
         <xd:desc>
             <xd:p>
@@ -224,9 +224,11 @@
                         </fo:block>
                     </fo:block-container>
                     <xsl:comment>Debug output, version etc</xsl:comment>
-                    <fo:block-container reference-orientation="270" position="absolute" left="126mm" top="70mm" bottom="{print:scaleA5toA4('15mm')}" text-align="right">
+                    <fo:block-container reference-orientation="270" position="absolute" left="126mm" top="70mm" bottom="{print:scaleA5toA4('15mm')}"
+                        text-align="right">
                         <fo:block font-family="FreeSans" font-size="5pt" color="grey">
-                            <xsl:value-of select="$template-info"/>|<xsl:value-of select="replace(//entry[@entity = '098' and @attribute = '002']/@value, ':', '')"/>
+                            <xsl:value-of select="$template-info"/>|<xsl:value-of
+                                select="replace(//entry[@entity = '098' and @attribute = '002']/@value, ':', '')"/>
                             <xsl:value-of select="$template-suffix"/>
                         </fo:block>
                     </fo:block-container>
@@ -234,8 +236,8 @@
                     <!-- Check user Type and target 
                          If user type is 15 or delivery target is not "Zentralbibliothek/Selbstabholbereich" or "Abholregal BB Kulturwiss.", print the user name and id, otherwise anonymize
                     -->
-                    <fo:block-container reference-orientation="90" position="absolute" top="0mm" left="130mm" bottom="{print:scaleA5toA4('15mm')}" border-start-style="solid" border-color="grey"
-                        border-start-width="2pt">
+                    <fo:block-container reference-orientation="90" position="absolute" top="0mm" left="130mm" bottom="{print:scaleA5toA4('15mm')}"
+                        border-start-style="solid" border-color="grey" border-start-width="2pt">
                         <xsl:choose>
                             <!--
                             <xsl:when
@@ -279,12 +281,12 @@
 
                     <!-- This needs to be changed in A4 mode -->
                     <!-- Old values: right="24pt"  height="30pt" -->
-                    <fo:block-container reference-orientation="90" position="absolute" top="0mm" right="8.5mm" height="11.5mm" bottom="{print:scaleA5toA4('15mm')}">
+                    <fo:block-container reference-orientation="90" position="absolute" top="0mm" right="8.5mm" height="11.5mm"
+                        bottom="{print:scaleA5toA4('15mm')}">
                         <fo:block font-family="FreeSans" font-size="12pt">
                             <xsl:value-of select="concat('Ausleihtyp: ', $loan-type-decription, ' (', $loan-type, ') / Nutzertyp: ', $user-type)"/>
                         </fo:block>
-                        <fo:block font-family="FreeSans" font-size="12pt" font-weight="bold">Ziel: 
-                            <!-- Target -->
+                        <fo:block font-family="FreeSans" font-size="12pt" font-weight="bold">Ziel: <!-- Target -->
                             <xsl:comment>Target</xsl:comment>
                             <xsl:value-of select="$target"/>
                         </fo:block>
@@ -318,7 +320,8 @@
                                 <fo:instream-foreign-object scaling="uniform" width="154mm">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="210mm" height="148mm">
                                         <!-- Font was 'Optima' -->
-                                        <text x="0" y="300" transform="rotate(-30)" style="font-size: 120pt; fill: grey; font-weight: bold; font-family: FreeSans;">
+                                        <text x="0" y="300" transform="rotate(-30)"
+                                            style="font-size: 120pt; fill: grey; font-weight: bold; font-family: FreeSans;">
                                             <xsl:value-of select="$debug-text"/>
                                         </text>
                                     </svg>

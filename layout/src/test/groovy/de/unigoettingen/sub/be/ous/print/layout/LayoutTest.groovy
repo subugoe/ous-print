@@ -28,7 +28,6 @@ import de.unigoettingen.sub.be.ous.print.util.Util
 import groovy.util.logging.Log4j
 import groovy.transform.TypeChecked
 
-import org.junit.AfterClass
 import org.junit.Test
 
 import static org.junit.Assert.*

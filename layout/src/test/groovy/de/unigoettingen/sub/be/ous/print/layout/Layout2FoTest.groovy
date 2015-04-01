@@ -28,13 +28,13 @@ import de.unigoettingen.sub.be.ous.print.layout.Xml2Parser.LayoutParser
 import groovy.util.logging.Log4j
 import groovy.transform.TypeChecked
 
-import org.junit.AfterClass
 import org.junit.BeforeClass
 import org.junit.Test
 
 import static org.junit.Assert.*
 
 @Log4j
+@TypeChecked
 class Layout2FoTest extends TestBase {
     static URL LAYOUT = Layout2FoTest.getClass().getResource("/layouts-xml/ous40_layout_001_du.asc.xml")
     static LayoutParser LP_LBS3

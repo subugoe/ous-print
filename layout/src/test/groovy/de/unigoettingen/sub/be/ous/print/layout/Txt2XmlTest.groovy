@@ -30,11 +30,10 @@ import groovy.transform.TypeChecked
 import org.junit.Ignore
 import org.junit.Test
 
-import static org.junit.Assert.*
-
 
 @Log4j
-class Txt2XmlTest {
+@TypeChecked
+class Txt2XmlTest extends TestBase {
     @Ignore
     @Test
     void testTransform () {

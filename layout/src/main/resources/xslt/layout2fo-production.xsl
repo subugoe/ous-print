@@ -240,9 +240,16 @@
                         <fo:block font-family="FreeSans" font-size="5pt" color="grey">
                         -->
                         <fo:block font-family="FreeSans" font-size="5pt">
-                            <xsl:value-of select="$template-info"/>|<xsl:value-of
-                                select="replace(//entry[@entity = '098' and @attribute = '002']/@value, ':', '')"/>
-                            <xsl:value-of select="$template-suffix"/>
+                            <xsl:choose>
+                                <xsl:when test="not($debug)">
+                                    <xsl:value-of select="$template-info"/>|<xsl:value-of
+                                        select="replace(//entry[@entity = '098' and @attribute = '002']/@value, ':', '')"/>
+                                    <xsl:value-of select="$template-suffix"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <fo:leader leader-pattern="space"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
                         </fo:block>
                     </fo:block-container>
                     <!-- This needs to be changed in A4 mode -->
@@ -282,9 +289,10 @@
                                 </fo:block>
                             </xsl:when>
                             <xsl:otherwise>
-                                <fo:block padding-top="5pt" font-family="FreeSans" font-size="78pt" font-weight="bold">
+                                <fo:block margin-top="4pt" padding-top="6pt" font-family="FreeSans" font-size="78pt" font-weight="bold">
                                     <xsl:value-of select="$user-id"/>
-                                    <fo:inline padding="6pt" margin-top="2pt" padding-bottom="0pt" margin-bottom="0pt" border="4pt" border-style="solid">
+                                    <fo:inline padding-top="10pt" padding-left="3pt" padding-right="3pt" margin-top="2pt" padding-bottom="0pt"
+                                        margin-bottom="0pt" border="4pt" border-style="solid">
                                         <xsl:value-of select="$user-initial"/>
                                     </fo:inline>
                                 </fo:block>

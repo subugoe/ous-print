@@ -265,9 +265,10 @@
                                 </fo:block>
                             </xsl:when>
                             <xsl:otherwise>
-                                <fo:block padding-top="5pt" font-family="FreeSans" font-size="78pt" font-weight="bold">
+                                <fo:block margin-top="4pt" padding-top="6pt" font-family="FreeSans" font-size="78pt" font-weight="bold">
                                     <xsl:value-of select="$user-id"/>
-                                    <fo:inline padding="6pt" margin-top="2pt" padding-bottom="0pt" margin-bottom="0pt" border="4pt" border-style="solid">
+                                    <fo:inline padding-top="10pt" padding-left="3pt" padding-right="3pt" margin-top="2pt" padding-bottom="0pt"
+                                        margin-bottom="0pt" border="4pt" border-style="solid">
                                         <xsl:value-of select="$user-initial"/>
                                     </fo:inline>
                                 </fo:block>

@@ -28,18 +28,18 @@ import org.junit.Test
  *
  * @author cmahnke
  */
-class PlainTextEndpointLBS4Test  extends CamelTestSupport {
+class PlainTextEndpointLBS4Test extends CamelTestSupport {
     
     @EndpointInject(uri = "mock:result")
     protected MockEndpoint resultEndpoint
     
     @Test
     public void testMessageCount() {
-        //We've got 36 Test files - This takes some time
+        //We've got 2 Test files - This takes some time
         resultEndpoint.setMinimumResultWaitTime(500)
         resultEndpoint.setResultWaitTime(20000)
         resultEndpoint.expectedMessageCount(2)
-        assertMockEndpointsSatisfied();       
+        assertMockEndpointsSatisfied()
     }
     
     @Override

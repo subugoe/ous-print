@@ -64,7 +64,7 @@ class PlainTextProcessor implements Processor {
         dimensions.put(PageSize.A4, ['height': '297mm', 'width': '210mm', 'margin': '10mm', 'orientation': 'PORTRAIT'])
         dimensions.put(PageSize.A5, ['height': '148mm', 'width': '210mm', 'margin': '10mm', 'orientation': 'LANDSCAPE'])
 
-        //Ignore last break
+        //Ignore last break (\044 represents the $ (dollar) sign, which is reseved in GString)
         replacements.put((String) "${FORM_FEED}\\s*\044", '')
         replacements.put(FORM_FEED, '<fo:block break-after="page"/>')
     }

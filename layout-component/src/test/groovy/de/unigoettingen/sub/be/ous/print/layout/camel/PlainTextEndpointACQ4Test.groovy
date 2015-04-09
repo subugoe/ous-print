@@ -29,8 +29,9 @@ class PlainTextEndpointACQ4Test extends CamelTestSupport {
             public void configure() throws Exception {
                 from("file:./target/generated-test-resources/hotfolder/acq4/in?include=.*.print&noop=true&charset=ISO-8859-1")
                         .to("plainText:.&pageSize=A5")
+                        .to('file:./target/?fileName=${file:name}-' + this.class.getName() + '-plain-acq4.fo')
                         .to("fop:application/pdf")
-                        .to('file:./target/?fileName=${file:name}-' + this.class.getName() + '-plain-lbs4.pdf')
+                        .to('file:./target/?fileName=${file:name}-' + this.class.getName() + '-plain-acq4.pdf')
                         .to("mock:result");
             }
         };

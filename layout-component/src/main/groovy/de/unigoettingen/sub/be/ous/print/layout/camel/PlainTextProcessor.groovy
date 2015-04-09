@@ -58,11 +58,15 @@ class PlainTextProcessor implements Processor {
     static Map<PageSize, Map<String, String>> dimensions = [:]
     /** A Map containing replacements, which will be applied to the text after the input is XML escaped */
     static Map<String, String> replacements = [:]
-
+    /** */
+    static String FORM_FEED = String.valueOf((char) 0x0c)
     static {
-        dimensions.put(PageSize.A4, ['height': '297mm', 'width': '210mm', 'margin': '13mm', 'orientation': 'PORTRAIT'])
-        dimensions.put(PageSize.A5, ['height': '148mm', 'width': '210mm', 'margin': '13mm', 'orientation': 'LANDSCAPE'])
-        replacements.put('###UMBRUCH###', '<fo:block break-after="page"/>')
+        dimensions.put(PageSize.A4, ['height': '297mm', 'width': '210mm', 'margin': '10mm', 'orientation': 'PORTRAIT'])
+        dimensions.put(PageSize.A5, ['height': '148mm', 'width': '210mm', 'margin': '10mm', 'orientation': 'LANDSCAPE'])
+
+        //Ignore last break
+        replacements.put((String) "${FORM_FEED}\\s*\044", '')
+        replacements.put(FORM_FEED, '<fo:block break-after="page"/>')
     }
 
     /**
@@ -104,9 +108,10 @@ class PlainTextProcessor implements Processor {
      * @return String the resulting XSL-FO
      */
     protected String getXslFo(String text) {
+        //TODO: Add Support fo http://junidecode.sourceforge.net/
         text = StringEscapeUtils.escapeXml(text)
         for (String r in replacements.keySet()) {
-            text = text.replace(r, replacements.get(r))
+            text = text.replaceAll(r, replacements.get(r))
         }
         String height = dimensions.get(pageSize).get('height')
         String width = dimensions.get(pageSize).get('width')

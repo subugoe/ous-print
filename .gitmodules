@@ -1,0 +1,3 @@
+[submodule "jspi"]
+	path = jspi
+	url = https://github.com/christianmahnke/jspi

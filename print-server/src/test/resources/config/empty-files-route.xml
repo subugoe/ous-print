@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<routes xmlns="http://camel.apache.org/schema/spring">
+    <!-- Handling of empty files -->
+    <interceptFrom>
+        <when>
+            <simple>${in.body} is not null</simple>
+        </when>
+        <stop/>
+    </interceptFrom>
+
+    <route>
+        <from uri="file:./target/generated-test-resources/hotfolder/acq4/in?include=acq40.*_slip10[012].print&amp;move=./sich&amp;charset=ISO-8859-1"/>
+        <to uri="plainText:.&amp;pageSize=A4"/>
+        <to uri="fop:application/pdf"/>
+        <!-- Output to file -->
+        <to uri="file:./target/?fileName=${file:name}.pdf"/>
+    </route>
+</routes>

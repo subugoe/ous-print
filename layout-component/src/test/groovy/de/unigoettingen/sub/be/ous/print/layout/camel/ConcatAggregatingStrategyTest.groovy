@@ -19,9 +19,21 @@
 package de.unigoettingen.sub.be.ous.print.layout.camel
 
 import org.apache.camel.EndpointInject
+import org.apache.camel.Exchange
+import org.apache.camel.Expression
+import org.apache.camel.Message
+import org.apache.camel.Processor
 import org.apache.camel.builder.RouteBuilder
 import org.apache.camel.component.mock.MockEndpoint
+import org.apache.camel.impl.DefaultMessage
+import org.apache.camel.model.ProcessorDefinition
 import org.apache.camel.test.junit4.CamelTestSupport
+
+import static org.apache.camel.language.mvel.MvelExpression.mvel
+
+import static org.mockito.Mockito.*
+
+import org.junit.Ignore
 import org.junit.Test
 
 /**
@@ -31,15 +43,48 @@ class ConcatAggregatingStrategyTest extends CamelTestSupport {
     @EndpointInject(uri = "mock:result")
     protected MockEndpoint resultEndpoint
 
+
     @Test
     public void testMessageCount() {
         //We've got 2 Test files - This takes some time
         resultEndpoint.setMinimumResultWaitTime(500)
         resultEndpoint.setResultWaitTime(20000)
         //Only one result expected
-        resultEndpoint.expectedMessageCount(1)
+        resultEndpoint.expectedMessageCount(6)
         assertMockEndpointsSatisfied()
     }
+
+    @Override
+    public boolean isUseDebugger() {
+        // must enable debugger
+        return true;
+    }
+
+    @Override
+    protected void debugBefore(Exchange exchange, Processor processor,
+                               ProcessorDefinition<?> definition, String id, String shortName) {
+        // this method is invoked before we are about to enter the given processor
+        // from your Java editor you can just add a breakpoint in the code line below
+        log.info("Before " + definition + " with body " + exchange.getIn().getBody());
+    }
+
+    @Test
+    public void testEl () {
+        Expression mvel = mvel('request.headers.CamelFileName.replaceAll("^(\\\\w*?)_.*$","$1")')
+
+        //Mock exchange.in.headers.get('CamelFileName')
+        Exchange ex = mock(Exchange.class)
+        Message m = new DefaultMessage()
+
+        m.setHeader('CamelFileName', 'sub100_2014060313043579_slip001.print')
+
+        when(ex.getIn()).thenReturn(m)
+        when(ex.getContext()).thenReturn(this.context())
+
+        String result = mvel.evaluate(ex, String.class)
+        log.info('Result of expression is ' + result)
+    }
+
 
     @Override
     protected RouteBuilder createRouteBuilder() throws Exception {
@@ -47,11 +92,23 @@ class ConcatAggregatingStrategyTest extends CamelTestSupport {
             @Override
             public void configure() throws Exception {
                 from("file:./target/generated-test-resources/hotfolder/lbs3/in?include=.*.print&noop=true&charset=Cp850")
-                        .aggregate(constant('true'), new ConcatAggregatingStrategy('\n'))
-                        .completionTimeout(500L)
+                        /* first set a header
+                        <setHeader headerName="printQueue">
+                            <constant>the value</constant>
+                        </setHeader>
+                        */
+                        .setHeader('printQueue', mvel('request.headers.CamelFileName.replaceAll("^(\\\\w*?)_.*$","$1")'))
+                        /*
+                        aggregate using this header
+                        <correlationExpression>
+                            <simple>header.printQueue</simple>
+                        </correlationExpression>
+                        */
+                        .aggregate(simple('header.printQueue'), new ConcatAggregatingStrategy('\n'))
+                        .completionTimeout(5000L)
                         .to("plainText:.&pageSize=A5")
                         .to("fop:application/pdf")
-                        .to('file:./target/?fileName=${file:name}-' + this.class.getName() + '-plain-lbs4.pdf')
+                        .to('file:./target/?fileName=${header.printQueue}-' + this.class.getName() + '-plain-lbs4.pdf')
                         .to("mock:result");
             }
         };

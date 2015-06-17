@@ -27,6 +27,10 @@ import org.apache.camel.processor.aggregate.AggregationStrategy
 class ConcatAggregatingStrategy implements AggregationStrategy {
     String joinStr = ""
 
+    ConcatAggregatingStrategy() {
+        this('\n')
+    }
+
     ConcatAggregatingStrategy (String str) {
         if (str != null) {
             joinStr = str

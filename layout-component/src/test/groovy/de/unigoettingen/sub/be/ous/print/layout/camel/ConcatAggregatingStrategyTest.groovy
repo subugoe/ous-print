@@ -93,17 +93,20 @@ class ConcatAggregatingStrategyTest extends CamelTestSupport {
                 from("file:./target/generated-test-resources/hotfolder/lbs3/in?include=.*.print&noop=true&charset=Cp850")
                         /* first set a header
                         <setHeader headerName="printQueue">
-                            <constant>the value</constant>
+                            <mvel>request.headers.CamelFileName.replaceAll("^(\\w*?)_.*$","$1")</mvel>
                         </setHeader>
                         */
                         .setHeader('printQueue', mvel('request.headers.CamelFileName.replaceAll("^(\\\\w*?)_.*$","$1")'))
                         /*
                         aggregate using this header
-                        <correlationExpression>
-                            <simple>header.printQueue</simple>
-                        </correlationExpression>
+                        <aggregate aggregationStrategy="de.unigoettingen.sub.be.ous.print.layout.camel.ConcatAggregatingStrategy" completionTimeout="20000">
+                            <correlationExpression>
+                                <simple>header.printQueue</simple>
+                            </correlationExpression>
+                            ...
+                        </aggregate>
                         */
-                        .aggregate(simple('header.printQueue'), new ConcatAggregatingStrategy('\n'))
+                        .aggregate(simple('header.printQueue'), new ConcatAggregatingStrategy())
                         .completionTimeout(5000L)
                         .to("plainText:.&pageSize=A5")
                         .to("fop:application/pdf")

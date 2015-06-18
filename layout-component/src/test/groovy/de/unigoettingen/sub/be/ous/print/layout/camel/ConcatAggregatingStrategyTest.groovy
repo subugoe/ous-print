@@ -33,7 +33,6 @@ import static org.apache.camel.language.mvel.MvelExpression.mvel
 
 import static org.mockito.Mockito.*
 
-import org.junit.Ignore
 import org.junit.Test
 
 /**
@@ -62,6 +61,7 @@ class ConcatAggregatingStrategyTest extends CamelTestSupport {
 
     @Override
     protected void debugBefore(Exchange exchange, Processor processor, ProcessorDefinition definition, String id, String shortName) {
+        // See http://camel.apache.org/debugger.html
         // this method is invoked before we are about to enter the given processor
         // from your Java editor you can just add a breakpoint in the code line below
         log.info("Before " + definition + " with body " + exchange.getIn().getBody());
@@ -82,6 +82,7 @@ class ConcatAggregatingStrategyTest extends CamelTestSupport {
 
         String result = mvel.evaluate(ex, String.class)
         log.info('Result of expression is ' + result)
+        assertTrue(result == 'sub100')
     }
 
 

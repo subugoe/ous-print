@@ -49,6 +49,7 @@ import static org.mockito.Mockito.when
  */
 class LayoutEndpointPrintTest extends CamelTestSupport  {
     static String VIRTUAL_PRINTER = 'PDFwriter'
+    boolean print = false
     
     @EndpointInject(uri = 'mock:result')
     protected MockEndpoint resultEndpoint;
@@ -78,12 +79,18 @@ class LayoutEndpointPrintTest extends CamelTestSupport  {
                         from("file:./target/generated-test-resources/hotfolder/lbs3/in?include=.*.print&noop=true&charset=Cp850")
                         .to("layout:.?xslfo=./target/test-classes/xslt/layout2fo.xsl&template=./target/test-classes/layouts/ous40_layout_001_du.asc")
                         .to('lpr://localhost/' + VIRTUAL_PRINTER).to('mock:result')
-                    } else {
+                    } else if (print == true) {
                         log.warn("Printing to default printer")
                         from("file:./target/generated-test-resources/hotfolder/lbs3/in?noop=true&include=.*.print&idempotent=true&charset=Cp850")
                         .to("layout:.?xslfo=./target/test-classes/xslt/layout2fo.xsl&template=./target/test-classes/layouts/ous40_layout_001_du.asc")
                         .to("lpr://localhost/default").to('mock:result')
+                    } else {
+                        log.error('No virtual printer given and printing to default printer disabled')
+                        from("file:./target/generated-test-resources/hotfolder/lbs3/in?noop=true&include=.*.print&idempotent=true&charset=Cp850")
+                                .to("layout:.?xslfo=./target/test-classes/xslt/layout2fo.xsl&template=./target/test-classes/layouts/ous40_layout_001_du.asc")
+                                .to('mock:result')
                     }
+
                 }
             })
         resultEndpoint.expectedMessageCount(28)

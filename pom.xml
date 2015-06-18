@@ -40,7 +40,12 @@
         <groovy.eclipse.compiler.version>2.9.1-01</groovy.eclipse.compiler.version>
         <groovy.eclipse.batch.version>2.3.7-01</groovy.eclipse.batch.version>
         <apache.camel.version>2.14.1</apache.camel.version>
+        <saxon.version>9.5.1-5</saxon.version>
+        <!-- Downgraded to work with Camel
+        See http://stackoverflow.com/questions/29109739/net-sf-saxon-jaxp-transformerimpl-setmessageemitternet-sf-saxon-event-receiver
+        And https://saxonica.plan.io/issues/1944 for an explanation why 9.4.0.7 doesn't rreallyhelp
         <saxon.version>9.6.0-4</saxon.version>
+        -->
         <powermock.version>1.5.4</powermock.version>
         <github.global.server>github</github.global.server>
         <junit.version>4.11</junit.version>

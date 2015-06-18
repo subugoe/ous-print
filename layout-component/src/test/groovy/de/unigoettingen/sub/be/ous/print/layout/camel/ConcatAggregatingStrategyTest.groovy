@@ -92,6 +92,9 @@ class ConcatAggregatingStrategyTest extends CamelTestSupport {
             @Override
             public void configure() throws Exception {
                 from("file:./target/generated-test-resources/hotfolder/lbs3/in?include=.*.print&noop=true&charset=Cp850")
+                        /* convert body to UTF-8
+                        <convertBodyTo type="java.lang.String" charset="UTF-8"/>
+                         */
                         /* first set a header
                         <setHeader headerName="printQueue">
                             <mvel>request.headers.CamelFileName.replaceAll("^(\\w*?)_.*$","$1")</mvel>
@@ -99,8 +102,8 @@ class ConcatAggregatingStrategyTest extends CamelTestSupport {
                         */
                         .setHeader('printQueue', mvel('request.headers.CamelFileName.replaceAll("^(\\\\w*?)_.*$","$1")'))
                         /*
-                        aggregate using this header
-                        <aggregate aggregationStrategy="de.unigoettingen.sub.be.ous.print.layout.camel.ConcatAggregatingStrategy" completionTimeout="20000">
+                        aggregate using this header, set the startegyRef using a bean binding via Spring or in the Main method, see the print server
+                        <aggregate strategyRef="aggregatorStrategy" completionTimeout="20000" forceCompletionOnStop="true">
                             <correlationExpression>
                                 <simple>header.printQueue</simple>
                             </correlationExpression>

@@ -52,6 +52,19 @@
             <artifactId>camel-mvel</artifactId>
             <version>${apache.camel.version}</version>
         </dependency>
+        <!--
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-saxon</artifactId>
+            <version>${apache.camel.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>net.sf.saxon</groupId>
+                    <artifactId>Saxon-HE</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        -->
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>layout</artifactId>

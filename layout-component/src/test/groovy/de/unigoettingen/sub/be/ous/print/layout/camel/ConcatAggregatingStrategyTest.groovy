@@ -115,7 +115,7 @@ class ConcatAggregatingStrategyTest extends CamelTestSupport {
                         .to("plainText:.&pageSize=A5")
                         .to("fop:application/pdf")
                         .to('file:./target/?fileName=${header.printQueue}-' + this.class.getName() + '-plain-lbs4.pdf')
-                        .to("mock:result");
+                        .to("mock:result")
             }
         };
     }

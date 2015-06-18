@@ -18,6 +18,7 @@
 
 package de.unigoettingen.sub.be.ous.print.server
 
+import de.unigoettingen.sub.be.ous.print.util.Util
 import groovy.transform.TypeChecked
 import groovy.util.logging.Log4j
 
@@ -27,7 +28,6 @@ import javax.xml.bind.Unmarshaller
 import org.apache.camel.CamelContext
 import org.apache.camel.builder.RouteBuilder
 import org.apache.camel.model.Constants
-import org.apache.camel.model.ModelCamelContext
 import org.apache.camel.model.RouteDefinition
 import org.apache.camel.model.RoutesDefinition
 import org.apache.camel.util.ObjectHelper
@@ -42,35 +42,51 @@ class PrintServerRouteBuilder extends RouteBuilder {
     protected RoutesDefinition rds = null
     /** The {@link java.net.URL URL} of the configuration file */
     protected URL config = null
-    
+
+    /** The namespace of Spring, need to be removed if Spring is integrated for configuration */
+    public static String SPRING_NAMESPACE = 'http://www.springframework.org/schema/beans'
+
     /**
      * Sets up a new {@link org.apache.camel.builder.RouteBuilder RouteBuilder} for the given configuration
-     * @param config, the {@link java.net.URL URL} of the configuration file
+     * @param config , the {@link java.net.URL URL} of the configuration file
      */
-    PrintServerRouteBuilder (URL config) {
+    PrintServerRouteBuilder(URL config) {
+        log.info("Loding configuration from ${config}")
         this.config = config
-        InputStream ins = config.openStream()
-        this.rds = loadRoutes(ins)
-        super.setRouteCollection(this.rds)
-        
+        if (Util.getRootNamespace(config).equalsIgnoreCase(org.apache.camel.builder.xml.Namespaces.DEFAULT_NAMESPACE)) {
+            InputStream ins = config.openStream()
+            this.rds = loadRoutes(ins)
+            log.info('Setting routes')
+            super.setRouteCollection(this.rds)
+        } else if (Util.getRootNamespace(config).equalsIgnoreCase(SPRING_NAMESPACE)) {
+            //TODO: finish handling of Spring configurations
+            log.error("Configuration file ${config} is in spring namespace, this currently not supported, exiting!")
+            super.setRouteCollection(null)
+        } else {
+            log.error("Configuration file ${config} is not in Camel or Spring namespace, exiting!")
+            super.setRouteCollection(null)
+        }
+
     }
 
     /**
      * @see org.apache.camel.builder.RouteBuilder#configure()
      */
-    void configure () {        
+    @Override
+    void configure() {
+
     }
-    
+
     //TODO: Check if this should be RouteDefinitions or RouteDefinition
     /**
      * This method is taken in parts from the Camel core, it reads Routes from the
      * provided {@link java.io.InputStream InputStream} XML content
-     * @param is, the {@link java.io.InputStream InputStream} to load routes from
+     * @param is , the {@link java.io.InputStream InputStream} to load routes from
      * @returns {@link org.apache.camel.model.RoutesDefinition RoutesDefinition}, the readed routes
      * @throws SAXParseException on parser errors
      * @throws java.io.IOException if the stream has already be consumed
      */
-    public static RoutesDefinition loadRoutes (InputStream is) {
+    public static RoutesDefinition loadRoutes(InputStream is) {
         JAXBContext jaxbContext = JAXBContext.newInstance(Constants.JAXB_CONTEXT_PACKAGES, CamelContext.class.getClassLoader());
         Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
         Object result = unmarshaller.unmarshal(is);
@@ -87,6 +103,6 @@ class PrintServerRouteBuilder extends RouteBuilder {
         }
         return answer
     }
-    
+
 }
 

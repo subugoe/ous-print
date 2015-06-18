@@ -18,27 +18,17 @@
 
 package de.unigoettingen.sub.be.ous.print.server
 
-import de.unigoettingen.sub.be.ous.print.layout.camel.LayoutProcessor
+import de.unigoettingen.sub.be.ous.print.layout.camel.ConcatAggregatingStrategy
 
 import groovy.transform.TypeChecked
 import groovy.util.logging.Log4j
 
-import javax.xml.bind.JAXBContext
 import javax.xml.bind.UnmarshalException
-import javax.xml.bind.Unmarshaller
 
-import org.apache.camel.CamelContext
-import org.apache.camel.Exchange
-import org.apache.camel.Processor
 import org.apache.camel.builder.RouteBuilder
 import org.apache.camel.impl.DefaultCamelContext
-import org.apache.camel.model.RouteDefinition
-import org.apache.camel.model.RoutesDefinition
 import org.apache.camel.main.Main
-import org.apache.camel.model.RoutesDefinition
 
-import org.apache.commons.vfs2.FileChangeEvent
-import org.apache.commons.vfs2.FileListener
 import org.apache.commons.vfs2.FileObject
 import org.apache.commons.vfs2.FileSystemManager
 import org.apache.commons.vfs2.VFS
@@ -57,6 +47,9 @@ import org.xml.sax.SAXParseException
 @Log4j
 //@TypeChecked
 class PrintServer extends Main {
+    /** A map containing definitions of our beans, should be moved into Spring */
+    static protected Map<String, Object> beans = [:]
+
     //pattern taken from https://camel.apache.org/running-camel-standalone-and-have-it-keep-running.html
     
     /** The Camel main class */
@@ -67,7 +60,12 @@ class PrintServer extends Main {
     protected String[] args;
     /** Container for boolean command line parameters */
     static protected Boolean verbose, quiet, watch, noDeamon = false
- 
+
+    static {
+        beans.put('aggregatorStrategy', new ConcatAggregatingStrategy())
+    }
+
+
     /**
      * Main method of the SUB PrintServer
      * Takes commandline arguments, parses them and boots up a Camel Context
@@ -198,6 +196,9 @@ class PrintServer extends Main {
         
         //Start
         println 'Starting Camel. Use ctrl + c to terminate the JVM.\n'
+        for (String s : beans.keySet()) {
+            main.bind(s, beans.get(s))
+        }
         main.run()
         
         // run until you terminate the JVM

@@ -56,7 +56,7 @@ class PrintServerRouteBuilder extends RouteBuilder {
         if (Util.getRootNamespace(config).equalsIgnoreCase(org.apache.camel.builder.xml.Namespaces.DEFAULT_NAMESPACE)) {
             InputStream ins = config.openStream()
             this.rds = loadRoutes(ins)
-            log.info('Setting routes')
+            log.info("Setting routes from ${config}")
             super.setRouteCollection(this.rds)
         } else if (Util.getRootNamespace(config).equalsIgnoreCase(SPRING_NAMESPACE)) {
             //TODO: finish handling of Spring configurations

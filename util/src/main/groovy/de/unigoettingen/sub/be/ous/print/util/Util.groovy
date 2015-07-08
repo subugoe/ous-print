@@ -259,4 +259,21 @@ class Util {
             return null
         }
     }
+
+    /**
+     * Converts a {@link java.net.URL URL} object into a file object
+     * @returns {@link java.io.File File} representing the given {@link java.net.URL URL}
+     */
+    @TypeChecked
+    def static File uRLToFile(URL url) {
+        //taken from https://weblogs.java.net/blog/kohsuke/archive/2007/04/how_to_convert.html
+        File f;
+        try {
+            f = new File(url.toURI())
+        } catch (URISyntaxException e) {
+            log.trace('Cought URISyntaxException', e)
+            f = new File(url.getPath())
+        }
+        return f
+    }
 }

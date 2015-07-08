@@ -45,7 +45,7 @@ class ConcatAggregatingStrategyTest extends CamelTestSupport {
 
     @Test
     public void testMessageCount() {
-        //We've got 2 Test files - This takes some time
+        //We've got 6 Test files - This takes some time
         resultEndpoint.setMinimumResultWaitTime(500)
         resultEndpoint.setResultWaitTime(20000)
         //Only one result expected

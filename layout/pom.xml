@@ -53,7 +53,7 @@
         <dependency>
             <groupId>org.apache.tika</groupId>
             <artifactId>tika-core</artifactId>
-            <version>1.5</version>
+            <version>${apache.tika.version}</version>
         </dependency>
         <!-- FOP 1.1 has a bug in the dependency declerations, see
              http://apache-fop.1065347.n5.nabble.com/Maven-dependencies-for-fop-1-1-td37437.html

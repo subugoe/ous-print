@@ -54,6 +54,7 @@
         <commons-logging.version>1.2</commons-logging.version>
         <commons-io.version>2.4</commons-io.version>
         <xml-apis.version>1.3.04</xml-apis.version>
+        <apache.tika.version>1.9</apache.tika.version>
     </properties>
 
     <organization>

@@ -25,11 +25,13 @@
      fo is the real one
 -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
-    xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0"
-    xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" xmlns:svgoo="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" xmlns:fo="http://www.w3.org/1999/XSL/Format"
-    xmlns:barcode="http://barcode4j.krysalis.org/ns" xmlns:print="http://www.sub.uni-goettingen.de/BE/OUS/print" xmlns:gxsl="http://www.sub.uni-goettingen.de/BE/OUS/gXSL"
-    xmlns:fooo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svg="http://www.w3.org/2000/svg"
-    xmlns:officeooo="http://openoffice.org/2009/office" exclude-result-prefixes="xd office text style draw svgoo fooo xlink officeooo" version="2.0">
+    xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0"
+    xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0"
+    xmlns:svgoo="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" xmlns:fo="http://www.w3.org/1999/XSL/Format"
+    xmlns:barcode="http://barcode4j.krysalis.org/ns" xmlns:print="http://www.sub.uni-goettingen.de/BE/OUS/print"
+    xmlns:gxsl="http://www.sub.uni-goettingen.de/BE/OUS/gXSL" xmlns:fooo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0"
+    xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svg="http://www.w3.org/2000/svg" xmlns:officeooo="http://openoffice.org/2009/office"
+    xmlns:css3t="http://www.w3.org/TR/css3-text/" exclude-result-prefixes="xd office text style draw svgoo fooo xlink officeooo" version="2.0">
     <xd:doc scope="stylesheet">
         <xd:desc>
             <xd:p><xd:b>Created on:</xd:b> May 14, 2014</xd:p>
@@ -111,12 +113,14 @@
                             <fo:region-body region-name="xsl-region-body"/>
                             <xsl:if test="$external-styles//style:page-layout/style:header-style/style:header-footer-properties">
                                 <fo:region-before region-name="xsl-region-before">
-                                    <xsl:attribute name="extent" select="$external-styles//style:page-layout/style:header-style/style:header-footer-properties/@fooo:margin-bottom"/>
+                                    <xsl:attribute name="extent"
+                                        select="$external-styles//style:page-layout/style:header-style/style:header-footer-properties/@fooo:margin-bottom"/>
                                 </fo:region-before>
                             </xsl:if>
                             <xsl:if test="$external-styles//style:page-layout/style:footer-style/style:header-footer-properties">
                                 <fo:region-after region-name="xsl-region-after">
-                                    <xsl:attribute name="extent" select="$external-styles//style:page-layout/style:footer-style/style:header-footer-properties/@fooo:margin-top"/>
+                                    <xsl:attribute name="extent"
+                                        select="$external-styles//style:page-layout/style:footer-style/style:header-footer-properties/@fooo:margin-top"/>
                                 </fo:region-after>
                             </xsl:if>
                         </fo:simple-page-master>
@@ -143,7 +147,8 @@
                                         <fo:instream-foreign-object scaling="uniform" width="154mm">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="210mm" height="148mm">
                                                 <!-- Font was 'Optima' -->
-                                                <text x="0" y="300" transform="rotate(-30)" style="font-size: 120pt; fill: grey; font-weight: bold; font-family: FreeSans;">
+                                                <text x="0" y="300" transform="rotate(-30)"
+                                                    style="font-size: 120pt; fill: grey; font-weight: bold; font-family: FreeSans;">
                                                     <gxsl:value-of select="$debug-text"/>
                                                 </text>
                                             </svg>
@@ -189,34 +194,34 @@
             <gxsl:function name="print:leader" as="element(fo:leader)" xmlns:fo="http://www.w3.org/1999/XSL/Format">
                 <fo:leader leader-pattern="space"/>
             </gxsl:function>
+            <xsl:comment>Adds a barcode</xsl:comment>
+            <gxsl:function name="print:barcode" as="element(fo:instream-foreign-object)" xmlns:fo="http://www.w3.org/1999/XSL/Format">
+                <gxsl:param name="message" as="xs:string"/>
+                <gxsl:param name="scaling" as="xs:string"/>
+                <gxsl:param name="content-width" as="xs:string"/>
+                <gxsl:param name="height" as="xs:string"/>
+                <gxsl:param name="human-readable" as="xs:string"/>
+                <fo:instream-foreign-object>
+                    <gxsl:attribute name="scaling" select="$scaling"/>
+                    <gxsl:attribute name="content-width" select="$content-width"/>
+                    <gxsl:comment>Barcode, see http://barcode4j.sourceforge.net/2.1/fop-ext.html</gxsl:comment>
+                    <barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns" render-mode="svg">
+                        <gxsl:attribute name="message">
+                            <gxsl:value-of select="$message"/>
+                        </gxsl:attribute>
+                        <barcode:code39>
+                            <!-- See http://barcode4j.sourceforge.net/2.1/barcode-xml.html -->
+                            <barcode:height>
+                                <gxsl:value-of select="$height"/>
+                            </barcode:height>
+                            <barcode:human-readable>
+                                <gxsl:value-of select="$human-readable"/>
+                            </barcode:human-readable>
+                        </barcode:code39>
+                    </barcode:barcode>
+                </fo:instream-foreign-object>
+            </gxsl:function>
         </gxsl:stylesheet>
-        <xsl:comment>Adds a barcode</xsl:comment>
-        <gxsl:function name="print:barcode" as="element(fo:instream-foreign-object)" xmlns:fo="http://www.w3.org/1999/XSL/Format">
-            <gxsl:param name="message" as="xs:string"/>
-            <gxsl:param name="scaling" as="xs:string"/>
-            <gxsl:param name="content-width" as="xs:string"/>
-            <gxsl:param name="height" as="xs:string"/>
-            <gxsl:param name="human-readable" as="xs:string"/>
-            <fo:instream-foreign-object>
-                <gxsl:attribute name="scaling" select="$scaling"/>
-                <gxsl:attribute name="content-width" select="$content-width"/>
-                <gxsl:comment>Barcode, see http://barcode4j.sourceforge.net/2.1/fop-ext.html</gxsl:comment>
-                <barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns" render-mode="svg">
-                    <gxsl:attribute name="message">
-                        <gxsl:value-of select="$message"/>
-                    </gxsl:attribute>
-                    <barcode:code39>
-                        <!-- See http://barcode4j.sourceforge.net/2.1/barcode-xml.html -->
-                        <barcode:height>
-                            <gxsl:value-of select="$height"/>
-                        </barcode:height>
-                        <barcode:human-readable>
-                            <gxsl:value-of select="$human-readable"/>
-                        </barcode:human-readable>
-                    </barcode:code39>
-                </barcode:barcode>
-            </fo:instream-foreign-object>
-        </gxsl:function>
     </xsl:template>
     <!-- Templates for styles -->
     <xsl:template match="style:header|style:footer">
@@ -319,9 +324,7 @@
             </xsl:when>
             -->
             <xsl:otherwise>
-                <xsl:variable name="message">
-                    Image Type of <xsl:value-of select="@xlink:href"/> not supported!
-                </xsl:variable>
+                <xsl:variable name="message"> Image Type of <xsl:value-of select="@xlink:href"/> not supported! </xsl:variable>
                 <xsl:message select="$message"/>
                 <gxsl:comment>If you expect an image here: <xsl:value-of select="$message"/></gxsl:comment>
             </xsl:otherwise>
@@ -340,11 +343,38 @@
                 <!-- text:p's without descriptions -->
                 <xsl:otherwise>
                     <xsl:apply-templates select="@*"/>
+                    <xsl:if test=".//text:line-break">
+                        <xsl:attribute name="linefeed-treatment">preserve</xsl:attribute>
+                    </xsl:if>
                     <xsl:apply-templates/>
                 </xsl:otherwise>
             </xsl:choose>
         </fo:block>
     </xsl:template>
+    <!-- See Whitespace
+        http://books.evc-cit.info/odbook/ch03.html#whitespace-section -->
+    <xsl:template match="text:s">
+        <xsl:if test="@text:c">
+            <xsl:value-of select="for $r in (1 to @text:c) return ' '"/>
+        </xsl:if>
+    </xsl:template>
+
+    <!-- Headings 
+        See http://books.evc-cit.info/odbook/ch03.html#paragraph-section -->
+    <xsl:template match="text:h">
+        <fo:block>
+            <xsl:if test=".//text:line-break">
+                <xsl:attribute name="linefeed-treatment">preserve</xsl:attribute>
+            </xsl:if>
+            <xsl:apply-templates select="@*|*"/>
+        </fo:block>
+    </xsl:template>
+
+    <xsl:template match="text:line-break">
+        <xsl:text>&#xA;</xsl:text>
+    </xsl:template>
+
+
     <!-- Text in SVG mode -->
     <xsl:template match="text:p" mode="svg">
         <svg:text xmlns:svg="http://www.w3.org/2000/svg">
@@ -437,7 +467,8 @@
         <xsl:attribute name="{local-name(.)}" select="."/>
     </xsl:template>
     <!-- Other FO attributes -->
-    <xsl:template match="@fooo:text-align|@fooo:border|@fooo:padding|@fooo:clip|@fooo:min-height|@fooo:color|@fooo:background-color|@fooo:font-size|@fooo:font-weight|@fooo:font-style|@fooo:text-align"
+    <xsl:template
+        match="@fooo:text-align|@fooo:border|@fooo:padding|@fooo:clip|@fooo:min-height|@fooo:color|@fooo:background-color|@fooo:font-size|@fooo:font-weight|@fooo:font-style|@fooo:text-align"
         mode="#all">
         <xsl:attribute name="{local-name(.)}" select="."/>
     </xsl:template>
@@ -467,14 +498,21 @@
         <xsl:apply-templates select="../style:text-properties/@*|../style:graphic-properties/@*|../style:paragraph-properties/@*" mode="#current"/>
     </xsl:template>
 
+    <!-- Elements to ignore -->
+    <xsl:template match="office:forms"/>
+
+    <!-- TODO: Find a better solution for this -->
+    <xsl:template match="text:tab"/>
+
     <!-- Attributes to ignore -->
     <xsl:template
-        match="@draw:name|@text:anchor-type|@style:name|@style:class|@style:page-layout-name|@office:version|@officeooo:*|@style:contextual-spacing|@text:number-lines|@text:line-number|@style:vertical-rel|@xlink:*|@draw:textarea-horizontal-align|@draw:textarea-vertical-align|@style:protect"/>
+        match="@text:consecutive-numbering|@style:display-name|@text:outline-level|@style:master-page-name|@style:country-complex|@style:language-complex|@style:font-pitch-complex|@style:font-family-complex|@style:font-pitch|@style:use-window-font-color|@style:writing-mode|@style:page-number|@draw:name|@text:anchor-type|@style:name|@style:class|@style:page-layout-name|@office:version|@officeooo:*|@style:contextual-spacing|@text:number-lines|@text:line-number|@style:vertical-rel|@xlink:*|@draw:textarea-horizontal-align|@draw:textarea-vertical-align|@style:protect"/>
     <!-- Asian attributes to ignore -->
     <xsl:template
         match="@style:font-name-asian|@style:font-weight-asian|@style:font-size-asian|@style:font-style-asian|@style:font-pitch-asian|@style:font-family-asian|@style:font-family-generic-asian"/>
     <!-- Complex settings to ignore -->
-    <xsl:template match="@style:font-name-complex|@style:font-size-complex|@style:font-weight-complex|@style:font-style-complex|@style:font-family-generic-complex"/>
+    <xsl:template
+        match="@style:font-name-complex|@style:font-size-complex|@style:font-weight-complex|@style:font-style-complex|@style:font-family-generic-complex"/>
     <!-- Font settings to ignore -->
     <xsl:template match="@fo:font-family|@style:font-family-generic"/>
 
@@ -485,6 +523,20 @@
     <!-- Other attributes that may be mapped in the future -->
     <xsl:template match="@style:horizontal-pos|@style:horizontal-rel|@style:mirror">
         <xsl:message>Unmatched attribute ignored: <xsl:value-of select="name(.)"/>, value: <xsl:value-of select="data(.)"/></xsl:message>
+    </xsl:template>
+    <!-- Copy FO unmatched attributes -->
+    <xsl:template match="@fooo:*">
+        <xsl:choose>
+            <xsl:when test="local-name(.) = 'font-family'"/>
+            <xsl:when test="local-name(.) = 'font-size'"/>
+            <xsl:when test="local-name(.) = 'orphans'"/>
+            <xsl:when test="local-name(.) = 'widows'"/>
+            <xsl:when test="local-name(.) = 'country'"/>
+            <xsl:when test="local-name(.) = 'language'"/>
+            <xsl:otherwise>
+                <xsl:attribute name="{local-name(.)}" select="data(.)" namespace="http://www.w3.org/1999/XSL/Format"/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     <!-- Attributes that might can be mapped to SVG -->
     <xsl:template
@@ -510,7 +562,8 @@
         <xsl:value-of select="."/>
     </xsl:template>
     <!-- SVG attributes to map -->
-    <xsl:template match="@style:wrap|@style:number-wrapped-paragraphs|@style:wrap-contour|@draw:wrap-influence-on-position|@style:text-autospace|@fooo:text-align|@fooo:min-height|@style:font-name"
+    <xsl:template
+        match="@style:wrap|@style:number-wrapped-paragraphs|@style:wrap-contour|@draw:wrap-influence-on-position|@style:text-autospace|@fooo:text-align|@fooo:min-height|@style:font-name"
         mode="svg"/>
 
     <!-- Unmatched attributes in svg mode -->
@@ -608,8 +661,7 @@
                         </xsl:analyze-string>
                     </xsl:when>
                     <xsl:otherwise>
-                        <xsl:message terminate="yes">
-                    Couldn't parse expression: <xsl:value-of select="$str"/>
+                        <xsl:message terminate="yes"> Couldn't parse expression: <xsl:value-of select="$str"/>
                         </xsl:message>
                     </xsl:otherwise>
                 </xsl:choose>

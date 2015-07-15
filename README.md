@@ -17,6 +17,8 @@ This framework can be used to replace the ous_print_server with a implementation
 * Generate XSL-FO files from ODF ([Open](https://www.openoffice.org/) / [Libre Office](http://www.libreoffice.org/))
 * Extract ASC files from database definitions
 * Convert plain text to PDF
+* Send files as attachments
+* Aggregate several outputs to one file
 
 ## Requirements
 This framework need just [Java](http://java.com/en/) (Version 1.6 or higher) as runtime environment, to check out and compile you also need [Git](http://git-scm.com/), [Maven](http://maven.apache.org/) and a internet connection to resolve required artifacts.
@@ -56,7 +58,13 @@ There are also some [slides (in German)](http://subugoe.github.io/ous-print/slid
 The code is in production use at SUB Göttingen but might have still some rough edges. The ODF to XSL-FO part is untested, the Groovy parts are not finished yet. Some unit tests may fail. Not every possible transformation is implemented in Groovy (CLI), use the style sheets directly if needed. The SUB PrintServer doesn't reload it's configuration on changes yet. 
 
 ### TODO
-* Make the Tests of the print-server module pass
+* Make the tests of the print-server module pass
+* Make the tests of the layout-cli module pass
+* Enable configuration reloading for print-server module
+* Integrate database access into print-server module
+* Integrate PDF manipulation
+* Integrate printer metadata from remote CUPS servers
+
 
 # Development
 
@@ -72,6 +80,7 @@ The following Maven Modules make up this framework:
 * **layout-test** - Contains test files for unit tests
 * **ous-db** - Contains objects for OUS database access
 
+More to come!
 
 ## XSL-FO Files
 The result of the layout process is determinate by XSL-FO files. Either use your own, change the provided one, or generate one using a ODF template. A description how to use ODF to create a XSL-FO file can be found in the Maven site.

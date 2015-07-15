@@ -25,9 +25,8 @@ import org.apache.camel.builder.RouteBuilder
 import org.apache.camel.component.mock.MockEndpoint
 import org.apache.camel.model.ProcessorDefinition
 import org.apache.camel.test.junit4.CamelTestSupport
-import org.junit.Test
 
-import static org.apache.camel.language.mvel.MvelExpression.mvel
+import org.junit.Test
 
 class RemindersTest extends CamelTestSupport {
     @EndpointInject(uri = "mock:result")

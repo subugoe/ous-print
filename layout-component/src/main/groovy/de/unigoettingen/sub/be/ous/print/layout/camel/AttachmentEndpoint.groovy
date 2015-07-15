@@ -26,14 +26,14 @@ import org.apache.camel.spi.UriEndpoint
 
 
 /**
- * A simple endpoint for the PlainTextProcessor, extending ProcessorEndpoint
+ * A simple endpoint for the AttachmentProcessor, extending ProcessorEndpoint
  * @author cmahnke
  */
 @TypeChecked
 @CompileStatic
 @UriEndpoint(scheme = "attachment")
 class AttachmentEndpoint extends ProcessorEndpoint {
-    /** The PlainTextProcessor to be used */
+    /** The AttachmentProcessor to be used */
     protected AttachmentProcessor ap
 
     /**

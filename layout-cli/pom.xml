@@ -23,7 +23,7 @@
     <parent>
         <groupId>de.unigoettingen.sub</groupId>
         <artifactId>ous-print</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.1-SNAPSHOT</version>
     </parent>
     <artifactId>layout-cli</artifactId>
     <packaging>jar</packaging>
@@ -49,7 +49,7 @@
         <dependency>
             <groupId>org.apache.pdfbox</groupId>
             <artifactId>pdfbox</artifactId>
-            <version>2.0.0-SNAPSHOT</version>
+            <version>2.0.17</version>
             <!--
             <version>1.8.5</version>
             -->
@@ -64,17 +64,6 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
-    <repositories>
-        <repository>
-            <id>apache-snapshots</id>
-            <name>Apache Snapshots</name>
-            <url>http://repository.apache.org/snapshots</url>
-            <layout>default</layout>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
     <build>
         <testResources>
             <testResource>
@@ -85,7 +74,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>1.2.1</version>
+                <version>3.2.0</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -127,7 +116,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
-                <version>2.0</version>
+                <version>3.1.1</version>
                 <executions>
                     <execution>
                         <id>unpack-shared-resources</id>
@@ -149,7 +138,7 @@
             <plugin>
                 <groupId>com.github.github</groupId>
                 <artifactId>site-maven-plugin</artifactId>
-                <version>0.9</version>
+                <version>0.12</version>
                 <configuration>
                     <message>Creating site for ${project.version}</message>
                     <path>${project.artifactId}</path>

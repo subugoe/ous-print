@@ -23,7 +23,7 @@
     <parent>
         <groupId>de.unigoettingen.sub</groupId>
         <artifactId>ous-print</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.1-SNAPSHOT</version>
     </parent>
     <artifactId>layout-test</artifactId>
     <packaging>pom</packaging>
@@ -35,6 +35,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.1.1</version>
                 <executions>
                     <execution>
                         <id>make shared resources</id>
@@ -53,7 +54,7 @@
             <plugin>
                 <groupId>com.github.github</groupId>
                 <artifactId>site-maven-plugin</artifactId>
-                <version>0.9</version>
+                <version>0.12</version>
                 <configuration>
                     <message>Creating site for ${project.version}</message>
                     <path>${project.artifactId}</path>

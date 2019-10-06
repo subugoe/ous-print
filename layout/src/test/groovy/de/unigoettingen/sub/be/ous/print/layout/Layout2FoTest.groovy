@@ -36,7 +36,7 @@ import static org.junit.Assert.*
 @Log4j
 @TypeChecked
 class Layout2FoTest extends TestBase {
-    static URL LAYOUT = Layout2FoTest.getClass().getResource("/layouts-xml/ous40_layout_001_du.asc.xml")
+    static URL LAYOUT = Layout2FoTest.class.getResource("/layouts-xml/ous40_layout_001_du.asc.xml")
     static LayoutParser LP_LBS3
     static LayoutParser LP_LBS4
 

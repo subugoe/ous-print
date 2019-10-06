@@ -31,7 +31,7 @@ import org.apache.camel.spi.UriEndpoint
  */
 @TypeChecked
 @CompileStatic
-@UriEndpoint(scheme = "layout")
+@UriEndpoint(scheme = "layout", title = "Layout", syntax = "layout:resourceUri")
 class LayoutEndpoint extends ProcessorEndpoint {
     /** The LayoutProcessor to be used */
     protected LayoutProcessor lp

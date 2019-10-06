@@ -31,7 +31,7 @@ import org.apache.camel.spi.UriEndpoint
  */
 @TypeChecked
 @CompileStatic
-@UriEndpoint(scheme = "attachment")
+@UriEndpoint(scheme = "attachment", title = "Attachment", syntax = "attachment:resourceUri")
 class AttachmentEndpoint extends ProcessorEndpoint {
     /** The PlainTextProcessor to be used */
     protected AttachmentProcessor ap

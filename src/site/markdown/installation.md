@@ -18,6 +18,12 @@ If you are working on MacOS with a current JDK from Oraclte (not Apple) make sur
 
 The resulting artifacts will be created in the subfolder 'target' in each of the modules. Refer to the module documentation to learn how to use them.
 
+## Installing the test data module
+
+To make sure the test data module is present during development make sure you have the module installed: 
+
+> mvn install -pl layout-test
+
 **You need a internet connection to build this software since dependencies will be downloaded. Without internet connection the build will fail!**
 
 # Installation

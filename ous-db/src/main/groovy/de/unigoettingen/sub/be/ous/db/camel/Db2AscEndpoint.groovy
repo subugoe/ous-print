@@ -29,7 +29,7 @@ import org.apache.camel.spi.UriEndpoint
  * Created by cmahnke on 04.03.15.
  */
 @CompileStatic
-@UriEndpoint(scheme = "db2asc" /*, consumerClass = Db2AscConsumer.class */)
+@UriEndpoint(scheme = "db2asc", title = "DB2Asc", syntax = "layout:resourceUri" /*, consumerClass = Db2AscConsumer.class */)
 class Db2AscEndpoint extends ProcessorEndpoint {
     /** The Db2AscProcessor to be used */
     protected Db2AscProcessor d2ap

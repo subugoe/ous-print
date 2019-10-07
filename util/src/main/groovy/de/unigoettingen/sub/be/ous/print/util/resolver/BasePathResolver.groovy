@@ -29,7 +29,7 @@ import javax.xml.transform.URIResolver
 import javax.xml.transform.stream.StreamSource
 
 /**
- * This resolver can be van take a base path and resolve relative URIs against it.
+ * This resolver can be can take a base path and resolve relative URIs against it.
  *
  * @author cmahnke
  * See http://stackoverflow.com/questions/5416421/apache-fop-how-to-set-base-url-for-accessing-external-resource-using-relative-p

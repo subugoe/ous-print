@@ -36,9 +36,7 @@
         to create PDF or Postscript files. This can be used with te command line interface
         or the Apache Camel component.
     </description>
-    <properties>
-        <xalan.version>2.7.2</xalan.version>
-    </properties>
+
     <dependencies>
         <dependency>
             <groupId>de.unigoettingen.sub</groupId>
@@ -88,6 +86,10 @@
                 <exclusion>
                     <groupId>org.apache.xmlgraphics</groupId>
                     <artifactId>xmlgraphics-commons</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.pdfbox</groupId>
+                    <artifactId>fontbox</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -150,6 +152,17 @@
             </exclusions>
         </dependency>
         <dependency>
+            <groupId>org.apache.pdfbox</groupId>
+            <artifactId>fontbox</artifactId>
+            <version>${pdfbox.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>${commons-io.version}</version>
@@ -184,7 +197,7 @@
         <dependency>
             <groupId>xerces</groupId>
             <artifactId>xercesImpl</artifactId>
-            <version>2.11.0</version>
+            <version>${xerces.version}</version>
         </dependency>
         <!-- Needed for barcodes -->
         <dependency>

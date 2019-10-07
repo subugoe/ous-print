@@ -33,7 +33,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding> 
         <gmavenVersion>1.4</gmavenVersion>
         <gmavenProviderSelection>2.0</gmavenProviderSelection>
-        <groovy.version>2.4.17</groovy.version>
+        <groovy.version>2.5.8</groovy.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <!-- See http://groovy.codehaus.org/Groovy-Eclipse+compiler+plugin+for+Maven -->
@@ -50,15 +50,20 @@
         <github.global.server>github</github.global.server>
         <junit.version>4.12</junit.version>
         <log4j.version>1.2.17</log4j.version>
-        <commons-collection.version>3.1</commons-collection.version>
+        <commons-collections.version>3.2.2</commons-collections.version>
         <commons-logging.version>1.2</commons-logging.version>
         <commons-io.version>2.6</commons-io.version>
         <commons-cli.version>1.4</commons-cli.version>
+        <commons-lang.version>2.6</commons-lang.version>
         <xml-apis.version>1.4.01</xml-apis.version>
         <apache.tika.version>1.22</apache.tika.version>
         <system-rules.version>1.19.0</system-rules.version>
         <fop.version>2.3</fop.version>
         <avalon.version>4.3</avalon.version>
+        <slf4j.version>1.7.28</slf4j.version>
+        <pdfbox.version>2.0.17</pdfbox.version>
+        <xalan.version>2.7.2</xalan.version>
+        <xerces.version>2.12.0</xerces.version>
     </properties>
 
     <organization>
@@ -103,6 +108,7 @@
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy-all</artifactId>
             <version>${groovy.version}</version>
+            <type>pom</type>
         </dependency>
         <dependency>
             <groupId>log4j</groupId>

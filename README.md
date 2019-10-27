@@ -6,6 +6,16 @@ OUS Printing Tools (NG)
 ## Overview
 This framework can be used to replace the ous_print_server with a implementation in Groovy, redirection rules are configured using XML. There are some [slides (in German)](http://subugoe.github.io/ous-print/slides.xhtml "Slides") describing the framework. Documentation can be found on the [project site](http://subugoe.github.io/ous-print/ "Project site").
 
+## Current Status / Versions
+
+  - 1.1 (SNAPSHOT) 
+    - Updated to Java 8
+    - New Versions of libraries
+    - Examples for use of Barcodes
+    - Docker image for easy building
+
+  - 1.0 (SNAPSHOT) - Initial Version - currently in use
+
 ## Features
 * Convert ASC Files to XML
 * Generate Parsers for generated slips
@@ -19,7 +29,7 @@ This framework can be used to replace the ous_print_server with a implementation
 * Convert plain text to PDF
 
 ## Requirements
-This framework need just [Java](http://java.com/en/) (Version 1.6 or higher) as runtime environment, to check out and compile you also need [Git](http://git-scm.com/), [Maven](http://maven.apache.org/) and a internet connection to resolve required artifacts.
+This framework need just [Java](http://java.com/en/) (Version 1.8 or higher) as runtime environment, to check out and compile you also need [Git](http://git-scm.com/), [Maven](http://maven.apache.org/) and a internet connection to resolve required artifacts.
 
 ##Terminology used in this document
 * **Artifact**: A piece of self-contained software.
@@ -36,6 +46,8 @@ Both include a command line documentation of their parameters, if you use the ar
 
 You need the other Maven modules as dependencies in your local Maven Repository in order to build the main artifacts. Just follow the steps below.
 
+If you have Docker (make sure you have a version same as or newer then 18.09) installed, you can also use the provided `Dockerfile` to build. This way you don't need to install the dependencies.
+
 ### Checkout from Git repository
 
 Just run the following command to get a copy of the source code:
@@ -51,6 +63,16 @@ This readme file only provides a bird eye view over the framework, to get the wh
 There are also some [slides (in German)](http://subugoe.github.io/ous-print/slides.xhtml) that reflect the current state of this framework.
 
 >mvn site
+
+### Using docker
+
+Get the source code.
+> git clone https://github.com/subugoe/ous-print.git
+
+Build using Docker:
+> DOCKER_BUILDKIT=1 docker build -f docker/ous-print/Dockerfile .
+
+After the image has been build you can extract the resulting jar file from the build image.
 
 ## Current Status
 The code is in production use at SUB Göttingen but might have still some rough edges. The ODF to XSL-FO part is untested, the Groovy parts are not finished yet. Some unit tests may fail. Not every possible transformation is implemented in Groovy (CLI), use the style sheets directly if needed. The SUB PrintServer doesn't reload it's configuration on changes yet. 

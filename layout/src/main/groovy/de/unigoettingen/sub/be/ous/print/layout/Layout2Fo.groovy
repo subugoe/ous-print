@@ -22,6 +22,7 @@ import de.unigoettingen.sub.be.ous.print.util.resolver.XSLTIncludeClasspathURIRe
 import de.unigoettingen.sub.be.ous.print.util.resolver.BasePathResolver
 
 import groovy.util.logging.Log4j
+import org.apache.fop.apps.FopFactoryBuilder
 
 import javax.xml.transform.Result
 import javax.xml.transform.Transformer
@@ -174,6 +175,18 @@ class Layout2Fo extends AbstractTransformer {
         if (result == null) {
             throw new IllegalArgumentException('No FO result generated')
         }
+
+        try{
+            if (fopFactory == null) {
+                FopFactoryBuilder builder = new FopFactoryBuilder(baseURI)
+                builder.setStrictFOValidation(false)
+            }
+            if (useConfig) {
+
+            }
+        }
+
+        /* This is for FOP 1.x
         try {
             //See https://xmlgraphics.apache.org/fop/1.0/embedding.html
             
@@ -202,12 +215,6 @@ class Layout2Fo extends AbstractTransformer {
             //Transformer transformer = factory.newTransformer(xslfo);
             Transformer transformer = factory.newTransformer(); // identity transformer
 
-            //Pass params to the stylesheet
-            /*
-            params.entrySet().each() {
-            transformer.setParameter((String) it.key, it.value)
-            }
-             */
             // Step 5: Setup input and output for XSLT transformation
             // Setup input stream
 
@@ -221,6 +228,7 @@ class Layout2Fo extends AbstractTransformer {
             throw te
 
         }
+         */
     }
     
     /**

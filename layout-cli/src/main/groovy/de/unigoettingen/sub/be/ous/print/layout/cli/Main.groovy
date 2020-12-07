@@ -38,9 +38,9 @@ import javax.xml.transform.TransformerConfigurationException
 
 import org.apache.log4j.Level
 
-import org.apache.pdfbox.printing.PDFPrinter
 import org.apache.pdfbox.pdmodel.PDDocument
 import org.apache.pdfbox.pdmodel.PDPage
+import org.apache.pdfbox.printing.PDFPageable
 
 import de.unigoettingen.sub.be.ous.print.layout.Layout
 import de.unigoettingen.sub.be.ous.print.layout.FORMAT
@@ -366,7 +366,8 @@ class Main {
                 println 'Printer not found: ' + printer
                 System.exit(20)
             }
-    
+
+            // TODO: This section is after the update of PDFBox 2.0 completely untested
             PrinterJob job = PrinterJob.getPrinterJob()
             job.setJobName(inputUrl.toString())
             job.setPrintService(p)
@@ -391,10 +392,15 @@ class Main {
             job.defaultPage(pf)
             
             //Paper paper = Layout.PageSize.getPaper(pageSize)
-            
-            PDFPrinter pdprinter = new PDFPrinter(pddocument)
+
+            job.setPageable(new PDFPageable(pddocument));
+            job.print();
+            // Pre 2.0 PDFBox variant
+            //PDFPrinter pdprinter = new PDFPrinter(pddocument)
+            // Old variant
             //PDFPrinter pdprinter = new PDFPrinter(pddocument, Scaling.SCALE_TO_FIT, Orientation.AUTO, paper)
-            pdprinter.silentPrint(job)
+            // Pre 2.0 PDFBox variant
+            //pdprinter.silentPrint(job)
             job = null
             
             //The is a Bug in PDF Box, orientation isn't set correctly, we jus define a bigger page
@@ -410,8 +416,9 @@ class Main {
              */
             println 'Generated file send to Printer ' + printer
             if (cut) {
-                PrinterUtil.cut(printer)
-                println 'Sended paper cut signal'
+                //PrinterUtil.cut(printer)
+                //println 'Sended paper cut signal'
+                println "Sending a cut signal isn't implemented anymore!"
             }
         
         } else if (outFormat == FORMAT.PS && printer != null && output != null) {

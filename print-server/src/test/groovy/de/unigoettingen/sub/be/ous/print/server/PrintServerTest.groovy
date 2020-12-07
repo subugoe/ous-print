@@ -42,11 +42,18 @@ import static org.junit.Assert.assertNotNull
 @Log4j
 @TypeChecked
 class PrintServerTest {
-    
+    //TODO: Finish this
+
     static URL TEST_ROUTES = PrintServerTest.getClass().getResource("/config/test-routes.xml")
     static URL TEST_A5_ROUTES = PrintServerTest.getClass().getResource("/config/a5route.xml")
     static URL TEST_ROUTES_BROKEN = PrintServerTest.getClass().getResource("/config/test-routes-broken.xml")
     static URL TEST_ROUTES_RENAME = PrintServerTest.getClass().getResource("/config/file-rename-route.xml")
+    static URL TEST_ROUTES_ASC2DB = PrintServerTest.getClass().getResource("/config/asc2db-route.xml")
+    static URL TEST_ROUTES_EMPTY = PrintServerTest.getClass().getResource("/config/empty-files-route.xml")
+
+    //Database settings
+    static URL TEST_JDBC_PROPERTIES = PrintServerTest.getClass().getResource("/jdbc.properties")
+
     static Long RUN_TIME = 15000 
     
     //See http://stackoverflow.com/questions/6141252/dealing-with-system-exit0-in-junit-tests
@@ -112,7 +119,35 @@ class PrintServerTest {
         PrintServer ps = new PrintServer(TEST_ROUTES_RENAME)
         Watcher w = new Watcher(ps, RUN_TIME)
     }
-    
+
+    @Test
+    void testDb2AscRoute () {
+        def routes = Util.uRL2RelPath(TEST_ROUTES_ASC2DB)
+        log.debug('Using test Db2Asc route from ' + routes)
+        log.trace('Setting up PrintServer for Db2Asc and stopping it after ' + RUN_TIME.toString() + ' millis')
+        PrintServer ps = new PrintServer(TEST_ROUTES_ASC2DB)
+    }
+
+    @Test
+    void testFileRenameRoute () {
+
+    }
+
+    @Test
+    void testReloadConfig () {
+
+    }
+
+    @Test
+    void testLBS4Route () {
+
+    }
+
+    @Test
+    void testEmptyFilesRoute () {
+
+    }
+
     @Log4j
     private class Watcher extends Thread {
         long wait

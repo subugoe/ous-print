@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<routes xmlns="http://camel.apache.org/schema/spring">
+<routes xmlns="http://camel.apache.org/schema/spring" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.w3.org/2001/XMLSchema-instance http://camel.apache.org/schema/spring/camel-spring-2.14.1.xsd">
 
     <route>
         <from uri="file:./target/generated-test-resources/hotfolder/lbs3/in?include=sub473_\d{16}_slip001.print&amp;?move=../out/${file:onlyname.noext}.printed"/>

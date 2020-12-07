@@ -5,137 +5,137 @@
     A4 Printer BBK        10.0.3.8        bbk-test
     -->
     <!-- Testroute -->
-    <!-- TODO
-            * Use /pica/goe/asc/lbs3_sun as template location (needs update of server software)
-    -->
-        
+
     <!-- Testprinter for umlauts, defaults to A4 -->
     <route>
-        <from uri="file:/pica/prod/prt/selbstabholbereich?include=sub4235_\d{16}_slip001.print&amp;?move=../sich-selbstabhol"/>
-        <to uri="layout:.?xslfo=./xslfo/layout2fo.xsl&amp;template=./ous40_layout_001_du.asc&amp;outputFormat=PS"/> 
+        <from uri="file:/pica/prod/prt/selbstabholbereich?include=sub4235_\d{16}_slip001.print&amp;?move=../sich"/>
+        <to uri="layout:.?xslfo=./xslfo/layout2fo.xsl&amp;template=/pica/goe/asc/lbs3_sun/ous40_layout_001_du.asc&amp;outputFormat=PS"/>
         <to uri="lpr://localhost/bbk-test"/>
     </route>
 
     <!-- BBK Routen -->
     <route>
-        <from uri="file:/pica/prod/prt/selbstabholbereich?include=sub249_\d{16}_slip001.print&amp;?move=../sich-selbstabhol"/>
-        <to uri="layout:.?xslfo=./xslfo/layout2fo.xsl&amp;template=./ous40_layout_001_du.asc&amp;outputFormat=PS"/>
+        <from uri="file:/pica/prod/prt/selbstabholbereich?include=sub249_\d{16}_slip001.print&amp;?move=../sich"/>
+        <to uri="layout:.?xslfo=./xslfo/layout2fo.xsl&amp;template=/pica/goe/asc/lbs3_sun/ous40_layout_001_du.asc&amp;outputFormat=PS"/>
         <to uri="lpr://localhost/sub249"/>
     </route>
     <route>
-        <from uri="file:/pica/prod/prt/selbstabholbereich?include=sub251_\d{16}_slip001.print&amp;?move=../sich-selbstabhol"/>
-        <to uri="layout:.?xslfo=./xslfo/layout2fo.xsl&amp;template=./ous40_layout_001_du.asc&amp;outputFormat=PS"/>
-        <to uri="lpr://localhost/sub251"/>
+        <from uri="file:/pica/prod/prt/selbstabholbereich?include=sub251_\d{16}_slip001.print&amp;?move=../sich"/>
+        <to uri="layout:.?xslfo=./xslfo/layout2fo.xsl&amp;template=/pica/goe/asc/lbs3_sun/ous40_layout_001_du.asc&amp;outputFormat=PS"/>
+        <to uri="lpr://localhost/sub249"/>
     </route>
-    
+
     <!-- Magazin -->
     <route>
-        <from uri="file:/pica/prod/prt/selbstabholbereich?include=sub473_\d{16}_slip001.print&amp;?move=../sich-selbstabhol"/>
-        <to uri="layout:.?xslfo=./xslfo/layout2fo.xsl&amp;template=./ous40_layout_001_du.asc&amp;outputFormat=PS&amp;pageSize=A5"/>
+        <from uri="file:/pica/prod/prt/selbstabholbereich?include=sub473_\d{16}_slip001.print&amp;?move=../sich"/>
+        <to uri="layout:.?xslfo=./xslfo/layout2fo.xsl&amp;template=/pica/goe/asc/lbs3_sun/ous40_layout_001_du.asc&amp;outputFormat=PS&amp;pageSize=A5"/>
         <to uri="lpr://localhost/sub473"/>
     </route>
     <route>
-        <from uri="file:/pica/prod/prt/selbstabholbereich?include=sub181_\d{16}_slip001.print&amp;?move=../sich-selbstabhol"/>
-        <to uri="layout:.?xslfo=./xslfo/layout2fo.xsl&amp;template=./ous40_layout_001_du.asc&amp;outputFormat=PS&amp;pageSize=A5"/>
+        <from uri="file:/pica/prod/prt/selbstabholbereich?include=sub181_\d{16}_slip001.print&amp;?move=../sich"/>
+        <to uri="layout:.?xslfo=./xslfo/layout2fo.xsl&amp;template=/pica/goe/asc/lbs3_sun/ous40_layout_001_du.asc&amp;outputFormat=PS&amp;pageSize=A5"/>
         <to uri="lpr://localhost/sub181"/>
     </route>
     <route>
-        <from uri="file:/pica/prod/prt/selbstabholbereich?include=sub2176_\d{16}_slip001.print&amp;?move=../sich-selbstabhol"/>
-        <to uri="layout:.?xslfo=./xslfo/layout2fo.xsl&amp;template=./ous40_layout_001_du.asc&amp;outputFormat=PS&amp;pageSize=A5"/>
+        <from uri="file:/pica/prod/prt/selbstabholbereich?include=sub2176_\d{16}_slip001.print&amp;?move=../sich"/>
+        <to uri="layout:.?xslfo=./xslfo/layout2fo.xsl&amp;template=/pica/goe/asc/lbs3_sun/ous40_layout_001_du.asc&amp;outputFormat=PS&amp;pageSize=A5"/>
         <to uri="lpr://localhost/sub2176"/>
     </route>
+    <!--
     <route>
-        <from uri="file:/pica/prod/prt/selbstabholbereich?include=sub3151_\d{16}_slip001.print&amp;?move=../sich-selbstabhol"/>
-        <to uri="layout:.?xslfo=./xslfo/layout2fo.xsl&amp;template=./ous40_layout_001_du.asc&amp;outputFormat=PS&amp;pageSize=A5"/>
+            <from uri="file:/pica/prod/prt/selbstabholbereich?include=sub2176_\d{16}_slip001.print&amp;?move=../sich"/>
+            <to uri="layout:.?xslfo=./xslfo/layout2fo.xsl&amp;template=/pica/goe/asc/lbs3_sun/ous40_layout_001_du.asc&amp;outputFormat=PS&amp;pageSize=A5"/>
+            <to uri="lpr://localhost/sub473"/>
+        </route>
+    -->
+    <route>
+        <from uri="file:/pica/prod/prt/selbstabholbereich?include=sub3151_\d{16}_slip001.print&amp;?move=../sich"/>
+        <to uri="layout:.?xslfo=./xslfo/layout2fo.xsl&amp;template=/pica/goe/asc/lbs3_sun/ous40_layout_001_du.asc&amp;outputFormat=PS&amp;pageSize=A5"/>
         <to uri="lpr://localhost/sub3151"/>
     </route>
     <route>
-        <from uri="file:/pica/prod/prt/selbstabholbereich?include=sub4013_\d{16}_slip001.print&amp;?move=../sich-selbstabhol"/>
-        <to uri="layout:.?xslfo=./xslfo/layout2fo.xsl&amp;template=./ous40_layout_001_du.asc&amp;outputFormat=PS&amp;pageSize=A5"/>
+        <from uri="file:/pica/prod/prt/selbstabholbereich?include=sub4013_\d{16}_slip001.print&amp;?move=../sich"/>
+        <to uri="layout:.?xslfo=./xslfo/layout2fo.xsl&amp;template=/pica/goe/asc/lbs3_sun/ous40_layout_001_du.asc&amp;outputFormat=PS&amp;pageSize=A5"/>
         <to uri="lpr://localhost/sub4013"/>
     </route>
     <!-- Vormerkungen ZI -->
     <route>
-        <from uri="file:/pica/prod/prt/selbstabholbereich?include=sub263_\d{16}_slip001.print&amp;?move=../sich-selbstabhol"/>
-        <to uri="layout:.?xslfo=./xslfo/layout2fo.xsl&amp;template=./ous40_layout_001_du.asc&amp;outputFormat=PS&amp;format=A5"/>
+        <from uri="file:/pica/prod/prt/selbstabholbereich?include=sub263_\d{16}_slip001.print&amp;?move=../sich"/>
+        <to uri="layout:.?xslfo=./xslfo/layout2fo.xsl&amp;template=/pica/goe/asc/lbs3_sun/ous40_layout_001_du.asc&amp;outputFormat=PS&amp;format=A5"/>
         <to uri="lpr://localhost/sub263"/>
     </route>
     <!-- TG MAG -->
     <route>
-        <from uri="file:/pica/prod/prt/selbstabholbereich?include=sub100_\d{16}_slip001.print&amp;?move=../sich-selbstabhol"/>
-        <to uri="layout:.?xslfo=./xslfo/layout2fo.xsl&amp;template=./ous40_layout_001_du.asc&amp;outputFormat=PS&amp;format=A5"/>
+        <from uri="file:/pica/prod/prt/selbstabholbereich?include=sub100_\d{16}_slip001.print&amp;?move=../sich"/>
+        <to uri="layout:.?xslfo=./xslfo/layout2fo.xsl&amp;template=/pica/goe/asc/lbs3_sun/ous40_layout_001_du.asc&amp;outputFormat=PS&amp;format=A5"/>
         <to uri="lpr://localhost/sub100"/>
     </route>
     <!-- Vormerkungen Lesesaal -->
     <route>
-        <from uri="file:/pica/prod/prt/selbstabholbereich?include=sub812_\d{16}_slip001.print&amp;?move=../sich-selbstabhol"/>
-        <to uri="layout:.?xslfo=./xslfo/layout2fo.xsl&amp;template=./ous40_layout_001_du.asc&amp;outputFormat=PS&amp;format=A5"/>
+        <from uri="file:/pica/prod/prt/selbstabholbereich?include=sub812_\d{16}_slip001.print&amp;?move=../sich"/>
+        <to uri="layout:.?xslfo=./xslfo/layout2fo.xsl&amp;template=/pica/goe/asc/lbs3_sun/ous40_layout_001_du.asc&amp;outputFormat=PS&amp;format=A5"/>
         <to uri="lpr://localhost/sub812"/>
     </route>
-    
     <!-- All printers below are configured in A4 Format -->
-    
     <!-- Vormerkungen KT -->
     <route>
-        <from uri="file:/pica/prod/prt/selbstabholbereich?include=sub51_\d{16}_slip001.print&amp;?move=../sich-selbstabhol"/>
-        <to uri="layout:.?xslfo=./xslfo/layout2fo.xsl&amp;template=./ous40_layout_001_du.asc&amp;outputFormat=PS"/>
+        <from uri="file:/pica/prod/prt/selbstabholbereich?include=sub51_\d{16}_slip001.print&amp;?move=../sich"/>
+        <to uri="layout:.?xslfo=./xslfo/layout2fo.xsl&amp;template=/pica/goe/asc/lbs3_sun/ous40_layout_001_du.asc&amp;outputFormat=PS"/>
         <to uri="lpr://localhost/sub51"/>
     </route>
-    
     <!-- BBF sub104 -->
     <route>
-        <from uri="file:/pica/prod/prt/selbstabholbereich?include=sub104_\d{16}_slip001.print&amp;?move=../sich-selbstabhol"/>
-        <to uri="layout:.?xslfo=./xslfo/layout2fo.xsl&amp;template=./ous40_layout_001_du.asc&amp;outputFormat=PS"/>
+        <from uri="file:/pica/prod/prt/selbstabholbereich?include=sub104_\d{16}_slip001.print&amp;?move=../sich"/>
+        <to uri="layout:.?xslfo=./xslfo/layout2fo.xsl&amp;template=/pica/goe/asc/lbs3_sun/ous40_layout_001_du.asc&amp;outputFormat=PS"/>
         <to uri="lpr://localhost/sub104"/>
     </route>
-        
+
     <!-- BBM sub209 -->
     <route>
-        <from uri="file:/pica/prod/prt/selbstabholbereich?include=sub209_\d{16}_slip001.print&amp;?move=../sich-selbstabhol"/>
-        <to uri="layout:.?xslfo=./xslfo/layout2fo.xsl&amp;template=./ous40_layout_001_du.asc&amp;outputFormat=PS"/>
+        <from uri="file:/pica/prod/prt/selbstabholbereich?include=sub209_\d{16}_slip001.print&amp;?move=../sich"/>
+        <to uri="layout:.?xslfo=./xslfo/layout2fo.xsl&amp;template=/pica/goe/asc/lbs3_sun/ous40_layout_001_du.asc&amp;outputFormat=PS"/>
         <to uri="lpr://localhost/sub209"/>
     </route>
-    
     <!-- BBC sub334 -->
     <route>
-        <from uri="file:/pica/prod/prt/selbstabholbereich?include=sub334_\d{16}_slip001.print&amp;?move=../sich-selbstabhol"/>
-        <to uri="layout:.?xslfo=./xslfo/layout2fo.xsl&amp;template=./ous40_layout_001_du.asc&amp;outputFormat=PS"/>
+        <from uri="file:/pica/prod/prt/selbstabholbereich?include=sub334_\d{16}_slip001.print&amp;?move=../sich"/>
+        <to uri="layout:.?xslfo=./xslfo/layout2fo.xsl&amp;template=/pica/goe/asc/lbs3_sun/ous40_layout_001_du.asc&amp;outputFormat=PS"/>
         <to uri="lpr://localhost/sub334"/>
     </route>
-    
     <!-- BBP sub682 -->
     <route>
-        <from uri="file:/pica/prod/prt/selbstabholbereich?include=sub682_\d{16}_slip001.print&amp;?move=../sich-selbstabhol"/>
-        <to uri="layout:.?xslfo=./xslfo/layout2fo.xsl&amp;template=./ous40_layout_001_du.asc&amp;outputFormat=PS"/>
+        <from uri="file:/pica/prod/prt/selbstabholbereich?include=sub682_\d{16}_slip001.print&amp;?move=../sich"/>
+        <to uri="layout:.?xslfo=./xslfo/layout2fo.xsl&amp;template=/pica/goe/asc/lbs3_sun/ous40_layout_001_du.asc&amp;outputFormat=PS"/>
         <to uri="lpr://localhost/sub682"/>
     </route>
-    
     <!-- BB Wiso subwi2 -->
     <route>
-        <from uri="file:/pica/prod/prt/selbstabholbereich?include=subwi2_\d{16}_slip001.print&amp;?move=../sich-selbstabhol"/>
-        <to uri="layout:.?xslfo=./xslfo/layout2fo.xsl&amp;template=./ous40_layout_001_du.asc&amp;outputFormat=PS"/>
+        <from uri="file:/pica/prod/prt/selbstabholbereich?include=subwi2_\d{16}_slip001.print&amp;?move=../sich"/>
+        <to uri="layout:.?xslfo=./xslfo/layout2fo.xsl&amp;template=/pica/goe/asc/lbs3_sun/ous40_layout_001_du.asc&amp;outputFormat=PS"/>
         <to uri="lpr://localhost/subwi2"/>
     </route>
-    
     <!-- Waldweg ww173 -->
     <route>
-        <from uri="file:/pica/prod/prt/selbstabholbereich?include=ww173_\d{16}_slip001.print&amp;?move=../sich-selbstabhol"/>
-        <to uri="layout:.?xslfo=./xslfo/layout2fo.xsl&amp;template=./ous40_layout_001_du.asc&amp;outputFormat=PS"/>
+        <from uri="file:/pica/prod/prt/selbstabholbereich?include=ww173_\d{16}_slip001.print&amp;?move=../sich"/>
+        <to uri="layout:.?xslfo=./xslfo/layout2fo.xsl&amp;template=/pica/goe/asc/lbs3_sun/ous40_layout_001_du.asc&amp;outputFormat=PS"/>
         <to uri="lpr://localhost/ww173"/>
     </route>
-    
     <!-- HG Magazin -->
     <route>
-        <from uri="file:/pica/prod/prt/selbstabholbereich?include=subalt_\d{16}_slip001.print&amp;?move=../sich-selbstabhol"/>
-        <to uri="layout:.?xslfo=./xslfo/layout2fo.xsl&amp;template=./ous40_layout_001_du.asc&amp;outputFormat=PS"/>
+        <from uri="file:/pica/prod/prt/selbstabholbereich?include=subalt_\d{16}_slip001.print&amp;?move=../sich"/>
+        <to uri="layout:.?xslfo=./xslfo/layout2fo.xsl&amp;template=/pica/goe/asc/lbs3_sun/ous40_layout_001_du.asc&amp;outputFormat=PS"/>
         <to uri="lpr://localhost/subalt"/>
     </route>
-    
     <!-- HG Servicetheke Vormerkdrucker -->
     <route>
         <from uri="file:/pica/prod/prt/selbstabholbereich?include=sub088_\d{16}_slip001.print&amp;?move=../sich-selbstabhol"/>
         <to uri="layout:.?xslfo=./xslfo/layout2fo.xsl&amp;template=./ous40_layout_001_du.asc&amp;outputFormat=PS"/>
         <to uri="lpr://localhost/sub088"/>
     </route>
-    
+    <!-- HG Servicetheke Vormerkdrucker -->
+    <route>
+        <from uri="file:/pica/prod/prt/selbstabholbereich?include=sub088_\d{16}_slip001.print&amp;?move=../sich"/>
+        <to uri="layout:.?xslfo=./xslfo/layout2fo.xsl&amp;template=/pica/goe/asc/lbs3_sun/ous40_layout_001_du.asc&amp;outputFormat=PS"/>
+        <to uri="lpr://localhost/sub088"/>
+    </route>
 </routes>

@@ -343,5 +343,6 @@
         <module>layout-component</module>
         <module>layout-test</module>
         <module>ous-db</module>
+        <module>jspi</module>
     </modules>
 </project>

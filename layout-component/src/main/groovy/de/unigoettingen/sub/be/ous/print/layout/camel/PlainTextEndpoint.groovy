@@ -31,7 +31,7 @@ import org.apache.camel.spi.UriEndpoint
  */
 @TypeChecked
 @CompileStatic
-@UriEndpoint(scheme = "plainText")
+@UriEndpoint(scheme = "plainText", title = "Plain Text", syntax = "plainText:resourceUri")
 class PlainTextEndpoint extends ProcessorEndpoint {
     /** The PlainTextProcessor to be used */
     protected PlainTextProcessor ptp

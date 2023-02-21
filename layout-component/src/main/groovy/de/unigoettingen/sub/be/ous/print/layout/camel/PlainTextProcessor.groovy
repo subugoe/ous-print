@@ -40,7 +40,7 @@ import org.apache.commons.lang.StringEscapeUtils
 @TypeChecked
 class PlainTextProcessor implements Processor {
     /** The path to the XSL-FO template */
-    def static URL XSL_FO_TEMPLATE = PlainTextProcessor.getClass().getResource('/xslfo/plaintext.fo')
+    def static URL XSL_FO_TEMPLATE = PlainTextProcessor.class.getResource('/xslfo/plaintext.fo')
 
     /** The page size */
     def PageSize pageSize = Layout.DEFAULT_PAGE_SIZE

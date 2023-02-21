@@ -42,7 +42,7 @@ class Xml2AscTest extends TestBase {
     @TypeChecked
     void testTransform () {
         for (xml in URLS) {
-            log.info('Transforming ASC File (' + Xml2Asc.toString() + '):' +xml)
+            log.info('Transforming ASC File (' + Xml2Asc.class.getName() + '):' +xml)
             Xml2Asc x2a = new Xml2Asc(xml)
             try {
                 x2a.transform()

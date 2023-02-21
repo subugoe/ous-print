@@ -33,8 +33,8 @@ import org.junit.Test
 @TypeChecked
 @Log4j
 class Asc2XmlTest extends TestBase {
-    static List<URL> BROKEN = [Asc2XmlTest.getClass().getResource("/layouts-broken/ous40_layout_001_du.asc"), 
-        Asc2XmlTest.getClass().getResource("/layouts-broken/ous40_layout_001_en.asc")]
+    static List<URL> BROKEN = [Asc2XmlTest.class.getResource("/layouts-broken/ous40_layout_001_du.asc"),
+        Asc2XmlTest.class.getResource("/layouts-broken/ous40_layout_001_en.asc")]
     
     //Test transformation
     @Test

@@ -15,22 +15,22 @@ import static org.junit.Assert.assertNotNull
 @Log4j
 @CompileStatic
 class TestBase {
-    static File SLIPS_LBS3 = new File(TestBase.getClass().getResource('/hotfolder/lbs3/in/').toURI())
-    static File SLIPS_LBS4 = new File(TestBase.getClass().getResource('/hotfolder/lbs4/in/').toURI())
+    static File SLIPS_LBS3 = new File(TestBase.class.getResource('/hotfolder/lbs3/in/').toURI())
+    static File SLIPS_LBS4 = new File(TestBase.class.getResource('/hotfolder/lbs4/in/').toURI())
     static List<URL> SLIP_LBS3_FILES = new ArrayList<URL>()
     static List<URL> SLIP_LBS4_FILES = new ArrayList<URL>()
-    static URL PARSER_XML = TestBase.getClass().getResource("/layouts-xml/ous40_layout_001_du.asc.xml")
-    static URL PARSER_TXT_LBS3 = TestBase.getClass().getResource("/layouts/ous40_layout_001_du.asc")
-    static URL PARSER_TXT_LBS4 = TestBase.getClass().getResource("/layouts/ous40_layout_001_du-lbs4.asc")
-    static URL XSLFO = TestBase.getClass().getResource("/xslt/layout2fo.xsl")
+    static URL PARSER_XML = TestBase.class.getResource("/layouts-xml/ous40_layout_001_du.asc.xml")
+    static URL PARSER_TXT_LBS3 = TestBase.class.getResource("/layouts/ous40_layout_001_du.asc")
+    static URL PARSER_TXT_LBS4 = TestBase.class.getResource("/layouts/ous40_layout_001_du-lbs4.asc")
+    static URL XSLFO = TestBase.class.getResource("/xslt/layout2fo.xsl")
 
-    static List<URL> URLS = [TestBase.getClass().getResource("/layouts-xml/ous40_layout_001_du.asc.xml"),
-                             TestBase.getClass().getResource("/layouts-xml/ous40_layout_001_en.asc.xml")]
+    static List<URL> URLS = [TestBase.class.getResource("/layouts-xml/ous40_layout_001_du.asc.xml"),
+                             TestBase.class.getResource("/layouts-xml/ous40_layout_001_en.asc.xml")]
 
-    static List<URL> URLS_ASC = [Asc2XmlTest.getClass().getResource("/layouts/ous40_layout_001_du.asc"),
-                                     Asc2XmlTest.getClass().getResource("/layouts/ous40_layout_001_en.asc")]
+    static List<URL> URLS_ASC = [Asc2XmlTest.class.getResource("/layouts/ous40_layout_001_du.asc"),
+                                     Asc2XmlTest.class.getResource("/layouts/ous40_layout_001_en.asc")]
 
-    static URL LAYOUT = Layout2FoTest.getClass().getResource("/layouts-xml/ous40_layout_001_du.asc.xml")
+    static URL LAYOUT = Layout2FoTest.class.getResource("/layouts-xml/ous40_layout_001_du.asc.xml")
 
     static String LBS3_CHARSET = 'Cp850'
     static String LBS4_CHARSET = 'ISO-8859-1'
